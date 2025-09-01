@@ -1,6 +1,6 @@
 # Patrick Sonata - Portfólio
 
-## 👋 Sobre Mim
+##  Sobre Mim
 
 Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo. Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.
 
