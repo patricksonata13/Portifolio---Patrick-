@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de cores */
         :root {
             --primary: #1a1a2e;
             --secondary: #16213e;
@@ -15,10 +14,8 @@
             --light: #f0f0f0;
             --text: #333333;
             --text-light: #ffffff;
-            --globoplay: #00c275;
         }
         
-        /* Reset e estilos base */
         * {
             margin: 0;
             padding: 0;
@@ -30,116 +27,26 @@
             color: var(--text);
             line-height: 1.6;
             font-family: 'Montserrat', sans-serif;
+            padding: 20px;
         }
         
-        /* Container principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        /* Cabeçalho */
-        header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--text-light);
-            padding: 60px 0 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .header-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('images/avatar/header-bg.jpg') center/cover no-repeat;
-            opacity: 0.2;
-            z-index: 0;
-        }
-        
-        .profile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .avatar {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .name-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-        }
-        
-        .name-title h2 {
-            font-size: 1.5rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        /* Navegação */
-        nav {
-            background-color: var(--secondary);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: center;
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li a {
-            display: block;
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 20px 25px;
-            transition: background-color 0.3s;
-            font-weight: 500;
-        }
-        
-        .nav-links li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        /* Seções */
-        section {
+        .projects-section {
             padding: 60px 0;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             color: var(--primary);
-            position: relative;
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
+            font-size: 2.5rem;
+            position: relative;
         }
         
         .section-title::after {
@@ -151,491 +58,147 @@
             margin: 15px auto;
         }
         
-        /* Sobre */
-        #about {
-            background-color: white;
-        }
-        
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-        }
-        
-        /* Trabalhos */
-        #works {
-            background-color: #f8f9fa;
-        }
-        
-        .works-grid {
+        .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
         
-        .work-card {
+        .project-card {
             background: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-        
-        .work-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .work-img {
-            height: 200px;
-            overflow: hidden;
-            position: relative;
-        }
-        
-        .work-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-        
-        .work-card:hover .work-img img {
-            transform: scale(1.05);
-        }
-        
-        .work-info {
-            padding: 20px;
-        }
-        
-        .work-info h3 {
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-size: 1.3rem;
-        }
-        
-        .work-info p {
-            color: #666;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-        }
-        
-        .work-info .role {
-            color: var(--accent);
-            font-weight: 600;
-        }
-        
-        /* Galeria */
-        #gallery {
-            background-color: white;
-        }
-        
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-        }
-        
-        .gallery-item {
-            border-radius: 8px;
-            overflow: hidden;
-            height: 250px;
-            position: relative;
-            cursor: pointer;
-        }
-        
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-        }
-        
-        .gallery-item:hover .gallery-caption {
-            transform: translateY(0);
-        }
-        
-        /* Modal para imagens */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            overflow: auto;
-        }
-        
-        .modal-content {
-            display: block;
-            margin: auto;
-            max-width: 90%;
-            max-height: 80%;
-            margin-top: 60px;
-            border-radius: 8px;
-        }
-        
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        
-        /* Contato */
-        #contact {
-            background-color: white;
-        }
-        
-        .contact-content {
+            border-radius: 15px;
+            padding: 30px 25px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 30px;
+            min-height: 300px;
         }
         
-        .social-links {
-            display: flex;
-            gap: 20px;
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
         }
         
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            background: var(--primary);
-            color: white;
+        .project-icon {
+            width: 100px;
+            height: 100px;
+            object-fit: contain;
+            margin-bottom: 25px;
             border-radius: 50%;
-            font-size: 24px;
-            text-decoration: none;
-            transition: transform 0.3s, background-color 0.3s;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 20px;
+            transition: transform 0.3s ease;
         }
         
-        .social-links a:hover {
-            transform: translateY(-5px);
-            background: var(--accent);
+        .project-card:hover .project-icon {
+            transform: scale(1.1);
         }
         
-        /* Rodapé */
-        footer {
-            background: var(--primary);
-            color: var(--text-light);
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 40px;
+        .project-title {
+            font-size: 1.4em;
+            margin: 10px 0;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
         }
         
-        /* Responsividade */
+        .project-year {
+            color: var(--accent);
+            font-weight: 600;
+            margin: 5px 0;
+            font-size: 1.1em;
+        }
+        
+        .project-role {
+            color: #666;
+            font-size: 0.95em;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-            }
-            
-            .nav-links li a {
-                padding: 15px;
-                text-align: center;
-            }
-            
-            .name-title h1 {
-                font-size: 2.2rem;
-            }
-            
-            .works-grid, .gallery-grid {
+            .projects-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
-            .section-title {
-                font-size: 1.8rem;
+            .project-card {
+                padding: 20px 15px;
             }
             
-            .avatar {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .gallery-item {
-                height: 200px;
+            .project-icon {
+                width: 80px;
+                height: 80px;
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho com perfil -->
-    <header>
-        <div class="header-bg"></div>
+    <section class="projects-section">
         <div class="container">
-            <div class="profile">
-                <div class="avatar">
-                    <!-- SUA FOTO DE PERFIL -->
-                    <img src="images/avatar/profile.jpg" alt="Patrick Sonata">
-                </div>
-                <div class="name-title">
-                    <h1>Patrick Sonata</h1>
-                    <h2>Roteirista e Comediante</h2>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-    <!-- Navegação -->
-    <nav>
-        <div class="container nav-container">
-            <ul class="nav-links">
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#works">Trabalhos</a></li>
-                <li><a href="#gallery">Galeria</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <!-- Seção Sobre -->
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">Sobre Mim</h2>
-            <div class="about-content">
-                <p>Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo.</p>
-                <p>Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Seção Trabalhos -->
-    <section id="works">
-        <div class="container">
-            <h2 class="section-title">Trabalhos Destacados</h2>
-            <div class="works-grid">
+            <h2 class="section-title">Meus Trabalhos</h2>
+            <div class="projects-grid">
                 <!-- Pablo & Luisão -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/pablo-luisao/capa.jpg" alt="Série Pablo & Luisão">
-                    </div>
-                    <div class="work-info">
-                        <h3>Série Pablo & Luisão (2025)</h3>
-                        <p class="role">Roteirista</p>
-                        <p><strong>Autor:</strong> Paulo Vieira, Maurício Rizzo</p>
-                        <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
-                        <p><strong>Direção:</strong> João Gomez</p>
-                        <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
-                    </div>
+                <div class="project-card">
+                    <img src="images/works/pablowluisão.png" alt="Pablo & Luisão" class="project-icon">
+                    <h3 class="project-title">Pablo & Luisão</h3>
+                    <p class="project-year">2025</p>
+                    <p class="project-role">Roteirista</p>
                 </div>
                 
                 <!-- Programa Zorra -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/zorra/capa.jpg" alt="Programa Zorra">
-                    </div>
-                    <div class="work-info">
-                        <h3>Programa Zorra (2019-2021)</h3>
-                        <p class="role">Roteirista</p>
-                        <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
-                        <p><strong>Direção Geral:</strong> Mauro Farias</p>
-                    </div>
-                </div>
-                
-                <!-- Espetáculo Pelada -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/pelada/capa.jpg" alt="Espetáculo Pelada">
-                    </div>
-                    <div class="work-info">
-                        <h3>Espetáculo Pelada - A Hora da Gaymada (2022)</h3>
-                        <p class="role">Roteiro e dramaturgia</p>
-                        <p><strong>Direção:</strong> Orlando Caldeira</p>
-                    </div>
-                </div>
-                
-                <!-- Show de Humor -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/show-humor/capa.jpg" alt="Show de Humor">
-                    </div>
-                    <div class="work-info">
-                        <h3>Show de Humor "Pra provar que eu não minto" (2023)</h3>
-                        <p class="role">Roteirista</p>
-                        <p><strong>Direção:</strong> Paulo Costa</p>
-                        <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
-                        <p><strong>Elenco:</strong> Dawis Jamaica</p>
-                    </div>
-                </div>
-                
-                <!-- Documentário -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/cidade-correria/capa.jpg" alt="Documentário Cidade Correria">
-                    </div>
-                    <div class="work-info">
-                        <h3>Documentário "Cidade Correria" (2022)</h3>
-                        <p class="role">Participação</p>
-                        <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
-                        <p><strong>Roteiro:</strong> Juliana Vicente</p>
-                        <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
-                    </div>
+                <div class="project-card">
+                    <img src="images/works/zorra.png" alt="Programa Zorra" class="project-icon">
+                    <h3 class="project-title">Programa Zorra</h3>
+                    <p class="project-year">2019-2021</p>
+                    <p class="project-role">Roteirista</p>
                 </div>
                 
                 <!-- Humor Negro -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/humor-negro/capa.jpg" alt="Série Humor Negro">
-                    </div>
-                    <div class="work-info">
-                        <h3>Série de Comédia "Humor Negro" (2023)</h3>
-                        <p class="role">Participação</p>
-                        <p><strong>Direção:</strong> Rodrigo França</p>
-                        <p><strong>Criação:</strong> Val Benvindo</p>
-                        <p><strong>Roteiro:</strong> Renata Di Carmo</p>
-                        <p><strong>Plataforma:</strong> Globoplay</p>
-                    </div>
+                <div class="project-card">
+                    <img src="images/works/zorra2.png" alt="Humor Negro" class="project-icon">
+                    <h3 class="project-title">Humor Negro</h3>
+                    <p class="project-year">2023</p>
+                    <p class="project-role">Participação</p>
                 </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Seção Galeria -->
-    <section id="gallery">
-        <div class="container">
-            <h2 class="section-title">Galeria</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="images/gallery/1.jpg" alt="Trabalho 1">
-                    <div class="gallery-caption">Cena de Pablo & Luisão</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery/2.jpg" alt="Trabalho 2">
-                    <div class="gallery-caption">Gravação do Programa Zorra</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery/3.jpg" alt="Trabalho 3">
-                    <div class="gallery-caption">Show de Humor</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery/4.jpg" alt="Trabalho 4">
-                    <div class="gallery-caption">Participação em Humor Negro</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery/5.jpg" alt="Trabalho 5">
-                    <div class="gallery-caption">Espetáculo Jongo Mamulengo</div>
-                </div>
-                <div class="gallery-item">
-                    <img src="images/gallery/6.jpg" alt="Trabalho 6">
-                    <div class="gallery-caption">Documentário Cidade Correria</div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Modal para imagens -->
-    <div id="imageModal" class="modal">
-        <span class="close">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-    
-    <!-- Seção Contato -->
-    <section id="contact">
-        <div class="container">
-            <h2 class="section-title">Contato</h2>
-            <div class="contact-content">
-                <div class="social-links">
-                    <a href="https://www.instagram.com/patricksonata" title="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.twitter.com/patricksonata" title="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/patricksonata" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:contato@patricksonata.com" title="Email"><i class="far fa-envelope"></i></a>
-                </div>
-                <p>Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Rodapé -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Patrick Sonata. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-    
-    <script>
-        // Smooth scroll para navegação
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
                 
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+                <!-- Cidade Correria -->
+                <div class="project-card">
+                    <img src="images/works/cidade-correriajpg" alt="Cidade Correria" class="project-icon">
+                    <h3 class="project-title">Cidade Correria</h3>
+                    <p class="project-year">2022</p>
+                    <p class="project-role">Participação</p>
+                </div>
                 
-                window.scrollTo({
-                    top: targetElement.offsetTop - 60,
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Efeito de mudança de cor no header ao scrollar
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 100) {
-                header.style.background = 'linear-gradient(135deg, #16213e, #0f1a30)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
-            }
-        });
-        
-        // Modal para galeria de imagens
-        const modal = document.getElementById("imageModal");
-        const modalImg = document.getElementById("modalImage");
-        const closeModal = document.querySelector(".close");
-        
-        document.querySelectorAll('.gallery-item img').forEach(img => {
-            img.addEventListener('click', function() {
-                modal.style.display = "block";
-                modalImg.src = this.src;
-            });
-        });
-        
-        closeModal.addEventListener('click', function() {
-            modal.style.display = "none";
-        });
-        
-        window.addEventListener('click', function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        });
-        
-        // Fallback para imagens quebradas
-        document.addEventListener('DOMContentLoaded', function() {
-            const images = document.querySelectorAll('img');
-            images.forEach(img => {
-                img.addEventListener('error', function() {
-                    this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZTVlNWU1Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIG5vdCBmb3VuZDwvdGV4dD48L3N2Zz4=';
-                    this.alt = 'Imagem não encontrada';
-                });
-            });
-        });
-    </script>
+                <!-- Jongo Mamulengo -->
+                <div class="project-card">
+                    <img src="images/works/jongo-mamulengo.jpg" alt="Jongo Mamulengo" class="project-icon">
+                    <h3 class="project-title">Jongo Mamulengo</h3>
+                    <p class="project-year">2017-2023</p>
+                    <p class="project-role">Elenco e Roteirista</p>
+                </div>
+                
+                <!-- Originais da Comédia -->
+                <div class="project-card">
+                    <img src="images/works/originais-comedia.png" alt="Originais da Comédia" class="project-icon">
+                    <h3 class="project-title">Originais da Comédia</h3>
+                    <p class="project-year">2022</p>
+                    <p class="project-role">Roteiro e Direção</p>
+                </div>
+                
+                <!-- Pelada (ATENÇÃO: vai funcionar após renomear) -->
+                <div class="project-card">
+                    <img src="images/works/pelada.jpg" alt="Espetáculo Pelada" class="project-icon">
+                    <h3 class="project-title">Espetáculo Pelada</h3>
+                    <p class="project-year">2022</p>
+                    <p class="project-role">Roteiro e Dramaturgia</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
