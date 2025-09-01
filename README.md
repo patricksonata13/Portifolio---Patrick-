@@ -57,26 +57,8 @@ Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criad
 
 ## 📁 Estrutura do Projeto
 
-Este portfólio foi desenvolvido utilizando Next.js e inclui:
 
-- Páginas HTML estáticas
-- Estilos CSS personalizados
-- Scripts JavaScript para interatividade
-- Configurações TypeScript
-- Scripts de deploy automatizados
 
-## 🛠️ Tecnologias Utilizadas
-
-- HTML
-- TypeScript
-- JavaScript
-- CSS
-- Shell Script
-- Next.js
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ---
 
