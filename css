@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+:root {
+  --azul-marinhoto-900: #1a3a5f;
+  --azul-marinhoto-800: #2a4b6a;
+  --azul-marinhoto-700: #3a5c7a;
+  --azul-marinhoto-600: #4a6d8a;
+  
+  --verde-montanha-800: #2d5a4d;
+  --verde-montanha-700: #3d6b5d;
+  --verde-montanha-600: #4d7c6d;
+  --verde-montanha-400: #6d9e8d;
+  --verde-montanha-300: #8dbead;
+  
+  --amarelo-sol-500: #ffd700;
+  --amarelo-sol-400: #ffe74c;
+  --amarelo-sol-300: #fff799;
+  
+  --laranja-poesunset-600: #ff6b35;
+  --laranja-poesunset-500: #ff8c5a;
+  --laranja-poesunset-400: #ffad8a;
+  
+  --rosa-poesunset-700: #d44d7a;
+}
+
+/* Classes de cor personalizadas */
+.bg-azul-marinhoto-900 { background-color: var(--azul-marinhoto-900); }
+.bg-azul-marinhoto-800 { background-color: var(--azul-marinhoto-800); }
+.bg-azul-marinhoto-700 { background-color: var(--azul-marinhoto-700); }
+.bg-azul-marinhoto-600 { background-color: var(--azul-marinhoto-600); }
+
+.bg-verde-montanha-800 { background-color: var(--verde-montanha-800); }
+.bg-verde-montanha-700 { background-color: var(--verde-montanha-700); }
+.bg-verde-montanha-600 { background-color: var(--verde-montanha-600); }
+
+.text-verde-montanha-400 { color: var(--verde-montanha-400); }
+.text-verde-montanha-300 { color: var(--verde-montanha-300); }
+
+.bg-amarelo-sol-500 { background-color: var(--amarelo-sol-500); }
+.text-amarelo-sol-500 { color: var(--amarelo-sol-500); }
+.text-amarelo-sol-400 { color: var(--amarelo-sol-400); }
+.text-amarelo-sol-300 { color: var(--amarelo-sol-300); }
+
+.bg-laranja-poesunset-600 { background-color: var(--laranja-poesunset-600); }
+.text-laranja-poesunset-600 { color: var(--laranja-poesunset-600); }
+.text-laranja-poesunset-500 { color: var(--laranja-poesunset-500); }
+.text-laranja-poesunset-400 { color: var(--laranja-poesunset-400); }
+
+.bg-rosa-poesunset-700 { background-color: var(--rosa-poesunset-700); }
