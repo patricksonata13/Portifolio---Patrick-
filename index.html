@@ -1,732 +1,480 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScriptFlow - Plataforma de Roteiros</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
-      color: #333;
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .container {
-      max-width: 1200px;
-      width: 100%;
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-    
-    header {
-      background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-      color: white;
-      padding: 2rem;
-      text-align: center;
-      position: relative;
-    }
-    
-    header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-    }
-    
-    .user-info {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      align-items: center;
-      background: rgba(255, 255, 255, 0.2);
-      padding: 0.5rem 1rem;
-      border-radius: 20px;
-    }
-    
-    .user-info span {
-      margin-right: 10px;
-    }
-    
-    .logout-btn {
-      background: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-    
-    .tabs {
-      display: flex;
-      background: #f8f9fa;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    .tab {
-      padding: 1rem 1.5rem;
-      cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: all 0.3s ease;
-      font-weight: 600;
-    }
-    
-    .tab:hover {
-      background: #e9ecef;
-    }
-    
-    .tab.active {
-      border-bottom: 3px solid #e74c3c;
-      background: #e9ecef;
-    }
-    
-    .sub-tabs {
-      display: flex;
-      background: #e9ecef;
-      padding: 0.5rem 1rem;
-      border-bottom: 1px solid #ddd;
-    }
-    
-    .sub-tab {
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      border-radius: 15px;
-      margin-right: 0.5rem;
-      transition: all 0.3s ease;
-      font-size: 0.9rem;
-    }
-    
-    .sub-tab:hover {
-      background: #dee2e6;
-    }
-    
-    .sub-tab.active {
-      background: #3498db;
-      color: white;
-    }
-    
-    .content {
-      padding: 2rem;
-    }
-    
-    .tab-content {
-      display: none;
-    }
-    
-    .tab-content.active {
-      display: block;
-    }
-    
-    .section {
-      margin-bottom: 2.5rem;
-    }
-    
-    h2 {
-      color: #2c3e50;
-      border-bottom: 2px solid #e74c3c;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    h2 i {
-      margin-right: 10px;
-      color: #e74c3c;
-    }
-    
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-    }
-    
-    .step-card {
-      background: #f8f9fa;
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      border-left: 4px solid #3498db;
-    }
-    
-    .step-card h3 {
-      color: #2c3e50;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-    }
-    
-    .step-card h3 .number {
-      background: #3498db;
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 10px;
-      font-size: 0.9rem;
-    }
-    
-    .step-card p {
-      margin-bottom: 1rem;
-    }
-    
-    .code {
-      background: #2c3e50;
-      color: #ecf0f1;
-      padding: 1rem;
-      border-radius: 5px;
-      font-family: monospace;
-      margin: 1rem 0;
-      overflow-x: auto;
-    }
-    
-    .editor {
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 1rem;
-      min-height: 300px;
-      margin-bottom: 1.5rem;
-    }
-    
-    textarea {
-      width: 100%;
-      min-height: 250px;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 1rem;
-      font-family: inherit;
-      resize: vertical;
-    }
-    
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-    }
-    
-    .research-card {
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 1rem;
-      background: #f8f9fa;
-    }
-    
-    .research-card h3 {
-      margin-bottom: 0.5rem;
-      color: #2c3e50;
-    }
-    
-    .outline-item {
-      padding: 1rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      margin-bottom: 1rem;
-      background: #f8f9fa;
-    }
-    
-    .outline-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 0.5rem;
-    }
-    
-    .scene-number {
-      background: #3498db;
-      color: white;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-    }
-    
-    .tip {
-      background: #fff4e6;
-      border-left: 4px solid #ffa94d;
-      padding: 1rem;
-      margin: 1rem 0;
-      border-radius: 0 5px 5px 0;
-    }
-    
-    .buttons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.8rem 1.5rem;
-      background: #3498db;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-    }
-    
-    .btn:hover {
-      background: #2980b9;
-      transform: translateY(-2px);
-    }
-    
-    .btn i {
-      margin-right: 8px;
-    }
-    
-    .btn-primary {
-      background: #e74c3c;
-    }
-    
-    .btn-primary:hover {
-      background: #c0392b;
-    }
-    
-    footer {
-      text-align: center;
-      padding: 2rem;
-      background: #2c3e50;
-      color: white;
-    }
-    
-    /* Modal de Login */
-    .login-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .login-modal.active {
-      display: flex;
-    }
-    
-    .login-form {
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      width: 400px;
-      max-width: 90%;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    }
-    
-    .login-form h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-      border: none;
-    }
-    
-    .form-group {
-      margin-bottom: 1.5rem;
-    }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-    
-    .form-group input {
-      width: 100%;
-      padding: 0.8rem;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-    
-    .login-btn {
-      width: 100%;
-      padding: 1rem;
-      background: #e74c3c;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    
-    .login-btn:hover {
-      background: #c0392b;
-    }
-    
-    .register-link {
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-    
-    .register-link a {
-      color: #3498db;
-      text-decoration: none;
-    }
-    
-    .register-link a:hover {
-      text-decoration: underline;
-    }
-    
-    @media (max-width: 768px) {
-      .steps, .research-grid {
-        grid-template-columns: 1fr;
-      }
-      
-      .buttons {
-        flex-direction: column;
-      }
-      
-      .tabs {
-        flex-wrap: wrap;
-      }
-      
-      .tab {
-        padding: 0.8rem 1rem;
-        font-size: 0.9rem;
-      }
-      
-      .user-info {
-        position: relative;
-        top: 0;
-        right: 0;
-        justify-content: center;
-        margin-top: 1rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata - Portfólio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Variáveis de cores */
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --light: #f0f0f0;
+            --text: #333333;
+            --text-light: #ffffff;
+            --globoplay: #00c275;
+        }
+        
+        /* Reset e estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+        
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), #ff7e5f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .name-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .name-title h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Navegação */
+        nav {
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            display: block;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 20px 25px;
+            transition: background-color 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Seções */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--primary);
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 15px auto;
+        }
+        
+        /* Sobre */
+        #about {
+            background-color: white;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        /* Trabalhos */
+        #works {
+            background-color: #f8f9fa;
+        }
+        
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .work-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .work-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .work-img {
+            height: 200px;
+            background: linear-gradient(45deg, #3498db, #2c3e50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+        
+        .work-info {
+            padding: 20px;
+        }
+        
+        .work-info h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .work-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        
+        .work-info .role {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Contato */
+        #contact {
+            background-color: white;
+        }
+        
+        .contact-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        
+        .social-links a:hover {
+            transform: translateY(-5px);
+            background: var(--accent);
+        }
+        
+        /* Rodapé */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+            }
+            
+            .nav-links li a {
+                padding: 15px;
+                text-align: center;
+            }
+            
+            .name-title h1 {
+                font-size: 2.2rem;
+            }
+            
+            .works-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Modal de Login -->
-  <div class="login-modal active" id="loginModal">
-    <div class="login-form">
-      <h2><i class="fas fa-scroll"></i> Acessar ScriptFlow</h2>
-      <div class="form-group">
-        <label for="username">Usuário</label>
-        <input type="text" id="username" placeholder="Digite seu usuário">
-      </div>
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" placeholder="Digite sua senha">
-      </div>
-      <button class="login-btn" id="loginBtn">Entrar</button>
-      <div class="register-link">
-        <p>Não tem uma conta? <a href="#" id="registerLink">Registrar-se</a></p>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" id="appContainer" style="display: none;">
+    <!-- Cabeçalho com perfil -->
     <header>
-      <div>
-        <h1><i class="fas fa-scroll"></i> ScriptFlow</h1>
-        <p>Plataforma completa para desenvolvimento de roteiros</p>
-      </div>
-      <div class="user-info">
-        <span id="userName">Usuário</span>
-        <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i></button>
-      </div>
+        <div class="container">
+            <div class="profile">
+                <div class="avatar">
+                    <i class="fas fa-theater-masks"></i>
+                </div>
+                <div class="name-title">
+                    <h1>Patrick Sonata</h1>
+                    <h2>Roteirista e Comediante</h2>
+                </div>
+            </div>
+        </div>
     </header>
     
-    <div class="tabs">
-      <div class="tab active" data-tab="research">Pesquisa</div>
-      <div class="tab" data-tab="outline">Escaleta</div>
-      <div class="tab" data-tab="argument">Argumento</div>
-      <div class="tab" data-tab="script">Roteiro</div>
-      <div class="tab" data-tab="help">Ajuda</div>
-    </div>
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#works">Trabalhos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
     
-    <div class="sub-tabs">
-      <div class="sub-tab active" data-subtab="longline">Longline</div>
-      <div class="sub-tab" data-subtab="synopsis">Sinopse</div>
-      <div class="sub-tab" data-subtab="storyline">Storyline</div>
-      <div class="sub-tab" data-subtab="treatment">Tratamento</div>
-    </div>
+    <!-- Seção Sobre -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <p>Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo.</p>
+                <p>Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.</p>
+            </div>
+        </div>
+    </section>
     
-    <div class="content">
-      <!-- ABA DE PESQUISA -->
-      <div class="tab-content active" id="research">
-        <div class="section">
-          <h2><i class="fas fa-search"></i> Área de Pesquisa</h2>
-          <p>Organize suas referências e materiais de pesquisa para seu roteiro.</p>
-          
-          <div class="research-grid">
-            <div class="research-card">
-              <h3>Personagens</h3>
-              <p>Adicione informações sobre seus personagens, suas motivações, histórias e características.</p>
-              <button class="btn" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar</button>
+    <!-- Seção Trabalhos -->
+    <section id="works">
+        <div class="container">
+            <h2 class="section-title">Trabalhos Destacados</h2>
+            <div class="works-grid">
+                <!-- Pablo & Luisão -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #8e44ad, #3498db);">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Série Pablo & Luisão (2025)</h3>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Autor:</strong> Paulo Vieira, Maurício Rizzo</p>
+                        <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
+                        <p><strong>Direção:</strong> João Gomez</p>
+                        <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
+                    </div>
+                </div>
+                
+                <!-- Programa Zorra -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #ff7e5f, #feb47b);">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Programa Zorra (2019-2021)</h3>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
+                        <p><strong>Direção Geral:</strong> Mauro Farias</p>
+                    </div>
+                </div>
+                
+                <!-- Espetáculo Pelada -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #00b4db, #0083b0);">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Espetáculo Pelada - A Hora da Gaymada (2022)</h3>
+                        <p class="role">Roteiro e dramaturgia</p>
+                        <p><strong>Direção:</strong> Orlando Caldeira</p>
+                    </div>
+                </div>
+                
+                <!-- Show de Humor -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #f85032, #e73827);">
+                        <i class="fas fa-laugh"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Show de Humor "Pra provar que eu não minto" (2023)</h3>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Direção:</strong> Paulo Costa</p>
+                        <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
+                        <p><strong>Elenco:</strong> Dawis Jamaica</p>
+                    </div>
+                </div>
+                
+                <!-- Documentário -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #614385, #516395);">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Documentário "Cidade Correria" (2022)</h3>
+                        <p class="role">Participação</p>
+                        <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
+                        <p><strong>Roteiro:</strong> Juliana Vicente</p>
+                        <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
+                    </div>
+                </div>
+                
+                <!-- Humor Negro -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #00c275, #00a86b);">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Série de Comédia "Humor Negro" (2023)</h3>
+                        <p class="role">Participação</p>
+                        <p><strong>Direção:</strong> Rodrigo França</p>
+                        <p><strong>Criação:</strong> Val Benvindo</p>
+                        <p><strong>Roteiro:</strong> Renata Di Carmo</p>
+                        <p><strong>Plataforma:</strong> Globoplay</p>
+                    </div>
+                </div>
+                
+                <!-- Jongo Mamulengo -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #f5af19, #f12711);">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Espetáculo "Jongo Mamulengo" (2017-2023)</h3>
+                        <p class="role">Elenco e Roteirista</p>
+                        <p><strong>Direção:</strong> Adriana Schneider e Lucas Oradovschi</p>
+                        <p><strong>Concepção e roteiro:</strong> Coletivo Bonobando</p>
+                        <p><strong>Elenco:</strong> Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano</p>
+                    </div>
+                </div>
+                
+                <!-- Originais da Comédia -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #654ea3, #eaafc8);">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Show de Humor "Originais da Comédia" (2022)</h3>
+                        <p class="role">Roteiro e Direção</p>
+                        <p><strong>Roteiro e Direção:</strong> Patrick Sonata e Marcelo Magano</p>
+                    </div>
+                </div>
             </div>
-            <div class="research-card">
-              <h3>Locais</h3>
-              <p>Descreva os locais onde sua história se passa, com detalhes visuais e atmosfera.</p>
-              <button class="btn" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar</button>
-            </div>
-            <div class="research-card">
-              <h3>Referências</h3>
-              <p>Colete imagens, vídeos e textos que sirvam de inspiração para seu projeto.</p>
-              <button class="btn" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar</button>
-            </div>
-            <div class="research-card">
-              <h3>Linha do Tempo</h3>
-              <p>Estabeleça a cronologia dos eventos da sua história.</p>
-              <button class="btn" style="margin-top: 10px;"><i class="fas fa-plus"></i> Adicionar</button>
-            </div>
-          </div>
         </div>
-      </div>
-      
-      <!-- ABA DE ESCALETA -->
-      <div class="tab-content" id="outline">
-        <div class="section">
-          <h2><i class="fas fa-list-ol"></i> Escaleta</h2>
-          <p>Organize a estrutura da sua história com cenas e sequências.</p>
-          
-          <div class="outline-item">
-            <div class="outline-header">
-              <div class="scene-number">1</div>
-              <div>
-                <button class="btn"><i class="fas fa-edit"></i></button>
-                <button class="btn"><i class="fas fa-trash"></i></button>
-              </div>
-            </div>
-            <h3>INT. CASA - DIA</h3>
-            <p>João descobre uma carta misteriosa embaixo da porta.</p>
-          </div>
-          
-          <div class="outline-item">
-            <div class="outline-header">
-              <div class="scene-number">2</div>
-              <div>
-                <button class="btn"><i class="fas fa-edit"></i></button>
-                <button class="btn"><i class="fas fa-trash"></i></button>
-              </div>
-            </div>
-            <h3>EXT. PARQUE - TARDE</h3>
-            <p>João encontra-se com Maria para mostrar a carta.</p>
-          </div>
-          
-          <button class="btn" style="margin-top: 15px;"><i class="fas fa-plus"></i> Adicionar Cena</button>
-        </div>
-      </div>
-      
-      <!-- ABA DE ARGUMENTO -->
-      <div class="tab-content" id="argument">
-        <div class="section">
-          <h2><i class="fas fa-pencil-alt"></i> Desenvolvimento de Argumento</h2>
-          <p>Desenvolva os elementos fundamentais da sua história.</p>
-          
-          <!-- SUB-ABA LONGLINE -->
-          <div class="sub-tab-content active" id="longline">
-            <h3>Longline</h3>
-            <p>Escreva uma descrição concisa de 1-2 frases sobre sua história.</p>
-            <textarea placeholder="Ex: Um jovem descobre que tem poderes especiais e deve usá-los para salvar sua cidade de uma ameaça iminente."></textarea>
-            <button class="btn"><i class="fas fa-save"></i> Salvar Longline</button>
-          </div>
-          
-          <!-- SUB-ABA SINOPSE -->
-          <div class="sub-tab-content" id="synopsis">
-            <h3>Sinopse</h3>
-            <p>Descreva a história completa em 1-2 parágrafos, incluindo o desfecho.</p>
-            <textarea placeholder="Ex: João, um jovem escritor em crise, encontra uma carta misteriosa que o leva a uma aventura inesperada..."></textarea>
-            <button class="btn"><i class="fas fa-save"></i> Salvar Sinopse</button>
-          </div>
-          
-          <!-- SUB-ABA STORYLINE -->
-          <div class="sub-tab-content" id="storyline">
-            <h3>Storyline</h3>
-            <p>Detalhe os principais eventos da história em ordem cronológica.</p>
-            <textarea placeholder="1. João encontra a carta misteriosa...
-2. Ele investiga a origem da carta...
-3. Descobre um segredo familiar..."></textarea>
-            <button class="btn"><i class="fas fa-save"></i> Salvar Storyline</button>
-          </div>
-          
-          <!-- SUB-ABA TRATAMENTO -->
-          <div class="sub-tab-content" id="treatment">
-            <h3>Tratamento</h3>
-            <p>Expanda a história em formato narrativo, com descrições de cenas e diálogos.</p>
-            <textarea placeholder="CENA 1 - INT. CASA DE JOÃO - DIA
-João abre a porta e encontra uma carta no chão. Ele a examina, intrigado..."></textarea>
-            <button class="btn"><i class="fas fa-save"></i> Salvar Tratamento</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- ABA DE ROTEIRO -->
-      <div class="tab-content" id="script">
-        <div class="section">
-          <h2><i class="fas fa-file-alt"></i> Roteiro</h2>
-          <p>Desenvolva seu roteiro com formatação profissional.</p>
-          <div class="editor">
-            <p>Área de edição do roteiro. Use os botões abaixo para adicionar elementos de formatação.</p>
-          </div>
-          <div class="buttons">
-            <button class="btn"><i class="fas fa-heading"></i> Cena</button>
-            <button class="btn"><i class="fas fa-user"></i> Personagem</button>
-            <button class="btn"><i class="fas fa-comment"></i> Diálogo</button>
-            <button class="btn"><i class="fas fa-running"></i> Ação</button>
-            <button class="btn"><i class="fas fa-exchange-alt"></i> Transição</button>
-          </div>
-        </div>
-      </div>
-      
-      <!-- ABA DE AJUDA -->
-      <div class="tab-content" id="help">
-        <div class="section">
-          <h2><i class="fas fa-question-circle"></i> Como usar o ScriptFlow</h2>
-          <p>O ScriptFlow é uma aplicação web para criação e formatação de roteiros cinematográficos.</p>
-          
-          <div class="steps">
-            <div class="step-card">
-              <h3><span class="number">1</span> Desenvolva sua história</h3>
-              <p>Use as abas de Pesquisa, Escaleta e Argumento para desenvolver sua história antes de começar a escrever o roteiro.</p>
-            </div>
-            
-            <div class="step-card">
-              <h3><span class="number">2</span> Escreva o roteiro</h3>
-              <p>Use a aba Roteiro para escrever com formatação profissional, adicionando cenas, personagens, diálogos e ações.</p>
-            </div>
-            
-            <div class="step-card">
-              <h3><span class="number">3</span> Salve e exporte</h3>
-              <p>Salve seu trabalho no navegador e exporte para PDF ou FDX quando estiver pronto.</p>
-            </div>
-          </div>
-          
-          <div class="tip">
-            <p><strong>Dica:</strong> Desenvolva bem sua história nas abas iniciais antes de partir para a escrita do roteiro. Isso facilitará muito o processo!</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
     
+    <!-- Seção Contato -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contato</h2>
+            <div class="contact-content">
+                <div class="social-links">
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="Email"><i class="far fa-envelope"></i></a>
+                </div>
+                <p>Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Rodapé -->
     <footer>
-      <p>ScriptFlow © 2023 - Plataforma de criação de roteiros | Desenvolvido por Patrick Sonata</p>
+        <div class="container">
+            <p>&copy; 2025 Patrick Sonata. Todos os direitos reservados.</p>
+        </div>
     </footer>
-  </div>
-
-  <script>
-    // Sistema de Login Simulado
-    document.getElementById('loginBtn').addEventListener('click', function() {
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      
-      if (username && password) {
-        // Simulação de login bem-sucedido
-        document.getElementById('loginModal').classList.remove('active');
-        document.getElementById('appContainer').style.display = 'block';
-        document.getElementById('userName').textContent = username;
-        
-        // Salvar informações de login (apenas para demonstração)
-        localStorage.setItem('loggedIn', 'true');
-        localStorage.setItem('username', username);
-      } else {
-        alert('Por favor, preencha todos os campos.');
-      }
-    });
     
-    // Botão de logout
-    document.getElementById('logoutBtn').addEventListener('click', function() {
-      localStorage.removeItem('loggedIn');
-      localStorage.removeItem('username');
-      document.getElementById('loginModal').classList.add('active');
-      document.getElementById('appContainer').style.display = 'none';
-      document.getElementById('username').value = '';
-      document.getElementById('password').value = '';
-    });
-    
-    // Verificar se já está logado (apenas para demonstração)
-    window.addEventListener('DOMContentLoaded', function() {
-      const loggedIn = localStorage.getItem('loggedIn');
-      const username = localStorage.getItem('username');
-      
-      if (loggedIn === 'true' && username) {
-        document.getElementById('loginModal').classList.remove('active');
-        document.getElementById('appContainer').style.display = 'block';
-        document.getElementById('userName').textContent = username;
-      }
-    });
-    
-    // Link de registro (apenas demonstração)
-    document.getElementById('registerLink').addEventListener('click', function(e) {
-      e.preventDefault();
-      alert('Sistema de registro não implementado nesta demonstração. Use qualquer usuário/senha para fazer login.');
-    });
-    
-    // Navegação entre abas principais
-    document.querySelectorAll('.tab').forEach(tab => {
-      tab.addEventListener('click', function() {
-        // Remove a classe active de todas as abas
-        document.querySelectorAll('.tab').forEach(t => {
-          t.classList.remove('active');
+    <script>
+        // Smooth scroll para navegação
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 60,
+                    behavior: 'smooth'
+                });
+            });
         });
         
-        // Adiciona a classe active à aba clicada
-        this.classList.add('active');
-        
-        // Esconde todos os conteúdos de abas
-        document.querySelectorAll('.tab-content').forEach(content => {
-          content.classList.remove('active');
+        // Efeito de mudança de cor no header ao scrollar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 100) {
+                header.style.background = 'linear-gradient(135deg, #16213e, #0f1a30)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            }
         });
-        
-        // Mostra o conteúdo da aba correspondente
-        const tabId = this.getAttribute('data-tab');
-        document.getElementById(tabId).classList.add('active');
-      });
-    });
-    
-    // Navegação entre sub-abas
-    document.querySelectorAll('.sub-tab').forEach(tab => {
-      tab.addEventListener('click', function() {
-        // Remove a classe active de todas as sub-abas
-        document.querySelectorAll('.sub-tab').forEach(t => {
-          t.classList.remove('active');
-        });
-        
-        // Adiciona a classe active à sub-aba clicada
-        this.classList.add('active');
-        
-        // Esconde todos os conteúdos de sub-abas
-        document.querySelectorAll('.sub-tab-content').forEach(content => {
-          content.classList.remove('active');
-        });
-        
-        // Mostra o conteúdo da sub-aba correspondente
-        const subtabId = this.getAttribute('data-subtab');
-        document.getElementById(subtabId).classList.add('active');
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
