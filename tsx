@@ -1,4 +1,3 @@
-- Cidade Correria (2016-2018) - Ator/Criador
-- Jongo Mamulengo (2017-2023) - Ator  
-- Pelada (2022) - Roteirista (Indicado Prêmio Shell)
-- Originais da Comédia (2022) - Roteirista/Diretor
+- Palhaçaria Clássica (Márcio Libar, João Carlos Artigos)
+- Maurício Rizzo (Oficina de Roteiro)
+- Adriana Schneider (UFRJ)
