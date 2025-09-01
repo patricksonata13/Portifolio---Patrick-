@@ -73,21 +73,7 @@ Roteiro e Direção: Patrick Sonata e Marcelo Magano
 
 ## 🌐 Site Online
 
-🔗 **Portfólio:** [https://patricksonata13.github.io/Portifolio---Patrick-/](https://patricksonata13.github.io/Portifolio---Patrick-/)
 
 ---
 
-## 🛠️ Como Executar Localmente
 
-```bash
-# Instalar dependências
-npm install
-
-# Executar em modo desenvolvimento
-npm run dev
-
-# Build para produção
-npm run build
-
-# Iniciar servidor de produção
-npm start
