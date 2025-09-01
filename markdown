@@ -1,41 +1,60 @@
 # 🎭 Patrick Sonata - Portfólio
 
-![Banner](https://via.placeholder.com/800x200/1a1a2e/ffffff?text=Patrick+Sonata+-+Portfólio)
+[![Next.js](https://img.shields.io/badge/Next.js-15.5.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
 
 ## 👋 Sobre Mim
 
-Sou **escritor, comediante e desenvolvedor** com experiência em:
-- 📺 **TV Globo**: Humor Negro e Zorra
-- 💻 **Desenvolvimento Web**: Next.js, React, TypeScript
-- 🎤 **Stand-up comedy** e criação de conteúdo
+**Desenvolvedor Full Stack | Escritor | Comediante**  
+Com experiência em projetos para **TV Globo** (Humor Negro e Zorra) e desenvolvimento de aplicações modernas com Next.js.
 
-## 🚀 Projetos em Destaque
+## 🚀 Tecnologias
+
+- **Frontend:** Next.js 15, React, TypeScript, Tailwind CSS
+- **Backend:** Node.js, PostgreSQL, REST APIs
+- **Ferramentas:** Git, GitHub, Vercel, Figma
+
+## 📺 Créditos na TV
 
 ### 🎬 Humor Negro - TV Globo
-**Função**: Escritor e criador de conteúdo  
-**Episódio**: "My Sista, Meus Brother" (T1:E5)  
-**Descrição**: Participação como escritor no programa de humor da Globo.
+- **Função:** Escritor e criador de conteúdo
+- **Episódio:** "My Sista, Meus Brother" (T1:E5)
+- **Descrição:** Participação como escritor no programa de humor da Globo
 
 ### 📺 Zorra - TV Globo  
-**Função**: Escritor  
-**Descrição**: Contribuição na equipe de roteiristas do programa.
+- **Função:** Escritor
+- **Descrição:** Contribuição na equipe de roteiristas do programa
 
-### 💻 Portfólio Next.js
-**Tecnologias**: Next.js 15, TypeScript, Tailwind CSS  
-**Descrição**: Este portfólio desenvolvido com as melhores práticas modernas.
+## 🎯 Projetos em Destaque
 
-## 🛠️ Tecnologias
+- **Portfólio Next.js** - Este site com design moderno e responsivo
+- **Projetos de Comédia** - Stand-up e criação de conteúdo humorístico
+- **Aplicações Web** - Desenvolvimento full stack de soluções inovadoras
 
-- **Frontend**: Next.js, React, TypeScript, Tailwind CSS
-- **Backend**: Node.js, PostgreSQL
-- **Ferramentas**: Git, GitHub, Vercel, Figma
+## 🌐 Acesse Meu Portfólio
+
+🔗 **URL:** [https://patricksonata13.github.io/Portifolio---Patrick-/](https://patricksonata13.github.io/Portifolio---Patrick-/)
 
 ## 📫 Contato
 
-- 📧 **Email**: patrick@exemplo.com
-- 💼 **GitHub**: [patricksonata13](https://github.com/patricksonata13)
-- 🌐 **Site**: [https://patricksonata13.github.io/Portifolio---Patrick-/](https://patricksonatonata13.github.io/Portifolio---Patrick-/)
+- 📧 **Email:** patrick@exemplo.com
+- 💼 **GitHub:** [@patricksonata13](https://github.com/patricksonata13)
+- 🌐 **LinkedIn:** [Seu perfil aqui]
 
 ---
 
-⭐ *Este portfólio foi desenvolvido com [Next.js](https://nextjs.org/) e [Tailwind CSS](https://tailwindcss.com/)*
+## 🛠️ Como Executar Localmente
+
+```bash
+# Instalar dependências
+npm install
+
+# Executar em modo desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Iniciar servidor de produção
+npm start
