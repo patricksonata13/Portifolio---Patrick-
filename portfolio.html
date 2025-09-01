@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Artístico - Galeria</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #1a202c, #000000);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        .gallery-item {
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.3);
+        }
+        
+        .category-btn {
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .modal-overlay {
+            animation: fadeIn 0.3s ease-out;
+        }
+        
+        .modal-content {
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .placeholder-icon {
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+        
+        .upload-area {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            border-color: #f59e0b;
+            background-color: rgba(245, 158, 11, 0.05);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 w-full bg-gray-900/80 backdrop-blur-md z-40 border-b border-gray-700">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-amber-400">Portfólio Artístico</div>
+            <div class="flex gap-6">
+                <button class="text-gray-300 hover:text-amber-400 transition">Início</button>
+                <button class="text-amber-400 font-bold">Galeria</button>
+                <button class="text-gray-300 hover:text-amber-400 transition">Sobre</button>
+                <button class="text-gray-300 hover:text-amber-400 transition">Contato</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Seção Galeria -->
+    <section class="pt-32 pb-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold text-amber-400 mb-2 text-center">Galeria de Trabalhos</h2>
+            <p class="text-gray-400 text-center mb-8">Explore meus projetos em diferentes categorias artísticas</p>
+            
+            <!-- Filtros por Categoria -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="category-btn px-6 py-3 rounded-full bg-amber-500 text-black font-bold">
+                    TV
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600">
+                    Teatro
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600">
+                    Shows
+                </button>
+                <button class="category-btn px-6 py-3 rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600">
+                    Formação
+                </button>
+            </div>
+
+            <!-- Grid de Imagens -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Item 1 -->
+                <div class="gallery-item bg-gray-800/50 rounded-2xl p-4 backdrop-blur-sm cursor-pointer">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <div class="text-center">
+                            <span class="placeholder-icon">📺</span>
+                            <p class="text-gray-400 text-sm mt-2">Zorra - TV Globo</p>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-amber-300 mb-2">Zorra - TV Globo</h3>
+                    <p class="text-gray-400 text-sm">Equipe de roteiristas (2019-2021)</p>
+                </div>
+                
+                <!-- Item 2 -->
+                <div class="gallery-item bg-gray-800/50 rounded-2xl p-4 backdrop-blur-sm cursor-pointer">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <div class="text-center">
+                            <span class="placeholder-icon">🎬</span>
+                            <p class="text-gray-400 text-sm mt-2">Humor Negro</p>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-amber-300 mb-2">Humor Negro</h3>
+                    <p class="text-gray-400 text-sm">Globoplay - Participação especial</p>
+                </div>
+                
+                <!-- Item 3 -->
+                <div class="gallery-item bg-gray-800/50 rounded-2xl p-4 backdrop-blur-sm cursor-pointer">
+                    <div class="w-full h-48 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-lg flex items-center justify-center mb-4">
+                        <div class="text-center">
+                            <span class="placeholder-icon">🎭</span>
+                            <p class="text-gray-400 text-sm mt-2">Pablo & Luisão</p>
+                        </div>
+                    </div>
+                    <h3 class="font-bold text-amber-300 mb-2">Pablo & Luisão</h3>
+                    <p class="text-gray-400 text-sm">Globoplay 2025 - Roteirista</p>
+                </div>
+            </div>
+
+            <!-- Aviso sobre upload de imagens -->
+            <div class="mt-12 p-6 bg-gray-800/30 rounded-lg text-center max-w-2xl mx-auto">
+                <div class="upload-area border-dashed rounded-lg p-8 mb-4">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-amber-400 mb-3"></i>
+                    <h3 class="text-amber-300 mb-2">Upload de Imagens</h3>
+                    <p class="text-gray-400 text-sm mb-4">Faça upload das imagens para preencher a galeria</p>
+                    <button class="bg-amber-500 text-black px-6 py-2 rounded-full font-bold hover:bg-amber-400 transition">
+                        Selecionar Arquivos
+                    </button>
+                </div>
+                <p class="text-gray-400 text-sm">
+                    Para ver as imagens reais, faça upload delas seguindo a estrutura de pastas: 
+                    <code class="bg-gray-700 px-2 py-1 rounded">public/images/tv/</code>, 
+                    <code class="bg-gray-700 px-2 py-1 rounded">public/images/teatro/</code>, etc.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Upload (oculto por padrão) -->
+    <div class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 modal-overlay" style="display: none;">
+        <div class="relative max-w-2xl w-full modal-content">
+            <button class="absolute -top-12 right-0 text-white text-2xl hover:text-amber-400 z-10 bg-gray-800 rounded-full p-2">
+                ✕ Fechar
+            </button>
+            
+            <div class="bg-gray-800 rounded-xl p-6">
+                <h3 class="text-xl font-bold text-amber-300 mb-4">Fazer Upload de Imagem</h3>
+                
+                <div class="upload-area border-dashed rounded-lg p-8 mb-6 text-center">
+                    <i class="fas fa-cloud-upload-alt text-5xl text-amber-400 mb-4"></i>
+                    <p class="text-gray-300 mb-4">Arraste e solte arquivos aqui ou</p>
+                    <label for="file-upload" class="bg-amber-500 text-black px-6 py-3 rounded-full font-bold hover:bg-amber-400 transition cursor-pointer">
+                        Selecione do Computador
+                    </label>
+                    <input id="file-upload" type="file" class="hidden" />
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div>
+                        <label class="text-gray-300 block mb-2">Categoria</label>
+                        <select class="w-full bg-gray-700 text-gray-300 rounded-lg p-3">
+                            <option>TV</option>
+                            <option>Teatro</option>
+                            <option>Shows</option>
+                            <option>Formação</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="text-gray-300 block mb-2">Título</label>
+                        <input type="text" class="w-full bg-gray-700 text-gray-300 rounded-lg p-3" placeholder="Nome do projeto">
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="text-gray-300 block mb-2">Descrição</label>
+                    <textarea class="w-full bg-gray-700 text-gray-300 rounded-lg p-3 h-24" placeholder="Descrição do projeto"></textarea>
+                </div>
+                
+                <button class="w-full bg-amber-500 text-black px-6 py-3 rounded-lg font-bold hover:bg-amber-400 transition">
+                    Fazer Upload
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900/80 border-t border-gray-700 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2023 Portfólio Artístico. Todos os direitos reservados.</p>
+            <div class="flex justify-center gap-4 mt-4">
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-gray-400 hover:text-amber-400 transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script para controlar a abertura e fechamento do modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.querySelector('.modal-overlay');
+            const closeModalBtn = document.querySelector('.modal-overlay button');
+            const uploadBtn = document.querySelector('.upload-area button');
+            
+            // Abrir modal ao clicar em qualquer item da galeria
+            galleryItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                });
+            });
+            
+            // Abrir modal ao clicar no botão de upload
+            uploadBtn.addEventListener('click', function() {
+                modal.style.display = 'flex';
+            });
+            
+            // Fechar modal
+            closeModalBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+            
+            // Fechar modal ao clicar fora do conteúdo
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Trocar categoria
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryBtns.forEach(b => b.classList.remove('bg-amber-500', 'text-black'));
+                    categoryBtns.forEach(b => b.classList.add('bg-gray-700', 'text-gray-300'));
+                    
+                    this.classList.remove('bg-gray-700', 'text-gray-300');
+                    this.classList.add('bg-amber-500', 'text-black');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
