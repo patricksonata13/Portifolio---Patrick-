@@ -1,30 +1,67 @@
-# 🎭 Patrick Sonata - Portfólio
-
-[![Next.js](https://img.shields.io/badge/Next.js-15.5.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+Patrick Sonata - Portfólio
 
 ## 👋 Sobre Mim
 
-**Patrick Sonata** - Desenvolvedor Full Stack | Escritor | Comediante  
-Com experiência em projetos para **TV Globo** (Humor Negro e Zorra) e desenvolvimento de aplicações modernas com Next.js.
+**Patrick Sonata** -  Ator e Roteirista   
 
-## 🚀 Tecnologias
+Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo. A partir daí, escreveu temporadas do programa Zorra e assinou episódios da série Pablo & Luisão. Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e  humor.
 
-- **Frontend:** Next.js 15, React, TypeScript, Tailwind CSS
-- **Backend:** Node.js, PostgreSQL, REST APIs
-- **Ferramentas:** Git, GitHub, Vercel, Figma
 
-## 📺 Créditos na TV
 
-### 🎬 Humor Negro - TV Globo
-- **Função:** Escritor e criador de conteúdo
-- **Episódio:** "My Sista, Meus Brother" (T1:E5)
-- **Descrição:** Participação como escritor no programa de humor da Globo
+Série 
+Pablo & Luisão (2025)
 
-### 📺 Zorra - TV Globo  
-- **Função:** Escritor
-- **Descrição:** Contribuição na equipe de roteiristas do programa
+Ficha técnica ; Autor: Paulo Vieira, Maurício Rizzo ; Direção artística: Luis Felipe Sá ; Direção: João Gomez ; Roteiro: Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata
+
+
+Programa 
+Zorra (2019-2021
+
+Redação Final: Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça 
+Direção Geral: Mauro Farias.
+
+
+Espetáculo 
+Pelada - A Hora da Gaymada (2022)
+
+
+Direção  Orlando Caldeira, 
+Roteiro e dramaturgia: Patrick Sonata
+
+
+Show de Humor
+Pra provar que eu não minto (2023)
+
+Direção : Paulo Costa
+Roteiro: Patrick Sonata e Tamires Gomes
+Elenco: Dawis Jamaica
+
+ Documentário  
+Cidade Correria  (2022)
+Direção: Juliana Vicente e Washington Deoli
+Roteiro: Juliana Vicente
+Realização: Prêt-à-porter Filmes
+
+Série de Comédia 
+Humor Negro (2023)
+T1 EP: May Sista, Meus Brother 
+Direção: Rodrigo França 
+Criação: Val Benvindo
+Roteiro: Renata Di Carmo 
+Globoplay
+
+Espetáculo 
+ Jongo Mamulengo (2017 -2023)
+Direção: Adriana  Schneider
+e Lucas  Oradovschi 
+Concepção e roteiro: Coletivo Bonobando
+Elenco: Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano
+
+Show de Humor 
+Originais da Comédia (2022)
+Roteiro e Direção: Patrick Sonata e Marcelo Magano
+
+
 
 ## 🌐 Redes Sociais
 
