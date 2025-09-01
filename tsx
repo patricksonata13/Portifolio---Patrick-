@@ -1,3 +1,4 @@
-- Zorra (2019-2021) - Roteirista
-- Humor Negro (2023) - Participação especial  
-- Pablo & Luisão (2025) - Roteirista (Globoplay)
+- Cidade Correria (2016-2018) - Ator/Criador
+- Jongo Mamulengo (2017-2023) - Ator  
+- Pelada (2022) - Roteirista (Indicado Prêmio Shell)
+- Originais da Comédia (2022) - Roteirista/Diretor
