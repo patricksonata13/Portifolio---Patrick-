@@ -1,7 +1,21 @@
-## 🎬 Créditos em Produções de TV
+# Patrick Sonata - Portfólio
 
-### Humor Negro - Série (Globo)
-![Crédito Humor Negro](images/Captura%20de%20Tela%202025-09-01%20às%2012.51.31.png)
+👋 Olá! Sou Patrick Sonata - Desenvolvedor, escritor e criador de conteúdo.
 
-### Zorra (Globo)
-![Crédito Zorra](images/Captura%20de%20Tela%202025-09-01%20às%2012.52.27.png)
+## 🚀 Sobre Mim
+- 🎭 Escritor no **Humor Negro** (Globo) e **Zorra** (Globo)
+- 💻 Desenvolvedor Full Stack
+- 🎤 Comediante e criador de conteúdo
+
+## 🛠️ Tecnologias
+- Next.js | TypeScript | Tailwind CSS
+- React | Node.js | PostgreSQL
+- Git | GitHub | Vercel
+
+## 📫 Contato
+- Email: patrick@exemplo.com
+- GitHub: [@patricksonata13](https://github.com/patricksonata13)
+
+---
+
+*Este projeto foi criado com [Next.js](https://nextjs.org/).*
