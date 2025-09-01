@@ -14,6 +14,7 @@ Pablo & Luisão (2025)
 Ficha técnica ; Autor: Paulo Vieira, Maurício Rizzo ; Direção artística: Luis Felipe Sá ; Direção: João Gomez ; Roteiro: Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata
 
 
+
 Programa 
 Zorra (2019-2021
 
