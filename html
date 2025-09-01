@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata - Ator e Roteirista</title>
+    <title>Patrick Sonata - Portfólio</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Variáveis de cores */
         :root {
-            --primary: #e63946;
-            --secondary: #1d3557;
-            --accent: #f1faee;
-            --dark: #0d1b2a;
-            --light: #f8f9fa;
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --light: #f0f0f0;
+            --text: #333333;
+            --text-light: #ffffff;
+            --globoplay: #00c275;
         }
         
         /* Reset e estilos base */
@@ -23,48 +26,71 @@
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
+            background-color: var(--light);
+            color: var(--text);
             line-height: 1.6;
-            overflow-x: hidden;
+            font-family: 'Montserrat', sans-serif;
         }
         
+        /* Container principal */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
         
-        /* Header e Navegação */
+        /* Cabeçalho */
         header {
-            background: rgba(13, 27, 42, 0.9);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--text-light);
+            padding: 60px 0 40px;
+            text-align: center;
         }
         
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), #ff7e5f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: white;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .name-title h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .name-title h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Navegação */
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
+        .nav-container {
             display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            margin-right: 10px;
+            justify-content: center;
         }
         
         .nav-links {
@@ -72,135 +98,31 @@
             list-style: none;
         }
         
-        .nav-links li {
-            margin-left: 30px;
-        }
-        
-        .nav-links a {
-            color: var(--light);
+        .nav-links li a {
+            display: block;
+            color: var(--text-light);
             text-decoration: none;
+            padding: 20px 25px;
+            transition: background-color 0.3s;
             font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
         }
         
-        .nav-links a:hover {
-            color: var(--primary);
+        .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
         
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 180px 0 100px;
-            text-align: center;
-            background: linear-gradient(rgba(13, 27, 42, 0.9), rgba(13, 27, 42, 0.9)), url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at center, transparent 10%, var(--dark) 90%);
-        }
-        
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto 30px;
-            color: var(--accent);
-        }
-        
-        .tagline {
-            font-style: italic;
-            color: #8a8a8a;
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s;
-            border: 2px solid var(--primary);
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            color: var(--primary);
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .btn-primary:hover {
-            background: #d32f2f;
-            border-color: #d32f2f;
-        }
-        
-        .btn-outline:hover {
-            background: rgba(230, 57, 70, 0.1);
-        }
-        
-        /* Seções Gerais */
+        /* Seções */
         section {
-            padding: 100px 0;
+            padding: 60px 0;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             color: var(--primary);
-            font-size: 2.5rem;
             position: relative;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
         }
         
         .section-title::after {
@@ -208,485 +130,350 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: var(--primary);
+            background-color: var(--accent);
             margin: 15px auto;
-            border-radius: 2px;
         }
         
-        /* Sobre Mim */
-        .about {
-            background-color: var(--secondary);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .about::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 100%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(29, 53, 87, 0.8) 0%, rgba(29, 53, 87, 0) 70%);
+        /* Sobre */
+        #about {
+            background-color: white;
         }
         
         .about-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            padding-right: 40px;
-        }
-        
-        .about-text p {
-            margin-bottom: 20px;
-            font-size: 1.1rem;
-            color: var(--accent);
-        }
-        
-        .profile-img {
-            flex: 1;
-            min-width: 300px;
-            text-align: center;
-            position: relative;
-        }
-        
-        .profile-img div {
-            width: 300px;
-            height: 300px;
+            max-width: 800px;
             margin: 0 auto;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: white;
-            border: 5px solid var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            font-size: 1.1rem;
         }
         
-        /* Projetos */
-        .projects {
-            background-color: var(--dark);
+        /* Trabalhos */
+        #works {
+            background-color: #f8f9fa;
         }
         
-        .projects-grid {
+        .works-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
         }
         
-        .project-card {
-            background: rgba(29, 53, 87, 0.5);
-            border-radius: 15px;
+        .work-card {
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
         }
         
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        .work-card:hover {
+            transform: translateY(-5px);
         }
         
-        .project-img {
+        .work-img {
             height: 200px;
-            background: linear-gradient(45deg, var(--secondary), var(--primary));
+            background: linear-gradient(45deg, #3498db, #2c3e50);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 2rem;
-            position: relative;
-            overflow: hidden;
+            font-size: 24px;
         }
         
-        .project-img::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, rgba(29, 53, 87, 0.7), rgba(230, 57, 70, 0.7));
+        .work-info {
+            padding: 20px;
         }
         
-        .project-img i {
-            z-index: 1;
-        }
-        
-        .project-info {
-            padding: 25px;
-        }
-        
-        .project-info h3 {
+        .work-info h3 {
             color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
         }
         
-        .project-info p {
+        .work-info p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+        
+        .work-info .role {
             color: var(--accent);
-            margin-bottom: 15px;
-        }
-        
-        .project-meta {
-            font-size: 0.9rem;
-            color: #8a8a8a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 15px;
-            margin-top: 15px;
+            font-weight: 600;
         }
         
         /* Contato */
-        .contact {
-            background: linear-gradient(to bottom, var(--secondary), var(--dark));
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .contact::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80') no-repeat center center/cover;
-            opacity: 0.1;
+        #contact {
+            background-color: white;
         }
         
         .contact-content {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .contact p {
-            max-width: 600px;
-            margin: 0 auto 30px;
-            font-size: 1.1rem;
-            color: var(--accent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
         }
         
         .social-links {
             display: flex;
-            justify-content: center;
             gap: 20px;
-            margin-top: 40px;
         }
         
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
             background: var(--primary);
             color: white;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            border-radius: 50%;
+            font-size: 24px;
+            text-decoration: none;
+            transition: transform 0.3s, background-color 0.3s;
         }
         
         .social-links a:hover {
             transform: translateY(-5px);
-            background: var(--secondary);
+            background: var(--accent);
         }
         
-        /* Footer */
+        /* Rodapé */
         footer {
-            background: var(--dark);
-            padding: 40px 0;
+            background: var(--primary);
+            color: var(--text-light);
             text-align: center;
-            color: #8a8a8a;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .footer-logo {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 20px;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 20px;
-        }
-        
-        .footer-links a {
-            color: var(--accent);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .footer-links a:hover {
-            color: var(--primary);
+            padding: 30px 0;
+            margin-top: 40px;
         }
         
         /* Responsividade */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .about-content {
                 flex-direction: column;
             }
             
-            .about-text {
-                padding-right: 0;
-                margin-bottom: 40px;
+            .nav-links li a {
+                padding: 15px;
+                text-align: center;
             }
             
-            .hero-buttons {
-                flex-direction: column;
-                gap: 15px;
+            .name-title h1 {
+                font-size: 2.2rem;
             }
             
-            .projects-grid {
+            .works-grid {
                 grid-template-columns: 1fr;
             }
-        }
-        
-        /* Animações */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+            
+            .section-title {
+                font-size: 1.8rem;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-        
-        .delay-1 {
-            animation-delay: 0.2s;
-        }
-        
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
-        
-        .delay-3 {
-            animation-delay: 0.6s;
         }
     </style>
 </head>
 <body>
-    <!-- Header e Navegação -->
+    <!-- Cabeçalho com perfil -->
     <header>
         <div class="container">
-            <nav>
-                <a href="#" class="logo"><i class="fas fa-theater-masks"></i>Patrick Sonata</a>
-                <ul class="nav-links">
-                    <li><a href="#about">Sobre</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h1 class="fade-in">Patrick Sonata</h1>
-            <p class="fade-in delay-1">Ator e Roteirista</p>
-            <p class="tagline fade-in delay-2">Trazendo histórias à vida através da comédia e da dramaturgia</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary fade-in delay-2">Ver Projetos</a>
-                <a href="#contact" class="btn btn-outline fade-in delay-3">Entrar em Contato</a>
+            <div class="profile">
+                <div class="avatar">
+                    <i class="fas fa-theater-masks"></i>
+                </div>
+                <div class="name-title">
+                    <h1>Patrick Sonata</h1>
+                    <h2>Roteirista e Comediante</h2>
+                </div>
             </div>
         </div>
-    </section>
-
-    <!-- Sobre Mim -->
-    <section id="about" class="about">
+    </header>
+    
+    <!-- Navegação -->
+    <nav>
+        <div class="container nav-container">
+            <ul class="nav-links">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#works">Trabalhos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Seção Sobre -->
+    <section id="about">
         <div class="container">
             <h2 class="section-title">Sobre Mim</h2>
             <div class="about-content">
-                <div class="about-text">
-                    <p>Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo.</p>
-                    <p>A partir daí, escreveu temporadas do programa Zorra e assinou episódios da série Pablo & Luisão. Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.</p>
-                    <p>Com uma carreira diversificada, Patrick já trabalhou em espetáculos teatrais, shows de humor, documentários e séries de televisão, sempre trazendo uma perspectiva única e autêntica influenciada por suas origens na Cidade de Deus.</p>
-                </div>
-                <div class="profile-img">
-                    <div><i class="fas fa-user"></i></div>
-                </div>
+                <p>Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo.</p>
+                <p>Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.</p>
             </div>
         </div>
     </section>
-
-    <!-- Projetos -->
-    <section id="projects" class="projects">
+    
+    <!-- Seção Trabalhos -->
+    <section id="works">
         <div class="container">
-            <h2 class="section-title">Projetos Destacados</h2>
-            <div class="projects-grid">
-                <!-- Projeto 1 -->
-                <div class="project-card fade-in">
-                    <div class="project-img"><i class="fas fa-tv"></i></div>
-                    <div class="project-info">
-                        <h3>Pablo & Luisão (2025)</h3>
-                        <p>Série de comédia onde Patrick participou da equipe de roteiristas.</p>
-                        <div class="project-meta">
-                            <p><strong>Autores:</strong> Paulo Vieira, Maurício Rizzo</p>
-                            <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
-                            <p><strong>Direção:</strong> João Gomez</p>
-                            <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
-                        </div>
+            <h2 class="section-title">Trabalhos Destacados</h2>
+            <div class="works-grid">
+                <!-- Pablo & Luisão -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #8e44ad, #3498db);">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Série Pablo & Luisão (2025)</h3>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Autor:</strong> Paulo Vieira, Maurício Rizzo</p>
+                        <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
+                        <p><strong>Direção:</strong> João Gomez</p>
+                        <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
                     </div>
                 </div>
                 
-                <!-- Projeto 2 -->
-                <div class="project-card fade-in delay-1">
-                    <div class="project-img"><i class="fas fa-microphone-alt"></i></div>
-                    <div class="project-info">
+                <!-- Programa Zorra -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #ff7e5f, #feb47b);">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <div class="work-info">
                         <h3>Programa Zorra (2019-2021)</h3>
-                        <p>Programa de humor da TV Globo onde Patrick integrou a equipe de roteiristas.</p>
-                        <div class="project-meta">
-                            <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
-                            <p><strong>Direção Geral:</strong> Mauro Farias</p>
-                        </div>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
+                        <p><strong>Direção Geral:</strong> Mauro Farias</p>
                     </div>
                 </div>
                 
-                <!-- Projeto 3 -->
-                <div class="project-card fade-in delay-2">
-                    <div class="project-img"><i class="fas fa-masks-theater"></i></div>
-                    <div class="project-info">
+                <!-- Espetáculo Pelada -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #00b4db, #0083b0);">
+                        <i class="fas fa-masks-theater"></i>
+                    </div>
+                    <div class="work-info">
                         <h3>Espetáculo Pelada - A Hora da Gaymada (2022)</h3>
-                        <p>Espetáculo teatral com roteiro e dramaturgia de Patrick Sonata.</p>
-                        <div class="project-meta">
-                            <p><strong>Direção:</strong> Orlando Caldeira</p>
-                        </div>
+                        <p class="role">Roteiro e dramaturgia</p>
+                        <p><strong>Direção:</strong> Orlando Caldeira</p>
                     </div>
                 </div>
                 
-                <!-- Projeto 4 -->
-                <div class="project-card fade-in">
-                    <div class="project-img"><i class="fas fa-laugh"></i></div>
-                    <div class="project-info">
+                <!-- Show de Humor -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #f85032, #e73827);">
+                        <i class="fas fa-laugh"></i>
+                    </div>
+                    <div class="work-info">
                         <h3>Show de Humor "Pra provar que eu não minto" (2023)</h3>
-                        <p>Show de stand-up comedy com roteiro de Patrick Sonata.</p>
-                        <div class="project-meta">
-                            <p><strong>Direção:</strong> Paulo Costa</p>
-                            <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
-                            <p><strong>Elenco:</strong> Dawis Jamaica</p>
-                        </div>
+                        <p class="role">Roteirista</p>
+                        <p><strong>Direção:</strong> Paulo Costa</p>
+                        <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
+                        <p><strong>Elenco:</strong> Dawis Jamaica</p>
                     </div>
                 </div>
                 
-                <!-- Projeto 5 -->
-                <div class="project-card fade-in delay-1">
-                    <div class="project-img"><i class="fas fa-film"></i></div>
-                    <div class="project-info">
-                        <h3>Cidade Correria (2022)</h3>
-                        <p>Documentário com roteiro de Patrick Sonata.</p>
-                        <div class="project-meta">
-                            <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
-                            <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
-                        </div>
+                <!-- Documentário -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #614385, #516395);">
+                        <i class="fas fa-film"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Documentário "Cidade Correria" (2022)</h3>
+                        <p class="role">Participação</p>
+                        <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
+                        <p><strong>Roteiro:</strong> Juliana Vicente</p>
+                        <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
                     </div>
                 </div>
                 
-                <!-- Projeto 6 -->
-                <div class="project-card fade-in delay-2">
-                    <div class="project-img"><i class="fas fa-video"></i></div>
-                    <div class="project-info">
-                        <h3>Série de Comédia Humor Negro (2023)</h3>
-                        <p>Série de comédia com participação de Patrick no roteiro.</p>
-                        <div class="project-meta">
-                            <p><strong>T1 EP:</strong> May Sista, Meus Brother</p>
-                            <p><strong>Direção:</strong> Rodrigo França</p>
-                            <p><strong>Criação:</strong> Val Benvindo</p>
-                            <p><strong>Roteiro:</strong> Renata Di Carmo</p>
-                            <p><strong>Plataforma:</strong> Globoplay</p>
-                        </div>
+                <!-- Humor Negro -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #00c275, #00a86b);">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Série de Comédia "Humor Negro" (2023)</h3>
+                        <p class="role">Participação</p>
+                        <p><strong>Direção:</strong> Rodrigo França</p>
+                        <p><strong>Criação:</strong> Val Benvindo</p>
+                        <p><strong>Roteiro:</strong> Renata Di Carmo</p>
+                        <p><strong>Plataforma:</strong> Globoplay</p>
+                    </div>
+                </div>
+                
+                <!-- Jongo Mamulengo -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #f5af19, #f12711);">
+                        <i class="fas fa-drum"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Espetáculo "Jongo Mamulengo" (2017-2023)</h3>
+                        <p class="role">Elenco e Roteirista</p>
+                        <p><strong>Direção:</strong> Adriana Schneider e Lucas Oradovschi</p>
+                        <p><strong>Concepção e roteiro:</strong> Coletivo Bonobando</p>
+                        <p><strong>Elenco:</strong> Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano</p>
+                    </div>
+                </div>
+                
+                <!-- Originais da Comédia -->
+                <div class="work-card">
+                    <div class="work-img" style="background: linear-gradient(45deg, #654ea3, #eaafc8);">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="work-info">
+                        <h3>Show de Humor "Originais da Comédia" (2022)</h3>
+                        <p class="role">Roteiro e Direção</p>
+                        <p><strong>Roteiro e Direção:</strong> Patrick Sonata e Marcelo Magano</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <!-- Contato -->
-    <section id="contact" class="contact">
-        <div class="container contact-content">
+    
+    <!-- Seção Contato -->
+    <section id="contact">
+        <div class="container">
             <h2 class="section-title">Contato</h2>
-            <p>Interessado em colaborar ou saber mais sobre meu trabalho? Entre em contato!</p>
-            <a href="mailto:contato@patricksonata.com" class="btn btn-primary">Enviar Mensagem</a>
-            
-            <div class="social-links">
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-imdb"></i></a>
-                <a href="#"><i class="fab fa-youtube"></i></a>
+            <div class="contact-content">
+                <div class="social-links">
+                    <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" title="Email"><i class="far fa-envelope"></i></a>
+                </div>
+                <p>Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
+    
+    <!-- Rodapé -->
     <footer>
-        <div class="container footer-content">
-            <div class="footer-logo">
-                <i class="fas fa-theater-masks"></i>
-            </div>
-            <div class="footer-links">
-                <a href="#about">Sobre</a>
-                <a href="#projects">Projetos</a>
-                <a href="#contact">Contato</a>
-            </div>
-            <p>&copy; 2023 Patrick Sonata - Todos os direitos reservados</p>
+        <div class="container">
+            <p>&copy; 2025 Patrick Sonata. Todos os direitos reservados.</p>
         </div>
     </footer>
-
+    
     <script>
-        // Animação de aparecimento ao rolar a página
-        document.addEventListener('DOMContentLoaded', function() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                    }
+        // Smooth scroll para navegação
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 60,
+                    behavior: 'smooth'
                 });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(element => {
-                element.style.opacity = 0;
-                element.style.transition = 'opacity 0.5s ease-out';
-                observer.observe(element);
             });
+        });
+        
+        // Efeito de mudança de cor no header ao scrollar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollPosition = window.scrollY;
+            
+            if (scrollPosition > 100) {
+                header.style.background = 'linear-gradient(135deg, #16213e, #0f1a30)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+            }
         });
     </script>
 </body>
