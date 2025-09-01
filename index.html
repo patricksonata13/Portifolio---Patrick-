@@ -58,13 +58,15 @@
             width: 180px;
             height: 180px;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--accent), #ff7e5f);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: white;
+            overflow: hidden;
             border: 5px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         
         .name-title h1 {
@@ -276,7 +278,8 @@
         <div class="container">
             <div class="profile">
                 <div class="avatar">
-                    <i class="fas fa-theater-masks"></i>
+                    <!-- SUA FOTO DE PERFIL - CAMINHO CORRETO -->
+                    <img src="profile.jpg" alt="Patrick Sonata">
                 </div>
                 <div class="name-title">
                     <h1>Patrick Sonata</h1>
@@ -431,10 +434,10 @@
             <h2 class="section-title">Contato</h2>
             <div class="contact-content">
                 <div class="social-links">
-                    <a href="https://www.instagram.com/seu_usuario" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.twitter.com/seu_usuario" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/seu_usuario" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:seuemail@exemplo.com" title="Email"><i class="far fa-envelope"></i></a>
+                    <a href="https://www.instagram.com/patricksonata" title="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com/patricksonata" title="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/in/patricksonata" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="mailto:contato@patricksonata.com" title="Email"><i class="far fa-envelope"></i></a>
                 </div>
                 <p>Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
             </div>
