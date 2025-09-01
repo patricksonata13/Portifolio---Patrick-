@@ -1,3 +1,3 @@
-- Palhaçaria Clássica (Márcio Libar, João Carlos Artigos)
-- Maurício Rizzo (Oficina de Roteiro)
-- Adriana Schneider (UFRJ)
+- Email: patrick12reis@gmail.com
+- Tel: (21) 98397-6299
+- Redes: @PatrickSonata
