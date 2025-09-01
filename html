@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata - Portfólio</title>
+    <title>Patrick Sonata - Ator e Roteirista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilos gerais */
+        /* Variáveis e reset */
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff6b6b;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
         }
         
         body {
@@ -25,66 +39,201 @@
             padding: 0 20px;
         }
         
-        /* Cabeçalho */
+        /* Header */
         header {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 40px;
+            padding: 80px 20px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,128L48,117.3C96,107,192,85,288,112C384,139,480,213,576,218.7C672,224,768,160,864,138.7C960,117,1056,139,1152,149.3C1248,160,1344,160,1392,160L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
         
         header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
         
         header p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             opacity: 0.9;
+            margin-bottom: 30px;
         }
         
-        /* Seções */
-        section {
-            margin-bottom: 50px;
-            padding: 30px;
+        .tagline {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        /* Navigation */
+        nav {
             background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
         
-        h2 {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            color: #2575fc;
+        .nav-container {
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 25px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            margin: 0 auto;
+            border-radius: 2px;
+        }
+        
+        /* About */
+        #about {
+            background: white;
+        }
+        
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             align-items: center;
         }
         
-        h2 span {
-            margin-right: 10px;
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
         }
         
-        /* Grid de imagens */
-        .image-grid {
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+        
+        .about-image {
+            background: linear-gradient(45deg, #6a89cc, #4a69bd);
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Portfolio */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .filter-btn {
+            background: white;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            margin: 5px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .portfolio-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
         
-        .image-card {
-            background: #f9f9f9;
-            border-radius: 8px;
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
         
-        .image-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
-        .image-placeholder {
+        .portfolio-image {
             height: 200px;
             background: linear-gradient(45deg, #6a89cc, #4a69bd);
             display: flex;
@@ -94,330 +243,587 @@
             font-weight: bold;
         }
         
-        .image-info {
-            padding: 15px;
+        .portfolio-info {
+            padding: 20px;
         }
         
-        .image-info h3 {
+        .portfolio-info h3 {
             margin-bottom: 10px;
-            color: #333;
+            color: var(--dark);
         }
         
-        /* Formulário de upload */
-        .upload-section {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        
-        .upload-area {
-            border: 2px dashed #6a89cc;
-            border-radius: 8px;
-            padding: 40px;
-            margin: 30px auto;
-            max-width: 600px;
-            background: #f8f9ff;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-        
-        .upload-area:hover {
-            background: #eef2ff;
-        }
-        
-        .upload-icon {
-            font-size: 3rem;
-            color: #6a89cc;
+        .portfolio-info p {
+            color: var(--gray);
             margin-bottom: 15px;
+            font-size: 0.9rem;
         }
         
-        .upload-button {
-            background: #4a69bd;
+        .portfolio-tags {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .portfolio-tag {
+            background: #f0f0f0;
+            color: var(--gray);
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: var(--primary);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            position: relative;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            background-color: white;
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -13px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        /* Contact */
+        #contact {
+            background: white;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 10px;
+            color: var(--primary);
+            width: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
+            padding: 12px 30px;
+            border-radius: 30px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background 0.3s;
-            margin-top: 20px;
+            font-weight: 500;
+            transition: all 0.3s;
         }
         
-        .upload-button:hover {
-            background: #1e3799;
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
         
-        /* Rodapé */
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 30px;
-            background: #333;
+            background: var(--dark);
             color: white;
-            margin-top: 50px;
+            text-align: center;
+            padding: 40px 0;
         }
         
-        /* Responsividade */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.2rem;
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ff6b6b, #6a11cb);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-container {
+                grid-template-columns: 1fr;
             }
             
-            .image-grid {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item::after {
+                left: 18px;
+            }
+            
+            .timeline-item:nth-child(odd)::after,
+            .timeline-item:nth-child(even)::after {
+                left: 18px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.5rem;
+            }
+            
+            header p {
+                font-size: 1.2rem;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+            }
+            
+            .nav-links li {
+                margin: 0 10px;
+            }
+            
+            .portfolio-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="container">
-            <h1>🎭 Patrick Sonata</h1>
-            <p>Roteirista | Comediante | Criador de Histórias</p>
+        <div class="container header-content">
+            <h1>Patrick Sonata</h1>
+            <p>Ator e Roteirista</p>
+            <div class="tagline">20 anos dedicados ao humor e ao teatro</div>
         </div>
     </header>
     
-    <div class="container">
-        <!-- Seção de Trajetória -->
-        <section id="trajetoria">
-            <h2><span>📖</span> Trajetória</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Trajetória - Parte 1</div>
-                    <div class="image-info">
-                        <h3>Minha Jornada</h3>
-                        <p>Os primeiros passos na minha carreira artística</p>
-                    </div>
-                </div>
-                <div class="image-card">
-                    <div class="image-placeholder">Trajetória - Parte 2</div>
-                    <div class="image-info">
-                        <h3>Evolução Profissional</h3>
-                        <p>Desenvolvimento das habilidades e conquistas</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de TV e Streaming -->
-        <section id="tv">
-            <h2><span>📺</span> Roteiro para TV e Streaming</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Pablo & Luisão</div>
-                    <div class="image-info">
-                        <h3>Pablo & Luisão</h3>
-                        <p>Roteiro para programa de comédia</p>
-                    </div>
-                </div>
-                <div class="image-card">
-                    <div class="image-placeholder">Zorra</div>
-                    <div class="image-info">
-                        <h3>Zorra</h3>
-                        <p>Participação em programa de humor</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de Espetáculos -->
-        <section id="espetaculos">
-            <h2><span>🎭</span> Espetáculos e Shows</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Pelada - A Hora da Gaymada</div>
-                    <div class="image-info">
-                        <h3>Pelada</h3>
-                        <p>Espetáculo de comédia stand-up</p>
-                    </div>
-                </div>
-                <div class="image-card">
-                    <div class="image-placeholder">Show Jamaica</div>
-                    <div class="image-info">
-                        <h3>Show Jamaica</h3>
-                        <p>Performance de comédia</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de Documentários -->
-        <section id="documentarios">
-            <h2><span>🎬</span> Documentário</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Cidade Correria</div>
-                    <div class="image-info">
-                        <h3>Cidade Correria</h3>
-                        <p>Documentário sobre cultura urbana</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de Séries e Humor -->
-        <section id="series">
-            <h2><span>😂</span> Séries e Humor</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Humor Negro</div>
-                    <div class="image-info">
-                        <h3>Humor Negro</h3>
-                        <p>Série de comédia</p>
-                    </div>
-                </div>
-                <div class="image-card">
-                    <div class="image-placeholder">Originais da Comédia</div>
-                    <div class="image-info">
-                        <h3>Originais da Comédia</h3>
-                        <p>Participação especial</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de Oficinas -->
-        <section id="oficinas">
-            <h2><span>📚</span> Oficinas e Aulas</h2>
-            <div class="image-grid">
-                <div class="image-card">
-                    <div class="image-placeholder">Estude o Funk</div>
-                    <div class="image-info">
-                        <h3>Estude o Funk</h3>
-                        <p>Oficina de criação e roteiro</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Seção de Upload -->
-        <section class="upload-section">
-            <h2><span>⬆️</span> Adicionar Novas Imagens</h2>
-            <p>Faça upload de novas imagens para seu portfólio</p>
-            
-            <div class="upload-area" id="dropArea">
-                <div class="upload-icon">📁</div>
-                <p>Arraste imagens para aqui ou</p>
-                <input type="file" id="fileInput" accept="image/*" multiple style="display: none;">
-                <button class="upload-button" onclick="document.getElementById('fileInput').click()">Selecionar Arquivos</button>
-            </div>
-            
-            <div id="previewContainer" style="margin-top: 20px;"></div>
-        </section>
-    </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Patrick Sonata</div>
+            <ul class="nav-links">
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#trajectory">Trajetória</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
     
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Patrick Sonata</h3>
+                    <p>Ator e comediante carioca, cria da Cidade de Deus. Com 36 anos, tem em sua trajetória 20 anos dedicados ao humor e ao teatro.</p>
+                    <p>Iniciou sua vida artística na escola municipal Compositor Luiz Gonzaga, na comunidade. Estudou em projeto social e foi dirigido pelo grande e saudoso Cico Caseira, com quem aprendeu muito sobre comédia.</p>
+                    <p>Atualmente, faz parte do Coletivo Bonobando, com o qual circulou com os espetáculos "Cidade Correria" e "Jongo Mamulengo".</p>
+                </div>
+                <div class="about-image">
+                    Imagem do Patrick Sonata
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-title">
+                <h2>Portfólio</h2>
+            </div>
+            
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="tv">TV e Streaming</button>
+                <button class="filter-btn" data-filter="shows">Espetáculos</button>
+                <button class="filter-btn" data-filter="documentary">Documentário</button>
+                <button class="filter-btn" data-filter="comedy">Humor</button>
+                <button class="filter-btn" data-filter="workshops">Oficinas</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- TV e Streaming -->
+                <div class="portfolio-item" data-category="tv">
+                    <div class="portfolio-image">Pablo & Luisão</div>
+                    <div class="portfolio-info">
+                        <h3>Pablo & Luisão</h3>
+                        <p>Série de comédia (2025) - Globoplay e Globo</p>
+                        <p>Autor: Paulo Vieira, Maurício Rizzo. Direção artística: Luis Felipe Sá. Direção: João Gomez.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Roteiro</span>
+                            <span class="portfolio-tag">Série</span>
+                            <span class="portfolio-tag">Comédia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="tv">
+                    <div class="portfolio-image">Zorra</div>
+                    <div class="portfolio-info">
+                        <h3>Zorra</h3>
+                        <p>Programa de humor (2019-2021)</p>
+                        <p>Redação Final: Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça. Direção Geral: Mauro Farias.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Roteiro</span>
+                            <span class="portfolio-tag">TV</span>
+                            <span class="portfolio-tag">Humor</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Espetáculos -->
+                <div class="portfolio-item" data-category="shows">
+                    <div class="portfolio-image">Pelada - A Hora da Gaymada</div>
+                    <div class="portfolio-info">
+                        <h3>Pelada - A Hora da Gaymada</h3>
+                        <p>Espetáculo (2022)</p>
+                        <p>Direção: Orlando Caldeira. Roteiro e dramaturgia: Patrick Sonata.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Teatro</span>
+                            <span class="portfolio-tag">Roteiro</span>
+                            <span class="portfolio-tag">Comédia</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="shows">
+                    <div class="portfolio-image">Show Jamaica</div>
+                    <div class="portfolio-info">
+                        <h3>Pra provar que eu não minto</h3>
+                        <p>Show de humor (2023)</p>
+                        <p>Direção: Paulo Costa. Roteiro: Patrick Sonata e Tamires Gomes. Elenco: Dawis Jamaica.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
+                            <span class="portfolio-tag">Roteiro</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Documentário -->
+                <div class="portfolio-item" data-category="documentary">
+                    <div class="portfolio-image">Cidade Correria</div>
+                    <div class="portfolio-info">
+                        <h3>Cidade Correria</h3>
+                        <p>Documentário (2022)</p>
+                        <p>Direção: Juliana Vicente e Washington Deoli. Roteiro: Juliana Vicente. Realização: Prêt-à-porter Filmes.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Documentário</span>
+                            <span class="portfolio-tag">Arte</span>
+                            <span class="portfolio-tag">Performance</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Humor -->
+                <div class="portfolio-item" data-category="comedy">
+                    <div class="portfolio-image">Humor Negro</div>
+                    <div class="portfolio-info">
+                        <h3>Humor Negro</h3>
+                        <p>Série de comédia (2023) - Globoplay</p>
+                        <p>Direção: Rodrigo França. Criação: Val Benvindo. Roteiro: Renata Di Carmo.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Série</span>
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Streaming</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-category="comedy">
+                    <div class="portfolio-image">Originais da Comédia</div>
+                    <div class="portfolio-info">
+                        <h3>Originais da Comédia</h3>
+                        <p>Show de humor (2022)</p>
+                        <p>Roteiro e Direção: Patrick Sonata e Marcelo Magno.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
+                            <span class="portfolio-tag">Roteiro</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Oficinas -->
+                <div class="portfolio-item" data-category="workshops">
+                    <div class="portfolio-image">Estude o Funk</div>
+                    <div class="portfolio-info">
+                        <h3>Estude o Funk</h3>
+                        <p>Aulas de teatro (2023-2025)</p>
+                        <p>Ciclo I, II, III e V.</p>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Oficina</span>
+                            <span class="portfolio-tag">Aulas</span>
+                            <span class="portfolio-tag">Teatro</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Trajectory Section -->
+    <section id="trajectory">
+        <div class="container">
+            <div class="section-title">
+                <h2>Trajetória</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2005</div>
+                        <p>Iniciou sua vida artística na escola municipal Compositor Luiz Gonzaga, na comunidade.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2014-2018</div>
+                        <p>Estudou palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018</div>
+                        <p>Ganhou uma bolsa do roteirista Maurício Rizzo e concluiu a oficina de Roteiro - A lógica por trás do Humor.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019</div>
+                        <p>Foi contratado para escrever o programa Zorra, onde permaneceu até o encerramento do programa em 2021.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2021</div>
+                        <p>Iniciou o processo de escrita da série "Pablo & Luisão", projeto que estreia em 2025 no Globoplay e Globo.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <p>Estreou o espetáculo "Pelada - A Hora da Gaymada", dirigido por Orlando Caldeira.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <p>Participou da série "Humor Negro" no Globoplay e realizou o show "Pra provar que eu não minto".</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contato</h2>
+            </div>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Entre em contato</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-envelope"></i> patrick12reis@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> (21) 98397-6299</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Rio de Janeiro, Brasil</p>
+                    </div>
+                    
+                    <h3>Redes sociais</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <input type="text" placeholder="Seu nome" required>
+                        <input type="email" placeholder="Seu e-mail" required>
+                        <input type="text" placeholder="Assunto">
+                        <textarea placeholder="Sua mensagem" required></textarea>
+                        <button type="submit" class="btn">Enviar mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
     <footer>
         <div class="container">
-            <p>© 2025 Patrick Sonata - Todos os direitos reservados</p>
+            <div class="footer-content">
+                <div class="footer-logo">Patrick Sonata</div>
+                <p>Ator e Roteirista | 20 anos dedicados ao humor e ao teatro</p>
+                <div class="copyright">© 2025 Patrick Sonata. Todos os direitos reservados.</div>
+            </div>
         </div>
     </footer>
-
+    
     <script>
-        // Configuração do upload de imagens
-        const dropArea = document.getElementById('dropArea');
-        const fileInput = document.getElementById('fileInput');
-        const previewContainer = document.getElementById('previewContainer');
-        
-        // Prevenir comportamento padrão para drag and drop
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, preventDefaults, false);
-        });
-        
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-        
-        // Destacar área de drop quando um arquivo estiver sobre ela
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropArea.addEventListener(eventName, highlight, false);
-        });
-        
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropArea.addEventListener(eventName, unhighlight, false);
-        });
-        
-        function highlight() {
-            dropArea.style.background = '#e6eeff';
-        }
-        
-        function unhighlight() {
-            dropArea.style.background = '#f8f9ff';
-        }
-        
-        // Manipular arquivos soltos
-        dropArea.addEventListener('drop', handleDrop, false);
-        
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            handleFiles(files);
-        }
-        
-        // Manipular seleção de arquivos via botão
-        fileInput.addEventListener('change', function() {
-            handleFiles(this.files);
-        });
-        
-        function handleFiles(files) {
-            previewContainer.innerHTML = '';
+        // Portfolio filtering
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
             
-            if (files.length === 0) return;
-            
-            const info = document.createElement('p');
-            info.textContent = `${files.length} imagem(ns) selecionada(s):`;
-            info.style.marginBottom = '15px';
-            info.style.fontWeight = 'bold';
-            previewContainer.appendChild(info);
-            
-            for (let i = 0; i < files.length; i++) {
-                const file = files[i];
-                
-                if (!file.type.match('image.*')) {
-                    continue;
-                }
-                
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    const preview = document.createElement('div');
-                    preview.style.display = 'inline-block';
-                    preview.style.margin = '10px';
-                    preview.style.position = 'relative';
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
                     
-                    const img = document.createElement('img');
-                    img.src = e.target.result;
-                    img.style.height = '100px';
-                    img.style.borderRadius = '5px';
-                    img.style.boxShadow = '0 2px 5px rgba(0,0,0,0.2)';
+                    // Add active class to clicked button
+                    button.classList.add('active');
                     
-                    const removeBtn = document.createElement('button');
-                    removeBtn.textContent = '×';
-                    removeBtn.style.position = 'absolute';
-                    removeBtn.style.top = '-5px';
-                    removeBtn.style.right = '-5px';
-                    removeBtn.style.background = 'red';
-                    removeBtn.style.color = 'white';
-                    removeBtn.style.border = 'none';
-                    removeBtn.style.borderRadius = '50%';
-                    removeBtn.style.width = '20px';
-                    removeBtn.style.height = '20px';
-                    removeBtn.style.cursor = 'pointer';
-                    removeBtn.onclick = function() {
-                        preview.remove();
-                    };
+                    const filterValue = button.getAttribute('data-filter');
                     
-                    preview.appendChild(img);
-                    preview.appendChild(removeBtn);
-                    previewContainer.appendChild(preview);
-                }
-                
-                reader.readAsDataURL(file);
-            }
-            
-            // Simular upload (em um caso real, aqui você faria uma requisição para o servidor)
-            setTimeout(() => {
-                alert('Imagens carregadas com sucesso! Em uma aplicação real, elas seriam enviadas para o servidor.');
-            }, 1000);
-        }
+                    portfolioItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
