@@ -1,79 +1,83 @@
-Patrick Sonata - Portfólio
+# Patrick Sonata - Portfólio
 
 ## 👋 Sobre Mim
 
-**Patrick Sonata** -  Ator e Roteirista   
+Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo. Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.
 
-Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo. A partir daí, escreveu temporadas do programa Zorra e assinou episódios da série Pablo & Luisão. Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e  humor.
+## 🎬 Trabalhos Destacados
 
+### Série Pablo & Luisão (2025)
+- **Autor**: Paulo Vieira, Maurício Rizzo
+- **Direção artística**: Luis Felipe Sá
+- **Direção**: João Gomez
+- **Roteiro**: Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata
 
+### Programa Zorra (2019-2021)
+- **Redação Final**: Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça
+- **Direção Geral**: Mauro Farias
 
-Série 
-Pablo & Luisão (2025)
+### Espetáculo Pelada - A Hora da Gaymada (2022)
+- **Direção**: Orlando Caldeira
+- **Roteiro e dramaturgia**: Patrick Sonata
 
-Ficha técnica ; Autor: Paulo Vieira, Maurício Rizzo ; Direção artística: Luis Felipe Sá ; Direção: João Gomez ; Roteiro: Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata
+### Show de Humor "Pra provar que eu não minto" (2023)
+- **Direção**: Paulo Costa
+- **Roteiro**: Patrick Sonata e Tamires Gomes
+- **Elenco**: Dawis Jamaica
 
+### Documentário "Cidade Correria" (2022)
+- **Direção**: Juliana Vicente e Washington Deoli
+- **Roteiro**: Juliana Vicente
+- **Realização**: Prêt-à-porter Filmes
 
+### Série de Comédia "Humor Negro" (2023) - T1 EP: May Sista, Meus Brother
+- **Direção**: Rodrigo França
+- **Criação**: Val Benvindo
+- **Roteiro**: Renata Di Carmo
+- **Plataforma**: Globoplay
 
-Programa 
-Zorra (2019-2021
+### Espetáculo "Jongo Mamulengo" (2017-2023)
+- **Direção**: Adriana Schneider e Lucas Oradovschi
+- **Concepção e roteiro**: Coletivo Bonobando
+- **Elenco**: Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano
 
-Redação Final: Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça 
-Direção Geral: Mauro Farias.
+### Show de Humor "Originais da Comédia" (2022)
+- **Roteiro e Direção**: Patrick Sonata e Marcelo Magano
 
+## 🌐 Redes Sociais e Contato
 
-Espetáculo 
-Pelada - A Hora da Gaymada (2022)
+- [Instagram](https://instagram.com/)
+- [Twitter](https://twitter.com/)
+- [LinkedIn](https://linkedin.com/)
+- [GitHub](https://github.com/patricksonata13)
 
+## 🚀 Site Online
 
-Direção  Orlando Caldeira, 
-Roteiro e dramaturgia: Patrick Sonata
+[Visite meu portfólio online](https://nextjs-boilerplate-omega-ten-30.vercel.app)
 
+## 📁 Estrutura do Projeto
 
-Show de Humor
-Pra provar que eu não minto (2023)
+Este portfólio foi desenvolvido utilizando Next.js e inclui:
 
-Direção : Paulo Costa
-Roteiro: Patrick Sonata e Tamires Gomes
-Elenco: Dawis Jamaica
+- Páginas HTML estáticas
+- Estilos CSS personalizados
+- Scripts JavaScript para interatividade
+- Configurações TypeScript
+- Scripts de deploy automatizados
 
- Documentário  
-Cidade Correria  (2022)
-Direção: Juliana Vicente e Washington Deoli
-Roteiro: Juliana Vicente
-Realização: Prêt-à-porter Filmes
+## 🛠️ Tecnologias Utilizadas
 
-Série de Comédia 
-Humor Negro (2023)
-T1 EP: May Sista, Meus Brother 
-Direção: Rodrigo França 
-Criação: Val Benvindo
-Roteiro: Renata Di Carmo 
-Globoplay
+- HTML
+- TypeScript
+- JavaScript
+- CSS
+- Shell Script
+- Next.js
 
-Espetáculo 
- Jongo Mamulengo (2017 -2023)
-Direção: Adriana  Schneider
-e Lucas  Oradovschi 
-Concepção e roteiro: Coletivo Bonobando
-Elenco: Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano
+## 📄 Licença
 
-Show de Humor 
-Originais da Comédia (2022)
-Roteiro e Direção: Patrick Sonata e Marcelo Magano
-
-
-
-## 🌐 Redes Sociais
-
-[![Instagram](https://img.shields.io/badge/Instagram-@PatrickSonata-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/PatrickSonata)
-[![Twitter](https://img.shields.io/badge/Twitter-@PatrickSonata-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/PatrickSonata)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Patrick%20Sonata-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/PatrickSonata)
-[![GitHub](https://img.shields.io/badge/GitHub-@patricksonata13-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/patricksonata13)
-
-## 🌐 Site Online
-
+Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
 ---
 
-
+© 2025 Patrick Sonata. Todos os direitos reservados.
