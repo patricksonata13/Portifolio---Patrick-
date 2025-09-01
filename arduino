@@ -1,0 +1,7 @@
+Portifolio---Patrick-/
+ ├── app/               # onde ficam suas páginas (Next.js 13+)
+ ├── public/            # imagens, ícones, etc.
+ ├── next.config.ts     # config do Next.js
+ ├── package.json       # scripts, dependências
+ ├── tsconfig.json
+ └── ...
