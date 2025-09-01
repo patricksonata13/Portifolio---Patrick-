@@ -55,7 +55,7 @@ Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criad
 
 [Visite meu portfólio online](https://nextjs-boilerplate-omega-ten-30.vercel.app)
 
-## 📁 Estrutura do Projeto
+
 
 
 
