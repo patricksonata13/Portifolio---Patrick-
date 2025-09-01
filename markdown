@@ -6,7 +6,7 @@
 
 ## 👋 Sobre Mim
 
-**Desenvolvedor Full Stack | Escritor | Comediante**  
+**Patrick Sonata** - Desenvolvedor Full Stack | Escritor | Comediante  
 Com experiência em projetos para **TV Globo** (Humor Negro e Zorra) e desenvolvimento de aplicações modernas com Next.js.
 
 ## 🚀 Tecnologias
@@ -26,6 +26,15 @@ Com experiência em projetos para **TV Globo** (Humor Negro e Zorra) e desenvolv
 - **Função:** Escritor
 - **Descrição:** Contribuição na equipe de roteiristas do programa
 
+## 🌐 Redes Sociais & Contato
+
+[![Instagram](https://img.shields.io/badge/Instagram-@PatrickSonata-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://instagram.com/PatrickSonata)
+[![Twitter](https://img.shields.io/badge/Twitter-@PatrickSonata-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/PatrickSonata)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Patrick%20Sonata-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/PatrickSonata)
+[![YouTube](https://img.shields.io/badge/YouTube-@PatrickSonata-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtube.com/@PatrickSonata)
+[![GitHub](https://img.shields.io/badge/GitHub-@PatrickSonata-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/PatrickSonata)
+[![Email](https://img.shields.io/badge/Email-patrick%40exemplo.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:patrick@exemplo.com)
+
 ## 🎯 Projetos em Destaque
 
 - **Portfólio Next.js** - Este site com design moderno e responsivo
@@ -35,12 +44,6 @@ Com experiência em projetos para **TV Globo** (Humor Negro e Zorra) e desenvolv
 ## 🌐 Acesse Meu Portfólio
 
 🔗 **URL:** [https://patricksonata13.github.io/Portifolio---Patrick-/](https://patricksonata13.github.io/Portifolio---Patrick-/)
-
-## 📫 Contato
-
-- 📧 **Email:** patrick@exemplo.com
-- 💼 **GitHub:** [@patricksonata13](https://github.com/patricksonata13)
-- 🌐 **LinkedIn:** [Seu perfil aqui]
 
 ---
 
