@@ -1,2 +1,2 @@
-- Fazer upload das imagens para: public/images/creditos/
-- Adicionar no código as seções com suas fotos
+git clone https://github.com/patricksonata13/Portifolio---Patrick.git
+cd Portifolio---Patrick
