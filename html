@@ -39,7 +39,7 @@
         header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
-            padding: 60px 0 40px;
+            padding: 80px 0 60px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -90,10 +90,11 @@
         .nav-link {
             color: white;
             text-decoration: none;
-            padding: 15px 25px;
+            padding: 20px 25px;
             display: inline-block;
             transition: var(--transition);
             position: relative;
+            font-weight: 500;
         }
         
         .nav-link::after {
@@ -129,6 +130,7 @@
             text-align: center;
             margin-bottom: 50px;
             position: relative;
+            font-size: 2.2rem;
         }
         
         .section-title::after {
@@ -138,6 +140,18 @@
             height: 4px;
             background: var(--accent);
             margin: 15px auto;
+        }
+        
+        /* About Section */
+        #sobre {
+            background-color: #f9f9f9;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
         }
         
         /* Work Cards */
@@ -153,6 +167,9 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .work-card:hover {
@@ -173,8 +190,17 @@
             background-color: #2c3e50;
         }
         
+        .work-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .work-content {
             padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .work-title {
@@ -197,11 +223,13 @@
             font-weight: bold;
             color: var(--accent);
             margin-bottom: 10px;
+            font-size: 1.1rem;
         }
         
         .work-desc {
             color: #666;
             margin-bottom: 15px;
+            flex-grow: 1;
         }
         
         .work-details {
@@ -213,13 +241,13 @@
         }
         
         /* Contact Section */
-        #contact {
+        #contato {
             background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
             color: white;
             text-align: center;
         }
         
-        #contact .section-title {
+        #contato .section-title {
             color: white;
         }
         
@@ -233,13 +261,14 @@
             display: inline-block;
             background: var(--secondary);
             color: var(--dark);
-            padding: 12px 30px;
-            borderRadius: 30px;
+            padding: 15px 35px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             transition: var(--transition);
             border: none;
             cursor: pointer;
+            font-size: 1.1rem;
         }
         
         .btn:hover {
@@ -253,7 +282,7 @@
             background: var(--dark);
             color: white;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             font-size: 0.9rem;
         }
         
@@ -276,38 +305,12 @@
             }
             
             .nav-link {
-                padding: 10px 15px;
+                padding: 15px;
             }
-        }
-
-        /* Documentário Section */
-        .doc-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .video-placeholder {
-            background: #e0e0e0;
-            height: 0;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
-            position: relative;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-weight: bold;
-        }
-        
-        .doc-details {
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 8px;
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
@@ -315,7 +318,7 @@
     <header id="home">
         <div class="container header-content">
             <h1>Patrick Sonata</h1>
-            <p class="tagline">Roteirista • Comediante • Criativo</p>
+            <p class="tagline">Roteirista e Comediante</p>
         </div>
     </header>
 
@@ -324,17 +327,16 @@
             <a href="#home" class="nav-link">Início</a>
             <a href="#sobre" class="nav-link">Sobre</a>
             <a href="#trabalhos" class="nav-link">Trabalhos</a>
-            <a href="#documentario" class="nav-link">Documentário</a>
             <a href="#contato" class="nav-link">Contato</a>
         </div>
     </nav>
 
     <section id="sobre">
         <div class="container">
-            <h2 class="section-title">Sobre</h2>
-            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-                <p>Patrick Sonata é um talentoso roteirista e comediante brasileiro com extensa experiência em televisão, teatro e comédia stand-up. Com trabalhos destacados em programas de sucesso como "Zorra" e "Pablo & Luisão", Patrick demonstra versatilidade e criatividade em suas produções.</p>
-                <p>Sua carreira abrange desde a escrita para programas de TV até a criação e atuação em espetáculos teatrais, sempre com um toque de humor inteligente e atual.</p>
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="about-content">
+                <p>Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criado na Cidade de Deus. Sua trajetória no humor para televisão começou em 2018, quando foi selecionado para a oficina de novos roteiristas da Globo.</p>
+                <p>Com experiência como ator e comediante nos principais palcos cariocas, Patrick também se dedica à pesquisa em linguagens populares e humor.</p>
             </div>
         </div>
     </section>
@@ -346,7 +348,7 @@
                 <!-- Pablo & Luisão -->
                 <div class="work-card">
                     <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/pablo_luisao.jpg" alt="Série Pablo e Luisão" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/pablo_luisao.jpg" alt="Série Pablo e Luisão">
                     </div>
                     <div class="work-content">
                         <h3 class="work-title">Série Pablo & Luisão</h3>
@@ -365,7 +367,7 @@
                 <!-- Programa Zorra -->
                 <div class="work-card">
                     <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/zorra.png" alt="Programa Zorra" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/zorra.png" alt="Programa Zorra">
                     </div>
                     <div class="work-content">
                         <h3 class="work-title">Programa Zorra</h3>
@@ -382,7 +384,7 @@
                 <!-- Espetáculo Pelada -->
                 <div class="work-card">
                     <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/pelada.jpg" alt="Espetáculo Pelada" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/pelada.jpg" alt="Espetáculo Pelada">
                     </div>
                     <div class="work-content">
                         <h3 class="work-title">Espetáculo Pelada - A Hora da Gaymada</h3>
@@ -395,10 +397,46 @@
                     </div>
                 </div>
 
-                <!-- Humor Negro -->
+                <!-- Show de Humor -->
                 <div class="work-card">
                     <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/humor_negro.png" alt="Série Humor Negro" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/show_humor.jpg" alt="Show de Humor Pra provar que eu não minto">
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">Show de Humor "Pra provar que eu não minto"</h3>
+                        <span class="work-year">2023</span>
+                        <p class="work-role">Roteirista</p>
+                        <p class="work-desc">Show de stand-up comedy com roteiro de Patrick Sonata.</p>
+                        <div class="work-details">
+                            <p><strong>Direção:</strong> Paulo Costa</p>
+                            <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
+                            <p><strong>Elenco:</strong> Dawis Jamaica</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documentário Cidade Correria -->
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/cidade_correria.jpg" alt="Documentário Cidade Correria">
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">Documentário "Cidade Correria"</h3>
+                        <span class="work-year">2022</span>
+                        <p class="work-role">Participação</p>
+                        <p class="work-desc">Documentário sobre a vida na cidade e suas complexidades.</p>
+                        <div class="work-details">
+                            <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
+                            <p><strong>Roteiro:</strong> Juliana Vicente</p>
+                            <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Série Humor Negro -->
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/humor_negro.png" alt="Série Humor Negro">
                     </div>
                     <div class="work-content">
                         <h3 class="work-title">Série de Comédia "Humor Negro"</h3>
@@ -414,44 +452,10 @@
                     </div>
                 </div>
 
-                <!-- Show de Humor "Pra provar que eu não minto" -->
+                <!-- Espetáculo Jongo Mamulengo -->
                 <div class="work-card">
                     <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/show_humor.jpg" alt="Show de Humor Pra provar que eu não minto" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="work-content">
-                        <h3 class="work-title">Show de Humor "Pra provar que eu não minto"</h3>
-                        <span class="work-year">2023</span>
-                        <p class="work-role">Roteirista</p>
-                        <p class="work-desc">Show de stand-up comedy com roteiro de Patrick Sonata.</p>
-                        <div class="work-details">
-                            <p><strong>Direção:</strong> Paulo Costa</p>
-                            <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
-                            <p><strong>Elenco:</strong> Dawis Jamaica</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Originais da Comédia -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/originais_comedia.png" alt="Show Originais da Comédia" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <div class="work-content">
-                        <h3 class="work-title">Show "Originais da Comédia"</h3>
-                        <span class="work-year">2022</span>
-                        <p class="work-role">Roteiro e Direção</p>
-                        <p class="work-desc">Show de humor com roteiro e direção de Patrick Sonata e Marcelo Magano.</p>
-                        <div class="work-details">
-                            <p><strong>Roteiro e Direção:</strong> Patrick Sonata e Marcelo Magano</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Jongo Mamulengo -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/jongo_mamulengo.jpg" alt="Espetáculo Jongo Mamulengo" style="width: 100%; height: 100%; object-fit: cover;">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/jongo_mamulengo.jpg" alt="Espetáculo Jongo Mamulengo">
                     </div>
                     <div class="work-content">
                         <h3 class="work-title">Espetáculo "Jongo Mamulengo"</h3>
@@ -465,35 +469,27 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Show Originais da Comédia -->
+                <div class="work-card">
+                    <div class="work-img">
+                        <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/originais_comedia.png" alt="Show Originais da Comédia">
+                    </div>
+                    <div class="work-content">
+                        <h3 class="work-title">Show de Humor "Originais da Comédia"</h3>
+                        <span class="work-year">2022</span>
+                        <p class="work-role">Roteiro e Direção</p>
+                        <p class="work-desc">Show de humor com roteiro e direção de Patrick Sonata e Marcelo Magano.</p>
+                        <div class="work-details">
+                            <p><strong>Roteiro e Direção:</strong> Patrick Sonata e Marcelo Magano</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="documentario">
-        <div class="container">
-            <h2 class="section-title">Documentário</h2>
-            <div class="doc-container">
-                <div class="work-img">
-                    <img src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/cidade_correria.jpg" alt="Documentário Cidade Correria" style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                
-                <h3 style="text-align: center;">Cidade Correria (2022)</h3>
-                
-                <div class="doc-details">
-                    <p><strong>Participação:</strong> Patrick Sonata</p>
-                    <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
-                    <p><strong>Roteiro:</strong> Juliana Vicente</p>
-                    <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
-                </div>
-                
-                <p style="margin-top: 20px; text-align: center;">
-                    <a href="#" class="btn">Assistir Documentário</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section id="contato" style="background-color: #f9f9f9;">
+    <section id="contato">
         <div class="container">
             <h2 class="section-title">Contato</h2>
             <p class="contact-text">Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
