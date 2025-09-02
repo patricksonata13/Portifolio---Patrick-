@@ -48,12 +48,6 @@ Espetáculo
 Texto e Dramaturgia: Coletivo Bonobando 
 Elenco: Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa
 
-- Espetáculo 
- Cidade  Correira (2016 -20118)
-Direção: Adriana Schneider e Lucas Oradovschi 
-Texto e Dramaturgia: Coletivo Bonobando 
-Elenco: Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa
-
 ### Show de Humor "Originais da Comédia" (2022)
 - **Roteiro e Direção**: Patrick Sonata e Marcelo Magano
 
