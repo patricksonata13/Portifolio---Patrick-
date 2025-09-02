@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Foto - Patrick Sonata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #1a1a2e;
+            color: white;
+            line-height: 1.7;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #0f3460;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            margin-bottom: 20px;
+        }
+        
+        .photo-check {
+            margin: 30px 0;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ff6b6b;
+            margin: 20px 0;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        
+        .success {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+        }
+        
+        .error {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .instructions {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #4ecdc4;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Verificação da Foto de Perfil</h1>
+        
+        <div class="photo-check">
+            <h2>Sua Foto Atual no GitHub</h2>
+            <img id="githubPhoto" class="profile-img" 
+                 src="https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/fotodeperfil.jpg" 
+                 alt="Foto do GitHub"
+                 onerror="this.style.display='none'; document.getElementById('errorStatus').style.display='block';">
+            
+            <div id="errorStatus" class="status error" style="display: none;">
+                Erro: A foto não foi encontrada no caminho esperado.
+            </div>
+            
+            <div id="successStatus" class="status success">
+                Foto carregada com sucesso! O problema pode estar no código do portfólio.
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h3>Possíveis soluções:</h3>
+            <ol>
+                <li>Verifique se o caminho da imagem no portfólio está correto:
+                    <br><code>&lt;img src="images/works/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img"&gt;</code>
+                </li>
+                <li>Certifique-se de que o arquivo está na pasta correta: <code>images/works/fotodeperfil.jpg</code></li>
+                <li>Se você renomeou o arquivo, atualize o código do portfólio com o nome correto</li>
+                <li>Às vezes o GitHub Pages pode demorar alguns minutos para atualizar as imagens</li>
+            </ol>
+        </div>
+        
+        <div>
+            <a href="https://github.com/patricksonata13/Portifolio---Patrick-/blob/main/index.html" class="btn" target="_blank">
+                Ver Código do Portfólio
+            </a>
+            <a href="https://github.com/patricksonata13/Portifolio---Patrick-/tree/main/images/works" class="btn" target="_blank">
+                Ver Pasta de Imagens
+            </a>
+            <a href="index.html" class="btn">
+                Voltar para o Portfólio
+            </a>
+        </div>
+        
+        <div class="instructions">
+            <h3>URL da sua foto:</h3>
+            <p id="photoUrl">https://raw.githubusercontent.com/patricksonata13/Portifolio---Patrick-/main/images/works/fotodeperfil.jpg</p>
+            <button class="btn" onclick="copyUrl()">Copiar URL</button>
+        </div>
+    </div>
+
+    <script>
+        // Verificar se a imagem carregou corretamente
+        window.addEventListener('load', function() {
+            const img = document.getElementById('githubPhoto');
+            if (img.complete && img.naturalHeight !== 0) {
+                document.getElementById('successStatus').style.display = 'block';
+            }
+        });
+        
+        // Copiar URL da imagem
+        function copyUrl() {
+            const url = document.getElementById('photoUrl').textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('URL copiada para a área de transferência!');
+            });
+        }
+    </script>
+</body>
+</html>
