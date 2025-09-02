@@ -1,7 +1,7 @@
-<!-- Pablo & Luisão - COM IMAGEM ALTERNATIVA -->
+<!-- Pablo & Luisão - COM A IMAGEM CORRETA NA RAIZ -->
 <div class="work-card">
     <div class="work-img">
-        <img src="images/works/pablowluisão.png" alt="Série Pablo & Luisão">
+        <img src="pablo-luisao.jpg" alt="Série Pablo & Luisão">
     </div>
     <div class="work-info">
         <h3>Série Pablo & Luisão (2025)</h3>
