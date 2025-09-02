@@ -41,6 +41,13 @@ Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criad
 - **Concepção e roteiro**: Coletivo Bonobando
 - **Elenco**: Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano
 
+
+Espetáculo 
+ Cidade  Correira (2016 -20118
+ Direção: Adriana Schneider e Lucas Oradovschi 
+Texto e Dramaturgia: Coletivo Bonobando 
+Elenco: Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa
+
 - Espetáculo 
  Cidade  Correira (2016 -20118)
 Direção: Adriana Schneider e Lucas Oradovschi 
