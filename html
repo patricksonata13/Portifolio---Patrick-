@@ -1,1 +1,293 @@
-<img src="assets/images/nome-da-imagem.jpg" alt="Descrição da imagem" width="500">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata - Portfólio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
+            color: #c9d1d9;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 0;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            color: #58a6ff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: #8b949e;
+            margin-bottom: 20px;
+        }
+        
+        .intro {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            text-align: center;
+            font-size: 1.1rem;
+            background: rgba(22, 27, 34, 0.7);
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #30363d;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .portfolio-item {
+            background: linear-gradient(145deg, #161b22, #0d1117);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #30363d;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+        }
+        
+        .image-container {
+            height: 220px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #010409;
+            position: relative;
+        }
+        
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover .image-container img {
+            transform: scale(1.05);
+        }
+        
+        .item-content {
+            padding: 25px;
+        }
+        
+        .item-content h3 {
+            color: #58a6ff;
+            margin-bottom: 12px;
+            font-size: 1.4rem;
+            border-left: 4px solid #58a6ff;
+            padding-left: 12px;
+        }
+        
+        .item-content p {
+            color: #8b949e;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .credits {
+            font-size: 0.9rem;
+            color: #6e7681;
+            border-top: 1px solid #21262d;
+            padding-top: 12px;
+            margin-top: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            margin-top: 40px;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 0.9rem;
+        }
+        
+        .warning {
+            background: rgba(218, 164, 13, 0.15);
+            border: 1px solid #d2a80c;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .warning h3 {
+            color: #d2a80c;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Patrick Sonata</h1>
+            <p class="subtitle">Portfólio de Trabalhos Artísticos</p>
+        </header>
+        
+        <div class="intro">
+            <p>Esta é uma coleção dos meus trabalhos artísticos e projetos criativos. Cada item representa uma colaboração única e especial no mundo das artes.</p>
+        </div>
+        
+        <div class="warning">
+            <h3>⚠️ Aviso Importante</h3>
+            <p>Para que as imagens apareçam corretamente, você precisa:</p>
+            <p>1. Criar uma pasta chamada <strong>images</strong> no seu repositório</p>
+            <p>2. Fazer upload das imagens para essa pasta</p>
+            <p>3. Verificar se os nomes dos arquivos estão corretos</p>
+        </div>
+        
+        <div class="portfolio-grid">
+            <!-- Item 1 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/doccidadecorreria.jpg" alt="Cidade Correria">
+                </div>
+                <div class="item-content">
+                    <h3>Cidade Correria</h3>
+                    <p>Um coletivo de artistas com diversas linguagens e expressões artísticas.</p>
+                    <div class="credits">
+                        Artistas: Daniela Joyce, Hugo Bernardo, Igor do Silva, Jardil Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata, Thiego Rosa, Vanessa Rocha, Adriana Schneider, Lucas Oradovschi
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 2 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/pabloeluisao-logo.jpg" alt="Pablo e Luisão">
+                </div>
+                <div class="item-content">
+                    <h3>Pablo e Luisão</h3>
+                    <p>Identidade visual para projeto criativo.</p>
+                </div>
+            </div>
+            
+            <!-- Item 3 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/praprovar.jpg" alt="Pra Provar Que Eu Não Minto">
+                </div>
+                <div class="item-content">
+                    <h3>Pra Provar Que Eu Não Minto</h3>
+                    <p>Show realizado em 06 de julho, às 19h30.</p>
+                </div>
+            </div>
+            
+            <!-- Item 4 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/humornegro.jpg" alt="Humor Negro">
+                </div>
+                <div class="item-content">
+                    <h3>Humor Negro - A Série</h3>
+                    <p>Série de humor com episódios temáticos.</p>
+                    <div class="credits">
+                        Episódios: My Sista, Meus Brother; Crocodilagem; Mete Dança, Gurí; A Mafia Baba Pura Balas
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 5 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/jongo.jpg" alt="Jongo Mamulengo">
+                </div>
+                <div class="item-content">
+                    <h3>Jongo Mamulengo</h3>
+                    <p>Apresentação do Coletivo Bonobando, Cordão do Boitatá e Jungo da Serrinha.</p>
+                </div>
+            </div>
+            
+            <!-- Item 6 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/originais.jpg" alt="Oxigians">
+                </div>
+                <div class="item-content">
+                    <h3>Oxigians</h3>
+                    <p>Show de humor na cidade.</p>
+                </div>
+            </div>
+            
+            <!-- Item 7 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/pelada.jpg" alt="Pelada">
+                </div>
+                <div class="item-content">
+                    <h3>Pelada - A Hora da Ganada</h3>
+                    <p>Indicado ao 34º Prêmio Shell de Teatro.</p>
+                    <div class="credits">
+                        Direção: Orlando Caldeira | Direção Musical e Percussão Corporal: Muoto
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Item 8 -->
+            <div class="portfolio-item">
+                <div class="image-container">
+                    <img src="https://patricksonata13.github.io/Portifolio---Patrick-/images/zorra2.jpg" alt="Zorra">
+                </div>
+                <div class="item-content">
+                    <h3>Zorra - Equipe de Roteiro</h3>
+                    <p>Programa de televisão com equipe de roteiristas.</p>
+                    <div class="credits">
+                        Roteiristas: Bia Braune, Henrique Tavares, Cesar Cardoso, Marcelo Martinez, Chico Vereza, Patrick Sonata, Claudio Lobato, Paula Rocha, Daniel Belmonte, Pedro Alvarenga, Diego Molina, Renata Andrade, Éou Krieger, Ricardo VR, Fernando Aragão, Vinicius Antunes, Joana Penna, Thais Pontes, Kika Hamaouj, Thiago Gadelha, Marcelo Magano, Ulisses Mattos, Haroldo Mourao, Wagner Pinto
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Portfólio criado para GitHub Pages</p>
+            <p>© 2023 - Todos os direitos reservados</p>
+        </footer>
+    </div>
+</body>
+</html>
