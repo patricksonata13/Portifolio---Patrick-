@@ -13,7 +13,7 @@ Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criad
 - **Roteiro**: Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata
 
 ### Programa Zorra (2019-2021)
-- **Redação Final**: Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça
+- **Redação Final**: Marcius Melhem, Celso Taddei, Gabriela Amaral, Nelito Fernandes e Marta Mendonça
 - **Direção Geral**: Mauro Farias
 
 ### Espetáculo Pelada - A Hora da Gaymada (2022)
@@ -40,6 +40,12 @@ Patrick Sonata é um roteirista e comediante carioca de 36 anos, nascido e criad
 - **Direção**: Adriana Schneider e Lucas Oradovschi
 - **Concepção e roteiro**: Coletivo Bonobando
 - **Elenco**: Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano
+
+- Espetáculo 
+ Cidade  Correira (2016 -20118)
+Direção: Adriana Schneider e Lucas Oradovschi 
+Texto e Dramaturgia: Coletivo Bonobando 
+Elenco: Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa
 
 ### Show de Humor "Originais da Comédia" (2022)
 - **Roteiro e Direção**: Patrick Sonata e Marcelo Magano
