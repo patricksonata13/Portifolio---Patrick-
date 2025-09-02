@@ -330,3 +330,24 @@ header h1 {
 .portfolio-item:hover .portfolio-img {
     transform: scale(1.05);
 }
+/* PORTFOLIO GRID - 3 COLUNAS */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Para telas menores - responsivo */
+@media (max-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr; /* 1 coluna em mobile */
+    }
+}
