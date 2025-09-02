@@ -14,12 +14,14 @@
         }
         
         :root {
-            --primary-color: #4db5ff;
-            --secondary-color: #2c2c6c;
-            --bg-color: #1f1f38;
-            --light-bg: #2a2a5e;
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #ffd166;
+            --bg-color: #1a1a2e;
+            --light-bg: #16213e;
+            --card-bg: #0f3460;
             --text-color: #fff;
-            --text-light: rgba(255, 255, 255, 0.7);
+            --text-light: rgba(255, 255, 255, 0.8);
         }
         
         body {
@@ -41,15 +43,16 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(26, 26, 46, 0.95);
             backdrop-filter: blur(15px);
             padding: 15px 0;
             transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
         }
         
         header.scrolled {
             padding: 10px 0;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(15, 15, 35, 0.98);
         }
         
         nav {
@@ -63,6 +66,12 @@
             font-weight: 700;
             color: var(--primary-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
         }
         
         .nav-menu {
@@ -79,6 +88,7 @@
             flex-direction: column;
             align-items: center;
             transition: all 0.3s ease;
+            position: relative;
         }
         
         .nav-link i {
@@ -88,6 +98,21 @@
         
         .nav-link:hover, .nav-link.active {
             color: var(--primary-color);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
         }
         
         .nav-link span {
@@ -100,7 +125,7 @@
             display: flex;
             align-items: center;
             padding-top: 80px;
-            background: linear-gradient(rgba(31, 31, 56, 0.9), rgba(31, 31, 56, 0.9));
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9));
             position: relative;
             overflow: hidden;
         }
@@ -126,13 +151,19 @@
         .hero-title {
             font-size: 3.5rem;
             margin-bottom: 20px;
-            background: linear-gradient(45deg, var(--primary-color), #fff);
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
         
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
             color: var(--text-light);
             margin-bottom: 40px;
         }
@@ -147,19 +178,56 @@
             margin-bottom: 60px;
             font-size: 2.5rem;
             color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--secondary-color);
+        }
+        
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: var(--light-bg);
+            color: var(--text-light);
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-color);
+            color: #fff;
         }
         
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
         
         .portfolio-item {
-            background: var(--light-bg);
+            background: var(--card-bg);
             border-radius: 15px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
         
         .portfolio-item:hover {
@@ -175,32 +243,63 @@
         }
         
         .portfolio-info {
-            padding: 20px;
+            padding: 25px;
         }
         
         .portfolio-title {
-            font-size: 1.4rem;
-            margin-bottom: 10px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: var(--primary-color);
+        }
+        
+        .portfolio-subtitle {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-style: italic;
         }
         
         .portfolio-desc {
             color: var(--text-light);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .portfolio-details {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .detail-item {
+            margin-bottom: 8px;
+            display: flex;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: var(--secondary-color);
+            min-width: 100px;
+        }
+        
+        .detail-content {
+            color: var(--text-light);
+            flex: 1;
         }
         
         .portfolio-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .portfolio-tag {
-            background: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 5px 10px;
+            background: var(--light-bg);
+            color: var(--secondary-color);
+            padding: 5px 12px;
             border-radius: 20px;
             font-size: 0.8rem;
         }
@@ -211,17 +310,35 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            position: relative;
         }
         
-        .portfolio-link:hover {
-            color: #fff;
+        .portfolio-link::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .portfolio-link:hover::after {
+            width: 100%;
         }
         
         /* Footer */
         footer {
-            background: var(--secondary-color);
-            padding: 40px 0 20px;
+            background: var(--light-bg);
+            padding: 60px 0 30px;
             text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
         .social-links {
@@ -238,7 +355,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--light-bg);
+            background: var(--card-bg);
             color: var(--primary-color);
             font-size: 1.2rem;
             transition: all 0.3s ease;
@@ -246,7 +363,7 @@
         
         .social-link:hover {
             background: var(--primary-color);
-            color: var(--bg-color);
+            color: #fff;
             transform: translateY(-5px);
         }
         
@@ -254,6 +371,68 @@
             color: var(--text-light);
             font-size: 0.9rem;
             margin-top: 20px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 50px 20px;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            background: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .modal-info {
+            padding: 30px;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
         }
         
         /* Responsividade */
@@ -278,8 +457,16 @@
                 font-size: 2.5rem;
             }
             
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
             .portfolio-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .modal-img {
+                height: 250px;
             }
         }
         
@@ -295,6 +482,23 @@
             .section-title {
                 font-size: 2rem;
             }
+            
+            .portfolio-info {
+                padding: 15px;
+            }
+            
+            .portfolio-title {
+                font-size: 1.3rem;
+            }
+            
+            .detail-item {
+                flex-direction: column;
+                margin-bottom: 15px;
+            }
+            
+            .detail-label {
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -303,7 +507,7 @@
     <header>
         <div class="container">
             <nav>
-                <a href="#" class="logo">Patrick Sonata</a>
+                <a href="#" class="logo">Patrick <span>Sonata</span></a>
                 <ul class="nav-menu">
                     <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> <span>Início</span></a></li>
                     <li><a href="#portfolio" class="nav-link"><i class="fas fa-briefcase"></i> <span>Portfólio</span></a></li>
@@ -320,7 +524,7 @@
             <div class="hero-content">
                 <h1 class="hero-title">Patrick Sonata</h1>
                 <p class="hero-subtitle">Portfólio de Trabalhos Artísticos</p>
-                <p>Esta é uma coleção dos meus trabalhos artísticos e projetos criativos. Cada item representa uma colaboração única e especial no mundo das artes.</p>
+                <p class="hero-description">Esta é uma coleção dos meus trabalhos artísticos e projetos criativos. Cada item representa uma colaboração única e especial no mundo das artes.</p>
             </div>
         </div>
     </section>
@@ -330,70 +534,211 @@
         <div class="container">
             <h2 class="section-title">Meus Trabalhos</h2>
             
+            <div class="portfolio-filters">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="tv">Televisão</button>
+                <button class="filter-btn" data-filter="theater">Teatro</button>
+                <button class="filter-btn" data-filter="comedy">Humor</button>
+                <button class="filter-btn" data-filter="film">Cinema</button>
+            </div>
+            
             <div class="portfolio-grid">
-                <!-- Cidade Correria -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="Cidade Correria" class="portfolio-img">
+                <!-- Série Pablo & Luisão -->
+                <div class="portfolio-item" data-category="tv">
+                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=464&q=80" alt="Série Pablo & Luisão" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Cidade Correria</h3>
-                        <p class="portfolio-desc">Um coletivo de artistas com diversas linguagens e expressões artísticas.</p>
+                        <h3 class="portfolio-title">Série Pablo & Luisão</h3>
+                        <p class="portfolio-subtitle">(2025)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Autores:</span>
+                                <span class="detail-content">Paulo Vieira, Maurício Rizzo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">João Gomez</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Direção Artística:</span>
+                                <span class="detail-content">Luis Felipe Sá</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
-                            <span class="portfolio-tag">Coletivo</span>
-                            <span class="portfolio-tag">Artes</span>
+                            <span class="portfolio-tag">Série</span>
+                            <span class="portfolio-tag">Comédia</span>
+                            <span class="portfolio-tag">Televisão</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
                 </div>
                 
-                <!-- Pablo e Luisão -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=464&q=80" alt="Pablo e Luisão" class="portfolio-img">
+                <!-- Programa Zorra -->
+                <div class="portfolio-item" data-category="tv comedy">
+                    <img src="https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Programa Zorra" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Pablo e Luisão</h3>
-                        <p class="portfolio-desc">Identidade visual para projeto criativo.</p>
+                        <h3 class="portfolio-title">Programa Zorra</h3>
+                        <p class="portfolio-subtitle">(2019-2021)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Redação Final:</span>
+                                <span class="detail-content">Marcius Melhem, Celso Taddei, Gabriela Amaral, Nelito Fernandes e Marta Mendonça</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Direção Geral:</span>
+                                <span class="detail-content">Mauro Farias</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
-                            <span class="portfolio-tag">Design</span>
-                            <span class="portfolio-tag">Identidade Visual</span>
+                            <span class="portfolio-tag">TV</span>
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Programa</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
                 </div>
                 
-                <!-- Pra Provar Que Eu Não Minto -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Pra Provar Que Eu Não Minto" class="portfolio-img">
+                <!-- Espetáculo Pelada -->
+                <div class="portfolio-item" data-category="theater">
+                    <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Espetáculo Pelada" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Pra Provar Que Eu Não Minto</h3>
-                        <p class="portfolio-desc">Show realizado em 06 de julho, às 19h30.</p>
+                        <h3 class="portfolio-title">Espetáculo Pelada - A Hora da Gaymada</h3>
+                        <p class="portfolio-subtitle">(2022)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Orlando Caldeira</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro e Dramaturgia:</span>
+                                <span class="detail-content">Patrick Sonata</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
+                            <span class="portfolio-tag">Teatro</span>
+                            <span class="portfolio-tag">Espetáculo</span>
+                            <span class="portfolio-tag">Comédia</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Show de Humor -->
+                <div class="portfolio-item" data-category="comedy">
+                    <img src="https://images.unsplash.com/photo-1501389446297-3bd9eca7dad7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1171&q=80" alt="Show de Humor" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Show de Humor "Pra provar que eu não minto"</h3>
+                        <p class="portfolio-subtitle">(2023)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Paulo Costa</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Patrick Sonata e Tamires Gomes</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Dawis Jamaica</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
                             <span class="portfolio-tag">Show</span>
-                            <span class="portfolio-tag">Performance</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
                 </div>
                 
-                <!-- Humor Negro -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Humor Negro" class="portfolio-img">
+                <!-- Documentário Cidade Correria -->
+                <div class="portfolio-item" data-category="film">
+                    <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="Documentário Cidade Correria" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Humor Negro - A Série</h3>
-                        <p class="portfolio-desc">Série de humor com episódios temáticos.</p>
+                        <h3 class="portfolio-title">Documentário "Cidade Correria"</h3>
+                        <p class="portfolio-subtitle">(2022)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Juliana Vicente e Washington Deoli</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Juliana Vicente</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Realização:</span>
+                                <span class="detail-content">Prêt-à-porter Filmes</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Documentário</span>
+                            <span class="portfolio-tag">Cinema</span>
+                            <span class="portfolio-tag">Arte</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Série Humor Negro -->
+                <div class="portfolio-item" data-category="tv comedy">
+                    <img src="https://images.unsplash.com/photo-1550645612-83f5d594b671?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Série Humor Negro" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Série de Comédia "Humor Negro"</h3>
+                        <p class="portfolio-subtitle">(2023) - T1 EP: May Sista, Meus Brother</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Rodrigo França</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Criação:</span>
+                                <span class="detail-content">Val Benvindo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Renata Di Carmo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Plataforma:</span>
+                                <span class="detail-content">Globoplay</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
                             <span class="portfolio-tag">Série</span>
                             <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Streaming</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
                 </div>
                 
-                <!-- Jongo Mamulengo -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Jongo Mamulengo" class="portfolio-img">
+                <!-- Espetáculo Jongo Mamulengo -->
+                <div class="portfolio-item" data-category="theater">
+                    <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80" alt="Espetáculo Jongo Mamulengo" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Jongo Mamulengo</h3>
-                        <p class="portfolio-desc">Apresentação do Coletivo Bonobando, Cordão do Boitatá e Jungo da Serrinha.</p>
+                        <h3 class="portfolio-title">Espetáculo "Jongo Mamulengo"</h3>
+                        <p class="portfolio-subtitle">(2017-2023)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Adriana Schneider e Lucas Oradovschi</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Concepção e Roteiro:</span>
+                                <span class="detail-content">Coletivo Bonobando</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
+                            <span class="portfolio-tag">Teatro</span>
                             <span class="portfolio-tag">Performance</span>
                             <span class="portfolio-tag">Cultural</span>
                         </div>
@@ -401,15 +746,51 @@
                     </div>
                 </div>
                 
-                <!-- Zorra -->
-                <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1584824486539-53bb4646bdbc?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" alt="Zorra" class="portfolio-img">
+                <!-- Espetáculo Cidade Correria -->
+                <div class="portfolio-item" data-category="theater">
+                    <img src="https://images.unsplash.com/photo-1535016120720-40c646be5580?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" alt="Espetáculo Cidade Correria" class="portfolio-img">
                     <div class="portfolio-info">
-                        <h3 class="portfolio-title">Zorra - Equipe de Roteiro</h3>
-                        <p class="portfolio-desc">Programa de televisão com equipe de roteiristas.</p>
+                        <h3 class="portfolio-title">Espetáculo Cidade Correria</h3>
+                        <p class="portfolio-subtitle">(2016-2018)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Adriana Schneider e Lucas Oradovschi</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Texto e Dramaturgia:</span>
+                                <span class="detail-content">Coletivo Bonobando</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa</span>
+                            </div>
+                        </div>
                         <div class="portfolio-tags">
-                            <span class="portfolio-tag">TV</span>
-                            <span class="portfolio-tag">Roteiro</span>
+                            <span class="portfolio-tag">Teatro</span>
+                            <span class="portfolio-tag">Coletivo</span>
+                            <span class="portfolio-tag">Performance</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Show Originais da Comédia -->
+                <div class="portfolio-item" data-category="comedy">
+                    <img src="https://images.unsplash.com/photo-1551818255-e6e109c4c5f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1169&q=80" alt="Show Originais da Comédia" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Show de Humor "Originais da Comédia"</h3>
+                        <p class="portfolio-subtitle">(2022)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro e Direção:</span>
+                                <span class="detail-content">Patrick Sonata e Marcelo Magano</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
+                            <span class="portfolio-tag">Show</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
@@ -421,20 +802,22 @@
     <!-- Footer -->
     <footer id="contact">
         <div class="container">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/patrick-sonata-7b4b2a241/" target="_blank" class="social-link">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/PatrickSonata13" target="_blank" class="social-link">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.instagram.com/patrick_sonata/" target="_blank" class="social-link">
-                    <i class="fab fa-instagram"></i>
-                </a>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/patrick-sonata-7b4b2a241/" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://github.com/PatrickSonata13" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/patrick_sonata/" target="_blank" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <p class="copyright">© 2023 Patrick Sonata - Todos os direitos reservados</p>
+                <p class="copyright">Portfólio criado para GitHub Pages</p>
             </div>
-            
-            <p class="copyright">© 2023 Patrick Sonata - Todos os direitos reservados</p>
-            <p class="copyright">Portfólio criado para GitHub Pages</p>
         </div>
     </footer>
 
@@ -444,6 +827,8 @@
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.nav-link');
             const header = document.querySelector('header');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const portfolioItems = document.querySelectorAll('.portfolio-item');
             
             // Header scroll effect
             window.addEventListener('scroll', function() {
@@ -483,6 +868,29 @@
                     window.scrollTo({
                         top: targetSection.offsetTop - 80,
                         behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Filtros do portfólio
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remover classe active de todos os botões
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adicionar classe active ao botão clicado
+                    this.classList.add('active');
+                    
+                    // Obter o filtro
+                    const filter = this.getAttribute('data-filter');
+                    
+                    // Filtrar itens
+                    portfolioItems.forEach(item => {
+                        if (filter === 'all' || item.getAttribute('data-category').includes(filter)) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
                     });
                 });
             });
