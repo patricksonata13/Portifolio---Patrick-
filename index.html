@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata - Roteirista e Comediante</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a1a2e;
-            --secondary: #16213e;
-            --accent: #e94560;
-            --light: #f0f0f0;
-            --text: #333333;
-            --text-light: #ffffff;
+            --primary: #1a1a1a;
+            --secondary: #ffd700;
+            --accent: #8a2be2;
+            --light: #f5f5f5;
+            --dark: #121212;
+            --text: #333;
+            --transition: all 0.3s ease;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
             background-color: var(--light);
             color: var(--text);
             line-height: 1.6;
-            font-family: 'Montserrat', sans-serif;
         }
         
         .container {
@@ -35,56 +35,51 @@
             padding: 0 20px;
         }
         
+        /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: var(--text-light);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
             padding: 80px 0 60px;
             text-align: center;
             position: relative;
-        }
-        
-        .profile {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 25px;
-        }
-        
-        .avatar {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
             overflow: hidden;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
         }
         
-        .avatar img {
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(138, 43, 226, 0.1)"/></svg>');
+            background-size: cover;
         }
         
-        .name-title h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.2rem;
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
             margin-bottom: 10px;
-            letter-spacing: 1px;
+            color: var(--secondary);
         }
         
-        .name-title h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.9);
-            letter-spacing: 0.5px;
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
         
+        /* Navigation */
         nav {
-            background-color: var(--secondary);
+            background-color: var(--primary);
             position: sticky;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         
         .nav-container {
@@ -92,302 +87,309 @@
             justify-content: center;
         }
         
-        .nav-links {
-            display: flex;
-            list-style: none;
-        }
-        
-        .nav-links li a {
-            display: block;
-            color: var(--text-light);
+        .nav-link {
+            color: white;
             text-decoration: none;
-            padding: 22px 28px;
-            transition: all 0.3s ease;
+            padding: 20px 25px;
+            display: inline-block;
+            transition: var(--transition);
+            position: relative;
             font-weight: 500;
-            font-size: 1.1rem;
         }
         
-        .nav-links li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--secondary);
+            transition: var(--transition);
+            transform: translateX(-50%);
         }
         
+        .nav-link:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-link:hover::after {
+            width: 80%;
+        }
+        
+        /* Sections */
         section {
             padding: 80px 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
         }
         
         .section-title {
             text-align: center;
             margin-bottom: 50px;
-            color: var(--primary);
             position: relative;
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 2.2rem;
         }
         
         .section-title::after {
             content: '';
             display: block;
-            width: 100px;
-            height: 5px;
-            background-color: var(--accent);
-            margin: 20px auto;
-            border-radius: 2px;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
         }
         
-        #about {
-            background-color: white;
+        /* About Section */
+        #sobre {
+            background-color: #f9f9f9;
         }
         
         .about-content {
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
             text-align: center;
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1.1rem;
         }
         
-        .about-content p {
-            margin-bottom: 25px;
-        }
-        
-        #works {
-            background-color: #f8f9fa;
-        }
-        
+        /* Work Cards */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 35px;
+            gap: 30px;
         }
         
         .work-card {
             background: white;
-            border-radius: 15px;
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .work-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
         }
         
         .work-img {
-            height: 220px;
-            overflow: hidden;
-            position: relative;
+            height: 200px;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
         }
         
         .work-img img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
         
-        .work-card:hover .work-img img {
-            transform: scale(1.08);
-        }
-        
-        .work-info {
+        .work-content {
             padding: 25px;
-        }
-        
-        .work-info h3 {
-            color: var(--primary);
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            font-family: 'Playfair Display', serif;
-        }
-        
-        .work-info p {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 10px;
-            line-height: 1.6;
-        }
-        
-        .work-info .role {
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
-            display: block;
-        }
-        
-        .work-info strong {
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        #contact {
-            background-color: white;
-        }
-        
-        .contact-content {
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 40px;
-            text-align: center;
         }
         
-        .social-links {
-            display: flex;
-            gap: 25px;
-            flex-wrap: wrap;
-            justify-content: center;
+        .work-title {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
         
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 70px;
-            height: 70px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            font-size: 28px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .social-links a:hover {
-            transform: translateY(-5px) scale(1.1);
+        .work-year {
+            display: inline-block;
             background: var(--accent);
-            box-shadow: 0 8px 20px rgba(233, 69, 96, 0.3);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
         }
         
-        .contact-content p {
-            font-size: 1.2rem;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-        
-        footer {
-            background: var(--primary);
-            color: var(--text-light);
-            text-align: center;
-            padding: 40px 0;
-            margin-top: 60px;
-        }
-        
-        footer p {
+        .work-role {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 10px;
             font-size: 1.1rem;
         }
         
+        .work-desc {
+            color: #666;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+        
+        .work-details {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+        
+        /* Contact Section */
+        #contato {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        #contato .section-title {
+            color: white;
+        }
+        
+        .contact-text {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 15px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+        }
+        
+        .btn:hover {
+            background: #ffed4e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 0.9rem;
+        }
+        
+        /* Placeholder styles */
+        .placeholder-icon {
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+        
+        .placeholder-text {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        /* Tutorial Section */
+        .tutorial {
+            background: #e8f4fc;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 40px 0;
+            border-left: 5px solid var(--accent);
+        }
+        
+        .tutorial h3 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .tutorial-step {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .tutorial-step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: var(--accent);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tutorial-code {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                flex-direction: column;
-            }
-            
-            .nav-links li a {
-                padding: 18px;
-                text-align: center;
-                font-size: 1rem;
-            }
-            
-            .name-title h1 {
+            h1 {
                 font-size: 2.5rem;
             }
             
-            .name-title h2 {
-                font-size: 1.3rem;
+            .tagline {
+                font-size: 1.2rem;
             }
             
             .works-grid {
                 grid-template-columns: 1fr;
-                gap: 25px;
+            }
+            
+            .nav-container {
+                flex-wrap: wrap;
+            }
+            
+            .nav-link {
+                padding: 15px;
             }
             
             .section-title {
-                font-size: 2.2rem;
-                margin-bottom: 40px;
-            }
-            
-            .avatar {
-                width: 170px;
-                height: 170px;
-            }
-            
-            .social-links a {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
-            }
-            
-            section {
-                padding: 60px 0;
-            }
-            
-            .about-content {
-                font-size: 1.1rem;
+                font-size: 1.8rem;
             }
         }
-        
-        /* Animações */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .work-card {
-            animation: fadeInUp 0.6s ease-out;
-        }
-        
-        .work-card:nth-child(2) { animation-delay: 0.1s; }
-        .work-card:nth-child(3) { animation-delay: 0.2s; }
-        .work-card:nth-child(4) { animation-delay: 0.3s; }
-        .work-card:nth-child(5) { animation-delay: 0.4s; }
-        .work-card:nth-child(6) { animation-delay: 0.5s; }
-        .work-card:nth-child(7) { animation-delay: 0.6s; }
-        .work-card:nth-child(8) { animation-delay: 0.7s; }
     </style>
 </head>
 <body>
-    <!-- Cabeçalho com perfil -->
-    <header>
-        <div class="container">
-            <div class="profile">
-                <div class="avatar">
-                    <img src="profile.jpg" alt="Patrick Sonata">
-                </div>
-                <div class="name-title">
-                    <h1>Patrick Sonata</h1>
-                    <h2>Roteirista e Comediante</h2>
-                </div>
-            </div>
+    <header id="home">
+        <div class="container header-content">
+            <h1>Patrick Sonata</h1>
+            <p class="tagline">Roteirista e Comediante</p>
         </div>
     </header>
-    
-    <!-- Navegação -->
+
     <nav>
         <div class="container nav-container">
-            <ul class="nav-links">
-                <li><a href="#about">Sobre</a></li>
-                <li><a href="#works">Trabalhos</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
+            <a href="#home" class="nav-link">Início</a>
+            <a href="#sobre" class="nav-link">Sobre</a>
+            <a href="#trabalhos" class="nav-link">Trabalhos</a>
+            <a href="#contato" class="nav-link">Contato</a>
         </div>
     </nav>
-    
-    <!-- Seção Sobre -->
-    <section id="about">
+
+    <section id="sobre">
         <div class="container">
             <h2 class="section-title">Sobre Mim</h2>
             <div class="about-content">
@@ -396,197 +398,161 @@
             </div>
         </div>
     </section>
-    
-    <!-- Seção Trabalhos -->
-    <section id="works">
+
+    <section id="trabalhos" style="background-color: #f9f9f9;">
         <div class="container">
             <h2 class="section-title">Trabalhos Destacados</h2>
             <div class="works-grid">
                 <!-- Pablo & Luisão -->
                 <div class="work-card">
-                    <div class="work-img">
-                        <img src="pablo-luisao.jpg" alt="Série Pablo & Luisão">
+                    <div class="work-img" style="background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);">
+                        <i class="fas fa-film placeholder-icon"></i>
+                        <span class="placeholder-text">Imagem: Série Pablo e Luisão</span>
                     </div>
-                    <div class="work-info">
-                        <h3>Série Pablo & Luisão (2025)</h3>
-                        <span class="role">Roteirista</span>
-                        <p><strong>Autor:</strong> Paulo Vieira, Maurício Rizzo</p>
-                        <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
-                        <p><strong>Direção:</strong> João Gomez</p>
-                        <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
+                    <div class="work-content">
+                        <h3 class="work-title">Série Pablo & Luisão</h3>
+                        <span class="work-year">2025</span>
+                        <p class="work-role">Roteirista</p>
+                        <p class="work-desc">Série de comédia avec les personnages célèbres de Paulo Vieira et Maurício Rizzo.</p>
+                        <div class="work-details">
+                            <p><strong>Autor:</strong> Paulo Vieira, Maurício Rizzo</p>
+                            <p><strong>Direção artística:</strong> Luis Felipe Sá</p>
+                            <p><strong>Direção:</strong> João Gomez</p>
+                            <p><strong>Roteiro:</strong> Bia Braune, Caíto Mainier, Nathalia Cruz e Patrick Sonata</p>
+                        </div>
                     </div>
                 </div>
-                
+
                 <!-- Programa Zorra -->
                 <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/zorra.png" alt="Programa Zorra">
+                    <div class="work-img" style="background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);">
+                        <i class="fas fa-tv placeholder-icon"></i>
+                        <span class="placeholder-text">Imagem: Programa Zorra</span>
                     </div>
-                    <div class="work-info">
-                        <h3>Programa Zorra (2019-2021)</h3>
-                        <span class="role">Roteirista</span>
-                        <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
-                        <p><strong>Direção Geral:</strong> Mauro Farias</p>
+                    <div class="work-content">
+                        <h3 class="work-title">Programa Zorra</h3>
+                        <span class="work-year">2019-2021</span>
+                        <p class="work-role">Roteirista</p>
+                        <p class="work-desc">Programa de humor da TV Globo com esquetes e musical.</p>
+                        <div class="work-details">
+                            <p><strong>Redação Final:</strong> Marcius Melhem, Celso Taddei, Gabriela Amaral, Melito Fernandes e Marta Mendonça</p>
+                            <p><strong>Direção Geral:</strong> Mauro Farias</p>
+                        </div>
                     </div>
                 </div>
-                
+
                 <!-- Espetáculo Pelada -->
                 <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/pelada.jpg" alt="Espetáculo Pelada">
+                    <div class="work-img" style="background: linear-gradient(135deg, #27ae60 0%, #219653 100%);">
+                        <i class="fas fa-theater-masks placeholder-icon"></i>
+                        <span class="placeholder-text">Imagem: Espetáculo Pelada</span>
                     </div>
-                    <div class="work-info">
-                        <h3>Espetáculo Pelada - A Hora da Gaymada (2022)</h3>
-                        <span class="role">Roteiro e dramaturgia</span>
-                        <p><strong>Direção:</strong> Orlando Caldeira</p>
+                    <div class="work-content">
+                        <h3 class="work-title">Espetáculo Pelada - A Hora da Gaymada</h3>
+                        <span class="work-year">2022</span>
+                        <p class="work-role">Roteiro e dramaturgia</p>
+                        <p class="work-desc">Espetáculo teatral que mistura futebol e comédia.</p>
+                        <div class="work-details">
+                            <p><strong>Direção:</strong> Orlando Caldeira</p>
+                        </div>
                     </div>
                 </div>
-                
+
                 <!-- Show de Humor -->
                 <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/originais-comedia.png" alt="Show de Humor">
+                    <div class="work-img" style="background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);">
+                        <i class="fas fa-microphone placeholder-icon"></i>
+                        <span class="placeholder-text">Imagem: Show de Humor</span>
                     </div>
-                    <div class="work-info">
-                        <h3>Show de Humor "Pra provar que eu não minto" (2023)</h3>
-                        <span class="role">Roteirista</span>
-                        <p><strong>Direção:</strong> Paulo Costa</p>
-                        <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
-                        <p><strong>Elenco:</strong> Dawis Jamaica</p>
-                    </div>
-                </div>
-                
-                <!-- Documentário -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/cidade-correriajpg" alt="Documentário Cidade Correria">
-                    </div>
-                    <div class="work-info">
-                        <h3>Documentário "Cidade Correria" (2022)</h3>
-                        <span class="role">Participação</span>
-                        <p><strong>Direção:</strong> Juliana Vicente e Washington Deoli</p>
-                        <p><strong>Roteiro:</strong> Juliana Vicente</p>
-                        <p><strong>Realização:</strong> Prêt-à-porter Filmes</p>
-                    </div>
-                </div>
-                
-                <!-- Humor Negro -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/zorra2.png" alt="Série Humor Negro">
-                    </div>
-                    <div class="work-info">
-                        <h3>Série de Comédia "Humor Negro" (2023)</h3>
-                        <span class="role">Participação</span>
-                        <p><strong>Direção:</strong> Rodrigo França</p>
-                        <p><strong>Criação:</strong> Val Benvindo</p>
-                        <p><strong>Roteiro:</strong> Renata Di Carmo</p>
-                        <p><strong>Plataforma:</strong> Globoplay</p>
-                    </div>
-                </div>
-                
-                <!-- Jongo Mamulengo -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/jongo-mamulengo.jpg" alt="Espetáculo Jongo Mamulengo">
-                    </div>
-                    <div class="work-info">
-                        <h3>Espetáculo "Jongo Mamulengo" (2017-2023)</h3>
-                        <span class="role">Elenco e Roteirista</span>
-                        <p><strong>Direção:</strong> Adriana Schneider e Lucas Oradovschi</p>
-                        <p><strong>Concepção e roteiro:</strong> Coletivo Bonobando</p>
-                        <p><strong>Elenco:</strong> Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano</p>
-                    </div>
-                </div>
-                
-                <!-- Originais da Comédia -->
-                <div class="work-card">
-                    <div class="work-img">
-                        <img src="images/works/originais-comedia.png" alt="Show Originais da Comédia">
-                    </div>
-                    <div class="work-info">
-                        <h3>Show de Humor "Originais da Comédia" (2022)</h3>
-                        <span class="role">Roteiro e Direção</span>
-                        <p><strong>Roteiro e Direção:</strong> Patrick Sonata e Marcelo Magano</p>
+                    <div class="work-content">
+                        <h3 class="work-title">Show de Humor "Pra provar que eu não minto"</h3>
+                        <span class="work-year">2023</span>
+                        <p class="work-role">Roteirista</p>
+                        <p class="work-desc">Show de stand-up comedy com roteiro de Patrick Sonata.</p>
+                        <div class="work-details">
+                            <p><strong>Direção:</strong> Paulo Costa</p>
+                            <p><strong>Roteiro:</strong> Patrick Sonata e Tamires Gomes</p>
+                            <p><strong>Elenco:</strong> Dawis Jamaica</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
-    <!-- Seção Contato -->
-    <section id="contact">
+
+    <section id="tutorial">
+        <div class="container">
+            <h2 class="section-title">Como Resolver o Problema das Imagens</h2>
+            <div class="tutorial">
+                <h3>Passo a passo para criar a estrutura de pastas no GitHub</h3>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">1</div>
+                    <p>Acesse seu repositório no GitHub: <strong>Portifolio---Patrick-</strong></p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">2</div>
+                    <p>Clique no botão <strong>"Add file"</strong> e selecione <strong>"Create new file"</strong></p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">3</div>
+                    <p>Para criar a pasta <strong>public/images/creditos/</strong>, digite no campo do nome do arquivo:</p>
+                    <div class="tutorial-code">public/images/creditos/.gitkeep</div>
+                    <p>O arquivo <strong>.gitkeep</strong> é apenas um placeholder para forçar o GitHub a criar as pastas.</p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">4</div>
+                    <p>Role para baixo e clique em <strong>"Commit new file"</strong></p>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">5</div>
+                    <p>Agora faça upload das suas imagens para a pasta <strong>public/images/creditos/</strong>:</p>
+                    <p>Clique em <strong>"Add file"</strong> → <strong>"Upload files"</strong></p>
+                    <p>Arraste as imagens para a área de upload ou selecione-as manualmente.</p>
+                    <p><strong>Certifique-se de que os nomes dos arquivos correspondem aos usados no código:</strong></p>
+                    <div class="tutorial-code">
+                        pabloeluisao.jpg<br>
+                        praprovar.jpg<br>
+                        pelada.jpg<br>
+                        doccidadecorreria.jpg<br>
+                        cidadecorreriapeca.jpg<br>
+                        humornegro.jpg
+                    </div>
+                </div>
+                
+                <div class="tutorial-step">
+                    <div class="tutorial-step-number">6</div>
+                    <p>Após o upload, seu portfólio deve exibir as imagens corretamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
         <div class="container">
             <h2 class="section-title">Contato</h2>
-            <div class="contact-content">
-                <div class="social-links">
-                    <a href="https://www.instagram.com/patricksonata" title="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.twitter.com/patricksonata" title="Twitter" target="_blank" rel="noopener"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/in/patricksonata" title="LinkedIn" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="mailto:contato@patricksonata.com" title="Email"><i class="far fa-envelope"></i></a>
-                </div>
-                <p>Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
+            <p class="contact-text">Entre em contato para oportunidades de roteiro, colaborações ou performances.</p>
+            <div style="text-align: center;">
+                <a href="mailto:contato@example.com" class="btn">Enviar E-mail</a>
             </div>
         </div>
     </section>
-    
-    <!-- Rodapé -->
+
     <footer>
         <div class="container">
-            <p>&copy; 2025 Patrick Sonata. Todos os direitos reservados.</p>
+            <p>© 2025 Patrick Sonata. Todos os direitos reservados.</p>
         </div>
     </footer>
-    
+
     <script>
-        // Smooth scroll para navegação
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 70,
-                    behavior: 'smooth'
-                });
-                
-                // Atualizar URL
-                history.pushState(null, null, targetId);
-            });
-        });
-        
-        // Efeito de mudança de cor no header ao scrollar
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            const scrollPosition = window.scrollY;
-            
-            if (scrollPosition > 100) {
-                header.style.background = 'linear-gradient(135deg, #16213e, #0f1a30)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
-            }
-        });
-        
-        // Animação de aparecimento dos cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-        
-        // Observar todos os cards de trabalho
-        document.querySelectorAll('.work-card').forEach(card => {
-            card.style.animationPlayState = 'paused';
-            observer.observe(card);
+        // Adicionar ano atual automaticamente no footer
+        document.addEventListener('DOMContentLoaded', function() {
+            const year = new Date().getFullYear();
+            document.querySelector('footer p').textContent = `© ${year} Patrick Sonata. Todos os direitos reservados.`;
         });
     </script>
 </body>
