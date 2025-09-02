@@ -435,6 +435,35 @@
             margin-bottom: 20px;
         }
         
+        /* Botão do WhatsApp */
+        .floating-contact {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .whatsapp-float {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+        }
+        
         /* Responsividade */
         @media screen and (max-width: 768px) {
             .nav-menu {
@@ -518,10 +547,16 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section com foto de perfil -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="images/works/perfil.jpg" alt="Patrick Sonata" 
+                         style="width: 180px; height: 180px; border-radius: 50%; 
+                                object-fit: cover; border: 4px solid var(--primary-color);
+                                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);">
+                </div>
                 <h1 class="hero-title">Patrick Sonata</h1>
                 <p class="hero-subtitle">Portfólio de Trabalhos Artísticos</p>
                 <p class="hero-description">Esta é uma coleção dos meus trabalhos artísticos e projetos criativos. Cada item representa uma colaboração única e especial no mundo das artes.</p>
@@ -578,7 +613,8 @@
                 
                 <!-- Programa Zorra -->
                 <div class="portfolio-item" data-category="tv comedy">
-                 <img src="images/works/programazorra.jpg" alt="Captura de tela do Programa Zorra da TV Globo" class="portfolio-img">
+                    <img src="images/works/programazorra.jpg" alt="Captura de tela do Programa Zorra da TV Globo" class="portfolio-img">
+                    <div class="portfolio-info">
                         <h3 class="portfolio-title">Programa Zorra</h3>
                         <p class="portfolio-subtitle">(2019-2021)</p>
                         <div class="portfolio-details">
@@ -602,7 +638,8 @@
                 
                 <!-- Espetáculo Pelada -->
                 <div class="portfolio-item" data-category="theater">
-                   <img src="images/works/pelada.jpg" alt="Espetáculo teatral Pelada" class="portfolio-img">
+                    <img src="images/works/pelada.jpg" alt="Espetáculo teatral Pelada" class="portfolio-img">
+                    <div class="portfolio-info">
                         <h3 class="portfolio-title">Espetáculo Pelada - A Hora da Gaymada</h3>
                         <p class="portfolio-subtitle">(2022)</p>
                         <div class="portfolio-details">
@@ -818,6 +855,19 @@
             </div>
         </div>
     </footer>
+
+    <!-- Contato discreto (não visível) -->
+    <div style="display: none;">
+        <span id="contact-phone">21983976299</span>
+        <span id="contact-name">Patrick Sonata</span>
+    </div>
+
+    <!-- Botão flutuante de contato -->
+    <div class="floating-contact">
+        <a href="https://wa.me/5521983976299" target="_blank" class="whatsapp-float">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
 
     <script>
         // Script para destacar a aba ativa durante a rolagem
