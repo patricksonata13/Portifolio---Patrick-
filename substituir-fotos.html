@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Substituir Fotos - Patrick Sonata</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+        }
+        
+        .instructions {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instructions ol {
+            margin-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.8;
+        }
+        
+        .instructions code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        
+        .image-replacement {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .image-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .image-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .image-box h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .preview {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #f5f7fa, #e4e8eb);
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            border: 2px dashed #bdc3c7;
+        }
+        
+        .preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        
+        .url-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .url-input:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+        
+        .file-input-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .file-input-label {
+            display: block;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 12px 15px;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .file-input-label:hover {
+            background: #dfe6e9;
+        }
+        
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            flex: 1;
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        .btn:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        
+        .btn.clear {
+            background: #e74c3c;
+        }
+        
+        .btn.clear:hover {
+            background: #c0392b;
+        }
+        
+        .code-output {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        
+        .code-output h3 {
+            margin-bottom: 15px;
+            color: #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        pre {
+            white-space: pre-wrap;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            line-height: 1.5;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 6px;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .copy-btn {
+            display: block;
+            width: 100%;
+            background: #1abc9c;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: #16a085;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2ecc71;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            opacity: 0;
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .image-replacement {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Substituir Fotos do Portfólio</h1>
+            <p class="subtitle">Ferramenta para atualizar imagens do portfólio de Patrick Sonata</p>
+        </header>
+        
+        <div class="instructions">
+            <h2><i class="fas fa-info-circle"></i> Como substituir as imagens:</h2>
+            <ol>
+                <li>Para cada imagem abaixo, você pode:
+                    <ul>
+                        <li>Inserir uma URL de imagem da internet (ex: Google Drive, Imgur, etc.)</li>
+                        <li>Ou fazer upload de uma imagem do seu computador</li>
+                    </ul>
+                </li>
+                <li>Após inserir todas as imagens, role até a parte inferior da página</li>
+                <li>Copie o código gerado e substitua as tags de imagem no seu código HTML original</li>
+                <li>Para imagens do Google Drive: compartilhe a imagem como "Qualquer pessoa com o link pode visualizar", depois copie o link e use neste gerador</li>
+            </ol>
+        </div>
+        
+        <div class="image-replacement">
+            <div class="image-box">
+                <h3><i class="fas fa-user"></i> Foto de Perfil</h3>
+                <div class="preview" id="profile-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="profile-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('profile')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="profile-file" accept="image/*" onchange="handleFileSelect('profile', this)">
+                    <label for="profile-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('profile')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('profile')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-paint-brush"></i> Cidade Correria</h3>
+                <div class="preview" id="project1-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project1-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project1')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project1-file" accept="image/*" onchange="handleFileSelect('project1', this)">
+                    <label for="project1-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project1')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project1')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-pencil-alt"></i> Pablo e Luisão</h3>
+                <div class="preview" id="project2-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project2-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project2')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project2-file" accept="image/*" onchange="handleFileSelect('project2', this)">
+                    <label for="project2-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project2')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project2')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-theater-masks"></i> Pra Provar Que Eu Não Minto</h3>
+                <div class="preview" id="project3-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project3-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project3')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project3-file" accept="image/*" onchange="handleFileSelect('project3', this)">
+                    <label for="project3-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project3')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project3')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-tv"></i> Humor Negro</h3>
+                <div class="preview" id="project4-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project4-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project4')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project4-file" accept="image/*" onchange="handleFileSelect('project4', this)">
+                    <label for="project4-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project4')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project4')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-music"></i> Jongo Mamulengo</h3>
+                <div class="preview" id="project5-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project5-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project5')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project5-file" accept="image/*" onchange="handleFileSelect('project5', this)">
+                    <label for="project5-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project5')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project5')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+            
+            <div class="image-box">
+                <h3><i class="fas fa-film"></i> Zorra</h3>
+                <div class="preview" id="project6-preview">Prévia da imagem</div>
+                <input type="text" class="url-input" id="project6-url" placeholder="Cole a URL da imagem aqui" onchange="updatePreview('project6')">
+                <div class="file-input-container">
+                    <input type="file" class="file-input" id="project6-file" accept="image/*" onchange="handleFileSelect('project6', this)">
+                    <label for="project6-file" class="file-input-label"><i class="fas fa-upload"></i> Escolher arquivo</label>
+                </div>
+                <div class="buttons">
+                    <button class="btn" onclick="updatePreview('project6')"><i class="fas fa-sync"></i> Atualizar</button>
+                    <button class="btn clear" onclick="clearImage('project6')"><i class="fas fa-trash"></i> Limpar</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="code-output">
+            <h3><i class="fas fa-code"></i> Código HTML para substituir as imagens:</h3>
+            <pre id="output-code">// As tags img serão geradas aqui após você inserir as imagens</pre>
+            <button class="copy-btn" onclick="copyToClipboard()"><i class="fas fa-copy"></i> Copiar Código</button>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">Código copiado para a área de transferência!</div>
+
+    <script>
+        // Objeto para armazenar as URLs das imagens
+        const imageUrls = {
+            profile: '',
+            project1: '',
+            project2: '',
+            project3: '',
+            project4: '',
+            project5: '',
+            project6: ''
+        };
+        
+        // Atualizar a prévia quando uma URL é inserida
+        function updatePreview(imageId) {
+            const urlInput = document.getElementById(`${imageId}-url`);
+            const previewDiv = document.getElementById(`${imageId}-preview`);
+            
+            if (urlInput.value) {
+                imageUrls[imageId] = urlInput.value;
+                previewDiv.innerHTML = `<img src="${urlInput.value}" alt="Prévia">`;
+                showNotification('Imagem atualizada com sucesso!');
+            } else if (imageUrls[imageId]) {
+                // Manter a imagem atual se já houver uma
+                previewDiv.innerHTML = `<img src="${imageUrls[imageId]}" alt="Prévia">`;
+            }
+            
+            generateCode();
+        }
+        
+        // Lidar com seleção de arquivo
+        function handleFileSelect(imageId, input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewDiv = document.getElementById(`${imageId}-preview`);
+                    previewDiv.innerHTML = `<img src="${e.target.result}" alt="Prévia">`;
+                    imageUrls[imageId] = e.target.result;
+                    
+                    // Limpar o campo de URL
+                    document.getElementById(`${imageId}-url`).value = '';
+                    
+                    generateCode();
+                    showNotification('Imagem carregada com sucesso!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+        
+        // Limpar imagem
+        function clearImage(imageId) {
+            document.getElementById(`${imageId}-preview`).innerHTML = 'Prévia da imagem';
+            document.getElementById(`${imageId}-url`).value = '';
+            document.getElementById(`${imageId}-file`).value = '';
+            imageUrls[imageId] = '';
+            
+            generateCode();
+            showNotification('Imagem removida!');
+        }
+        
+        // Gerar o código HTML
+        function generateCode() {
+            let code = '';
+            
+            if (imageUrls.profile) {
+                code += `<!-- Foto de Perfil -->\n<img src="${imageUrls.profile}" alt="Patrick Sonata" class="profile-img">\n\n`;
+            }
+            
+            if (imageUrls.project1) {
+                code += `<!-- Cidade Correria -->\n<img src="${imageUrls.project1}" alt="Cidade Correria" class="portfolio-img">\n\n`;
+            }
+            
+            if (imageUrls.project2) {
+                code += `<!-- Pablo e Luisão -->\n<img src="${imageUrls.project2}" alt="Pablo e Luisão" class="portfolio-img">\n\n`;
+            }
+            
+            if (imageUrls.project3) {
+                code += `<!-- Pra Provar Que Eu Não Minto -->\n<img src="${imageUrls.project3}" alt="Pra Provar Que Eu Não Minto" class="portfolio-img">\n\n`;
+            }
+            
+            if (imageUrls.project4) {
+                code += `<!-- Humor Negro -->\n<img src="${imageUrls.project4}" alt="Humor Negro" class="portfolio-img">\n\n`;
+            }
+            
+            if (imageUrls.project5) {
+                code += `<!-- Jongo Mamulengo -->\n<img src="${imageUrls.project5}" alt="Jongo Mamulengo" class="portfolio-img">\n\n`;
+            }
+            
+            if (imageUrls.project6) {
+                code += `<!-- Zorra -->\n<img src="${imageUrls.project6}" alt="Zorra" class="portfolio-img">\n\n`;
+            }
+            
+            document.getElementById('output-code').textContent = code || '// Insira as imagens para gerar o código';
+        }
+        
+        // Copiar para a área de transferência
+        function copyToClipboard() {
+            const code = document.getElementById('output-code').textContent;
+            if (code.startsWith('//')) {
+                showNotification('Por favor, adicione pelo menos uma imagem antes de copiar!');
+                return;
+            }
+            
+            navigator.clipboard.writeText(code).then(() => {
+                showNotification('Código copiado para a área de transferência!');
+            });
+        }
+        
+        // Mostrar notificação
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Inicializar
+        generateCode();
+        
+        // Adicionar Font Awesome
+        const fontAwesome = document.createElement('link');
+        fontAwesome.rel = 'stylesheet';
+        fontAwesome.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        document.head.appendChild(fontAwesome);
+    </script>
+</body>
+</html>
