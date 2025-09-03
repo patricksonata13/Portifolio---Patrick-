@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -129,7 +130,6 @@
             background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(26, 26, 46, 0.9));
             position: relative;
             overflow: hidden;
-            text-align: center;
         }
 
         .hero::before {
@@ -145,9 +145,10 @@
         }
 
         .hero-content {
+            text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 20px 0;
         }
 
         .profile-img-container {
@@ -158,7 +159,11 @@
             overflow: hidden;
             border: 4px solid var(--primary-color);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
+            background: #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
         }
 
         .profile-img {
@@ -488,6 +493,129 @@
             box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
         }
         
+        /* Botão de compartilhar para clientes */
+        .client-share {
+            position: fixed;
+            bottom: 100px;
+            right: 25px;
+            z-index: 1000;
+        }
+        
+        .client-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            color: var(--bg-color);
+            border-radius: 50%;
+            text-align: center;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .client-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Modal de compartilhamento */
+        .share-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .share-modal-content {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .share-modal h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .share-options {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .share-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--light-bg);
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .share-btn.whatsapp {
+            background: #25D366;
+        }
+        
+        .share-btn.link {
+            background: var(--secondary-color);
+        }
+        
+        .share-btn:hover {
+            transform: translateY(-5px);
+        }
+        
+        .share-url {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .share-url input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: var(--light-bg);
+            color: white;
+        }
+        
+        .copy-btn {
+            padding: 0 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
         /* Responsividade */
         @media screen and (max-width: 768px) {
             .nav-menu {
@@ -525,6 +653,10 @@
             
             .about-content {
                 flex-direction: column;
+            }
+            
+            .client-share {
+                bottom: 90px;
             }
         }
         
@@ -590,8 +722,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="profile-img-container">
-                    <!-- Substitua pelo caminho da sua imagem real -->
-                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZmlsZSUyMHBpY3R1cmV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=80" alt="Patrick Sonata" class="profile-img">
+                    <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Patrick Sonata" class="profile-img">
                 </div>
                 <h1 class="hero-title">Patrick Sonata</h1>
                 <p class="hero-subtitle">Da CDD para o Mundo!</p>
@@ -736,6 +867,97 @@
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
                 </div>
+                
+                <!-- Show de Humor -->
+                <div class="portfolio-item" data-category="comedy">
+                    <img src="https://images.unsplash.com/photo-1548217395-6c6095abb49c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3RhbmQlMjB1cHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Show de Humor" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Show de Humor "Pra provar que eu não minto"</h3>
+                        <p class="portfolio-subtitle">(2023)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Paulo Costa</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Patrick Sonata e Tamires Gomes</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Dawis Jamaica</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
+                            <span class="portfolio-tag">Show</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Documentário Cidade Correria -->
+                <div class="portfolio-item" data-category="film">
+                    <img src="https://images.unsplash.com/photo-1543857778-c4a1a569e0bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fGRvY3VtZW50YXJ5fGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=80" alt="Documentário Cidade Correria" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Documentário "Cidade Correria"</h3>
+                        <p class="portfolio-subtitle">(2022)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Juliana Vicente e Washington Deoli</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Juliana Vicente</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Realização:</span>
+                                <span class="detail-content">Prêt-à-porter Filmes</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Documentário</span>
+                            <span class="portfolio-tag">Cinema</span>
+                            <span class="portfolio-tag">Arte</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Série Humor Negro -->
+                <div class="portfolio-item" data-category="tv comedy">
+                    <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fHN0cmVhbWluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Série Humor Negro" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Série de Comédia "Humor Negro"</h3>
+                        <p class="portfolio-subtitle">(2023) - T1 EP: May Sista, Meus Brother</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Rodrigo França</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Criação:</span>
+                                <span class="detail-content">Val Benvindo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro:</span>
+                                <span class="detail-content">Renata Di Carmo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Plataforma:</span>
+                                <span class="detail-content">Globoplay</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Série</span>
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Streaming</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -762,11 +984,43 @@
         </div>
     </footer>
 
+    <!-- Modal de compartilhamento -->
+    <div class="share-modal" id="shareModal">
+        <div class="share-modal-content">
+            <span class="close-modal" onclick="closeShareModal()">&times;</span>
+            <h2>Compartilhar Portfólio</h2>
+            <p>Compartilhe meu portfólio com clientes ou colegas</p>
+            
+            <div class="share-options">
+                <a href="#" class="share-btn whatsapp" onclick="shareOnWhatsapp()">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="share-btn link" onclick="copyLink()">
+                    <i class="fas fa-link"></i>
+                </a>
+            </div>
+            
+            <div class="share-url">
+                <input type="text" id="portfolioUrl" value="https://patricksonata13.github.io/Portifolio---Patrick-/" readonly>
+                <button class="copy-btn" onclick="copyLink()">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Botão flutuante de contato -->
     <div class="floating-contact">
         <a href="https://wa.me/5521983976299" target="_blank" class="whatsapp-float">
             <i class="fab fa-whatsapp"></i>
         </a>
+    </div>
+
+    <!-- Botão para compartilhar com clientes -->
+    <div class="client-share">
+        <div class="client-btn" onclick="openShareModal()">
+            <i class="fas fa-share-alt"></i>
+        </div>
     </div>
 
     <script>
@@ -842,6 +1096,35 @@
                     });
                 });
             });
+        });
+
+        // Funções para compartilhamento
+        function openShareModal() {
+            document.getElementById('shareModal').style.display = 'flex';
+        }
+        
+        function closeShareModal() {
+            document.getElementById('shareModal').style.display = 'none';
+        }
+        
+        function copyLink() {
+            const urlInput = document.getElementById('portfolioUrl');
+            urlInput.select();
+            document.execCommand('copy');
+            alert('Link copiado para a área de transferência!');
+        }
+        
+        function shareOnWhatsapp() {
+            const url = encodeURIComponent('https://patricksonata13.github.io/Portifolio---Patrick-/');
+            const text = encodeURIComponent('Confira o portfólio de Patrick Sonata - Artista multifacetado com experiência em televisão, teatro, comédia e cinema.');
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+        }
+        
+        // Fechar o modal clicando fora dele
+        document.getElementById('shareModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeShareModal();
+            }
         });
     </script>
 </body>
