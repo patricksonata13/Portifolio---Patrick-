@@ -119,13 +119,6 @@
             font-size: 0.85rem;
         }
         
-        .menu-btn {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-        
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -396,6 +389,68 @@
             margin-top: 20px;
         }
         
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 50px 20px;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            background: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .modal-info {
+            padding: 30px;
+        }
+        
+        .modal-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+        
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
         /* Botão do WhatsApp */
         .floating-contact {
             position: fixed;
@@ -426,42 +481,21 @@
         }
         
         /* Responsividade */
-        @media screen and (max-width: 992px) {
-            .portfolio-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            }
-            
-            .hero-title {
-                font-size: 2.8rem;
-            }
-        }
-        
         @media screen and (max-width: 768px) {
-            .menu-btn {
-                display: block;
-            }
-            
             .nav-menu {
                 position: fixed;
-                top: 0;
-                right: -100%;
-                width: 70%;
-                height: 100vh;
-                background: var(--light-bg);
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.5s ease;
-                gap: 2rem;
-                padding: 50px 0;
-            }
-            
-            .nav-menu.active {
-                right: 0;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.3);
+                backdrop-filter: blur(15px);
+                padding: 15px 0;
+                justify-content: space-around;
+                gap: 0;
             }
             
             .nav-link span {
-                display: block;
+                display: none;
             }
             
             .hero-title {
@@ -481,8 +515,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .section-title {
-                font-size: 2rem;
+            .modal-img {
+                height: 250px;
             }
         }
         
@@ -496,7 +530,7 @@
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
             
             .profile-img-container {
@@ -520,35 +554,6 @@
             .detail-label {
                 margin-bottom: 5px;
             }
-            
-            .portfolio-filters {
-                gap: 8px;
-            }
-            
-            .filter-btn {
-                padding: 6px 15px;
-                font-size: 0.9rem;
-            }
-        }
-        
-        /* Imagens de fallback */
-        .portfolio-img {
-            background-color: #2c3e50;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
-            font-size: 1rem;
-            text-align: center;
-            padding: 20px;
-        }
-        
-        .profile-img {
-            background-color: #34495e;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-light);
         }
     </style>
 </head>
@@ -558,17 +563,11 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">Patrick <span>Sonata</span></a>
-                <div class="menu-btn">
-                    <i class="fas fa-bars"></i>
-                </div>
                 <ul class="nav-menu">
                     <li><a href="#home" class="nav-link active"><i class="fas fa-home"></i> <span>Início</span></a></li>
                     <li><a href="#portfolio" class="nav-link"><i class="fas fa-briefcase"></i> <span>Portfólio</span></a></li>
                     <li><a href="#about" class="nav-link"><i class="fas fa-user"></i> <span>Sobre</span></a></li>
                     <li><a href="#contact" class="nav-link"><i class="fas fa-envelope"></i> <span>Contato</span></a></li>
-                    <li class="close-menu">
-                        <i class="fas fa-times"></i>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -579,7 +578,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="profile-img-container">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Patrick Sonata" class="profile-img">
+                    <img src="images/works/perfil.jpg" alt="Patrick Sonata" class="profile-img">
                 </div>
                 <h1 class="hero-title">Patrick Sonata</h1>
                 <p class="hero-subtitle">Portfólio de Trabalhos Artísticos</p>
@@ -604,9 +603,7 @@
             <div class="portfolio-grid">
                 <!-- Série Pablo & Luisão -->
                 <div class="portfolio-item" data-category="tv">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1609743522653-52354461eb27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Série Pablo & Luisão">
-                    </div>
+                    <img src="images/works/pabloeluisao.jpg" alt="Série Pablo & Luisão" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Série Pablo & Luisão</h3>
                         <p class="portfolio-subtitle">(2025)</p>
@@ -639,9 +636,7 @@
                 
                 <!-- Programa Zorra -->
                 <div class="portfolio-item" data-category="tv comedy">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="Captura de tela do Programa Zorra da TV Globo">
-                    </div>
+                    <img src="images/works/programazorra.jpg" alt="Captura de tela do Programa Zorra da TV Globo" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Programa Zorra</h3>
                         <p class="portfolio-subtitle">(2019-2021)</p>
@@ -666,9 +661,7 @@
                 
                 <!-- Espetáculo Pelada -->
                 <div class="portfolio-item" data-category="theater">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1514306199707-5d69f8aecf8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Espetáculo teatral Pelada">
-                    </div>
+                    <img src="images/works/pelada.jpg" alt="Espetáculo teatral Pelada" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Espetáculo Pelada - A Hora da Gaymada</h3>
                         <p class="portfolio-subtitle">(2022)</p>
@@ -693,9 +686,7 @@
                 
                 <!-- Show de Humor -->
                 <div class="portfolio-item" data-category="comedy">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1549576490-b0b4831ef60a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Show de Humor">
-                    </div>
+                    <img src="images/works/praprovar.jpg" alt="Show de Humor" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Show de Humor "Pra provar que eu não minto"</h3>
                         <p class="portfolio-subtitle">(2023)</p>
@@ -724,9 +715,7 @@
                 
                 <!-- Documentário Cidade Correria -->
                 <div class="portfolio-item" data-category="film">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1595769816263-9b910be24d5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1179&q=80" alt="Documentário Cidade Correria">
-                    </div>
+                    <img src="images/works/doccidadecorreria.jpg" alt="Documentário Cidade Correria" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Documentário "Cidade Correria"</h3>
                         <p class="portfolio-subtitle">(2022)</p>
@@ -755,9 +744,7 @@
                 
                 <!-- Série Humor Negro -->
                 <div class="portfolio-item" data-category="tv comedy">
-                    <div class="portfolio-img">
-                        <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="Série Humor Negro">
-                    </div>
+                    <img src="images/works/humornegro.jpg" alt="Série Humor Negro" class="portfolio-img">
                     <div class="portfolio-info">
                         <h3 class="portfolio-title">Série de Comédia "Humor Negro"</h3>
                         <p class="portfolio-subtitle">(2023) - T1 EP: May Sista, Meus Brother</p>
@@ -783,6 +770,85 @@
                             <span class="portfolio-tag">Série</span>
                             <span class="portfolio-tag">Humor</span>
                             <span class="portfolio-tag">Streaming</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Espetáculo Jongo Mamulengo -->
+                <div class="portfolio-item" data-category="theater">
+                    <img src="images/works/jongo.jpg" alt="Espetáculo Jongo Mamulengo" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Espetáculo "Jongo Mamulengo"</h3>
+                        <p class="portfolio-subtitle">(2017-2023)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Adriana Schneider e Lucas Oradovschi</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Concepção e Roteiro:</span>
+                                <span class="detail-content">Coletivo Bonobando</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Hugo Bernardo, Patrick Sonata, Lívia Lado e Marcelo Magano</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Teatro</span>
+                            <span class="portfolio-tag">Performance</span>
+                            <span class="portfolio-tag">Cultural</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Espetáculo Cidade Correria -->
+                <div class="portfolio-item" data-category="theater">
+                    <img src="images/works/cidadecorreriapeca.jpg" alt="Espetáculo Cidade Correria" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Espetáculo Cidade Correria</h3>
+                        <p class="portfolio-subtitle">(2016-2018)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Direção:</span>
+                                <span class="detail-content">Adriana Schneider e Lucas Oradovschi</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Texto e Dramaturgia:</span>
+                                <span class="detail-content">Coletivo Bonobando</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Elenco:</span>
+                                <span class="detail-content">Daniela Joyce, Hugo Bernardo, Igor da Silva, Jardila Baptista, Karla Suarez, Livia Laso, Marcelo Magano, Patrick Sonata e Thiago Rosa</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Teatro</span>
+                            <span class="portfolio-tag">Coletivo</span>
+                            <span class="portfolio-tag">Performance</span>
+                        </div>
+                        <a href="#" class="portfolio-link">Ver detalhes →</a>
+                    </div>
+                </div>
+                
+                <!-- Show Originais da Comédia -->
+                <div class="portfolio-item" data-category="comedy">
+                    <img src="images/works/originais.jpg" alt="Show Originais da Comédia" class="portfolio-img">
+                    <div class="portfolio-info">
+                        <h3 class="portfolio-title">Show de Humor "Originais da Comédia"</h3>
+                        <p class="portfolio-subtitle">(2022)</p>
+                        <div class="portfolio-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Roteiro e Direção:</span>
+                                <span class="detail-content">Patrick Sonata e Marcelo Magano</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-tags">
+                            <span class="portfolio-tag">Humor</span>
+                            <span class="portfolio-tag">Stand-up</span>
+                            <span class="portfolio-tag">Show</span>
                         </div>
                         <a href="#" class="portfolio-link">Ver detalhes →</a>
                     </div>
@@ -813,6 +879,12 @@
         </div>
     </footer>
 
+    <!-- Contato discreto (não visível) -->
+    <div style="display: none;">
+        <span id="contact-phone">21983976299</span>
+        <span id="contact-name">Patrick Sonata</span>
+    </div>
+
     <!-- Botão flutuante de contato -->
     <div class="floating-contact">
         <a href="https://wa.me/5521983976299" target="_blank" class="whatsapp-float">
@@ -828,25 +900,6 @@
             const header = document.querySelector('header');
             const filterButtons = document.querySelectorAll('.filter-btn');
             const portfolioItems = document.querySelectorAll('.portfolio-item');
-            const menuBtn = document.querySelector('.menu-btn');
-            const navMenu = document.querySelector('.nav-menu');
-            const closeMenu = document.querySelector('.close-menu');
-            
-            // Menu mobile toggle
-            menuBtn.addEventListener('click', function() {
-                navMenu.classList.add('active');
-            });
-            
-            closeMenu.addEventListener('click', function() {
-                navMenu.classList.remove('active');
-            });
-            
-            // Fechar menu ao clicar em um link
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    navMenu.classList.remove('active');
-                });
-            });
             
             // Header scroll effect
             window.addEventListener('scroll', function() {
@@ -912,19 +965,6 @@
                     });
                 });
             });
-            
-            // Prevenir quebra de imagens
-            document.querySelectorAll('.portfolio-img img').forEach(img => {
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    this.parentElement.innerHTML = 'Imagem não disponível';
-                };
-            });
-            
-            document.querySelector('.profile-img').onerror = function() {
-                this.style.display = 'none';
-                this.parentElement.innerHTML = 'Patrick Sonata';
-            };
         });
     </script>
 </body>
