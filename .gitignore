@@ -1,0 +1,10 @@
+old-site/
+node_modules/
+.DS_Store
+*.log
+*.backup
+*.tar.gz
+*.zip
+Thumbs.db
+.vscode/
+.idea/
