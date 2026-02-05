@@ -56,7 +56,7 @@
             <div class="hero-content">
                 <div class="profile-card">
                     <div class="profile-image">
-                        <img src="assets/images/profile/patrick-perfil2.jpg" 
+                        <img src="assets/images/profile/patrick-sonata-perfil.jpg" 
                              alt="Patrick Sonata" 
                              class="profile-photo"
                             >
@@ -147,7 +147,7 @@
                 </div>
                 
                 <div class="about-image">
-                    <img src="assets/images/profile/patrick-perfil2.jpg" alt="Patrick trabalhando">
+                    <img src="assets/images/profile/patrick-about.jpg" alt="Patrick trabalhando">
                 </div>
             </div>
         </div>
@@ -168,6 +168,16 @@
                 <button class="filter-btn" data-filter="web">Web</button>
             </div>
             
+            <div class="works-grid">
+                <!-- Trabalho 1 -->
+                <div class="work-card" data-category="teatro">
+                    <div class="work-image">
+                        <img src="assets/images/works/cidadecorreriapeca.jpg" alt="Cidade Correria - Peça Teatral">
+                        <div class="work-overlay">
+                            <a href="#" class="work-link">
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="work-info">
                         <h3>Cidade Correria</h3>
