@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste Final JS</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        .teste { margin: 20px 0; padding: 10px; background: #f0f0f0; }
+    </style>
+</head>
+<body>
+    <h1>Teste Final JavaScript</h1>
+    
+    <div class="teste">
+        <h3>Teste 1: JS Externo</h3>
+        <p id="teste1">Carregando...</p>
+        <script src="assets/js/main.js"></script>
+        <script>
+            setTimeout(() => {
+                document.getElementById('teste1').textContent = 
+                    typeof setupMenu === 'function' ? '✅ JS Externo OK!' : '❌ JS Externo FALHOU';
+            }, 1000);
+        </script>
+    </div>
+    
+    <div class="teste">
+        <h3>Teste 2: Console</h3>
+        <p>Abra o Console (F12) e veja se aparece:</p>
+        <ul>
+            <li>🚀 Site Patrick Sonata - JavaScript inicializado</li>
+            <li>✅ DOM carregado</li>
+            <li>🔗 Configurando menu...</li>
+        </ul>
+    </div>
+    
+    <div class="teste">
+        <h3>Teste 3: Navegação</h3>
+        <a href="#teste" id="linkTeste">Clique aqui para teste</a>
+        <div id="teste" style="height: 500px; margin-top: 50px; background: #e0e0e0;">
+            Área de teste - deve rolar suavemente até aqui
+        </div>
+    </div>
+</body>
+</html>
