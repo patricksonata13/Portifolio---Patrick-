@@ -3,163 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Portfolio</title>
+    <title>Patrick Sonata | Portfolio Oficial</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Site oficial do artista Patrick Sonata - Portfólio de trabalhos e projetos.">
 </head>
 <body>
     <!-- Cabeçalho -->
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Patrick Sonata</div>
-                <ul class="nav-menu">
-                    <li><a href="#inicio"><i class="fas fa-home"></i> Início</a></li>
-                    <li><a href="#sobre"><i class="fas fa-user"></i> Sobre</a></li>
-                    <li><a href="#obras"><i class="fas fa-briefcase"></i> Obras</a></li>
-                    <li><a href="#contato"><i class="fas fa-envelope"></i> Contato</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav class="container">
+            <div class="logo">Patrick Sonata</div>
+            <div class="menu">
+                <a href="#inicio">Início</a>
+                <a href="#sobre">Sobre</a>
+                <a href="#trabalhos">Trabalhos</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </nav>
     </header>
 
     <!-- Seção Início -->
     <section id="inicio" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="profile">
-                    <img src="assets/images/profile/patrick-sonata-perfil.jpg" 
-                         alt="Patrick Sonata"
-                         class="profile-img"
-                         onerror="this.onerror=null; this.src='assets/images/profile/patrick-home.jpg'">
-                </div>
-                <div class="hero-text">
-                    <h1>Patrick Sonata</h1>
-                    <p class="tagline">Artista • Criador • Desenvolvedor</p>
-                    <p class="bio">
-                        Criando experiências que conectam arte e tecnologia. 
-                        Especializado em produção audiovisual, desenvolvimento web 
-                        e criação de conteúdo inovador.
-                    </p>
-                    <div class="social">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                        <a href="#"><i class="fab fa-github"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
+            <img src="assets/images/profile/patrick-sonata-perfil.jpg" 
+                 alt="Patrick Sonata" 
+                 class="profile-img">
+            <h1>Patrick Sonata</h1>
+            <p class="tagline">Artista • Criador • Desenvolvedor</p>
+            <p class="descricao">Criando experiências únicas que combinam arte, tecnologia e inovação.</p>
         </div>
     </section>
 
     <!-- Seção Sobre -->
-    <section id="sobre" class="about">
+    <section id="sobre" class="sobre">
         <div class="container">
             <h2>Sobre Mim</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>
-                        Olá! Sou Patrick Sonata, um criador multifacetado com paixão por 
-                        contar histórias através de diferentes mídias. Minha jornada 
-                        combina arte tradicional com tecnologia moderna.
-                    </p>
-                    <p>
-                        Com experiência em teatro, produção audiovisual e desenvolvimento web, 
-                        busco sempre projetos que desafiem limites e inspirem pessoas.
-                    </p>
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <p>Olá! Sou Patrick Sonata, um criador multifacetado com paixão por contar histórias através de diferentes mídias.</p>
+                    <p>Minha jornada combina experiência em teatro, produção audiovisual e desenvolvimento web.</p>
+                </div>
+                <div class="habilidades">
                     <h3>Habilidades</h3>
-                    <div class="skills">
+                    <div class="skills-list">
                         <span>Produção Audiovisual</span>
                         <span>Desenvolvimento Web</span>
                         <span>Direção Criativa</span>
                         <span>Edição de Vídeo</span>
-                        <span>Design Gráfico</span>
-                        <span>Gestão de Projetos</span>
-                    </div>
-                </div>
-                <div class="about-stats">
-                    <div class="stat">
-                        <h4>50+</h4>
-                        <p>Projetos Concluídos</p>
-                    </div>
-                    <div class="stat">
-                        <h4>5+</h4>
-                        <p>Anos de Experiência</p>
-                    </div>
-                    <div class="stat">
-                        <h4>100%</h4>
-                        <p>Comprometimento</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Obras -->
-    <section id="obras" class="works">
+    <!-- Seção Trabalhos -->
+    <section id="trabalhos" class="trabalhos">
         <div class="container">
             <h2>Meus Trabalhos</h2>
-            <p class="section-subtitle">Alguns dos projetos e obras que já realizei</p>
-            
-            <div class="works-grid">
-                <!-- Obra 1 -->
-                <div class="work-card">
+            <div class="galeria">
+                <div class="trabalho">
                     <img src="assets/images/works/cidadecorreriapeca.jpg" alt="Cidade Correria">
-                    <div class="work-info">
+                    <div class="trabalho-info">
                         <h3>Cidade Correria</h3>
                         <p>Peça teatral e projeto cultural</p>
-                        <span class="work-tag">Teatro</span>
                     </div>
                 </div>
-
-                <!-- Obra 2 -->
-                <div class="work-card">
+                <div class="trabalho">
                     <img src="assets/images/works/doccidadecorreria.jpg" alt="Documentário">
-                    <div class="work-info">
+                    <div class="trabalho-info">
                         <h3>Documentário</h3>
                         <p>Documentário sobre o projeto</p>
-                        <span class="work-tag">Documentário</span>
                     </div>
                 </div>
-
-                <!-- Obra 3 -->
-                <div class="work-card">
+                <div class="trabalho">
                     <img src="assets/images/works/humornegro.jpg" alt="Humor Negro">
-                    <div class="work-info">
+                    <div class="trabalho-info">
                         <h3>Humor Negro</h3>
                         <p>Projeto de comédia</p>
-                        <span class="work-tag">Comédia</span>
                     </div>
                 </div>
-
-                <!-- Obra 4 -->
-                <div class="work-card">
+                <div class="trabalho">
                     <img src="assets/images/works/pabloeluisao.jpg" alt="Pablo e Luizão">
-                    <div class="work-info">
+                    <div class="trabalho-info">
                         <h3>Pablo & Luizão</h3>
                         <p>Projeto de personagens</p>
-                        <span class="work-tag">Personagens</span>
-                    </div>
-                </div>
-
-                <!-- Obra 5 -->
-                <div class="work-card">
-                    <img src="assets/images/works/programazorra.jpg" alt="Programa Zorra">
-                    <div class="work-info">
-                        <h3>Programa Zorra</h3>
-                        <p>Participação em programa de TV</p>
-                        <span class="work-tag">TV</span>
-                    </div>
-                </div>
-
-                <!-- Obra 6 -->
-                <div class="work-card">
-                    <img src="assets/images/works/originais.jpg" alt="Trabalhos Originais">
-                    <div class="work-info">
-                        <h3>Trabalhos Originais</h3>
-                        <p>Projetos autorais</p>
-                        <span class="work-tag">Autoral</span>
                     </div>
                 </div>
             </div>
@@ -167,40 +94,17 @@
     </section>
 
     <!-- Seção Contato -->
-    <section id="contato" class="contact">
+    <section id="contato" class="contato">
         <div class="container">
-            <h2>Entre em Contato</h2>
-            <p class="section-subtitle">Vamos criar algo incrível juntos</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>contato@patricksonata.com.br</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Telefone</h3>
-                            <p>(11) 99999-9999</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Localização</h3>
-                            <p>São Paulo, Brasil</p>
-                        </div>
-                    </div>
+            <h2>Contato</h2>
+            <div class="contato-content">
+                <div class="info-contato">
+                    <p><strong>Email:</strong> contato@patricksonata.com.br</p>
+                    <p><strong>Site:</strong> patricksonata.com.br</p>
                 </div>
-                
-                <form class="contact-form">
+                <form class="form-contato">
                     <input type="text" placeholder="Seu nome" required>
                     <input type="email" placeholder="Seu email" required>
-                    <input type="text" placeholder="Assunto" required>
                     <textarea placeholder="Sua mensagem" rows="5" required></textarea>
                     <button type="submit">Enviar Mensagem</button>
                 </form>
@@ -210,12 +114,11 @@
 
     <!-- Rodapé -->
     <footer>
-     <div class="container">
-         <p>&copy; 2024 Patrick Sonata. Todos os direitos reservados.</p>
-         <p>Desenvolvido com ❤️ por Patrick Sonata</p>
-     </div>
- </footer>
-
+        <div class="container">
+            <p>&copy; 2024 Patrick Sonata. Todos os direitos reservados.</p>
+            <p>Desenvolvido com ❤️ por Patrick Sonata</p>
+        </div>
+    </footer>
 
     <script src="assets/js/main.js"></script>
 </body>
