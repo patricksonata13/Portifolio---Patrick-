@@ -1,0 +1,75 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0e0e0e;
+  color: #f2f2f2;
+}
+
+.header {
+  padding: 1rem;
+  border-bottom: 1px solid #222;
+}
+
+.header h1 {
+  font-size: 1.2rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  margin-top: .5rem;
+  flex-wrap: wrap;
+}
+
+nav a {
+  color: #aaa;
+  text-decoration: none;
+  font-size: .9rem;
+}
+
+.home {
+  padding: 1.5rem;
+}
+
+.hero {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.card {
+  padding: 1.5rem;
+  border: 1px solid #222;
+  text-decoration: none;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.card:hover {
+  border-color: #555;
+}
+
+.footer {
+  padding: 1rem;
+  border-top: 1px solid #222;
+  font-size: .8rem;
+  text-align: center;
+  color: #777;
+}
+
+/* desktop */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
