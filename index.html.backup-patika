@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata | Roteirista & Comediante</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- SEO BÁSICO -->
+    <meta name="description" content="Patrick Sonata - Roteirista e comediante carioca. Roteirista do Programa Zorra (TV Globo) e criador da série Pablo & Luisão (Globoplay). Especialista em humor crítico e linguagens populares.">
+    <meta name="keywords" content="roteirista, comediante, humor, TV Globo, Globoplay, Zorra, Pablo e Luisão, teatro, palhaçaria, mamulengo">
+    <meta name="author" content="Patrick Sonata">
+    
+    <!-- OPEN GRAPH / FACEBOOK -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Patrick Sonata | Roteirista & Comediante">
+    <meta property="og:description" content="Roteirista do Programa Zorra (Globo) e criador da série Pablo & Luisão (Globoplay). Especialista em humor crítico e linguagens populares.">
+    <meta property="og:image" content="https://patricksonata.com.br/assets/images/profile/patrick-perfil2-opt.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    <meta property="og:site_name" content="Patrick Sonata">
+    
+    <!-- TWITTER CARDS -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Patrick Sonata | Roteirista & Comediante">
+    <meta name="twitter:description" content="Roteirista do Programa Zorra e criador da série Pablo & Luisão.">
+    <meta name="twitter:image" content="https://patricksonata.com.br/assets/images/profile/patrick-perfil2-opt.jpg">
+    
+    <!-- SCHEMA.ORG MARKUP -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Patrick Sonata",
+        "url": "https://patricksonata.com.br",
+        "image": "https://patricksonata.com.br/assets/images/profile/patrick-perfil2-opt.jpg",
+        "jobTitle": "Roteirista e Comediante",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "TV Globo"
+        },
+        "sameAs": [
+            "https://www.instagram.com/patrick_sonata/"
+        ],
+        "knowsAbout": ["Humor", "Roteiro", "Teatro", "Comédia", "Palhaçaria", "Mamulengo", "Dramaturgia"]
+    }
+    </script>
+    
+    <!-- FAVICON -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+</head>
+<body>
+    <!-- NAVEGAÇÃO -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <h1>Patrick Sonata</h1>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">
+                            <i class="fas fa-home"></i> Início
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">
+                            <i class="fas fa-user"></i> Sobre
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#works" class="nav-link">
+                            <i class="fas fa-tv"></i> Trabalhos
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">
+                            <i class="fas fa-envelope"></i> Contato
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- SEÇÃO INÍCIO -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="profile-card">
+                    <div class="profile-image">
+                        <picture>
+                            <!-- WebP com fallback para JPEG -->
+                            <source srcset="assets/images/profile/patrick-perfil2.webp" type="image/webp">
+                            <source srcset="assets/images/profile/patrick-perfil2-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/profile/patrick-perfil2-opt.jpg" 
+                                 alt="Patrick Sonata - Roteirista e Comediante" 
+                                 class="profile-photo lazy"
+                                 loading="lazy"
+                                 width="280"
+                                 height="280">
+                        </picture>
+                        <div class="profile-badge">
+                            <i class="fas fa-pen-fancy"></i> Roteirista
+                        </div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h2 class="profile-name">Patrick Sonata</h2>
+                        <p class="profile-title">Roteirista & Comediante</p>
+                        
+                        <div class="profile-bio">
+                            <p>Roteirista e comediante carioca criado na Cidade de Deus, com 20 anos de trajetória consolidada no humor televisivo e teatral. Humor ácido e crítico alimentado por pesquisa em linguagens populares: Palhaçaria Clássica e Teatro de Mamulengo.</p>
+                        </div>
+                        
+                        <div class="profile-stats">
+                            <div class="stat">
+                                <h3>10+</h3>
+                                <p>Projetos</p>
+                            </div>
+                            <div class="stat">
+                                <h3>20+</h3>
+                                <p>Anos</p>
+                            </div>
+                            <div class="stat">
+                                <h3>2M+</h3>
+                                <p>Público</p>
+                            </div>
+                        </div>
+                        
+                        <div class="social-links">
+                            <a href="https://www.instagram.com/patrick_sonata/" 
+                               target="_blank" 
+                               rel="noopener noreferrer"
+                               class="social-btn instagram">
+                                <i class="fab fa-instagram"></i> @patrick_sonata
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO SOBRE -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">Trajetória</h2>
+            <p class="section-subtitle">Do teatro comunitário à TV Globo</p>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Minha formação artística começou em <strong>projetos sociais na Cidade de Deus</strong>, 
+                        impulsionada pelo impacto cultural do filme homônimo, que abriu portas para iniciativas 
+                        criativas locais. Foi nesse contexto que encontrei na comédia minha expressão mais potente.
+                    </p>
+                    <p>
+                        A carreira na TV decolou ao ser selecionado para a <strong>oficina de novos talentos da Globo em 2018</strong>, 
+                        integrando, em seguida, a equipe de roteiristas do programa <strong>Zorra (2019–2021)</strong>.
+                    </p>
+                    
+                    <div class="experience-list">
+                        <h3><i class="fas fa-trophy"></i> Experiência Relevante</h3>
+                        <div class="experience-item">
+                            <strong>TV Globo - Programa Zorra</strong>
+                            <span>Roteirista principal (2019-2021)</span>
+                        </div>
+                        <div class="experience-item">
+                            <strong>Globoplay - Pablo & Luisão</strong>
+                            <span>Criador e roteirista (2025)</span>
+                        </div>
+                        <div class="experience-item">
+                            <strong>Espetáculo Pelada</strong>
+                            <span>Dramaturgo e ator (2022-2023)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-list">
+                    <h3><i class="fas fa-lightbulb"></i> Especialidades</h3>
+                    <div class="skill-item">
+                        <strong>Palhaçaria Clássica</strong>
+                        <span>Pesquisa e aplicação em trabalhos autorais</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Teatro de Mamulengo</strong>
+                        <span>Linguagens populares brasileiras</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Humor Crítico</strong>
+                        <span>Comédia de viés ácido e social</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Roteiro para TV</strong>
+                        <span>Desenvolvimento de séries e programas</span>
+                    </div>
+                    <div class="skill-item">
+                        <strong>Dramaturgia Teatral</strong>
+                        <span>Criação de espetáculos autorais</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO TRABALHOS -->
+    <section id="works" class="works-section">
+        <div class="container">
+            <h2 class="section-title">Trabalhos</h2>
+            <p class="section-subtitle">Projetos em TV, streaming, teatro e documentário</p>
+            
+            <div class="works-filter">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="tv">TV & Streaming</button>
+                <button class="filter-btn" data-filter="teatro">Teatro</button>
+                <button class="filter-btn" data-filter="show">Shows</button>
+                <button class="filter-btn" data-filter="doc">Documentários</button>
+            </div>
+            
+            <div class="works-grid">
+                <!-- Pablo & Luisão -->
+                <div class="work-card" data-category="tv">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/pabloeluisao-logo.webp" type="image/webp">
+                            <source srcset="assets/images/works/pabloeluisao-logo-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/pabloeluisao-logo-opt.jpg" 
+                                 alt="Pablo & Luisão - Série Globoplay" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Pablo & Luisão</h3>
+                        <p class="work-description">
+                            Série de comédia com personagens carismáticos e situações cômicas. 
+                            Roteiro em colaboração com equipe criativa da Globo.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Roteiro</span>
+                            <span class="work-tag">Globoplay</span>
+                            <span class="work-year">2025</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zorra -->
+                <div class="work-card" data-category="tv">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/programazorra.webp" type="image/webp">
+                            <source srcset="assets/images/works/programazorra-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/programazorra-opt.jpg" 
+                                 alt="Programa Zorra - TV Globo" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Programa Zorra</h3>
+                        <p class="work-description">
+                            Roteirista principal no programa humorístico da Globo. 
+                            Desenvolvimento de esquetes e personagens icônicos.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Roteiro</span>
+                            <span class="work-tag">TV Globo</span>
+                            <span class="work-year">2019-2021</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pelada -->
+                <div class="work-card" data-category="teatro">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/pelada.webp" type="image/webp">
+                            <source srcset="assets/images/works/pelada-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/pelada-opt.jpg" 
+                                 alt="Pelada - A Hora da Gaymada" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Pelada - A Hora da Gaymada</h3>
+                        <p class="work-description">
+                            Espetáculo teatral autoral que mistura humor, futebol e questões LGBTQIA+. 
+                            Roteiro e dramaturgia original.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Teatro</span>
+                            <span class="work-tag">Dramaturgia</span>
+                            <span class="work-year">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Humor Negro -->
+                <div class="work-card" data-category="tv">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/humornegro.webp" type="image/webp">
+                            <source srcset="assets/images/works/humornegro-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/humornegro-opt.jpg" 
+                                 alt="Humor Negro - Globoplay" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Humor Negro</h3>
+                        <p class="work-description">
+                            Projeto de comédia que aborda temas sociais com sarcasmo inteligente. 
+                            Episódio roteirizado para o Globoplay.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Roteiro</span>
+                            <span class="work-tag">Globoplay</span>
+                            <span class="work-year">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pra Provar Que Eu Não Minto -->
+                <div class="work-card" data-category="show">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/praprovar.webp" type="image/webp">
+                            <source srcset="assets/images/works/praprovar-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/praprovar-opt.jpg" 
+                                 alt="Pra Provar Que Eu Não Minto - Show" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Pra Provar Que Eu Não Minto</h3>
+                        <p class="work-description">
+                            Show de stand-up em colaboração com Tamires Gomes. 
+                            Roteiro e performance ao vivo.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Stand-up</span>
+                            <span class="work-tag">Show</span>
+                            <span class="work-year">2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cidade Correria - Documentário -->
+                <div class="work-card" data-category="doc">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/doccidadecorreria.webp" type="image/webp">
+                            <source srcset="assets/images/works/doccidadecorreria-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/doccidadecorreria-opt.jpg" 
+                                 alt="Cidade Correria - Documentário" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Cidade Correria - Documentário</h3>
+                        <p class="work-description">
+                            Documentário sobre a vida e cultura na Cidade de Deus. 
+                            Registro audiovisual de histórias e personagens da comunidade.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Documentário</span>
+                            <span class="work-tag">Direção</span>
+                            <span class="work-tag">2022</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cidade Correria - Peça -->
+                <div class="work-card" data-category="teatro">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/cidadecorreriapeca.webp" type="image/webp">
+                            <source srcset="assets/images/works/cidadecorreriapeca-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/cidadecorreriapeca-opt.jpg" 
+                                 alt="Cidade Correria - Peça Teatral" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Cidade Correria - Peça</h3>
+                        <p class="work-description">
+                            Espetáculo teatral sobre a rotina acelerada e os personagens 
+                            que compõem o dia a dia da Cidade de Deus.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Teatro</span>
+                            <span class="work-tag">Dramaturgia</span>
+                            <span class="work-tag">2021</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jongo Mamulengo -->
+                <div class="work-card" data-category="teatro">
+                    <div class="work-image">
+                        <picture>
+                            <source srcset="assets/images/works/jongo.webp" type="image/webp">
+                            <source srcset="assets/images/works/jongo-opt.jpg" type="image/jpeg">
+                            <img src="assets/images/works/jongo-opt.jpg" 
+                                 alt="Jongo Mamulengo - Projeto Cultural" 
+                                 loading="lazy"
+                                 width="350"
+                                 height="250">
+                        </picture>
+                    </div>
+                    <div class="work-info">
+                        <h3 class="work-title">Jongo Mamulengo</h3>
+                        <p class="work-description">
+                            Projeto de pesquisa e criação teatral que une as tradições 
+                            do Jongo e do Teatro de Mamulengo. Coletivo Bombando.
+                        </p>
+                        <div class="work-meta">
+                            <span class="work-tag">Teatro</span>
+                            <span class="work-tag">Pesquisa</span>
+                            <span class="work-tag">Cultura Popular</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO CONTATO -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Contato</h2>
+            <p class="section-subtitle">Entre em contato para parcerias e projetos</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fab fa-instagram"></i>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/patrick_sonata/" 
+                       target="_blank" 
+                       rel="noopener noreferrer">
+                        @patrick_sonata
+                    </a>
+                    <p>Siga para atualizações e projetos</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <h3>E-mail Profissional</h3>
+                    <a href="mailto:contato@patricksonata.com.br">
+                        contato@patricksonata.com.br
+                    </a>
+                    <p>Para propostas profissionais</p>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Localização</h3>
+                    <p>Rio de Janeiro, RJ</p>
+                    <p>Cidade de Deus - Origem e inspiração</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3>Patrick Sonata</h3>
+                    <p>Roteirista & Comediante</p>
+                </div>
+                
+                <div class="footer-links">
+                    <a href="#home">Início</a>
+                    <a href="#about">Sobre</a>
+                    <a href="#works">Trabalhos</a>
+                    <a href="#contact">Contato</a>
+                </div>
+                
+                <div class="footer-social">
+                    <a href="https://www.instagram.com/patrick_sonata/" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear">2026</span> Patrick Sonata. Todos os direitos reservados.</p>
+                <p>Desenvolvido com paixão pela arte do humor</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÃO VOLTAR AO TOPO -->
+    <button id="backToTop" class="back-to-top" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/js/main.js"></script>
+    
+    <!-- GOOGLE ANALYTICS (substitua G-XXXXXXXXXX pelo seu código) -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+</body>
+</html>

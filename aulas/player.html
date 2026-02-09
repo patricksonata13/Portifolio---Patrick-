@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Player de Videoaula | Patrick Sonata</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #000; color: #fff; margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+        .player-header { padding: 20px; background: #111; display: flex; align-items: center; gap: 15px; }
+        .back-btn { background: #333; border: none; color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-size: 18px; }
+        .video-container { flex: 1; background: #000; display: flex; align-items: center; justify-content: center; }
+        .video-placeholder { background: #222; width: 90%; max-width: 800px; height: 450px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #666; font-size: 1.2em; text-align: center; }
+        .video-info { padding: 30px; background: #111; }
+        .footer { padding: 20px; background: #1a1a1a; text-align: center; color: #666; }
+        .back-link { color: #999; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="player-header">
+        <button class="back-btn" onclick="window.history.back()">← Voltar</button>
+        <h2 style="margin: 0;">Videoaula</h2>
+    </div>
+    
+    <div class="video-container">
+        <div class="video-placeholder">
+            🎬 Player de Vídeo<br>
+            <small style="font-size: 0.8em;">Integre com Vimeo ou YouTube</small>
+        </div>
+    </div>
+    
+    <div class="video-info">
+        <h1 id="aulaTitle">Carregando aula...</h1>
+        <p id="aulaDescription">Descrição da aula será carregada aqui.</p>
+        <p><strong>Dica:</strong> Para vídeos reais, crie conta no Vimeo (free) e cole o código embed aqui.</p>
+    </div>
+    
+    <div class="footer">
+        <a href="../" class="back-link">← Voltar ao site Patrick Sonata</a>
+    </div>
+    
+    <script>
+        // Simulação de carregamento de aula
+        const urlParams = new URLSearchParams(window.location.search);
+        const aulaId = urlParams.get('id') || '1';
+        
+        const aulas = {
+            '1': {
+                title: 'Teoria da Proximidade na Prática',
+                description: 'Como aplicar o "quase" em roteiros de comédia e drama.'
+            },
+            '2': {
+                title: 'Estrutura de Esquete de Humor',
+                description: 'Do conceito à piada final. Análise de esquete real.'
+            }
+        };
+        
+        const aula = aulas[aulaId] || aulas['1'];
+        document.getElementById('aulaTitle').textContent = aula.title;
+        document.getElementById('aulaDescription').textContent = aula.description;
+    </script>
+</body>
+</html>
