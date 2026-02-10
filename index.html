@@ -7,108 +7,94 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
         
-        * { box-sizing: border-box; }
-        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; padding: 0; scroll-behavior: smooth; }
+        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
         
-        /* --- MENU DE NAVEGAÇÃO --- */
-        nav { position: sticky; top: 0; background: rgba(0,0,0,0.9); border-bottom: 1px solid #222; padding: 15px; text-align: center; z-index: 1000; }
-        nav a { color: #888; text-decoration: none; margin: 0 15px; font-size: 0.9em; text-transform: uppercase; transition: 0.3s; }
-        nav a:hover { color: #fff; }
+        /* Layout Principal */
+        .main-layout { display: flex; flex-direction: row; width: 100%; max-width: 1200px; margin: 0 auto; flex-grow: 1; }
 
-        /* --- HEADER / PERFIL --- */
-        .header { text-align: center; padding: 80px 20px 40px 20px; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; }
-        h1 { font-size: 2.2em; text-transform: uppercase; letter-spacing: 4px; margin: 0; }
-        .slugline { color: #666; margin-top: 10px; font-size: 0.9em; }
+        /* Coluna Central: Perfil e Sobre */
+        .center-column { flex: 1; padding: 60px 20px; text-align: center; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; }
+        .script-box { background: #fff; color: #000; padding: 30px; text-align: left; margin-top: 30px; font-size: 0.9em; line-height: 1.2; }
+        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
 
-        /* --- SEÇÕES --- */
-        section { padding: 60px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #111; }
-        .section-title { font-size: 1.5em; text-transform: uppercase; letter-spacing: 5px; color: #fff; margin-bottom: 40px; text-align: center; border-bottom: 1px solid #333; padding-bottom: 10px; }
+        /* Coluna Direita: Abas */
+        .right-tabs { width: 200px; padding: 60px 20px; border-left: 1px solid #222; display: flex; flex-direction: column; gap: 20px; }
+        .tab-button { background: none; border: 1px solid #444; color: #888; padding: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; text-align: left; }
+        .tab-button:hover, .tab-button.active { color: #fff; border-color: #fff; background: #111; }
 
-        /* --- ABA: SOBRE (ESTILO ROTEIRO) --- */
-        .script-box { background: #fff; color: #000; padding: 40px; line-height: 1.4; max-width: 700px; margin: 0 auto; }
-        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 15px; }
+        /* Conteúdo Dinâmico (Carrosséis) */
+        .content-display { display: none; margin-top: 40px; padding: 20px; border-top: 1px solid #333; width: 100%; }
+        .content-display.active { display: block; animation: fadeIn 0.5s; }
 
-        /* --- ABA: TRABALHOS (CARROSSEL TOUCH) --- */
-        .project-block { margin-bottom: 50px; }
-        .project-name { font-weight: bold; margin-bottom: 10px; text-transform: uppercase; }
-        .carousel-wrapper { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 15px; padding-bottom: 15px; }
-        .carousel-item { flex: 0 0 85%; scroll-snap-align: center; }
-        @media (min-width: 768px) { .carousel-item { flex: 0 0 450px; } }
-        .carousel-item img { width: 100%; height: 280px; object-fit: cover; border-radius: 4px; border: 1px solid #222; }
-        .project-desc { margin-top: 10px; color: #777; font-size: 0.85em; }
+        .carousel-wrapper { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
+        .carousel-item { flex: 0 0 300px; scroll-snap-align: center; }
+        .carousel-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
 
-        /* --- ABA: CONTATO --- */
-        .contact-links { text-align: center; font-size: 1.2em; }
-        .contact-links a { color: #fff; text-decoration: underline; margin: 0 10px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        footer { text-align: center; padding: 60px; color: #333; font-size: 0.8em; }
+        @media (max-width: 768px) {
+            .main-layout { flex-direction: column; }
+            .right-tabs { width: 100%; flex-direction: row; border-left: none; border-bottom: 1px solid #222; order: -1; overflow-x: auto; }
+        }
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#trabalhos">Trabalhos</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#contato">Contato</a>
-    </nav>
+    <div class="main-layout">
+        <div class="center-column">
+            <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
+            <h1>Patrick Sonata</h1>
+            <div style="color:#666; letter-spacing: 3px;">ROTEIRISTA // ATOR</div>
 
-    <div id="home" class="header">
-        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
-        <h1>Patrick Sonata</h1>
-        <div class="slugline">ROTEIRISTA // ATOR // CRIATIVO</div>
+            <div class="script-box">
+                <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
+                <div class="action">PATRICK SONATA revisa a cena. O conteúdo dos trabalhos aparece ao lado.</div>
+            </div>
+
+            <div id="cdd" class="content-display">
+                <div class="scene-heading">PROJETO: CDD (CIDADE CORRERIA)</div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"></div>
+                    <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"></div>
+                </div>
+            </div>
+
+            <div id="patika" class="content-display">
+                <div class="scene-heading">PROJETO: PATIKA (PABLO & LUISÃO)</div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"></div>
+                    <div class="carousel-item"><img src="assets/images/works/originais.webp"></div>
+                </div>
+            </div>
+
+            <div id="aulas" class="content-display">
+                <div class="scene-heading">PROJETO: AULAS / OUTROS</div>
+                <div class="carousel-wrapper">
+                    <div class="carousel-item"><img src="assets/images/works/jongo.webp"></div>
+                    <div class="carousel-item"><img src="assets/images/works/humornegro.webp"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-tabs">
+            <button class="tab-button" onclick="showContent('cdd')">CDD</button>
+            <button class="tab-button" onclick="showContent('patika')">PATIKA</button>
+            <button class="tab-button" onclick="showContent('aulas')">AULAS</button>
+        </div>
     </div>
 
-    <section id="sobre">
-        <div class="section-title">Sobre</div>
-        <div class="script-box">
-            <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
-            <div class="action">PATRICK SONATA (37) é um criativo que transita entre a escrita e a performance. Com foco em narrativas potentes, ele constrói pontes entre o humor e a realidade urbana.</div>
-        </div>
-    </section>
-
-    <section id="trabalhos">
-        <div class="section-title">Trabalhos</div>
-
-        <div class="project-block">
-            <div class="project-name">Jongo</div>
-            <div class="carousel-wrapper">
-                <div class="carousel-item"><img src="assets/images/works/jongo.webp"></div>
-                <div class="carousel-item"><img src="assets/images/works/jongo-optimized.webp"></div>
-            </div>
-            <div class="project-desc">Ancestralidade em movimento.</div>
-        </div>
-
-        <div class="project-block">
-            <div class="project-name">Cidade Correria</div>
-            <div class="carousel-wrapper">
-                <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"></div>
-                <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"></div>
-            </div>
-            <div class="project-desc">Documentário e teatro periférico.</div>
-        </div>
-
-        <div class="project-block">
-            <div class="project-name">Pablo & Luisão</div>
-            <div class="carousel-wrapper">
-                <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"></div>
-                <div class="carousel-item"><img src="assets/images/works/originais.webp"></div>
-            </div>
-            <div class="project-desc">Série Original Globoplay.</div>
-        </div>
-    </section>
-
-    <section id="contato">
-        <div class="section-title">Contato</div>
-        <div class="contact-links">
-            <p>Vamos criar algo juntos?</p>
-            <a href="mailto:seuemail@gmail.com">E-mail</a>
-            <a href="https://instagram.com/patricksonata" target="_blank">Instagram</a>
-        </div>
-    </section>
-
-    <footer>FADE OUT. © 2026 PATRICK SONATA</footer>
+    <script>
+        function showContent(id) {
+            // Esconde tudo
+            document.querySelectorAll('.content-display').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            
+            // Mostra o clicado
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 
 </body>
 </html>
