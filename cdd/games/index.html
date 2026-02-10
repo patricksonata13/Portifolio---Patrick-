@@ -3,134 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cidade de Deus, Cidade do Diabo - O Jogo</title>
+    <title>CDD - Cidade do Diabo | Seleção</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-
-        body {
-            margin: 0;
-            background: #000;
-            color: #fff;
-            font-family: 'Courier Prime', monospace;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+        body { background: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; overflow: hidden; }
+        
+        #selection-screen {
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            height: 100vh; background: #000; z-index: 500; position: relative;
         }
 
-        /* Interface do Jogo */
-        #game-viewport {
-            flex-grow: 1;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 1s ease;
-            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
+        .char-container { display: flex; gap: 30px; margin-top: 40px; }
+        
+        .char-card {
+            border: 1px solid #333; padding: 20px; width: 200px; text-align: center;
+            cursor: pointer; transition: 0.3s;
         }
 
-        /* Mudança de Época: Passado (Fazenda/Indígena) */
-        body.past #game-viewport {
-            background: radial-gradient(circle, #2d1e0a 0%, #050505 100%);
-            color: #d4a373;
-        }
+        .char-card:hover { border-color: #fff; background: #111; transform: translateY(-10px); }
+        .char-card h3 { font-size: 14px; letter-spacing: 2px; }
+        .char-card p { font-size: 10px; color: #888; }
 
-        .narrator-box {
-            position: absolute;
-            bottom: 40px;
-            width: 80%;
-            max-width: 800px;
-            background: rgba(0,0,0,0.8);
-            border: 1px solid #333;
-            padding: 20px;
-            text-align: center;
+        /* Estilo do Jogo após seleção */
+        #game-ui { display: none; height: 100vh; flex-direction: column; }
+        #game-viewport { flex-grow: 1; display: flex; align-items: center; justify-content: center; position: relative; }
+        
+        .past #game-viewport { background: #1a0f00; color: #d4a373; }
+        .stats { position: fixed; top: 20px; width: 100%; display: flex; justify-content: space-around; z-index: 100; }
+        
+        .sync-btn { 
+            background: #fff; color: #000; border: none; padding: 10px 20px; 
+            font-family: 'Courier Prime'; font-weight: bold; cursor: pointer;
         }
-
-        .stats-bar {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 40px;
-            z-index: 100;
+        
+        .dialogue-box {
+            position: absolute; bottom: 30px; width: 80%; background: rgba(0,0,0,0.9);
+            border: 1px solid #333; padding: 20px; text-align: center;
         }
-
-        .sync-meter {
-            color: #00ff00;
-            font-weight: bold;
-            text-shadow: 0 0 10px #00ff00;
-        }
-
-        .sync-btn {
-            background: none;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Courier Prime', monospace;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .sync-btn:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        .character-sprite {
-            width: 150px;
-            height: 250px;
-            border: 2px dashed #444;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            text-align: center;
-        }
-
-        .back-link { position: fixed; top: 20px; left: 20px; color: #555; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <a href="../index.html" class="back-link">← SAIR DO JOGO</a>
-
-    <div class="stats-bar">
-        <div class="sync-meter">SINCRONIA: 85%</div>
-        <button class="sync-btn" onclick="travelTime()">Sincronizar Ancestralidade</button>
-        <div>PERSONAGEM: BENTO</div>
+    <div id="selection-screen">
+        <h1>ESCOLHA SEU GUARDIAO</h1>
+        <div class="char-container">
+            <div class="char-card" onclick="startGame('BENTO', 'O CAÇADOR (FOLHAS)')">
+                <h3>BENTO</h3>
+                <p>Inspiração: Hank<br>Energia: Mata/Busca<br>Habilidade: Visão Espiritual</p>
+            </div>
+            <div class="char-card" onclick="startGame('DANDARA', 'A TEMPESTADE (VENTO)')">
+                <h3>DANDARA</h3>
+                <p>Inspiração: Sheila<br>Energia: Ar/Justiça<br>Habilidade: Invisibilidade</p>
+            </div>
+            <div class="char-card" onclick="startGame('TIÃO', 'A ROCHA (PEDRA)')">
+                <h3>TIÃO</h3>
+                <p>Inspiração: Bobby<br>Energia: Terra/Força<br>Habilidade: Impacto Sísmico</p>
+            </div>
+        </div>
     </div>
 
-    <div id="game-viewport">
-        <div class="character-sprite" id="player">
-            [ PERSONAGEM <br> BENTO ]
+    <div id="game-ui">
+        <div class="stats">
+            <div id="player-info">PERSONAGEM: -</div>
+            <button class="sync-btn" onclick="toggleSync()">SINCRONIA ANCESTRAL</button>
+            <div id="sync-level">SINCRONIA: 100%</div>
         </div>
-
-        <div class="narrator-box">
-            <p id="dialogue">"Este asfalto é novo, mas as vozes debaixo dele são antigas. Bento sente o chão tremer."</p>
+        
+        <div id="game-viewport">
+            <div id="visual-sprite" style="font-size: 50px;">👤</div>
+            <div class="dialogue-box" id="msg">...</div>
         </div>
     </div>
 
     <script>
+        let currentPlayer = "";
         let isPast = false;
 
-        function travelTime() {
-            isPast = !isPast;
-            const body = document.body;
-            const dialogue = document.getElementById('dialogue');
-            const player = document.getElementById('player');
+        function startGame(name, energy) {
+            currentPlayer = { name, energy };
+            document.getElementById('selection-screen').style.display = 'none';
+            document.getElementById('game-ui').style.display = 'flex';
+            document.getElementById('player-info').innerText = `GUARDIAO: ${name}`;
+            document.getElementById('msg').innerText = `${name} entrou no território. A energia de ${energy} vibra no asfalto.`;
+        }
 
-            if (isPast) {
-                body.classList.add('past');
-                dialogue.innerText = "Sincronia Ancestral Ativa: Você está na Fazenda de Jacarepaguá (1800). O feitor se aproxima.";
-                player.style.borderColor = "#d4a373";
-                player.innerHTML = "[ BENTO <br> MODO CAÇADOR ]";
+        function toggleSync() {
+            isPast = !isPast;
+            const ui = document.body;
+            const msg = document.getElementById('msg');
+            
+            if(isPast) {
+                ui.classList.add('past');
+                msg.innerText = `Sincronia Ativa: ${currentPlayer.name} vê a Fazenda de Jacarepaguá através do tempo. O passado é agora.`;
             } else {
-                body.classList.remove('past');
-                dialogue.innerText = "Sincronia Rompida: Você voltou para a CDD (2026). A sirene da viatura ecoa no bloco.";
-                player.style.borderColor = "#444";
-                player.innerHTML = "[ BENTO <br> MODO RUA ]";
+                ui.classList.remove('past');
+                msg.innerText = `Sincronia Rompida: ${currentPlayer.name} está de volta à CDD. O asfalto queima.`;
             }
         }
     </script>
