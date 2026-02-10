@@ -177,3 +177,47 @@ window.processarJogo = function(cmd) {
         if (processadorComInventario) processadorComInventario(cmd);
     }
 };
+
+// --- PROTOCOLO DE FINALIZAÇÃO: CURA DO TEMPO ---
+function dispararFinalizacao() {
+    logar("------------------------------------------", "#00ff41");
+    logar("✨ ALERTA: SINCRONIA ANCESTRAL EM 100%", "#fff");
+    logar(">> STATUS: Ciclo de trauma rompido.", "#00ff41");
+    logar(">> ISRAEL: 'O passado não é mais uma corrente. É um mapa.'", "#fff");
+    logar("------------------------------------------", "#00ff41");
+
+    // Efeito Sonoro de Ascensão (Acorde maior)
+    tocarSom(523.25, 'sine', 0.5); // Dó
+    setTimeout(() => tocarSom(659.25, 'sine', 0.5), 200); // Mi
+    setTimeout(() => tocarSom(783.99, 'sine', 1), 400);   // Sol
+
+    // Transformação Visual do Canvas (Luz Branca/Dourada)
+    const cv = document.getElementById('game-canvas');
+    cv.style.transition = "all 2s ease";
+    cv.style.backgroundColor = "#fff";
+    cv.style.boxShadow = "0 0 50px #fff";
+
+    setTimeout(() => {
+        logar(">> MISSÃO CUMPRIDA. CDD-3001 ESTÁ SEGURA.", "#00ff41");
+        logar(">> Pressione ESC para retornar ao HUB com os dados salvos.", "#666");
+        
+        // Adiciona um brilho especial ao botão CDD no menu lateral
+        const btn = document.querySelector('button[onclick*="cdd"]');
+        if(btn) {
+            btn.style.color = "#00ff41";
+            btn.style.textShadow = "0 0 10px #00ff41";
+            btn.innerHTML = "CDD - 3001 (CURADA)";
+        }
+    }, 2000);
+}
+
+// Hook de verificação no motor de inventário
+const checarVitoriaOriginal = window.pegarItem;
+window.pegarItem = function() {
+    if(checarVitoriaOriginal) checarVitoriaOriginal();
+    
+    // Se pegou os dois itens, dispara o final
+    if (JOGO_CDD.inventario.length >= 2) {
+        setTimeout(dispararFinalizacao, 1500);
+    }
+};
