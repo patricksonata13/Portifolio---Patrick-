@@ -2,12 +2,42 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Aulas de Roteiro</title>
-    <style>body { background: #000; color: #fff; font-family: Courier; padding: 50px; }</style>
+    <title>Aulas de Roteiro - Patrick Sonata</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+        body { background: #000; color: #fff; font-family: 'Courier Prime', monospace; padding: 40px; }
+        .class-list { margin-top: 40px; }
+        .class-row { 
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #333; padding: 20px 0;
+        }
+        .btn-material { 
+            border: 1px solid #fff; color: #fff; padding: 5px 15px; 
+            text-decoration: none; font-size: 12px; 
+        }
+        .btn-material:hover { background: #fff; color: #000; }
+    </style>
 </head>
 <body>
-    <h1>AULAS</h1>
-    <p>Página em desenvolvimento: Vídeos e materiais formativos.</p>
-    <a href="../../index.html" style="color: yellow;">← Voltar ao Hub</a>
+    <a href="../../index.html" style="color:#888; text-decoration:none;">← HUB</a>
+    <h1>AULAS E MATERIAIS FORMATIVOS</h1>
+
+    <div class="class-list">
+        <div class="class-row">
+            <div>
+                <h3>01. ESTRUTURA DRAMÁTICA</h3>
+                <p>O básico da jornada do herói aplicada à periferia.</p>
+            </div>
+            <a href="materiais/aula01.pdf" class="btn-material">BAIXAR PDF</a>
+        </div>
+        
+        <div class="class-row">
+            <div>
+                <h3>02. DIÁLOGOS E ORALIDADE</h3>
+                <p>Como transcrever a voz das ruas para o papel.</p>
+            </div>
+            <a href="#" class="btn-material">EM BREVE</a>
+        </div>
+    </div>
 </body>
 </html>
