@@ -17,164 +17,186 @@
             overflow: hidden; 
         }
 
-        /* Estrutura de Navegação Superior */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 30px 50px;
+        /* --- CAPA DO SITE (FOTO FIXA) --- */
+        .hero-bg {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            z-index: 100;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
         }
 
-        /* Abas do Centro */
-        .center-nav {
+        .profile-main-img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fff;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 2.2em; letter-spacing: 5px; margin: 10px 0; }
+
+        /* --- MENU ABAIXO DA FOTO --- */
+        .hero-nav {
             display: flex;
             gap: 30px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            margin-top: 20px;
         }
 
-        /* Abas da Direita (Lado a lado) */
-        .right-nav {
-            display: flex;
-            gap: 20px;
-            margin-left: auto;
-        }
-
-        button {
+        .hero-nav button {
             background: none;
             border: none;
-            color: #444;
+            color: #888;
             font-family: 'Courier Prime', monospace;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            font-size: 14px;
+            letter-spacing: 3px;
             cursor: pointer;
             transition: 0.3s;
-            padding: 5px 0;
+            font-size: 16px;
         }
 
-        button:hover, button.active {
-            color: #fff;
-        }
+        .hero-nav button:hover { color: #fff; }
 
-        /* --- PÁGINAS QUE SOBEM (FINAL DRAFT) --- */
-        .page {
+        /* --- FOLHA DE ROTEIRO (SLIDE UP) --- */
+        .script-overlay {
             position: fixed;
             bottom: -110%; /* Escondido */
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 100%;
             max-width: 800px;
-            height: 80vh;
+            height: 85vh;
             background: #fff;
             color: #000;
             padding: 60px;
-            transition: bottom 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: bottom 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 100;
             overflow-y: auto;
-            box-shadow: 0 -20px 60px rgba(0,0,0,0.7);
-            z-index: 50;
+            box-shadow: 0 -20px 50px rgba(0,0,0,0.9);
         }
 
-        .page.active {
-            bottom: 0;
+        .script-overlay.active { bottom: 0; }
+
+        .close-btn {
+            position: sticky;
+            top: 0;
+            float: right;
+            background: #000;
+            color: #fff;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+            font-size: 12px;
         }
 
-        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 25px; border-bottom: 2px solid #000; font-size: 1.2em; }
-        .action { margin-bottom: 20px; line-height: 1.4; font-size: 17px; }
-        .profile-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 2px solid #000; }
+        /* --- CONTEÚDO ESTILO FINAL DRAFT --- */
+        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid #000; font-size: 1.2em; }
+        .action { margin-bottom: 20px; line-height: 1.4; font-size: 17px; text-align: justify; }
 
-        /* Estilo das Imagens nos Trabalhos */
-        .gallery { display: flex; overflow-x: auto; gap: 15px; margin-top: 20px; }
-        .gallery img { height: 250px; border: 1px solid #000; }
+        /* --- ABAS DA DIREITA (CDD, PATIKA, AULAS) --- */
+        .right-nav {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            display: flex;
+            gap: 20px;
+            z-index: 10;
+        }
+
+        .right-nav button {
+            background: none;
+            border: none;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            font-size: 13px;
+        }
 
         /* Mobile */
         @media (max-width: 768px) {
-            header { flex-direction: column; padding: 15px; gap: 15px; }
-            .center-nav, .right-nav { position: static; transform: none; gap: 15px; font-size: 12px; }
-            .page { padding: 30px; width: 100%; }
+            .profile-main-img { width: 180px; height: 180px; }
+            .script-overlay { padding: 30px; }
+            .hero-nav { gap: 15px; font-size: 12px; }
+            .right-nav { top: 20px; right: 20px; gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="center-nav">
-            <button onclick="reveal('perfil')">Perfil</button>
-            <button onclick="reveal('sobre')">Sobre</button>
-            <button onclick="reveal('trabalho')">Trabalho</button>
-        </div>
-
-        <div class="right-nav">
-            <button onclick="reveal('cdd')">CDD</button>
-            <button onclick="reveal('patika')">Patika</button>
-            <button onclick="reveal('aulas')">Aulas</button>
-        </div>
-    </header>
-
-    <div id="perfil" class="page">
-        <div class="scene-heading">INT. PERFIL - DIA</div>
-        <img src="assets/images/fotodeperfil.jpg" class="profile-img">
-        <div class="action">PATRICK SONATA. Ator e Roteirista carioca.</div>
-        <div class="action">Um rosto que carrega o texto e um texto que revela a imagem.</div>
+    <div class="right-nav">
+        <button onclick="openScript('cdd')">CDD</button>
+        <button onclick="openScript('patika')">Patika</button>
+        <button onclick="openScript('aulas')">Aulas</button>
     </div>
 
-    <div id="sobre" class="page">
-        <div class="scene-heading">INT. SOBRE - NOITE</div>
-        <div class="action">Dramaturgo formado pelo corre diário do Rio de Janeiro. Patrick mescla a técnica do roteiro com a potência da atuação.</div>
-        <div class="action">Sempre focado em narrativas que transformam a vivência em cena.</div>
-    </div>
-
-    <div id="trabalho" class="page">
-        <div class="scene-heading">EXT. PORTFÓLIO GERAL - DIA</div>
-        <div class="action">Aqui reside a coletânea de obras. Selecione os itens específicos na navegação para detalhes.</div>
-    </div>
-
-    <div id="cdd" class="page">
-        <div class="scene-heading">PROJETO: CIDADE CORRERIA</div>
-        <div class="action">Abaixo, os registros da obra que traduz a pulsação periférica.</div>
-        <div class="gallery">
-            <img src="assets/images/works/cidadecorreriapeca.webp">
-            <img src="assets/images/works/doccidadecorreria.webp">
+    <div class="hero-bg">
+        <img src="assets/images/fotodeperfil.jpg" class="profile-main-img">
+        <h1>PATRICK SONATA</h1>
+        <div class="hero-nav">
+            <button onclick="openScript('perfil')">Perfil</button>
+            <button onclick="openScript('sobre')">Sobre</button>
+            <button onclick="openScript('trabalho')">Trabalho</button>
         </div>
     </div>
 
-    <div id="patika" class="page">
-        <div class="scene-heading">PROJETO: PABLO & LUISÃO</div>
-        <div class="action">Colaboração e roteiro para a série original.</div>
-        <div class="gallery">
-            <img src="assets/images/works/pabloeluisao.webp">
-            <img src="assets/images/works/originais.webp">
-        </div>
-    </div>
-
-    <div id="aulas" class="page">
-        <div class="scene-heading">OUTROS PROJETOS / AULAS</div>
-        <div class="action">Performance, Jongo e Humor Negro.</div>
-        <div class="gallery">
-            <img src="assets/images/works/jongo.webp">
-            <img src="assets/images/works/humornegro.webp">
-            <img src="assets/images/works/pelada.webp">
-        </div>
+    <div id="script-overlay" class="script-overlay">
+        <button class="close-btn" onclick="closeScript()">FECHAR [X]</button>
+        <div id="script-content">
+            </div>
     </div>
 
     <script>
-        function reveal(id) {
-            const allPages = document.querySelectorAll('.page');
-            const targetPage = document.getElementById(id);
-            const isAlreadyActive = targetPage.classList.contains('active');
+        const content = {
+            sobre: `
+                <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
+                <div class="action">PATRICK SONATA (37) é ator, comediante e roteirista carioca, cria da Cidade de Deus.</div>
+                <div class="action">Iniciou sua vida artística na escola municipal compositor Luiz Gonzaga, na comunidade. Estudou em projeto social e hoje integra o Coletivo Bonobando.</div>
+                <div class="action">Sua formação inclui palhaçaria clássica e pesquisa em linguagens populares como o Teatro de Mamulengo.</div>
+                <div class="action">Em 2018, ingressou na oficina de roteiro da Globo, escrevendo para o programa Zorra (2019-2021). Atualmente, é um dos roteiristas da série "Pablo & Luisão", já lançada no Globoplay com estreia na TV Globo prevista para 2026.</div>
+                <div class="action">No teatro, assina a dramaturgia de "Pelada – A Hora da Gaymada" (2023).</div>
+            `,
+            perfil: `
+                <div class="scene-heading">INT. PERFIL DO ARTISTA</div>
+                <div class="action">Roteirista focado em humor popular e olhar crítico sobre a realidade brasileira.</div>
+                <div class="action">Ator e Criativo com mais de duas décadas de palco.</div>
+            `,
+            trabalho: `
+                <div class="scene-heading">EXT. PORTFÓLIO GERAL</div>
+                <div class="action">Clique nas abas superiores (CDD, PATIKA, AULAS) para ver os frames de cada produção.</div>
+            `,
+            cdd: `
+                <div class="scene-heading">PROJETO: CIDADE CORRERIA</div>
+                <div class="action">O espetáculo debate assuntos espinhosos da atualidade através de uma invasão teatral.</div>
+                <img src="assets/images/works/cidadecorreriapeca.webp" style="width:100%; margin-top:20px;">
+            `,
+            patika: `
+                <div class="scene-heading">PROJETO: PABLO & LUISÃO</div>
+                <div class="action">Roteirista da série original Globoplay. Estreia na TV aberta em 2026.</div>
+                <img src="assets/images/works/pabloeluisao.webp" style="width:100%; margin-top:20px;">
+            `,
+            aulas: `
+                <div class="scene-heading">OUTROS / PERFORMANCE</div>
+                <div class="action">Teatro de bonecos, Jongo e Palhaçaria.</div>
+                <img src="assets/images/works/jongo.webp" style="width:100%; margin-top:20px;">
+            `
+        };
 
-            // Fecha todas as páginas
-            allPages.forEach(p => p.classList.remove('active'));
+        function openScript(id) {
+            document.getElementById('script-content').innerHTML = content[id];
+            document.getElementById('script-overlay').classList.add('active');
+        }
 
-            // Se não estava aberta, abre. Se já estava, ela fecha (toggle)
-            if (!isAlreadyActive) {
-                targetPage.classList.add('active');
-            }
+        function closeScript() {
+            document.getElementById('script-overlay').classList.remove('active');
         }
     </script>
 
