@@ -1,0 +1,9 @@
+body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; }
+.scroll-container { scroll-snap-type: y mandatory; overflow-y: scroll; height: 100vh; }
+.panel { height: 100vh; scroll-snap-align: start; display: flex; align-items: center; justify-content: center; position: relative; border-bottom: 1px solid #222; }
+.hero { background: linear-gradient(to bottom, rgba(0,0,0,0.4), #000), url('../assets/images/foto-cdd-1.jpg') center/cover; }
+.content { max-width: 600px; text-align: center; padding: 20px; }
+h1 { font-size: 5rem; letter-spacing: -3px; margin: 0; color: #fff; }
+p { font-size: 1.2rem; color: #888; line-height: 1.6; }
+.btn-back { position: fixed; top: 20px; left: 20px; color: #fff; text-decoration: none; z-index: 100; font-size: 0.8rem; opacity: 0.5; }
+.btn-back:hover { opacity: 1; }
