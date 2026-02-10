@@ -44,8 +44,13 @@
 
     <template id="cdd-template">
         <div class="slugline">CDD - 3001 | SANKOFA OS</div>
-        <div id="sin-terminal"><div id="log-output"></div>
-        <div class="input-line"><span>></span><input type="text" id="game-input" autofocus autocomplete="off"></div></div>
+        <div id="sin-terminal">
+            <div id="log-output"></div>
+            <div class="input-line">
+                <span>></span>
+                <input type="text" id="game-input" autofocus autocomplete="off">
+            </div>
+        </div>
         <div class="hud">SINCRONIA: <span id="sincronia-val">100%</span></div>
     </template>
 
@@ -59,11 +64,13 @@
             btn.innerText = isMuted ? "🔇 SOM: OFF" : "🔊 SOM: ON";
             if (window.audioCtx) isMuted ? window.audioCtx.suspend() : window.audioCtx.resume();
         }
+
         function togglePanel(id) {
             const panel = document.getElementById('side-panel');
             const contentDiv = document.getElementById('panel-content');
+            if(!window.db || !window.db[id]) return;
+            
             const data = window.db[id];
-            if(!data) return;
             if(data.isGame) {
                 contentDiv.innerHTML = document.getElementById('cdd-template').innerHTML;
                 setTimeout(() => { if(window.iniciarTerminalCDD) window.iniciarTerminalCDD(); }, 100);
@@ -71,14 +78,21 @@
                 contentDiv.innerHTML = `<div class="slugline">${data.title}</div><div class="action-text">${data.text}</div>`;
             }
             panel.classList.add('active');
+            document.getElementById('work-gallery').classList.remove('active');
         }
-        function openGallery() { document.getElementById('work-gallery').classList.add('active'); }
+
+        function openGallery() { 
+            closeAll();
+            document.getElementById('work-gallery').classList.add('active'); 
+        }
+
         function closeAll() { 
             document.getElementById('side-panel').classList.remove('active'); 
             document.getElementById('work-gallery').classList.remove('active'); 
         }
+
         document.addEventListener('keydown', (e) => {
-            if (e.target.id === 'game-input' && e.key === 'Enter') {
+            if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
                 if(window.processarJogo) window.processarJogo(e.target.value);
                 e.target.value = '';
             }
