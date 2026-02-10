@@ -4,85 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Hub Criativo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-        
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            background-color: #000; color: #fff; 
-            font-family: 'Courier Prime', monospace; 
-            height: 100vh; overflow: hidden; 
-        }
-
-        /* Fundo com a foto fixa */
-        .hero-bg {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 1;
-        }
-        .profile-main-img {
-            width: 220px; height: 220px; border-radius: 50%;
-            object-fit: cover; border: 2px solid #fff; margin-bottom: 20px;
-        }
+        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; height: 100vh; overflow: hidden; }
+        .hero-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1; }
+        .profile-main-img { width: 220px; height: 220px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; }
         h1 { font-size: 1.6em; letter-spacing: 5px; font-weight: 400; text-align: center; }
-
-        /* Navegação */
         .nav-center { display: flex; gap: 30px; margin-top: 25px; z-index: 100; }
-        .nav-right {
-            position: fixed; top: 40px; right: 40px;
-            display: flex; flex-direction: column; gap: 20px; z-index: 200;
-            align-items: flex-end;
-        }
-
-        button {
-            background: none; border: none; color: #666;
-            text-transform: uppercase; letter-spacing: 2px;
-            cursor: pointer; transition: 0.3s; font-family: 'Courier Prime', monospace;
-            font-size: 13px; outline: none;
-        }
+        .nav-right { position: fixed; top: 40px; right: 40px; display: flex; flex-direction: column; gap: 20px; z-index: 200; align-items: flex-end; }
+        button { background: none; border: none; color: #666; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; font-family: 'Courier Prime', monospace; font-size: 13px; outline: none; }
         button:hover, button.active-btn { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
-
-        /* Painel Lateral (Estilo Roteiro) */
-        .panel {
-            position: fixed; top: 0; right: -100%; width: 40%; min-width: 350px; height: 100vh;
-            background: #fff; color: #000; padding: 60px 40px;
-            transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 300; overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-        }
+        .panel { position: fixed; top: 0; right: -100%; width: 40%; min-width: 350px; height: 100vh; background: #fff; color: #000; padding: 60px 40px; transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1); z-index: 300; overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5); }
         .panel.active { right: 0; }
-
         .slugline { font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; margin-bottom: 20px; font-size: 1.1em; }
         .action-text { line-height: 1.5; margin-bottom: 25px; font-size: 16px; text-align: justify; }
-        
-        .cta-button {
-            display: inline-block; padding: 12px 20px; border: 2px solid #000;
-            color: #000; text-decoration: none; font-weight: bold; text-transform: uppercase;
-            font-size: 12px; transition: 0.3s;
-        }
+        .cta-button { display: inline-block; padding: 12px 20px; border: 2px solid #000; color: #000; text-decoration: none; font-weight: bold; text-transform: uppercase; font-size: 12px; transition: 0.3s; }
         .cta-button:hover { background: #000; color: #fff; }
-
-        /* Galeria de Trabalho */
-        .full-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.98); display: none; z-index: 400;
-            overflow-y: auto; padding: 80px 20px;
-        }
+        .full-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); display: none; z-index: 400; overflow-y: auto; padding: 80px 20px; }
         .full-overlay.active { display: block; }
         .gallery-container { max-width: 1000px; margin: 0 auto; text-align: center; }
         .gallery-container img { width: 100%; margin-bottom: 40px; border: 1px solid #333; }
-
-        .close-x {
-            position: absolute; top: 30px; left: 30px; font-size: 20px;
-            cursor: pointer; font-weight: bold; font-family: sans-serif;
-        }
-
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-        .blink { animation: blink 1s infinite; }
-
-        @media (max-width: 768px) {
-            .panel { width: 100%; }
-            .nav-right { top: 20px; right: 20px; }
-        }
+        .close-x { position: absolute; top: 30px; left: 30px; font-size: 20px; cursor: pointer; font-weight: bold; font-family: sans-serif; }
+        @media (max-width: 768px) { .panel { width: 100%; } .nav-right { top: 20px; right: 20px; } }
     </style>
 </head>
 <body>
@@ -121,58 +66,16 @@
         </div>
     </div>
 
+    <script src="assets/js/database.js"></script>
     <script src="assets/js/jogo.js"></script>
 
     <script>
-        const db = {
-            sobre: {
-                title: "INT. TRAJETÓRIA - DIA",
-                text: "PATRICK SONATA (37). Um artista que não apenas vive a Cidade de Deus, mas a traduz em dramaturgia. Com 20 anos de carreira, sua escrita une o rigor técnico do roteiro à vivência visceral das ruas.",
-                isGame: false
-            },
-            perfil: {
-                title: "INT. PERFIL PROFISSIONAL",
-                text: "Roteirista com passagens pela TV Globo (Zorra) e Globoplay (Pablo & Luisão). Especialista em comédia social, desenvolvimento de personagens e estruturas narrativas para streaming.",
-                isGame: false
-            },
-            cdd: {
-    title: "KINDRED 3001: NAVE BIOLÓGICA",
-    text: `As paredes respiram. O tempo é uma trança.
-    <div id="game-container" style="background:#000; border:1px solid #332200; border-bottom:none; margin-top:15px; display:flex; justify-content:center;">
-        <canvas id="game-canvas" width="300" height="120"></canvas>
-    </div>
-    <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; padding:15px; border:1px solid #332200; height:220px; overflow-y:auto; font-size:13px; font-family:monospace;">
-        <div id="log-output">
-            <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
-            <p>> SANKOFA-PROTOCOL: Ativo.</p>
-        </div>
-        <div style="margin-top:10px; display:flex; border-top:1px solid #222; padding-top:5px;">
-            <span style="color:#ffae00;">AXÉ_SCAN></span>
-            <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Digite HELP..." autofocus>
-        </div>
-    </div>`,
-    isGame: true
-},
-            patika: {
-                title: "INT. PATIKA - LABORATÓRIO",
-                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na organização de batidas dramáticas e estrutura de cenas.",
-                link: "projetos/patika/index.html",
-                label: "ABRIR FERRAMENTA",
-                isGame: false
-            },
-            aulas: {
-                title: "INT. SALA DE AULA - FORMATIVO",
-                text: "Conteúdo pedagógico e mentorias focadas na formação de novos roteiristas periféricos.",
-                link: "projetos/aulas/index.html",
-                label: "ACESSAR AULAS",
-                isGame: false
-            }
-        };
-
         function togglePanel(id) {
             const panel = document.getElementById('side-panel');
             const contentDiv = document.getElementById('panel-content');
             
+            if(!db[id]) return;
+
             contentDiv.innerHTML = `
                 <div class="slugline">${db[id].title}</div>
                 <div class="action-text">${db[id].text}</div>
@@ -182,33 +85,27 @@
             panel.classList.add('active');
             document.getElementById('work-gallery').classList.remove('active');
 
-            // Inicializa o terminal se for a aba CDD
             if(db[id].isGame) {
                 setTimeout(() => {
+                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
                     const input = document.getElementById('game-input');
                     if(input) input.focus();
-                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
-                }, 100);
+                }, 200);
             }
         }
 
-        function openGallery() {
-            closeAll();
-            document.getElementById('work-gallery').classList.add('active');
-        }
+        function openGallery() { closeAll(); document.getElementById('work-gallery').classList.add('active'); }
+        function closeAll() { document.getElementById('side-panel').classList.remove('active'); document.getElementById('work-gallery').classList.remove('active'); }
 
-        function closeAll() {
-            document.getElementById('side-panel').classList.remove('active');
-            document.getElementById('work-gallery').classList.remove('active');
-        }
-
-        // Listener global para capturar o Enter no input do jogo, mesmo sendo injetado dinamicamente
         document.addEventListener('keydown', function(e) {
             if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
-                if(typeof processarJogo === "function") {
-                    processarJogo(e.target.value);
-                    e.target.value = '';
+                const val = e.target.value;
+                if(window.processarJogo) {
+                    window.processarJogo(val);
+                } else if(typeof processarJogo === "function") {
+                    processarJogo(val);
                 }
+                e.target.value = '';
             }
         });
     </script>
