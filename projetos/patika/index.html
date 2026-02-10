@@ -2,41 +2,35 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA | O Roteiro Profissional Livre</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
+    <title>PATIKA | Focus Mode</title>
     <link rel="stylesheet" href="css/patika-app.css">
 </head>
 <body class="patika-app">
 
-    <nav class="app-header">
-        <div class="app-container">
-            <a href="../../index.html" class="back-btn">← Sair do Editor</a>
-            <div class="project-info">
-                <strong>PATIKA</strong> <span class="divider">|</span> <span id="project-name">Roteiro Sem Título</span>
-            </div>
-            <div class="app-actions">
-                <button class="btn-tool" onclick="window.print()">Gerar PDF (Padrão Indústria)</button>
-            </div>
+    <header class="app-header">
+        <div>
+            <span class="logo-patika">PATIKA</span>
+            <span class="project-name">— roteiro_v1.sdk</span>
         </div>
-    </nav>
+        <div class="header-actions">
+            <button class="btn-export" onclick="window.print()">Exportar PDF</button>
+        </div>
+    </header>
 
     <main class="editor-main">
         <aside class="element-picker">
-            <div class="element-hint">Pressione [Tab] para mudar</div>
-            <button class="el-btn" data-type="slugline">CENA (INT/EXT)</button>
-            <button class="el-btn" data-type="action">AÇÃO</button>
-            <button class="el-btn" data-type="character">PERSONAGEM</button>
-            <button class="el-btn" data-type="parenthetical">PARÊNTESES</button>
-            <button class="el-btn" data-type="dialogue">FALA</button>
+            <button class="el-btn" title="Cena">S</button>
+            <button class="el-btn" title="Ação">A</button>
+            <button class="el-btn" title="Personagem">P</button>
+            <button class="el-btn" title="Fala">F</button>
         </aside>
 
         <section class="paper-container">
             <div id="script-editor" contenteditable="true" class="script-page">
-                <div class="slugline">INT. SALA DE ROTEIRO - DIA</div>
-                <div class="action">Patrick Sonata digita freneticamente. O código da PATIKA ganha vida na tela do MacBook Air.</div>
-                <div class="character">PATRICK</div>
-                <div class="dialogue">Agora o Brasil vai ter um editor de roteiro profissional e gratuito.</div>
+<div class="slugline">INT. QUARTO DO PATRICK - NOITE</div>
+<div class="action">A luz do monitor reflete nos olhos de Patrick. O editor é limpo, o foco é total.</div>
+<div class="character">PATRICK</div>
+<div class="dialogue">Agora sim. Sem distrações. Apenas a história.</div>
             </div>
         </section>
     </main>
