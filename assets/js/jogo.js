@@ -119,3 +119,61 @@ function renderizarCenario() {
     // Aqui no futuro adicionaremos árvores ou grades dependendo da era
     console.log("Cenário atualizado para: " + JOGO_CDD.eraAtual);
 }
+
+// --- BANCO DE DADOS DE ITENS (DATA-LORE) ---
+const ITENS_DO_MUNDO = {
+    'FAZENDA': { id: 'GRILHAO', nome: 'Grilhão Partido', msg: 'Um elo de ferro rompido. Contém memórias de resistência.' },
+    'ALDEIA': { id: 'AMULETO', nome: 'Amuleto de Jurema', msg: 'Feito de sementes e circuitos orgânicos. Protege a alma no salto.' }
+};
+
+// --- FUNÇÃO DE COLETA ---
+function pegarItem() {
+    const era = JOGO_CDD.eraAtual;
+    const itemEncontrado = ITENS_DO_MUNDO[era];
+
+    if (!itemEncontrado) {
+        logar(">> Não há itens físicos estáveis para coleta nesta era.", "#666");
+        return;
+    }
+
+    if (JOGO_CDD.inventario.includes(itemEncontrado.id)) {
+        logar(`>> Você já possui o ${itemEncontrado.nome} em seu DNA-Buffer.`, "#ffae00");
+        return;
+    }
+
+    // Processo de Coleta
+    JOGO_CDD.inventario.push(itemEncontrado.id);
+    logar(`>> COLETADO: ${itemEncontrado.nome}`, "#00ff41");
+    logar(`>> INFO: ${itemEncontrado.msg}`, "#fff");
+    
+    // Feedback Sonoro (Bip de sucesso)
+    tocarSom(600, 'sine', 0.2);
+    setTimeout(() => tocarSom(900, 'sine', 0.2), 100);
+
+    // Bônus de Sincronia
+    JOGO_CDD.sincronia = Math.min(100, JOGO_CDD.sincronia + 15);
+    logar(`>> SINCRONIA AUMENTADA: ${JOGO_CDD.sincronia}%`, "#00ff41");
+
+    // Verifica Condição de Vitória (Ambos os itens coletados)
+    if (JOGO_CDD.inventario.length >= 2) {
+        logar("✨ ALERTA: Sincronia Total detectada. O portal para o PRESENTE está curado.", "#fff");
+    }
+}
+
+// Injetando no processador de comandos
+const processadorComInventario = window.processarJogo;
+window.processarJogo = function(cmd) {
+    const input = cmd.toUpperCase().trim();
+
+    if (input === 'PEGAR' || input.startsWith('PEGAR ')) {
+        pegarItem();
+    } else if (input === 'INVENTARIO' || input === 'I') {
+        if (JOGO_CDD.inventario.length === 0) {
+            logar(">> Inventário vazio.", "#666");
+        } else {
+            logar(`>> BUFFER ATUAL: ${JOGO_CDD.inventario.join(' | ')}`, "#00ccff");
+        }
+    } else {
+        if (processadorComInventario) processadorComInventario(cmd);
+    }
+};
