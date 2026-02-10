@@ -221,3 +221,29 @@ window.pegarItem = function() {
         setTimeout(dispararFinalizacao, 1500);
     }
 };
+
+// --- SISTEMA DE BADGES ---
+function desbloquearConquista(id) {
+    let conquistas = JSON.parse(localStorage.getItem('CDD_BADGES') || '[]');
+    if (!conquistas.includes(id)) {
+        conquistas.push(id);
+        localStorage.setItem('CDD_BADGES', JSON.stringify(conquistas));
+        logar(`✨ CONQUISTA DESBLOQUEADA: ${id}`, "#00ff41");
+        atualizarBadgesHub();
+    }
+}
+
+function atualizarBadgesHub() {
+    const conquistas = JSON.parse(localStorage.getItem('CDD_BADGES') || '[]');
+    const container = document.querySelector('.badge-container');
+    if (container && conquistas.length > 0) {
+        container.classList.add('unlocked');
+    }
+}
+
+// Hook na finalização para dar a badge "Mestre do Tempo"
+const finalOriginal = window.dispararFinalizacao;
+window.dispararFinalizacao = function() {
+    if(finalOriginal) finalOriginal();
+    desbloquearConquista('⏳'); // Badge de Sincronia
+};

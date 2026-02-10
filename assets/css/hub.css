@@ -45,3 +45,26 @@
     padding: 20px;
     background: #0a0a0a;
 }
+
+/* Container de Conquistas */
+.badge-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+    opacity: 0.3;
+    transition: opacity 1s ease;
+}
+.badge-container.unlocked { opacity: 1; }
+
+.badge {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #00ff41;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    background: rgba(0, 255, 65, 0.1);
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
+}
