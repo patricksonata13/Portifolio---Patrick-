@@ -160,10 +160,52 @@ margin-left:10px; width:100%; font-family:monospace;" autofocus>
 </div>            
 cdd: {
                 title: "EXT. CIDADE DE DEUS - CULTURA",
-                text: "Espaço dedicado à preservação da memória e celebração da cultura da CDD. Aqui você encontra a história da favela, suas obras, cinema e os projetos que movem o território.",
-                link: "cdd/index.html",
-                label: "EXPLORAR CDD"
-            },
+                <div class="scene-heading">KINDRED 3001: A NAVE BIOLÓGICA 
+CDD</div>
+    <div class="action">As paredes respiram. O sangue da terra corre nos 
+canos de PVC. 
+    Aqui, o tempo não é uma linha, é uma trança.</div>
+
+    <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; 
+font-family:'Courier New', monospace; padding:15px; border:1px solid 
+#332200; height:220px; overflow-y:auto; margin-top:15px; font-size:13px; 
+box-shadow: inset 0 0 10px #000;">
+        <div id="log-output">
+            <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
+            <p>> SANKOFA-PROTOCOL: Ativo.</p>
+            <p>> STATUS: Axé em 88%. Memória Genética: Estável.</p>
+            <p>---</p>
+            <p>Digite o nome de um aliado ou facção para escanear a 
+rede:</p>
+        </div>
+        <div style="margin-top:10px; display:flex; border-top: 1px solid 
+#222; padding-top:5px;">
+            <span style="color:#ffae00">AXÉ_SCAN></span>
+            <input type="text" id="game-input" 
+style="background:transparent; border:none; color:#fff; outline:none; 
+margin-left:10px; width:100%; font-family:monospace;" 
+placeholder="Nome...">
+        </div>
+    </div>
+
+    <div class="scene-heading" style="margin-top:20px; 
+color:#ffae00;">TECNOLOGIA ADINKRA</div>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; 
+font-size:11px; color:#aaa;">
+        <div style="border:1px solid #222; padding:5px;">
+            <b>SANKOFA:</b><br>Recupera dados do passado.
+        </div>
+        <div style="border:1px solid #222; padding:5px;">
+            <b>GYE NYAME:</b><br>Escudo de força vital.
+        </div>
+    </div>
+
+    <div class="action" style="margin-top:15px; font-style:italic;">
+        "O apocalipse tentou apagar nossa história, mas esqueceu que ela 
+está guardada no DNA."
+    </div>
+`;            
+},
             patika: {
                 title: "INT. PATIKA - LABORATÓRIO DE ESCRITA",
                 text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na estrutura de cenas, organização de beats e formatação profissional.",
@@ -205,3 +247,8 @@ cdd: {
     </script>
 </body>
 </html>
+const db = {
+            cdd: { ... },
+            patika: { ... },
+            aulas: { ... }
+        };
