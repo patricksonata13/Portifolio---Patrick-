@@ -3,182 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDD - Cidade do Diabo | Motor de Jogo</title>
+    <title>CDD - Cidade do Diabo | Terminal Edition</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
         
-        :root {
-            --neon-green: #00ff00;
-            --sepia-gold: #d4a373;
-            --bg-dark: #050505;
-        }
-
+        :root { --green: #00ff00; --red: #ff0000; --gold: #d4a373; }
+        * { box-sizing: border-box; }
         body { 
-            background: #000; color: #fff; 
-            font-family: 'Courier Prime', monospace; 
-            margin: 0; overflow: hidden; 
+            background: #000; color: #fff; font-family: 'Courier Prime', monospace; 
+            margin: 0; overflow: hidden; height: 100vh;
         }
 
-        /* TELA DE CARREGAMENTO/SELEÇÃO */
-        #setup-layer {
-            position: fixed; inset: 0; background: var(--bg-dark);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 1000; transition: opacity 0.5s;
+        /* TELAS */
+        .layer { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #000; z-index: 10; }
+        #game-screen { display: none; z-index: 5; }
+
+        /* COMBATE */
+        #battle-overlay {
+            display: none; position: absolute; inset: 0; background: rgba(255,0,0,0.1);
+            z-index: 200; flex-direction: column; align-items: center; justify-content: center;
         }
 
-        .char-grid { display: flex; gap: 20px; margin-top: 30px; }
-        .card {
-            border: 2px solid #222; padding: 20px; width: 180px; text-align: center;
-            cursor: pointer; transition: 0.3s;
-        }
-        .card:hover { border-color: var(--neon-green); transform: scale(1.05); }
+        /* INTERFACE */
+        .hud { position: absolute; top: 0; width: 100%; padding: 20px; display: flex; justify-content: space-between; font-size: 14px; }
+        .viewport { flex-grow: 1; display: flex; align-items: center; justify-content: center; transition: 1s; }
+        .past-mode .viewport { background: #1a0f00; filter: sepia(0.6); }
 
-        /* INTERFACE PRINCIPAL DO JOGO */
-        #game-world { 
-            display: none; height: 100vh; position: relative;
-            flex-direction: column; 
+        .narrative-box { 
+            height: 250px; width: 100%; background: linear-gradient(transparent, #000);
+            padding: 40px; text-align: center; border-top: 1px solid #222;
         }
 
-        /* HUD - Heads Up Display */
-        .hud {
-            position: absolute; top: 0; width: 100%; padding: 20px;
-            display: flex; justify-content: space-between; align-items: flex-start;
-            pointer-events: none; z-index: 100;
+        button {
+            background: transparent; border: 1px solid #fff; color: #fff;
+            padding: 10px 20px; cursor: pointer; font-family: 'Courier Prime';
+            text-transform: uppercase; margin: 5px; transition: 0.3s;
         }
-        .hud-item { pointer-events: auto; background: rgba(0,0,0,0.7); padding: 10px; border-left: 3px solid var(--neon-green); }
+        button:hover { background: #fff; color: #000; }
+        .btn-attack { border-color: var(--red); color: var(--red); }
+        .btn-attack:hover { background: var(--red); color: #fff; }
 
-        /* VIEWPORT (Onde a mágica acontece) */
-        #viewport {
-            flex-grow: 1; display: flex; align-items: center; justify-content: center;
-            transition: background 1.5s, filter 1.5s;
-        }
-
-        /* Estilo Passado (Sépia) */
-        .past-state #viewport { background: #1a0f00; filter: sepia(0.5) contrast(1.2); }
-        .past-state .hud-item { border-left-color: var(--sepia-gold); }
-
-        /* CAIXA DE DIÁLOGO ROBUSTA */
-        .narrative-engine {
-            position: absolute; bottom: 0; width: 100%; height: 200px;
-            background: linear-gradient(transparent, #000 30%);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px; text-align: center;
-        }
-        
-        .typewriter { font-size: 18px; max-width: 800px; min-height: 1.2em; }
-
-        /* BOTÃO DE SINCRONIA (A CHAVE DO JOGO) */
-        #sync-trigger {
-            background: transparent; border: 2px solid #fff; color: #fff;
-            padding: 15px 30px; font-family: 'Courier Prime'; cursor: pointer;
-            text-transform: uppercase; font-weight: bold; margin-top: 20px;
-            transition: 0.3s;
-        }
-        #sync-trigger:hover { background: #fff; color: #000; box-shadow: 0 0 20px #fff; }
-
-        .back-btn { position: fixed; top: 10px; left: 10px; color: #444; text-decoration: none; z-index: 2000; font-size: 10px; }
+        .hp-bar { width: 200px; height: 10px; border: 1px solid #444; margin-top: 5px; }
+        .hp-fill { height: 100%; background: var(--green); transition: 0.5s; }
     </style>
 </head>
 <body>
 
-    <a href="../index.html" class="back-btn">TERMINAR SESSÃO [X]</a>
-
-    <div id="setup-layer">
-        <h1 style="letter-spacing: 10px;">CDD: CIDADE DO DIABO</h1>
-        <p>SELECIONE A FREQUÊNCIA DO GUARDIAO:</p>
-        <div class="char-grid">
-            <div class="card" onclick="initGame('BENTO', 'ARCO DE LUZ', 'MATA')">
-                <h3>BENTO</h3>
-                <small>SINCRONIA: 100%</small>
-            </div>
-            <div class="card" onclick="initGame('DANDARA', 'CAPA DOS VENTOS', 'AR')">
-                <h3>DANDARA</h3>
-                <small>SINCRONIA: 100%</small>
-            </div>
-            <div class="card" onclick="initGame('TIÃO', 'TACAPE DE ROCHA', 'TERRA')">
-                <h3>TIÃO</h3>
-                <small>SINCRONIA: 100%</small>
-            </div>
+    <div id="setup-screen" class="layer">
+        <h1 style="letter-spacing:10px">CIDADE DO DIABO</h1>
+        <p>CONECTE-SE AO GUARDIAO:</p>
+        <div style="display:flex; gap:20px">
+            <button onclick="start('BENTO', 'ARCO')">BENTO</button>
+            <button onclick="start('DANDARA', 'CAPA')">DANDARA</button>
+            <button onclick="start('TIÃO', 'TACAPE')">TIÃO</button>
         </div>
     </div>
 
-    <div id="game-world">
+    <div id="game-screen" class="layer">
         <div class="hud">
-            <div class="hud-item">
-                <span id="p-name">-</span><br>
-                <small id="p-item">-</small>
+            <div>
+                GUARDIAO: <span id="n">-</span> | HP
+                <div class="hp-bar"><div id="hp" class="hp-fill" style="width:100%"></div></div>
             </div>
-            <div class="hud-item" id="time-indicator">ÉPOCA: CDD 2026</div>
+            <div id="era-tag">CDD 2026</div>
         </div>
 
-        <div id="viewport">
-            <div id="sprite-container" style="font-size: 60px;">⚡</div>
+        <div id="battle-overlay">
+            <h2 id="enemy-name" style="color:var(--red)">INIMIGO DETECTADO</h2>
+            <div class="hp-bar" style="border-color:var(--red)"><div id="e-hp" class="hp-fill" style="background:var(--red); width:100%"></div></div>
+            <div style="margin-top:20px">
+                <button class="btn-attack" onclick="attack()">USAR ENERGIA ANCESTRAL</button>
+            </div>
         </div>
 
-        <div class="narrative-engine">
-            <div id="text-output" class="typewriter"></div>
-            <button id="sync-trigger" onclick="handleSync()">SINCRONIA ANCESTRAL</button>
+        <div class="viewport">
+            <div id="sprite" style="font-size:80px">🛡️</div>
+        </div>
+
+        <div class="narrative-box">
+            <div id="console" style="margin-bottom:20px; font-size:18px"></div>
+            <div id="controls">
+                <button onclick="sync()">SINCRONIA ANCESTRAL</button>
+                <button onclick="explore()">EXPLORAR TERRITÓRIO</button>
+            </div>
         </div>
     </div>
 
     <script>
-        const gameData = {
-            player: null,
-            isPast: false,
-            narratives: {
-                present: [
-                    "O asfalto da CDD exala o calor do dia. Viaturas passam na via principal.",
-                    "Você ouve o som de um rádio vindo de um beco. A resistência observa.",
-                    "A corrupção do Estado se manifesta em câmeras de vigilância frias."
-                ],
-                past: [
-                    "O cheiro de terra molhada e mata virgem. A Fazenda de Jacarepaguá é vasta.",
-                    "O chicote estala ao longe. A Casa Grande vigia o suor dos antepassados.",
-                    "Som de tambores ecoa por trás das árvores. A força indígena resiste."
-                ]
-            }
-        };
+        let player = { name: '', hp: 100 };
+        let enemy = { name: '', hp: 0, active: false };
+        let isPast = false;
 
-        function initGame(name, item, energy) {
-            gameData.player = { name, item, energy };
-            document.getElementById('setup-layer').style.opacity = '0';
-            setTimeout(() => {
-                document.getElementById('setup-layer').style.display = 'none';
-                document.getElementById('game-world').style.display = 'flex';
-                document.getElementById('p-name').innerText = name;
-                document.getElementById('p-item').innerText = item;
-                typeWriter(`Bem-vindo, ${name}. Você é o portador da energia de ${energy}. Proteja o território.`);
-            }, 500);
+        function start(name, item) {
+            player.name = name;
+            document.getElementById('setup-screen').style.display = 'none';
+            document.getElementById('game-screen').style.display = 'flex';
+            document.getElementById('n').innerText = name;
+            print(`O portador do ${item} despertou na Cidade de Deus.`);
         }
 
-        function handleSync() {
-            gameData.isPast = !gameData.isPast;
-            const world = document.body;
-            const timeTag = document.getElementById('time-indicator');
+        function print(txt) {
+            const c = document.getElementById('console');
+            c.innerText = txt;
+        }
+
+        function sync() {
+            if(enemy.active) return print("A Sincronia está travada pelo combate!");
+            isPast = !isPast;
+            document.body.classList.toggle('past-mode');
+            document.getElementById('era-tag').innerText = isPast ? "FAZENDA 1800" : "CDD 2026";
+            print(isPast ? "As correntes do passado pesam. O chão agora é terra." : "O asfalto retorna. O tempo do agora é seu escudo.");
+        }
+
+        function explore() {
+            if(Math.random() > 0.6) spawnEnemy();
+            else print("Você caminha pelo território. O silêncio é uma forma de resistência.");
+        }
+
+        function spawnEnemy() {
+            enemy.active = true;
+            enemy.hp = 100;
+            enemy.name = isPast ? "FEITOR DA FAZENDA" : "COMANDANTE CORRUPTO";
+            document.getElementById('enemy-name').innerText = enemy.name;
+            document.getElementById('e-hp').style.width = '100%';
+            document.getElementById('battle-overlay').style.display = 'flex';
+            print(`Sincronia Ancestral sob ataque! O ${enemy.name} bloqueia seu caminho.`);
+        }
+
+        function attack() {
+            let damage = Math.floor(Math.random() * 30) + 10;
+            enemy.hp -= damage;
+            document.getElementById('e-hp').style.width = enemy.hp + '%';
             
-            if(gameData.isPast) {
-                world.classList.add('past-state');
-                timeTag.innerText = "ÉPOCA: FAZENDA 1800";
-                typeWriter("SINCRONIA ATIVA. O tempo se dobra. " + gameData.narratives.past[Math.floor(Math.random()*3)]);
+            if(enemy.hp <= 0) {
+                enemy.active = false;
+                document.getElementById('battle-overlay').style.display = 'none';
+                print(`Inimigo derrotado! O território de ${isPast ? 'ontem' : 'hoje'} está livre por enquanto.`);
             } else {
-                world.classList.remove('past-state');
-                timeTag.innerText = "ÉPOCA: CDD 2026";
-                typeWriter("SINCRONIA ROMPIDA. De volta ao concreto. " + gameData.narratives.present[Math.floor(Math.random()*3)]);
+                player.hp -= 15;
+                document.getElementById('hp').style.width = player.hp + '%';
+                print(`Você causou ${damage} de dano. O ${enemy.name} contra-ataca!`);
+                if(player.hp <= 0) location.reload();
             }
-        }
-
-        function typeWriter(text) {
-            const output = document.getElementById('text-output');
-            output.innerText = "";
-            let i = 0;
-            function type() {
-                if (i < text.length) {
-                    output.innerText += text.charAt(i);
-                    i++;
-                    setTimeout(type, 30);
-                }
-            }
-            type();
         }
     </script>
 </body>
