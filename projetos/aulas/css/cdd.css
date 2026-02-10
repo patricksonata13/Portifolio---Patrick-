@@ -1,0 +1,39 @@
+body { background: #000; color: #fff; margin: 0; }
+
+.cdd-nav { position: fixed; top: 20px; left: 20px; z-index: 100; }
+.back-link { color: #fff; text-decoration: none; font-size: 12px; letter-spacing: 2px; opacity: 0.6; transition: 0.3s; }
+.back-link:hover { opacity: 1; }
+
+.hero-cdd {
+    height: 100vh;
+    background: url('../assets/images/cdd-hero.jpg') center/cover no-repeat fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(to bottom, transparent, #000); }
+
+.hero-content { position: relative; z-index: 2; }
+.hero-content h1 { font-size: clamp(3rem, 10vw, 8rem); text-transform: uppercase; margin: 0; letter-spacing: -2px; }
+.hero-content p { font-size: 1.2rem; color: #86868b; font-weight: 300; }
+
+.narrative-section { padding: 150px 20px; display: flex; justify-content: center; }
+.text-block { max-width: 600px; text-align: center; }
+.text-block span { color: #007aff; font-weight: 700; font-size: 12px; letter-spacing: 3px; }
+.text-block h2 { font-size: 2.5rem; margin: 20px 0; line-height: 1.1; }
+.text-block p { color: #86868b; font-size: 1.2rem; line-height: 1.8; }
+
+.image-wide {
+    height: 80vh;
+    background: #111; /* Substituir por imagem */
+    margin: 50px 0;
+    display: flex;
+    align-items: flex-end;
+    padding: 40px;
+}
+
+.quote-section { padding: 100px 20px; text-align: center; }
+blockquote { font-size: 2rem; font-style: italic; max-width: 800px; margin: 0 auto; color: #fff; border: none; }
