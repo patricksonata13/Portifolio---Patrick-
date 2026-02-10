@@ -1,236 +1,63 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patika - Plataforma de Escrita</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="css/mobile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos específicos do Patika */
-        .patika-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .patika-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 40px;
-        }
-        
-        .patika-title {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        
-        .patika-subtitle {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        
-        .feature-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            color: #3498db;
-        }
-        
-        .cta-section {
-            text-align: center;
-            padding: 40px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            margin: 40px 0;
-        }
-        
-        .btn-primary {
-            display: inline-block;
-            padding: 15px 30px;
-            background: #3498db;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: bold;
-            margin: 10px;
-            transition: background 0.3s ease;
-        }
-        
-        .btn-primary:hover {
-            background: #2980b9;
-        }
-        
-        .btn-secondary {
-            display: inline-block;
-            padding: 15px 30px;
-            background: transparent;
-            color: #3498db;
-            text-decoration: none;
-            border: 2px solid #3498db;
-            border-radius: 30px;
-            font-weight: bold;
-            margin: 10px;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: #3498db;
-            color: white;
-        }
-        
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
-        }
-        
-        .template-card {
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid #3498db;
-        }
-    </style>
+    <title>PATIKA | Workflow de Roteiro</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="css/patika-app.css">
 </head>
-<body>
-    <!-- Menu de Navegação -->
-    <nav style="background: #2c3e50; padding: 15px; text-align: center;">
-        <a href="/" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
-        <a href="/patika/" style="color: #3498db; margin: 0 15px; text-decoration: none; font-weight: bold;">Patika</a>
-        <a href="/aulas/" style="color: white; margin: 0 15px; text-decoration: none;">Aulas</a>
-        <a href="/cidade/" style="color: white; margin: 0 15px; text-decoration: none;">Cidade</a>
+<body class="patika-app">
+
+    <nav class="app-header">
+        <div class="app-container">
+            <a href="../../index.html" class="back-btn">← Voltar</a>
+            <div class="project-info">
+                <span class="status-dot"></span>
+                <strong>Projeto:</strong> <span id="project-name">Sem Título</span>
+            </div>
+            <div class="user-badge">Head: Patrick Sonata</div>
+        </div>
     </nav>
 
-    <div class="patika-container">
-        <header class="patika-header">
-            <h1 class="patika-title">Patika</h1>
-            <p class="patika-subtitle">Plataforma de escrita mobile-first para roteiristas</p>
-            <div style="margin-top: 20px;">
-                <i class="fas fa-pen-fancy" style="font-size: 3rem; opacity: 0.8;"></i>
+    <main class="app-layout">
+        <aside class="app-sidebar">
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <small>DESENVOLVIMENTO</small>
+                    <a href="#" class="active">Bíblia da Série</a>
+                    <a href="#">Arco da Temporada</a>
+                </div>
+                <div class="nav-section">
+                    <small>SALA DE ROTEIRO</small>
+                    <a href="#">Episódios / Escaletas</a>
+                    <a href="#">Personagens</a>
+                    <a href="#">Mapa de Conflitos</a>
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-pitch">Exportar Deck de Pitch</button>
             </div>
-        </header>
-        
-        <section>
-            <h2 style="text-align: center; color: #2c3e50;">✨ Por que usar o Patika?</h2>
+        </aside>
+
+        <section class="app-editor">
+            <div class="editor-header">
+                <h2>Bíblia da Série</h2>
+                <p>Defina o universo e a espinha dorsal da sua narrativa.</p>
+            </div>
             
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📱</div>
-                    <h3>Mobile-First</h3>
-                    <p>Escreva em qualquer lugar, no celular ou tablet</p>
+            <div class="workflow-cards">
+                <div class="card">
+                    <label>Logline (O Coração da Ideia)</label>
+                    <textarea placeholder="Em uma frase, do que se trata a história?"></textarea>
                 </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
-                    <h3>Rápido e Leve</h3>
-                    <p>Interface limpa que não atrapalha a criatividade</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">💾</div>
-                    <h3>Salvamento Automático</h3>
-                    <p>Nunca perca seu trabalho, salva a cada 5 segundos</p>
-                </div>
-                
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>Contador de Palavras</h3>
-                    <p>Acompanhe seu progresso em tempo real</p>
+                <div class="card">
+                    <label>Tema Central</label>
+                    <textarea placeholder="Sobre o que a série realmente fala (além da trama)?"></textarea>
                 </div>
             </div>
         </section>
-        
-        <section class="cta-section">
-            <h2 style="color: #2c3e50;">🚀 Comece a Escrever Agora</h2>
-            <p>Crie seu primeiro projeto ou explore nossos templates</p>
-            
-            <div style="margin: 30px 0;">
-                <a href="editor.html" class="btn-primary">
-                    <i class="fas fa-plus"></i> Novo Projeto
-                </a>
-                <a href="#templates" class="btn-secondary">
-                    <i class="fas fa-layer-group"></i> Ver Templates
-                </a>
-            </div>
-        </section>
-        
-        <section id="templates">
-            <h2 style="text-align: center; color: #2c3e50;">🎭 Templates Prontos</h2>
-            <p style="text-align: center;">Comece com estruturas profissionais</p>
-            
-            <div class="templates-grid">
-                <div class="template-card">
-                    <h4>🎬 Cinema (Longa)</h4>
-                    <p>Estrutura para roteiro de longa-metragem</p>
-                    <a href="templates/cinema-longa.md" style="color: #3498db; text-decoration: none;">Usar →</a>
-                </div>
-                
-                <div class="template-card">
-                    <h4>📺 Cinema (Curta)</h4>
-                    <p>Formato para curta-metragem</p>
-                    <a href="templates/cinema-curta.md" style="color: #3498db; text-decoration: none;">Usar →</a>
-                </div>
-                
-                <div class="template-card">
-                    <h4>🎭 Teatro</h4>
-                    <p>Estrutura para peça teatral</p>
-                    <a href="templates/teatro.md" style="color: #3498db; text-decoration: none;">Usar →</a>
-                </div>
-                
-                <div class="template-card">
-                    <h4>📝 Artigo</h4>
-                    <p>Formato para artigos e ensaios</p>
-                    <a href="#" style="color: #3498db; text-decoration: none;">Em breve</a>
-                </div>
-            </div>
-        </section>
-        
-        <section style="margin-top: 50px; padding: 30px; background: #f1f8ff; border-radius: 10px;">
-            <h3 style="color: #2c3e50; text-align: center;">💡 Dicas para Escritores</h3>
-            <ul style="max-width: 600px; margin: 20px auto;">
-                <li>Escreva todos os dias, mesmo que pouco</li>
-                <li>Use o modo foco (tela cheia) para evitar distrações</li>
-                <li>Defina metas diárias de palavras</li>
-                <li>Revise no dia seguinte com olhos frescos</li>
-                <li>Compartilhe com colegas para feedback</li>
-            </ul>
-        </section>
-        
-        <footer style="text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid #eee;">
-            <p>Patika - Ferramenta desenvolvida por Patrick Sonata</p>
-            <p>Baseado na <strong>Teoria da Proximidade</strong></p>
-            <p style="margin-top: 20px;">
-                <a href="/" style="color: #3498db; text-decoration: none;">
-                    <i class="fas fa-arrow-left"></i> Voltar ao site principal
-                </a>
-            </p>
-        </footer>
-    </div>
+    </main>
+
 </body>
 </html>
