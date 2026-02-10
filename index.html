@@ -3,83 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Roteirista & Ator</title>
+    <title>Patrick Sonata | Portfólio</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
-
-        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; overflow-x: hidden; }
+        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; padding-bottom: 50px; }
         
-        .header { text-align: center; padding: 60px 0 20px 0; }
-        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; filter: grayscale(100%); transition: 0.5s; }
-        .profile-img:hover { filter: grayscale(0%); transform: scale(1.05); }
-        h1 { font-size: 2.2em; text-transform: uppercase; letter-spacing: 4px; margin: 20px 0 5px 0; }
-        .slugline { color: #666; font-size: 0.9em; letter-spacing: 2px; }
+        .header { text-align: center; padding: 60px 0; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; filter: grayscale(100%); }
+        
+        /* Container do Projeto */
+        .project-section { max-width: 900px; margin: 0 auto 80px auto; padding: 0 20px; }
+        .project-title { font-size: 1.5em; text-transform: uppercase; border-left: 4px solid #fff; padding-left: 15px; margin-bottom: 20px; letter-spacing: 2px; }
 
-        /* --- CARROSSEL INFINITO --- */
-        .carousel-container {
-            width: 100%;
-            height: 250px;
-            margin: 40px 0;
-            overflow: hidden;
-            position: relative;
-            background: #050505;
-            display: flex;
-            align-items: center;
-        }
+        /* Carrossel Interno do Projeto */
+        .work-carousel { width: 100%; overflow: hidden; position: relative; background: #0a0a0a; border-radius: 8px; }
+        .track { display: flex; animation: slide 20s linear infinite; width: fit-content; }
+        .track img { height: 300px; width: auto; margin-right: 10px; filter: grayscale(50%); transition: 0.3s; }
+        .track img:hover { filter: grayscale(0%); transform: scale(1.02); }
 
-        .carousel-track {
-            display: flex;
-            width: calc(250px * 14); /* Ajuste conforme o número de imagens duplicadas */
-            animation: scroll 30s linear infinite;
-        }
-
-        .carousel-item {
-            width: 250px;
-            height: 180px;
-            padding: 0 15px;
-            flex-shrink: 0;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .carousel-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 4px;
-            opacity: 0.6;
-            transition: 0.3s;
-        }
-
-        /* "Logo na frente" - Título sobreposto */
-        .logo-overlay {
-            position: absolute;
-            font-weight: bold;
-            font-size: 1.2em;
-            text-transform: uppercase;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-            pointer-events: none;
-            border: 1px solid rgba(255,255,255,0.3);
-            padding: 5px 10px;
-            background: rgba(0,0,0,0.4);
-        }
-
-        .carousel-item:hover img { opacity: 1; transform: scale(1.1); }
-
-        @keyframes scroll {
+        @keyframes slide {
             0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 7)); } /* Metade do track para loop perfeito */
+            100% { transform: translateX(-50%); }
         }
 
-        /* --- TEXTO ESTILO ROTEIRO --- */
-        .script-section { max-width: 800px; margin: 50px auto; padding: 40px; background: #fff; color: #000; }
-        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 20px; }
-        .action { margin-bottom: 20px; line-height: 1.4; }
-
-        footer { text-align: center; padding: 60px; color: #333; font-size: 0.8em; letter-spacing: 3px; }
+        .project-desc { margin-top: 15px; color: #888; font-size: 0.9em; line-height: 1.4; }
+        
+        footer { text-align: center; color: #333; padding: 40px; text-transform: uppercase; letter-spacing: 5px; }
     </style>
 </head>
 <body>
@@ -87,37 +36,49 @@
     <div class="header">
         <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
         <h1>Patrick Sonata</h1>
-        <div class="slugline">SCENARIST // ACTOR // CREATIVE DIRECTOR</div>
+        <div style="color:#666">WRITER // ACTOR</div>
     </div>
 
-    <div class="carousel-container">
-        <div class="carousel-track">
-            <div class="carousel-item"><img src="assets/images/works/pelada.webp"><div class="logo-overlay">PELADA</div></div>
-            <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"><div class="logo-overlay">PABLO & LUISÃO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/humornegro.webp"><div class="logo-overlay">HUMOR NEGRO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"><div class="logo-overlay">CIDADE CORRERIA</div></div>
-            <div class="carousel-item"><img src="assets/images/works/jongo.webp"><div class="logo-overlay">JONGO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/originais.webp"><div class="logo-overlay">ORIGINAIS</div></div>
-            <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"><div class="logo-overlay">DOC CORRERIA</div></div>
-            
-            <div class="carousel-item"><img src="assets/images/works/pelada.webp"><div class="logo-overlay">PELADA</div></div>
-            <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"><div class="logo-overlay">PABLO & LUISÃO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/humornegro.webp"><div class="logo-overlay">HUMOR NEGRO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"><div class="logo-overlay">CIDADE CORRERIA</div></div>
-            <div class="carousel-item"><img src="assets/images/works/jongo.webp"><div class="logo-overlay">JONGO</div></div>
-            <div class="carousel-item"><img src="assets/images/works/originais.webp"><div class="logo-overlay">ORIGINAIS</div></div>
-            <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"><div class="logo-overlay">DOC CORRERIA</div></div>
+    <div class="project-section">
+        <div class="project-title">JONGO</div>
+        <div class="work-carousel">
+            <div class="track">
+                <img src="assets/images/works/jongo.webp">
+                <img src="assets/images/works/jongo-optimized.webp">
+                <img src="assets/images/works/jongo.webp">
+                <img src="assets/images/works/jongo-optimized.webp">
+            </div>
         </div>
+        <div class="project-desc">Exploração visual e narrativa sobre as raízes e movimentos do Jongo.</div>
     </div>
 
-    <div class="script-section">
-        <div class="scene-heading">INT. TRAJETÓRIA - NOITE</div>
-        <div class="action">
-            PATRICK observa o horizonte criativo. Entre as linhas de um roteiro da Globo e o suor do palco no Bonobando, a narrativa se constrói na urgência do agora.
+    <div class="project-section">
+        <div class="project-title">CIDADE CORRERIA</div>
+        <div class="work-carousel">
+            <div class="track">
+                <img src="assets/images/works/cidadecorreriapeca.webp">
+                <img src="assets/images/works/doccidadecorreria.webp">
+                <img src="assets/images/works/cidadecorreriapeca.webp">
+                <img src="assets/images/works/doccidadecorreria.webp">
+            </div>
         </div>
+        <div class="project-desc">Do palco para o documentário: a vivência urbana transformada em cena.</div>
     </div>
 
-    <footer>FADE OUT.</footer>
+    <div class="project-section">
+        <div class="project-title">PABLO & LUISÃO</div>
+        <div class="work-carousel">
+            <div class="track">
+                <img src="assets/images/works/pabloeluisao.webp">
+                <img src="assets/images/works/originais.webp">
+                <img src="assets/images/works/pabloeluisao.webp">
+                <img src="assets/images/works/originais.webp">
+            </div>
+        </div>
+        <div class="project-desc">Colaboração no desenvolvimento de roteiro para a série original Globoplay.</div>
+    </div>
+
+    <footer>Fade out.</footer>
 
 </body>
 </html>
