@@ -5,31 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Roteirista & Ator</title>
     <style>
-        body { background-color: #000; color: #fff; font-family: 'Courier Prime', 'Courier', monospace; margin: 0; padding: 20px; line-height: 1.2; }
-        .header { text-align: center; padding: 40px 0; border-bottom: 1px solid #333; }
-        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; filter: grayscale(100%); transition: 0.3s; }
-        .profile-img:hover { filter: grayscale(0%); }
-        h1 { font-size: 2.5em; margin: 10px 0; text-transform: uppercase; letter-spacing: 2px; }
-        .slugline { color: #888; font-weight: bold; margin-bottom: 30px; }
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; overflow-x: hidden; }
         
-        /* Estilo Script */
-        .script-container { max-width: 800px; margin: 40px auto; background: #fff; color: #000; padding: 60px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
-        .scene-heading { font-weight: bold; margin-top: 25px; text-transform: uppercase; }
-        .action { margin: 15px 0; }
-        .character { text-align: center; width: 50%; margin: 20px auto 0 auto; text-transform: uppercase; }
-        .parenthetical { text-align: center; width: 40%; margin: 0 auto; font-size: 0.9em; }
-        .dialogue { text-align: center; width: 70%; margin: 0 auto 20px auto; }
+        .header { text-align: center; padding: 60px 0 20px 0; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; filter: grayscale(100%); transition: 0.5s; }
+        .profile-img:hover { filter: grayscale(0%); transform: scale(1.05); }
+        h1 { font-size: 2.2em; text-transform: uppercase; letter-spacing: 4px; margin: 20px 0 5px 0; }
+        .slugline { color: #666; font-size: 0.9em; letter-spacing: 2px; }
 
-        /* Grade de Trabalhos */
-        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 50px auto; padding: 0 20px; }
-        .work-item { background: #111; border: 1px solid #333; overflow: hidden; border-radius: 8px; transition: transform 0.3s; }
-        .work-item:hover { transform: translateY(-10px); border-color: #fff; }
-        .work-item img { width: 100%; height: 200px; object-fit: cover; }
-        .work-info { padding: 15px; }
-        .work-title { font-weight: bold; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-size: 0.9em; }
-        .work-desc { color: #888; font-size: 0.8em; }
+        /* --- CARROSSEL INFINITO --- */
+        .carousel-container {
+            width: 100%;
+            height: 250px;
+            margin: 40px 0;
+            overflow: hidden;
+            position: relative;
+            background: #050505;
+            display: flex;
+            align-items: center;
+        }
 
-        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
+        .carousel-track {
+            display: flex;
+            width: calc(250px * 14); /* Ajuste conforme o número de imagens duplicadas */
+            animation: scroll 30s linear infinite;
+        }
+
+        .carousel-item {
+            width: 250px;
+            height: 180px;
+            padding: 0 15px;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 4px;
+            opacity: 0.6;
+            transition: 0.3s;
+        }
+
+        /* "Logo na frente" - Título sobreposto */
+        .logo-overlay {
+            position: absolute;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            pointer-events: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            background: rgba(0,0,0,0.4);
+        }
+
+        .carousel-item:hover img { opacity: 1; transform: scale(1.1); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-250px * 7)); } /* Metade do track para loop perfeito */
+        }
+
+        /* --- TEXTO ESTILO ROTEIRO --- */
+        .script-section { max-width: 800px; margin: 50px auto; padding: 40px; background: #fff; color: #000; }
+        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 20px; }
+        .action { margin-bottom: 20px; line-height: 1.4; }
+
+        footer { text-align: center; padding: 60px; color: #333; font-size: 0.8em; letter-spacing: 3px; }
     </style>
 </head>
 <body>
@@ -37,55 +87,37 @@
     <div class="header">
         <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
         <h1>Patrick Sonata</h1>
-        <div class="slugline">ROTEIRISTA // ATOR // CRIATIVO</div>
+        <div class="slugline">SCENARIST // ACTOR // CREATIVE DIRECTOR</div>
     </div>
 
-    <div class="script-container">
-        <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
-        <div class="action">PATRICK SONATA (37) é um roteirista e comediante carioca com trajetória consolidada no teatro e no audiovisual.</div>
-        
-        <div class="scene-heading">EXT. PORTFÓLIO - DESTAQUES</div>
-        <div class="action">Abaixo, os frames de uma carreira em constante movimento:</div>
-    </div>
-
-    <div class="works-grid">
-        <div class="work-item">
-            <img src="assets/images/works/pelada.webp" alt="Pelada">
-            <div class="work-info">
-                <div class="work-title">Pelada - A Hora da Gaymada</div>
-                <div class="work-desc">Dramaturgia e performance no Coletivo Bonobando. Sucesso de crítica em 2023.</div>
-            </div>
-        </div>
-
-        <div class="work-item">
-            <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
-            <div class="work-info">
-                <div class="work-title">Pablo & Luisão (TV Globo)</div>
-                <div class="work-desc">Equipe de roteiro da nova série de humor da TV Globo (2025/2026).</div>
-            </div>
-        </div>
-
-        <div class="work-item">
-            <img src="assets/images/works/humornegro.webp" alt="Humor Negro">
-            <div class="work-info">
-                <div class="work-title">Humor Negro</div>
-                <div class="work-desc">Projeto focado em narrativas potentes e humor ácido de viés crítico.</div>
-            </div>
-        </div>
-
-        <div class="work-item">
-            <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
-            <div class="work-info">
-                <div class="work-title">Cidade Correria</div>
-                <div class="work-desc">Exploração das periferias em narrativas potentes para cinema e palco.</div>
-            </div>
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <div class="carousel-item"><img src="assets/images/works/pelada.webp"><div class="logo-overlay">PELADA</div></div>
+            <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"><div class="logo-overlay">PABLO & LUISÃO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/humornegro.webp"><div class="logo-overlay">HUMOR NEGRO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"><div class="logo-overlay">CIDADE CORRERIA</div></div>
+            <div class="carousel-item"><img src="assets/images/works/jongo.webp"><div class="logo-overlay">JONGO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/originais.webp"><div class="logo-overlay">ORIGINAIS</div></div>
+            <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"><div class="logo-overlay">DOC CORRERIA</div></div>
+            
+            <div class="carousel-item"><img src="assets/images/works/pelada.webp"><div class="logo-overlay">PELADA</div></div>
+            <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"><div class="logo-overlay">PABLO & LUISÃO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/humornegro.webp"><div class="logo-overlay">HUMOR NEGRO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"><div class="logo-overlay">CIDADE CORRERIA</div></div>
+            <div class="carousel-item"><img src="assets/images/works/jongo.webp"><div class="logo-overlay">JONGO</div></div>
+            <div class="carousel-item"><img src="assets/images/works/originais.webp"><div class="logo-overlay">ORIGINAIS</div></div>
+            <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"><div class="logo-overlay">DOC CORRERIA</div></div>
         </div>
     </div>
 
-    <footer>
-        FADE OUT. <br><br>
-        © 2026 PATRICK SONATA. TODOS OS DIREITOS RESERVADOS.
-    </footer>
+    <div class="script-section">
+        <div class="scene-heading">INT. TRAJETÓRIA - NOITE</div>
+        <div class="action">
+            PATRICK observa o horizonte criativo. Entre as linhas de um roteiro da Globo e o suor do palco no Bonobando, a narrativa se constrói na urgência do agora.
+        </div>
+    </div>
+
+    <footer>FADE OUT.</footer>
 
 </body>
 </html>
