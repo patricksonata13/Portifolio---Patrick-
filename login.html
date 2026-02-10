@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrar | Patrick Sonata</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { background: #000; color: #fff; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        .login-card { background: #111; padding: 40px; border-radius: 20px; width: 100%; max-width: 400px; text-align: center; border: 1px solid #333; }
+        h1 { font-weight: 300; letter-spacing: -1px; margin-bottom: 30px; }
+        input { width: 100%; padding: 15px; margin-bottom: 15px; background: #222; border: 1px solid #444; border-radius: 10px; color: #fff; box-sizing: border-box; }
+        button { width: 100%; padding: 15px; background: #fff; color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #ccc; }
+        .switch { margin-top: 20px; font-size: 14px; color: #888; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <h1 id="auth-title">Acessar Ecossistema</h1>
+        <input type="email" id="email" placeholder="Seu e-mail">
+        <input type="password" id="password" placeholder="Sua senha">
+        <button id="auth-btn">Entrar</button>
+        <div class="switch" id="auth-switch">Não tem conta? Criar agora</div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="assets/js/supabase-client.js"></script>
+    <script>
+        const authBtn = document.getElementById('auth-btn');
+        const authTitle = document.getElementById('auth-title');
+        const authSwitch = document.getElementById('auth-switch');
+        let isLogin = true;
+
+        authSwitch.onclick = () => {
+            isLogin = !isLogin;
+            authTitle.innerText = isLogin ? "Acessar Ecossistema" : "Criar Conta";
+            authBtn.innerText = isLogin ? "Entrar" : "Cadastrar";
+            authSwitch.innerText = isLogin ? "Não tem conta? Criar agora" : "Já tem conta? Entrar";
+        };
+
+        authBtn.onclick = async () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if(isLogin) {
+                const { error } = await window.supabaseClient.auth.signInWithPassword({ email, password });
+                if (error) alert(error.message);
+                else window.location.href = 'index.html';
+            } else {
+                const { error } = await window.supabaseClient.auth.signUp({ email, password });
+                if (error) alert("Verifique seu e-mail para confirmar o cadastro!");
+                else alert("Conta criada! Confirme no e-mail.");
+            }
+        };
+    </script>
+</body>
+</html>
