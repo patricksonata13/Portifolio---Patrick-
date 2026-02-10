@@ -30,9 +30,57 @@ Luz focada em uma mesa de trabalho. Pilhas de escaletas e livros de dramaturgia.
 <div class="script-dialog">Escrever a quebrada sem estereótipos, focando na humanidade e na potência estética do real.</div>
 <div class="script-transition">CORTE PARA PRETO.</div>`
     },
+    trabalho: {
+        title: "PORTFÓLIO DE PROJETOS",
+        isGalleryHub: true,
+        projects: [
+            {
+                id: "pablo_luisao",
+                title: "PABLO E LUISÃO",
+                role: "Roteirista",
+                info: "Série Original Globoplay. Criação de Paulo Vieira.",
+                cover: "assets/images/works/pabloeluisao.webp",
+                images: ["assets/images/works/pabloeluisao.webp"] 
+            },
+            {
+                id: "humor_negro",
+                title: "HUMOR NEGRO",
+                role: "Roteirista",
+                info: "Especial e Série - Multishow/Globoplay.",
+                cover: "assets/images/works/humornegro.webp",
+                images: ["assets/images/works/humornegro.webp"]
+            },
+            {
+                id: "cidade_correria",
+                title: "CIDADE CORRERIA",
+                role: "Autor e Ator",
+                info: "Teatro e Documentário sobre vivências urbanas.",
+                cover: "assets/images/works/cidadecorreriapeca.webp",
+                images: ["assets/images/works/cidadecorreriapeca.webp", "assets/images/works/doccidadecorreria.webp"]
+            },
+            {
+                id: "pelada",
+                title: "PELADA",
+                role: "Roteirista",
+                info: "Longa-metragem de ficção (Comédia).",
+                cover: "assets/images/works/pelada.webp",
+                images: ["assets/images/works/pelada.webp"]
+            },
+            {
+                id: "jongo",
+                title: "JONGO",
+                role: "Direção Narrativa",
+                info: "Audiovisual, Memória e Ancestralidade.",
+                cover: "assets/images/works/jongo.webp",
+                images: ["assets/images/works/jongo.webp"]
+            }
+        ],
+        text: "Selecione um projeto para ver os detalhes técnicos."
+    },
     cdd: { 
         title: "CDD - 3001", 
-        isGame: true 
+        isGame: true,
+        text: "Projeto transmídia explorando o futuro da Cidade de Deus."
     },
     patika: { 
         title: "PATIKA", 
@@ -42,4 +90,4 @@ Luz focada em uma mesa de trabalho. Pilhas de escaletas e livros de dramaturgia.
         title: "AULAS", 
         text: "Mentorias e oficinas de roteiro voltadas para a democratização da escrita cinematográfica." 
     }
-};
+}; // Fim do banco de dados
