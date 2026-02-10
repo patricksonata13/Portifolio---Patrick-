@@ -24,107 +24,65 @@
             <button onclick="togglePanel('perfil')">Perfil</button>
             <button onclick="openGallery()">Trabalho</button>
         </div>
-        
-        <div class="badge-container" id="badges">
-            <div class="badge" title="Mestre da Sincronia">⏳</div>
-        </div>
+        <div class="badge-container" id="badges"><div class="badge">⏳</div></div>
     </div>
 
     <div id="side-panel" class="panel">
         <div class="close-x" onclick="closeAll()">X</div>
-        <div id="panel-content">
-            </div>
+        <div id="panel-content"></div>
     </div>
 
     <div id="work-gallery" class="full-overlay">
         <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
         <div class="gallery-container">
-            <h2 style="margin-bottom: 40px; letter-spacing: 5px;">PORTFÓLIO VISUAL</h2>
+            <h2>PORTFÓLIO VISUAL</h2>
             <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
             <img src="assets/images/works/zorralogo.jpg" alt="Zorra">
             <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
-            <img src="assets/images/works/doccidadecorreria.webp" alt="Documentário">
-            <img src="assets/images/works/originais.webp" alt="Originais">
-            <img src="assets/images/works/jongo.webp" alt="Jongo">
         </div>
     </div>
 
     <template id="cdd-template">
         <div class="slugline">CDD - 3001 | SANKOFA OS</div>
-        <div id="sin-terminal">
-            <div id="log-output"></div>
-            <div class="input-line">
-                <span>></span>
-                <input type="text" id="game-input" autofocus autocomplete="off">
-            </div>
-        </div>
+        <div id="sin-terminal"><div id="log-output"></div>
+        <div class="input-line"><span>></span><input type="text" id="game-input" autofocus autocomplete="off"></div></div>
         <div class="hud">SINCRONIA: <span id="sincronia-val">100%</span></div>
     </template>
 
     <script src="assets/js/database.js"></script>
     <script src="assets/js/jogo.js"></script>
-    
     <script>
         let isMuted = false;
-
         function toggleMute() {
             isMuted = !isMuted;
             const btn = document.getElementById('audio-control');
             btn.innerText = isMuted ? "🔇 SOM: OFF" : "🔊 SOM: ON";
-            btn.classList.toggle('muted', isMuted);
-            if (window.audioCtx) {
-                isMuted ? window.audioCtx.suspend() : window.audioCtx.resume();
-            }
+            if (window.audioCtx) isMuted ? window.audioCtx.suspend() : window.audioCtx.resume();
         }
-
         function togglePanel(id) {
             const panel = document.getElementById('side-panel');
             const contentDiv = document.getElementById('panel-content');
-            
-            if(!window.db || !window.db[id]) return;
-
             const data = window.db[id];
-            
+            if(!data) return;
             if(data.isGame) {
                 contentDiv.innerHTML = document.getElementById('cdd-template').innerHTML;
-                setTimeout(() => {
-                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
-                    document.getElementById('game-input').focus();
-                }, 100);
+                setTimeout(() => { if(window.iniciarTerminalCDD) window.iniciarTerminalCDD(); }, 100);
             } else {
-                contentDiv.innerHTML = `
-                    <div class="slugline">${data.title}</div>
-                    <div class="action-text">${data.text}</div>
-                    ${data.link ? `<a href="${data.link}" class="cta-button" target="_blank">${data.label}</a>` : ''}
-                `;
+                contentDiv.innerHTML = `<div class="slugline">${data.title}</div><div class="action-text">${data.text}</div>`;
             }
-            
             panel.classList.add('active');
-            document.getElementById('work-gallery').classList.remove('active');
         }
-
-        function openGallery() { 
-            closeAll(); 
-            document.getElementById('work-gallery').classList.add('active'); 
-        }
-
+        function openGallery() { document.getElementById('work-gallery').classList.add('active'); }
         function closeAll() { 
             document.getElementById('side-panel').classList.remove('active'); 
             document.getElementById('work-gallery').classList.remove('active'); 
         }
-
-        document.addEventListener('keydown', function(e) {
-            if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
+        document.addEventListener('keydown', (e) => {
+            if (e.target.id === 'game-input' && e.key === 'Enter') {
                 if(window.processarJogo) window.processarJogo(e.target.value);
                 e.target.value = '';
             }
         });
-
-        // Checar conquistas ao carregar
-        window.onload = () => {
-            const conquistas = JSON.parse(localStorage.getItem('CDD_BADGES') || '[]');
-            if(conquistas.length > 0) document.getElementById('badges').classList.add('unlocked');
-        };
     </script>
 </body>
 </html>
