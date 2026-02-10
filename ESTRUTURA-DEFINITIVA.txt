@@ -1,0 +1,21 @@
+# SITE PATRICK SONATA - ESTRUTURA DEFINITIVA
+/
+├── index.html          # HOME ÚNICA
+├── sobre.html          # Sobre mim
+├── trabalhos.html      # Portfolio
+├── contato.html        # Contato
+├── CNAME              # Config domínio
+├── _headers           # Config Netlify
+├── assets/            # TODOS recursos
+│   ├── css/
+│   │   └── style.css  # CSS ÚNICO
+│   ├── js/
+│   │   └── main.js    # JS ÚNICO
+│   └── images/
+│       ├── profile/   # Fotos pessoais
+│       └── works/     # Trabalhos
+├── projetos/          # Projetos especiais
+│   ├── patika/        # Editor PWA
+│   ├── cidade/        # CDD completo
+│   └── aulas/         # Videoaulas
+└── README.md          # Documentação
