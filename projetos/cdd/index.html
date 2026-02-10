@@ -1,273 +1,39 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cidade de Deus - Projeto Cultural</title>
-    <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>CDD | Patrick Sonata</title>
+    <link rel="stylesheet" href="css/cdd.css">
 </head>
-<body class="cidade-page">
-    <!-- Menu Global -->
-    <nav class="nav">
-        <a href="/" class="nav-link">Home</a>
-        <a href="/patika/" class="nav-link">Patika</a>
-        <a href="/aulas/" class="nav-link">Aulas</a>
-        <a href="/cidade/" class="nav-link active">Cidade</a>
-    </nav>
-
-    <header class="cidade-header">
-        <div class="header-content">
-            <h1 class="cidade-title">CIDADE DE DEUS</h1>
-            <p class="cidade-subtitle">Narrativas, Memória e Futuro</p>
-            <div class="cidade-logo">
-                <img src="assets/images/logo-cdd.svg" alt="Logo CDD" onerror="this.style.display='none'">
-            </div>
-        </div>
-    </header>
-
-    <!-- Sub-menu de navegação -->
-    <nav class="subnav">
-        <div class="subnav-container">
-            <button class="subnav-btn active" data-section="overview">
-                <span class="icon">🏙️</span>
-                <span class="text">Visão Geral</span>
-            </button>
-            <button class="subnav-btn" data-section="mapa">
-                <span class="icon">🗺️</span>
-                <span class="text">Mapa Interativo</span>
-            </button>
-            <button class="subnav-btn" data-section="historias">
-                <span class="icon">📖</span>
-                <span class="text">Histórias</span>
-            </button>
-            <button class="subnav-btn" data-section="midia">
-                <span class="icon">🎬</span>
-                <span class="text">Mídia</span>
-            </button>
-            <button class="subnav-btn" data-section="raiz">
-                <span class="icon">🌱</span>
-                <span class="text">Raiz</span>
-            </button>
-            <button class="subnav-btn" data-section="games">
-                <span class="icon">🎮</span>
-                <span class="text">Games</span>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Container Principal -->
-    <main class="cidade-container">
-        <!-- Seção: Visão Geral (padrão) -->
-        <section id="overview" class="section active">
-            <div class="section-header">
-                <h2>Visão Geral do Projeto</h2>
-                <p>Um ecossistema digital para preservar, conectar e reinventar as narrativas da Cidade de Deus</p>
-            </div>
-            
-            <div class="overview-grid">
-                <div class="overview-card">
-                    <div class="card-icon">🎯</div>
-                    <h3>Missão</h3>
-                    <p>Digitalizar a memória coletiva da comunidade através de tecnologia acessível e narrativas imersivas.</p>
-                </div>
-                
-                <div class="overview-card">
-                    <div class="card-icon">🚀</div>
-                    <h3>Futuro</h3>
-                    <p>Desenvolver jogos educativos, realidade aumentada e plataformas colaborativas para jovens.</p>
-                </div>
-                
-                <div class="overview-card">
-                    <div class="card-icon">🤝</div>
-                    <h3>Comunidade</h3>
-                    <p>Espaço para moradores compartilharem histórias, projetos e iniciativas locais.</p>
-                </div>
-            </div>
-
-            <!-- Dashboard de Atividades -->
-            <div class="dashboard">
-                <h3>Atividades Recentes</h3>
-                <div class="dashboard-grid">
-                    <div class="stats-card">
-                        <h4>📖 Histórias Coletadas</h4>
-                        <p class="stat-number" id="stories-count">24</p>
-                    </div>
-                    <div class="stats-card">
-                        <h4>📍 Pontos no Mapa</h4>
-                        <p class="stat-number" id="map-points">18</p>
-                    </div>
-                    <div class="stats-card">
-                        <h4>🎮 Projetos em Games</h4>
-                        <p class="stat-number" id="games-projects">3</p>
-                    </div>
-                    <div class="stats-card">
-                        <h4>👥 Participantes</h4>
-                        <p class="stat-number" id="participants">47</p>
-                    </div>
-                </div>
+<body>
+    <div class="scroll-container">
+        <section class="panel hero">
+            <div class="content">
+                <h1>CIDADE DE DEUS</h1>
+                <p>Onde a arte encontra a sobrevivência.</p>
             </div>
         </section>
 
-        <!-- Seção: Mapa Interativo -->
-        <section id="mapa" class="section">
-            <div class="section-header">
-                <h2>Mapa da Memória</h2>
-                <p>Explore locais importantes, histórias e projetos na Cidade de Deus</p>
-            </div>
-            
-            <div class="map-container">
-                <div id="cdd-map"></div>
-                <div class="map-controls">
-                    <div class="filter-category">
-                        <h4>Filtrar por:</h4>
-                        <label><input type="checkbox" name="map-filter" value="historias" checked> 📖 Histórias</label>
-                        <label><input type="checkbox" name="map-filter" value="midia" checked> 🎬 Mídia</label>
-                        <label><input type="checkbox" name="map-filter" value="raiz" checked> 🌱 Projetos</label>
-                        <label><input type="checkbox" name="map-filter" value="games"> 🎮 Games</label>
-                    </div>
-                    <button id="reset-map" class="btn-secondary">Resetar Vista</button>
-                </div>
-            </div>
-            
-            <div class="map-legend">
-                <h4>Legenda:</h4>
-                <div class="legend-item"><span class="legend-color historias"></span> Pontos Históricos</div>
-                <div class="legend-item"><span class="legend-color midia"></span> Locais de Gravação</div>
-                <div class="legend-item"><span class="legend-color raiz"></span> Projetos Comunitários</div>
-                <div class="legend-item"><span class="legend-color games"></span> Áreas para Games</div>
+        <section class="panel story">
+            <div class="content">
+                <h2>A Vivência como Roteiro</h2>
+                <p>Minha escrita não nasceu nos livros, nasceu no asfalto quente da CDD. Cada diálogo que escrevo hoje para a TV carrega a métrica e o balanço de quem aprendeu a ouvir antes de falar.</p>
             </div>
         </section>
 
-        <!-- Seção: Histórias -->
-        <section id="historias" class="section">
-            <div class="section-header">
-                <h2>Histórias da Comunidade</h2>
-                <p>Narrativas coletadas com moradores, memórias e tradições</p>
-            </div>
-            
-            <div class="stories-grid">
-                <!-- Histórias serão carregadas via JS -->
-            </div>
-            
-            <div class="contribute-box">
-                <h3>Conte Sua História</h3>
-                <p>Quer compartilhar uma memória ou história da Cidade de Deus?</p>
-                <button id="share-story" class="btn-primary">📝 Contribuir</button>
+        <section class="panel gallery">
+            <div class="content">
+                <blockquote>"Transformar a correria em poesia é o meu maior trabalho."</blockquote>
             </div>
         </section>
 
-        <!-- Seção: Mídia -->
-        <section id="midia" class="section">
-            <div class="section-header">
-                <h2>Produções de Mídia</h2>
-                <p>Documentários, filmes, fotografias e conteúdo audiovisual</p>
-            </div>
-            
-            <div class="media-tabs">
-                <button class="media-tab active" data-media="videos">🎬 Vídeos</button>
-                <button class="media-tab" data-media="fotos">📸 Fotos</button>
-                <button class="media-tab" data-media="audio">🎧 Áudio</button>
-            </div>
-            
-            <div class="media-content">
-                <div id="videos" class="media-section active">
-                    <!-- Conteúdo de vídeos -->
-                </div>
-                <div id="fotos" class="media-section">
-                    <!-- Conteúdo de fotos -->
-                </div>
-                <div id="audio" class="media-section">
-                    <!-- Conteúdo de áudio -->
-                </div>
-            </div>
-        </section>
+        <footer class="cdd-footer">
+            <a href="../../index.html">VOLTAR AO INÍCIO</a>
+        </footer>
+    </div>
 
-        <!-- Seção: Raiz -->
-        <section id="raiz" class="section">
-            <div class="section-header">
-                <h2>Raiz Cultural</h2>
-                <p>Tradições, cultura popular e projetos de base comunitária</p>
-            </div>
-            
-            <div class="timeline-container">
-                <div class="timeline">
-                    <!-- Linha do tempo será gerada via JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Seção: Games -->
-        <section id="games" class="section">
-            <div class="section-header">
-                <h2>Projetos em Games</h2>
-                <p>Jogos educativos e experiências interativas em desenvolvimento</p>
-            </div>
-            
-            <div class="games-showcase">
-                <div class="game-card">
-                    <div class="game-preview">
-                        <div class="game-placeholder">CDD: Memória Viva</div>
-                    </div>
-                    <h3>CDD: Memória Viva</h3>
-                    <p>Jogo de aventura baseado nas histórias reais da comunidade</p>
-                    <span class="game-status in-dev">🛠️ Em desenvolvimento</span>
-                </div>
-                
-                <div class="game-card">
-                    <div class="game-preview">
-                        <div class="game-placeholder">Mapa Interativo AR</div>
-                    </div>
-                    <h3>Realidade Aumentada</h3>
-                    <p>Visualize histórias sobrepostas à realidade do bairro</p>
-                    <span class="game-status planned">📅 Planejado</span>
-                </div>
-                
-                <div class="game-card">
-                    <div class="game-preview">
-                        <div class="game-placeholder">Quiz Cultural</div>
-                    </div>
-                    <h3>Quiz Cultural CDD</h3>
-                    <p>Teste seu conhecimento sobre a história do bairro</p>
-                    <span class="game-status active">🎮 Disponível</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer Específico -->
-    <footer class="cidade-footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Projeto Cidade de Deus</h4>
-                <p>Iniciativa cultural independente</p>
-                <p>Contato: contato@cidadededeus.org</p>
-            </div>
-            <div class="footer-section">
-                <h4>Colaboradores</h4>
-                <p>Patrick Sonata (Coordenação)</p>
-                <p>Moradores da CDD</p>
-                <p>Artistas Locais</p>
-            </div>
-            <div class="footer-section">
-                <h4>Tecnologia</h4>
-                <p>Mapa: Leaflet.js</p>
-                <p>Gráficos: Chart.js</p>
-                <p>Design: Mobile-First</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 Projeto Cidade de Deus | Desenvolvimento contínuo</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/mapa-interativo.js"></script>
-    <script src="js/filtro-conteudo.js"></script>
-    <script src="js/linha-tempo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../assets/js/supabase-client.js"></script>
 </body>
 </html>

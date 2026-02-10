@@ -107,5 +107,23 @@
     </footer>
 
     <script src="assets/js/main.js"></script>
-</body>
+<script>
+    async function updateUI() {
+        const { data: { user } } = await window.supabaseClient.auth.getUser();
+        if (user) {
+            console.log("Usuário logado:", user.email);
+            /* Aqui você pode adicionar um botão de Sair via código se quiser */
+        }
+    }
+    updateUI();
+<script>
+    async function updateUI() {
+        const { data: { user } } = await window.supabaseClient.auth.getUser();
+        if (user) {
+            console.log("Usuário logado:", user.email);
+            /* Aqui você pode adicionar um botão de Sair via código se quiser */
+        }
+    }
+    updateUI();
+</script></script></body>
 </html>
