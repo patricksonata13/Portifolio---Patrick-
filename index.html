@@ -3,91 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Hub Criativo</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/hub.css">
+    <title>PATRICK SONATA | HUB</title>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        .hero { text-align: center; border: 1px solid #00ff41; padding: 40px; box-shadow: 0 0 20px rgba(0,255,65,0.2); }
+        h1 { font-size: 2.5em; letter-spacing: 5px; margin-bottom: 20px; }
+        .nav { display: flex; gap: 20px; }
+        button { background: none; border: 1px solid #00ff41; color: #00ff41; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: 0.3s; }
+        button:hover { background: #00ff41; color: #000; box-shadow: 0 0 15px #00ff41; }
+        .panel { position: fixed; right: -500px; top: 0; width: 400px; height: 100%; background: #050505; border-left: 2px solid #00ff41; transition: 0.5s; padding: 30px; box-sizing: border-box; z-index: 100; }
+        .panel.active { right: 0; }
+        .close-btn { color: #ff4444; cursor: pointer; margin-bottom: 20px; display: block; }
+        #log-output { height: 300px; overflow-y: auto; border: 1px solid #222; padding: 10px; font-size: 14px; color: #00ccff; }
+        input { width: 100%; background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; margin-top: 10px; outline: none; }
+    </style>
 </head>
 <body>
-    <button id="audio-control" onclick="toggleMute()">🔊 SOM: ON</button>
 
-    <div class="nav-right">
-        <button onclick="togglePanel('cdd')">CDD 3001</button>
-        <button onclick="togglePanel('patika')">Patika</button>
-        <button onclick="togglePanel('aulas')">Aulas</button>
-    </div>
-
-    <div class="hero-bg">
-        <img src="assets/images/fotodeperfil.jpg" class="profile-main-img" alt="Patrick Sonata">
+    <div class="hero">
         <h1>PATRICK SONATA</h1>
-        <div class="nav-center">
-            <button onclick="togglePanel('sobre')">Sobre</button>
-            <button onclick="togglePanel('perfil')">Perfil</button>
-            <button onclick="openGallery()">Trabalho</button>
+        <div class="nav">
+            <button onclick="openPanel('sobre')">SOBRE</button>
+            <button onclick="openPanel('trabalhos')">TRABALHOS</button>
+            <button onclick="openPanel('cdd')">CDD 3001</button>
         </div>
     </div>
 
     <div id="side-panel" class="panel">
-        <div class="close-x" onclick="closeAll()">X</div>
-        <div id="panel-content"></div>
+        <span class="close-btn" onclick="closePanel()">[ FECHAR X ]</span>
+        <div id="content"></div>
     </div>
 
-    <div id="work-gallery" class="full-overlay">
-        <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
-        <div class="gallery-container">
-            <h2>PORTFÓLIO VISUAL</h2>
-            <p>Carregando galeria...</p>
-        </div>
-    </div>
-
-    <template id="cdd-template">
-        <div class="slugline">CDD - 3001 | SANKOFA OS</div>
-        <div id="sin-terminal">
-            <div id="log-output"></div>
-            <div class="input-line"><span>></span><input type="text" id="game-input" autofocus autocomplete="off"></div>
-        </div>
-    </template>
-
-    <script src="assets/js/database.js"></script>
-    <script src="assets/js/jogo.js"></script>
     <script>
-        let isMuted = false;
-        function toggleMute() {
-            isMuted = !isMuted;
-            const btn = document.getElementById('audio-control');
-            btn.innerText = isMuted ? "🔇 SOM: OFF" : "🔊 SOM: ON";
-            if (window.audioCtx) isMuted ? window.audioCtx.suspend() : window.audioCtx.resume();
-        }
+        const db = {
+            sobre: "<h3>SOBRE</h3><p>Roteirista, desenvolvedor e criador de mundos focado em narrativas periféricas e afrofuturismo.</p>",
+            trabalhos: "<h3>TRABALHOS</h3><p>• Pablo e Luisão (GloboPlay)<br>• Zorra (Globo)<br>• Cidade Correria</p>",
+            cdd: "<h3>CDD 3001</h3><div id='log-output'>> SANKOFA OS INICIALIZADO...<br>> Digite HELP para comandos.</div><input type='text' id='game-input' placeholder='Comando...'>"
+        };
 
-        function togglePanel(id) {
+        function openPanel(id) {
             const panel = document.getElementById('side-panel');
-            const contentDiv = document.getElementById('panel-content');
-            if(!window.db || !window.db[id]) return;
-            
-            const data = window.db[id];
-            if(data.isGame) {
-                contentDiv.innerHTML = document.getElementById('cdd-template').innerHTML;
-                setTimeout(() => { if(window.iniciarTerminalCDD) window.iniciarTerminalCDD(); }, 100);
-            } else {
-                contentDiv.innerHTML = `<div class="slugline">${data.title}</div><div class="action-text">${data.text}</div>`;
-            }
+            const content = document.getElementById('content');
+            content.innerHTML = db[id];
             panel.classList.add('active');
-        }
 
-        function openGallery() { 
-            closeAll();
-            document.getElementById('work-gallery').classList.add('active'); 
-        }
-
-        function closeAll() { 
-            document.querySelectorAll('.panel, .full-overlay').forEach(el => el.classList.remove('active'));
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
-                if(window.processarJogo) window.processarJogo(e.target.value);
-                e.target.value = '';
+            if(id === 'cdd') {
+                setTimeout(() => {
+                    const input = document.getElementById('game-input');
+                    input.addEventListener('keypress', (e) => {
+                        if(e.key === 'Enter') {
+                            const log = document.getElementById('log-output');
+                            log.innerHTML += `<br>> Executando: ${input.value.toUpperCase()}`;
+                            log.scrollTop = log.scrollHeight;
+                            input.value = '';
+                        }
+                    });
+                }, 100);
             }
-        });
+        }
+
+        function closePanel() {
+            document.getElementById('side-panel').classList.remove('active');
+        }
     </script>
 </body>
 </html>
