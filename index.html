@@ -3,68 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATRICK SONATA | HUB</title>
-    <style>
-        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; margin: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        .hero { text-align: center; border: 1px solid #00ff41; padding: 40px; box-shadow: 0 0 20px rgba(0,255,65,0.2); }
-        h1 { font-size: 2.5em; letter-spacing: 5px; margin-bottom: 20px; }
-        .nav { display: flex; gap: 20px; }
-        button { background: none; border: 1px solid #00ff41; color: #00ff41; padding: 10px 20px; cursor: pointer; font-family: inherit; transition: 0.3s; }
-        button:hover { background: #00ff41; color: #000; box-shadow: 0 0 15px #00ff41; }
-        .panel { position: fixed; right: -500px; top: 0; width: 400px; height: 100%; background: #050505; border-left: 2px solid #00ff41; transition: 0.5s; padding: 30px; box-sizing: border-box; z-index: 100; }
-        .panel.active { right: 0; }
-        .close-btn { color: #ff4444; cursor: pointer; margin-bottom: 20px; display: block; }
-        #log-output { height: 300px; overflow-y: auto; border: 1px solid #222; padding: 10px; font-size: 14px; color: #00ccff; }
-        input { width: 100%; background: #000; border: 1px solid #00ff41; color: #00ff41; padding: 10px; margin-top: 10px; outline: none; }
-    </style>
+    <title>Patrick Sonata | Hub Criativo</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/hub.css">
 </head>
 <body>
 
-    <div class="hero">
+    <div class="nav-right">
+        <button onclick="togglePanel('cdd')">CDD</button>
+        <button onclick="togglePanel('patika')">Patika</button>
+        <button onclick="togglePanel('aulas')">Aulas</button>
+    </div>
+
+    <div class="hero-bg">
+        <img src="assets/images/fotodeperfil.jpg" class="profile-main-img" alt="Patrick Sonata">
         <h1>PATRICK SONATA</h1>
-        <div class="nav">
-            <button onclick="openPanel('sobre')">SOBRE</button>
-            <button onclick="openPanel('trabalhos')">TRABALHOS</button>
-            <button onclick="openPanel('cdd')">CDD 3001</button>
+        <div class="nav-center">
+            <button onclick="togglePanel('sobre')">Sobre</button>
+            <button onclick="togglePanel('perfil')">Perfil</button>
+            <button onclick="openGallery()">Trabalho</button>
         </div>
     </div>
 
     <div id="side-panel" class="panel">
-        <span class="close-btn" onclick="closePanel()">[ FECHAR X ]</span>
-        <div id="content"></div>
+        <div class="close-x" onclick="closeAll()">X</div>
+        <div id="panel-content"></div>
     </div>
 
+    <div id="work-gallery" class="full-overlay">
+        <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
+        <div class="gallery-container">
+            <h2 style="margin-bottom: 40px; letter-spacing: 5px;">PORTFÓLIO VISUAL</h2>
+            <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
+            <img src="assets/images/works/zorralogo.jpg" alt="Zorra">
+            <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
+            <img src="assets/images/works/doccidadecorreria.webp" alt="Documentário">
+            <img src="assets/images/works/originais.webp" alt="Originais">
+            <img src="assets/images/works/jongo.webp" alt="Jongo">
+        </div>
+    </div>
+
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/utils/local-storage.js"></script>
+    <script src="assets/js/jogo.js"></script>
+
     <script>
-        const db = {
-            sobre: "<h3>SOBRE</h3><p>Roteirista, desenvolvedor e criador de mundos focado em narrativas periféricas e afrofuturismo.</p>",
-            trabalhos: "<h3>TRABALHOS</h3><p>• Pablo e Luisão (GloboPlay)<br>• Zorra (Globo)<br>• Cidade Correria</p>",
-            cdd: "<h3>CDD 3001</h3><div id='log-output'>> SANKOFA OS INICIALIZADO...<br>> Digite HELP para comandos.</div><input type='text' id='game-input' placeholder='Comando...'>"
-        };
-
-        function openPanel(id) {
+        function togglePanel(id) {
             const panel = document.getElementById('side-panel');
-            const content = document.getElementById('content');
-            content.innerHTML = db[id];
-            panel.classList.add('active');
+            const contentDiv = document.getElementById('panel-content');
+            
+            if(!window.db || !window.db[id]) {
+                console.error("Erro: Banco de dados não carregado ou ID inválido.");
+                return;
+            }
 
-            if(id === 'cdd') {
+            const data = window.db[id];
+            
+            contentDiv.innerHTML = `
+                <div class="slugline">${data.title}</div>
+                <div class="action-text">${data.text}</div>
+                ${data.link ? `<a href="${data.link}" class="cta-button" target="_blank">${data.label || 'VER MAIS'}</a>` : ''}
+            `;
+            
+            panel.classList.add('active');
+            document.getElementById('work-gallery').classList.remove('active');
+
+            if(data.isGame) {
                 setTimeout(() => {
+                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
                     const input = document.getElementById('game-input');
-                    input.addEventListener('keypress', (e) => {
-                        if(e.key === 'Enter') {
-                            const log = document.getElementById('log-output');
-                            log.innerHTML += `<br>> Executando: ${input.value.toUpperCase()}`;
-                            log.scrollTop = log.scrollHeight;
-                            input.value = '';
-                        }
-                    });
-                }, 100);
+                    if(input) input.focus();
+                }, 200);
             }
         }
 
-        function closePanel() {
-            document.getElementById('side-panel').classList.remove('active');
-        }
+        function openGallery() { closeAll(); document.getElementById('work-gallery').classList.add('active'); }
+        function closeAll() { document.getElementById('side-panel').classList.remove('active'); document.getElementById('work-gallery').classList.remove('active'); }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
+                const val = e.target.value;
+                if(window.processarJogo) window.processarJogo(val);
+                e.target.value = '';
+            }
+        });
     </script>
 </body>
 </html>
