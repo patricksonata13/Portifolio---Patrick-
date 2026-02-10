@@ -51,3 +51,15 @@ a {
     border-bottom: 1px dashed #ccc;
     padding-bottom: 4px;
 }
+
+/* Estilo para simular papel de roteiro na aba Patika */
+.action-text strong {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-text ul li {
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 4px;
+}
