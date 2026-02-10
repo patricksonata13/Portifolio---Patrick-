@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/hub.css">
 </head>
-<body><button id="audio-control" onclick="toggleMute()">🔊 SOM: ON</button>
+<body>
+    <button id="audio-control" onclick="toggleMute()">🔊 SOM: ON</button>
 
     <div class="nav-right">
-        <button onclick="togglePanel('cdd')">CDD</button>
+        <button onclick="togglePanel('cdd')">CDD 3001</button>
         <button onclick="togglePanel('patika')">Patika</button>
         <button onclick="togglePanel('aulas')">Aulas</button>
     </div>
@@ -23,11 +24,16 @@
             <button onclick="togglePanel('perfil')">Perfil</button>
             <button onclick="openGallery()">Trabalho</button>
         </div>
+        
+        <div class="badge-container" id="badges">
+            <div class="badge" title="Mestre da Sincronia">⏳</div>
+        </div>
     </div>
 
     <div id="side-panel" class="panel">
         <div class="close-x" onclick="closeAll()">X</div>
-        <div id="panel-content"></div>
+        <div id="panel-content">
+            </div>
     </div>
 
     <div id="work-gallery" class="full-overlay">
@@ -43,68 +49,82 @@
         </div>
     </div>
 
-    <script src="assets/js/database.js"></script>
-    <script src="assets/js/utils/local-storage.js"></script>
-    <script src="assets/js/jogo.js"></script>
+    <template id="cdd-template">
+        <div class="slugline">CDD - 3001 | SANKOFA OS</div>
+        <div id="sin-terminal">
+            <div id="log-output"></div>
+            <div class="input-line">
+                <span>></span>
+                <input type="text" id="game-input" autofocus autocomplete="off">
+            </div>
+        </div>
+        <div class="hud">SINCRONIA: <span id="sincronia-val">100%</span></div>
+    </template>
 
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/jogo.js"></script>
+    
     <script>
+        let isMuted = false;
+
+        function toggleMute() {
+            isMuted = !isMuted;
+            const btn = document.getElementById('audio-control');
+            btn.innerText = isMuted ? "🔇 SOM: OFF" : "🔊 SOM: ON";
+            btn.classList.toggle('muted', isMuted);
+            if (window.audioCtx) {
+                isMuted ? window.audioCtx.suspend() : window.audioCtx.resume();
+            }
+        }
+
         function togglePanel(id) {
             const panel = document.getElementById('side-panel');
             const contentDiv = document.getElementById('panel-content');
             
-            if(!window.db || !window.db[id]) {
-                console.error("Erro: Banco de dados não carregado ou ID inválido.");
-                return;
-            }
+            if(!window.db || !window.db[id]) return;
 
             const data = window.db[id];
             
-            contentDiv.innerHTML = `
-                <div class="slugline">${data.title}</div>
-                <div class="action-text">${data.text}</div>
-                ${data.link ? `<a href="${data.link}" class="cta-button" target="_blank">${data.label || 'VER MAIS'}</a>` : ''}
-            `;
+            if(data.isGame) {
+                contentDiv.innerHTML = document.getElementById('cdd-template').innerHTML;
+                setTimeout(() => {
+                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
+                    document.getElementById('game-input').focus();
+                }, 100);
+            } else {
+                contentDiv.innerHTML = `
+                    <div class="slugline">${data.title}</div>
+                    <div class="action-text">${data.text}</div>
+                    ${data.link ? `<a href="${data.link}" class="cta-button" target="_blank">${data.label}</a>` : ''}
+                `;
+            }
             
             panel.classList.add('active');
             document.getElementById('work-gallery').classList.remove('active');
-
-            if(data.isGame) {
-                setTimeout(() => {
-                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
-                    const input = document.getElementById('game-input');
-                    if(input) input.focus();
-                }, 200);
-            }
         }
 
-        function openGallery() { closeAll(); document.getElementById('work-gallery').classList.add('active'); }
-        function closeAll() { document.getElementById('side-panel').classList.remove('active'); document.getElementById('work-gallery').classList.remove('active'); }
+        function openGallery() { 
+            closeAll(); 
+            document.getElementById('work-gallery').classList.add('active'); 
+        }
+
+        function closeAll() { 
+            document.getElementById('side-panel').classList.remove('active'); 
+            document.getElementById('work-gallery').classList.remove('active'); 
+        }
 
         document.addEventListener('keydown', function(e) {
             if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
-                const val = e.target.value;
-                if(window.processarJogo) window.processarJogo(val);
+                if(window.processarJogo) window.processarJogo(e.target.value);
                 e.target.value = '';
             }
         });
+
+        // Checar conquistas ao carregar
+        window.onload = () => {
+            const conquistas = JSON.parse(localStorage.getItem('CDD_BADGES') || '[]');
+            if(conquistas.length > 0) document.getElementById('badges').classList.add('unlocked');
+        };
     </script>
 </body>
 </html>
-<script>
-    let isMuted = false;
-    function toggleMute() {
-        isMuted = !isMuted;
-        const btn = document.getElementById('audio-control');
-        
-        if (isMuted) {
-            btn.innerText = "🔇 SOM: OFF";
-            btn.classList.add('muted');
-            // Se o AudioContext existir no jogo, suspendemos ele
-            if (window.audioCtx) window.audioCtx.suspend();
-        } else {
-            btn.innerText = "🔊 SOM: ON";
-            btn.classList.remove('muted');
-            if (window.audioCtx) window.audioCtx.resume();
-        }
-    }
-</script>
