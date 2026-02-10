@@ -6,37 +6,97 @@
     <title>Patrick Sonata | Roteirista & Ator</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        body { background: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
-        .profile-section { display: flex; align-items: center; gap: 60px; max-width: 1100px; padding: 40px; flex-wrap: wrap; justify-content: center; }
-        .profile-pic { width: 320px; height: 320px; border-radius: 50%; border: 3px solid #c5a059; object-fit: cover; box-shadow: 0 0 30px rgba(197, 160, 89, 0.2); }
-        .bio { flex: 1; min-width: 300px; text-align: left; }
-        .bio h1 { margin: 0; font-size: 3rem; letter-spacing: -2px; color: #fff; }
-        .bio h2 { font-size: 1rem; color: #c5a059; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 20px; }
-        .bio p { font-size: 1.05rem; color: #aaa; line-height: 1.8; margin-bottom: 25px; text-align: justify; }
-        .nav-links { display: flex; gap: 15px; flex-wrap: wrap; }
-        .nav-links a { color: #fff; text-decoration: none; border: 1px solid #333; padding: 12px 25px; border-radius: 50px; font-size: 0.8rem; font-weight: bold; letter-spacing: 1px; transition: 0.3s; }
-        .nav-links a:hover { background: #c5a059; color: #000; border-color: #c5a059; transform: translateY(-3px); }
-        @media (max-width: 768px) { .bio { text-align: center; } .profile-section { gap: 30px; } .nav-links { justify-content: center; } }
+        .hero-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%);
+        }
+
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            filter: grayscale(100%);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+            transition: filter 0.5s ease;
+        }
+        
+        .profile-pic:hover { filter: grayscale(0%); }
+
+        .bio-content {
+            max-width: 700px;
+            text-align: center;
+        }
+
+        .bio-content h2 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.4em;
+            color: var(--apple-gray);
+            margin-bottom: 10px;
+        }
+
+        .bio-content h1 {
+            font-size: 3.5rem;
+            margin: 0 0 30px 0;
+            color: var(--apple-white);
+        }
+
+        .bio-text {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            color: #a1a1a6;
+            font-weight: 400;
+            margin-bottom: 50px;
+        }
+
+        .nav-minimal {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-minimal a {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--apple-gray);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding-bottom: 5px;
+            border-bottom: 1px solid transparent;
+        }
+
+        .nav-minimal a:hover {
+            color: var(--apple-white);
+            border-bottom: 1px solid var(--apple-white);
+        }
+
+        @media (max-width: 600px) {
+            .bio-content h1 { font-size: 2.5rem; }
+            .nav-minimal { gap: 20px; flex-direction: column; align-items: center; }
+        }
     </style>
 </head>
 <body>
-    <div class="profile-section">
+    <div class="hero-container">
         <img src="assets/images/perfil.jpg" alt="Patrick Sonata" class="profile-pic">
-        <div class="bio">
-            <h2>Roteirista & Comediante</h2>
-            <h1>PATRICK SONATA</h1>
-            <p>
-                Carioca, cria da Cidade de Deus, aos 37 anos consolida uma trajetória de duas décadas dedicada ao humor e ao teatro. 
-                Sua caminhada artística começou em projetos sociais e escolas públicas da comunidade, encontrando na comédia sua expressão mais potente. 
-                Estudou palhaçaria clássica e teatro de bonecos, linguagens que alimentam seu humor crítico e popular. 
-                No audiovisual, integrou a equipe de roteiristas do <strong>Zorra (TV Globo)</strong> e assina a dramaturgia da série <strong>"Pablo & Luisão"</strong>, 
-                sucesso no Globoplay com estreia na TV Globo prevista para 2026. É integrante do Coletivo Bonobando, onde segue pesquisando a potência do palco e da narrativa periférica.
+        <div class="bio-content">
+            <h2>Escritor • Ator • Criador</h2>
+            <h1>Patrick Sonata</h1>
+            <p class="bio-text">
+                Carioca da Cidade de Deus, roteirista do <strong>Zorra</strong> e da série <strong>Pablo & Luisão</strong> (Globoplay/Globo). 
+                Minha narrativa transita entre o humor ácido e o realismo periférico, lapidada por 20 anos de palco e coletividade.
             </p>
-            <div class="nav-links">
-                <a href="projetos/trabalhos/index.html">TRABALHOS</a>
-                <a href="projetos/patika/index.html">PATIKA</a>
-                <a href="projetos/aulas/index.html">AULAS</a>
-            </div>
+            <nav class="nav-minimal">
+                <a href="projetos/trabalhos/index.html">Trabalhos</a>
+                <a href="projetos/patika/index.html">Patika</a>
+                <a href="projetos/aulas/index.html">Aulas</a>
+            </nav>
         </div>
     </div>
 </body>
