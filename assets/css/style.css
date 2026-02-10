@@ -1,88 +1,21 @@
-:root {
-    --black: #1d1d1f;
-    --gray-text: #86868b;
-    --gray-bg: #f5f5f7;
-    --primary: #007aff;
-    --white: #ffffff;
-    --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+body { 
+    background-color: #000; 
+    color: #fff; 
+    font-family: sans-serif; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    height: 100vh; 
+    margin: 0; 
 }
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-    font-family: var(--font-main);
-    background-color: var(--white);
-    color: var(--black);
-    -webkit-font-smoothing: antialiased;
+nav { margin-bottom: 50px; }
+nav a { 
+    color: #c5a059; 
+    text-decoration: none; 
+    margin: 0 20px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    letter-spacing: 2px;
 }
-
-.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-/* Navbar Única */
-.navbar {
-    position: fixed; top: 0; width: 100%; z-index: 1000;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-}
-
-.nav-wrapper {
-    display: flex; justify-content: space-between; align-items: center; height: 52px;
-}
-
-.logo { font-weight: 600; text-decoration: none; color: var(--black); font-size: 19px; }
-
-.nav-groups { display: flex; align-items: center; gap: 30px; }
-
-.nav-main a {
-    text-decoration: none; color: var(--black); font-weight: 500; margin-left: 20px;
-}
-
-.nav-secondary {
-    display: flex; gap: 15px; border-left: 1px solid #d2d2d7; padding-left: 20px;
-}
-
-.nav-secondary a {
-    text-decoration: none; color: var(--gray-text); font-size: 13px; transition: 0.3s;
-}
-
-.nav-secondary a:hover { color: var(--primary); }
-
-/* Seção Sobre */
-.section-about { padding: 120px 0 80px; }
-
-.grid-about { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
-
-.badge { font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--primary); letter-spacing: 1px; }
-
-h1 { font-size: 48px; font-weight: 700; line-height: 1.1; margin: 15px 0; letter-spacing: -1px; }
-
-.blue-text { color: var(--primary); }
-
-.about-content p { font-size: 20px; color: var(--gray-text); margin-bottom: 20px; line-height: 1.5; }
-
-.profile-frame { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-
-/* Grid de Trabalhos */
-.section-works { padding: 80px 0; background: var(--gray-bg); }
-
-.label-section { font-size: 24px; margin-bottom: 30px; }
-
-.works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-
-.work-card {
-    position: relative; border-radius: 14px; overflow: hidden; background: #000; aspect-ratio: 16/9;
-}
-
-.work-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: 0.5s; }
-
-.work-card:hover img { transform: scale(1.05); opacity: 0.6; }
-
-.work-info { position: absolute; bottom: 20px; left: 20px; color: white; }
-
-/* Mobile */
-@media (max-width: 768px) {
-    .grid-about { grid-template-columns: 1fr; text-align: center; }
-    .nav-secondary { display: none; } /* Esconde secundários no mobile para limpar */
-    h1 { font-size: 32px; }
-}
+h1 { font-size: 4rem; letter-spacing: -2px; }
