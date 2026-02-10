@@ -2,33 +2,137 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>CDD GAMES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidade de Deus, Cidade do Diabo - O Jogo</title>
     <style>
-        body { background: #000; color: #fff; font-family: 'Courier Prime', monospace; padding: 40px; text-align: center; }
-        .game-canvas {
-            width: 800px;
-            height: 450px;
-            background: #111;
-            margin: 40px auto;
-            border: 2px solid #333;
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: 'Courier Prime', monospace;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Interface do Jogo */
+        #game-viewport {
+            flex-grow: 1;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #555;
+            transition: all 1s ease;
+            background: radial-gradient(circle, #1a1a1a 0%, #000 100%);
         }
+
+        /* Mudança de Época: Passado (Fazenda/Indígena) */
+        body.past #game-viewport {
+            background: radial-gradient(circle, #2d1e0a 0%, #050505 100%);
+            color: #d4a373;
+        }
+
+        .narrator-box {
+            position: absolute;
+            bottom: 40px;
+            width: 80%;
+            max-width: 800px;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid #333;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stats-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 40px;
+            z-index: 100;
+        }
+
+        .sync-meter {
+            color: #00ff00;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+        }
+
+        .sync-btn {
+            background: none;
+            border: 2px solid #fff;
+            color: #fff;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .sync-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        .character-sprite {
+            width: 150px;
+            height: 250px;
+            border: 2px dashed #444;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            text-align: center;
+        }
+
+        .back-link { position: fixed; top: 20px; left: 20px; color: #555; text-decoration: none; }
     </style>
 </head>
 <body>
-    <a href="../index.html" style="color:#555; text-decoration:none;">← VOLTAR</a>
-    <h1>CIDADE DE DEUS, CIDADE DO DIABO</h1>
-    <p>O JOGO. EM BREVE.</p>
 
-    <div class="game-canvas">
-        [ ÁREA DO GAME ENGINE ]
+    <a href="../index.html" class="back-link">← SAIR DO JOGO</a>
+
+    <div class="stats-bar">
+        <div class="sync-meter">SINCRONIA: 85%</div>
+        <button class="sync-btn" onclick="travelTime()">Sincronizar Ancestralidade</button>
+        <div>PERSONAGEM: BENTO</div>
     </div>
 
-    <div style="max-width: 600px; margin: 0 auto; text-align: justify;">
-        <p>Prepare-se para uma experiência imersiva de estratégia e narrativa nas ruas da CDD.</p>
+    <div id="game-viewport">
+        <div class="character-sprite" id="player">
+            [ PERSONAGEM <br> BENTO ]
+        </div>
+
+        <div class="narrator-box">
+            <p id="dialogue">"Este asfalto é novo, mas as vozes debaixo dele são antigas. Bento sente o chão tremer."</p>
+        </div>
     </div>
+
+    <script>
+        let isPast = false;
+
+        function travelTime() {
+            isPast = !isPast;
+            const body = document.body;
+            const dialogue = document.getElementById('dialogue');
+            const player = document.getElementById('player');
+
+            if (isPast) {
+                body.classList.add('past');
+                dialogue.innerText = "Sincronia Ancestral Ativa: Você está na Fazenda de Jacarepaguá (1800). O feitor se aproxima.";
+                player.style.borderColor = "#d4a373";
+                player.innerHTML = "[ BENTO <br> MODO CAÇADOR ]";
+            } else {
+                body.classList.remove('past');
+                dialogue.innerText = "Sincronia Rompida: Você voltou para a CDD (2026). A sirene da viatura ecoa no bloco.";
+                player.style.borderColor = "#444";
+                player.innerHTML = "[ BENTO <br> MODO RUA ]";
+            }
+        }
+    </script>
 </body>
 </html>
