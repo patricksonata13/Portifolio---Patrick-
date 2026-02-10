@@ -39,3 +39,15 @@ a {
     background: #ff4444; color: white; border: none;
     padding: 10px 20px; cursor: pointer; z-index: 1001;
 }
+
+/* Estilo para simular papel de roteiro na aba Patika */
+.action-text strong {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.action-text ul li {
+    margin-bottom: 8px;
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 4px;
+}
