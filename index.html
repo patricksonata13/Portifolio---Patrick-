@@ -6,138 +6,181 @@
     <title>Patrick Sonata | Roteirista & Ator</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        body { background: #000; color: #fff; margin: 0; overflow-x: hidden; }
+        html { scroll-behavior: smooth; }
+        body { 
+            background: #000; 
+            color: #fff; 
+            margin: 0; 
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; 
+            -webkit-font-smoothing: antialiased;
+        }
         
-        /* Menu Superior - Lado Direito (Em Desenvolvimento) */
+        /* Ecossistema - Canto Superior Direito */
         .top-nav {
-            position: absolute;
+            position: fixed;
             top: 40px;
-            right: 60px;
+            right: 50px;
             display: flex;
-            gap: 30px;
+            gap: 25px;
             z-index: 100;
         }
 
         .nav-dev {
-            font-size: 0.65rem;
-            color: #444; /* Mais discreto por estar em dev */
+            font-size: 0.6rem;
+            color: #444;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;
             text-decoration: none;
             transition: color 0.4s ease;
         }
 
-        .nav-dev:hover { color: #888; }
+        .nav-dev:hover { color: #fff; }
 
-        /* Container Central */
-        .main-content {
+        /* Seção Principal (Hero) */
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            padding: 0 20px;
             text-align: center;
+            background: radial-gradient(circle at center, #111 0%, #000 100%);
         }
 
         .profile-pic {
-            width: 110px;
-            height: 110px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             filter: grayscale(100%);
-            margin-bottom: 40px;
-            opacity: 0.7;
+            margin-bottom: 35px;
+            opacity: 0.6;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+        }
+        
+        .profile-pic:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
+
+        h1 { 
+            font-size: 2.5rem; 
+            font-weight: 500; 
+            letter-spacing: -0.03em; 
+            margin: 0 0 45px 0; 
         }
 
-        .bio-content h1 {
-            font-size: 2.8rem;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-            margin: 0 0 20px 0;
-        }
-
-        .bio-text {
-            font-size: 1rem;
-            line-height: 1.8;
-            color: #888;
-            max-width: 550px;
-            margin-bottom: 50px;
-            font-weight: 300;
-        }
-
-        /* Menu Principal Centralizado */
-        .main-nav {
-            display: flex;
-            gap: 60px;
-            margin-bottom: 80px;
-        }
-
+        /* Menu de Destaque Central */
+        .main-nav { display: flex; gap: 60px; }
+        
         .nav-main-link {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 0.3em;
+            letter-spacing: 0.35em;
             text-decoration: none;
-            padding-bottom: 8px;
+            padding-bottom: 6px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             transition: all 0.4s ease;
         }
 
-        .nav-main-link:hover {
+        .nav-main-link:hover { 
             border-bottom: 1px solid #fff;
-            transform: translateY(-2px);
+            color: #fff;
         }
 
-        .contact-footer {
-            position: absolute;
-            bottom: 40px;
+        /* Seção Sobre */
+        .about-section {
+            min-height: 100vh;
             display: flex;
-            gap: 40px;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 20px;
+            background: #000;
+        }
+
+        .about-content {
+            max-width: 550px;
+            text-align: center;
+        }
+
+        .about-content h2 {
+            font-size: 0.65rem;
+            letter-spacing: 0.5em;
+            color: #333;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.9;
+            color: #888;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        .about-content strong { color: #bbb; font-weight: 500; }
+
+        /* Rodapé de Contato */
+        .contact-footer {
+            padding: 80px 0;
+            text-align: center;
+            background: #000;
+            border-top: 1px solid #111;
         }
 
         .contact-item {
             font-size: 0.7rem;
-            color: #333;
+            color: #444;
             text-decoration: none;
-            letter-spacing: 0.1em;
-            transition: color 0.3s ease;
+            letter-spacing: 0.2em;
+            margin: 0 25px;
+            transition: color 0.3s;
         }
 
-        .contact-item:hover { color: #666; }
+        .contact-item:hover { color: #fff; }
 
         @media (max-width: 768px) {
-            .top-nav { position: relative; top: 40px; right: 0; justify-content: center; margin-bottom: 60px; }
+            .top-nav { position: relative; top: 30px; right: 0; justify-content: center; margin-bottom: -50px; }
             .main-nav { gap: 30px; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
+
     <nav class="top-nav">
         <a href="projetos/cdd/index.html" class="nav-dev">CDD</a>
         <a href="projetos/patika/index.html" class="nav-dev">Patika</a>
         <a href="projetos/aulas/index.html" class="nav-dev">Aulas</a>
     </nav>
 
-    <main class="main-content">
+    <section class="hero">
         <img src="assets/images/perfil.jpg" alt="Patrick Sonata" class="profile-pic">
-        
-        <div class="bio-content">
-            <h1>Patrick Sonata</h1>
-            <p class="bio-text">
-                Roteirista e Ator. Cria da Cidade de Deus. <br>
-                Trajetória marcada pelo humor, vivência e dramaturgia.
-            </p>
-        </div>
-
+        <h1>Patrick Sonata</h1>
         <nav class="main-nav">
             <a href="#sobre" class="nav-main-link">Sobre</a>
             <a href="projetos/trabalhos/index.html" class="nav-main-link">Trabalhos</a>
         </nav>
+    </section>
 
-        <div class="contact-footer">
-            <a href="mailto:contato@patricksonata.com.br" class="contact-item">contato@patricksonata.com.br</a>
-            <a href="https://instagram.com/patricksonata" target="_blank" class="contact-item">@patricksonata</a>
+    <section id="sobre" class="about-section">
+        <div class="about-content">
+            <h2>Bio</h2>
+            <p>
+                Patrick Sonata é roteirista e comediante carioca, cria da Cidade de Deus. Aos 37 anos, consolida uma trajetória de duas décadas dedicada ao humor e ao teatro.
+            </p>
+            <p>
+                No audiovisual, integrou a equipe de roteiristas do <strong>Zorra (TV Globo)</strong> e assina a dramaturgia da série <strong>"Pablo & Luisão"</strong> (Globoplay), com estreia na TV Globo prevista para 2026. 
+            </p>
+            <p>
+                Sua escrita transita entre o humor ácido e a crônica social, fundamentada em linguagens populares como a palhaçaria clássica e o teatro de bonecos.
+            </p>
         </div>
-    </main>
+    </section>
+
+    <footer class="contact-footer">
+        <a href="mailto:contato@patricksonata.com.br" class="contact-item">Email</a>
+        <a href="https://instagram.com/patricksonata" target="_blank" class="contact-item">Instagram</a>
+    </footer>
+
 </body>
 </html>
