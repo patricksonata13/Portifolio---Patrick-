@@ -42,3 +42,34 @@ document.addEventListener('DOMContentLoaded', function() {
 
     console.log('🎭 Patrick Sonata Portfolio loaded');
 });
+// Função para abrir o painel com o efeito de desfoque (Blur)
+function openTab(abaId) {
+    const panel = document.getElementById('side-panel');
+    const mainWrapper = document.getElementById('main-wrapper'); // O container principal do seu site
+    const content = window.db[abaId];
+
+    if (content) {
+        // Insere o conteúdo no painel
+        const panelBody = document.getElementById('panel-content');
+        
+        // Se for SOBRE ou PERFIL, aplica a classe de roteiro
+        if (abaId === 'sobre' || abaId === 'perfil') {
+            panelBody.innerHTML = `<div class="script-content">${content.text}</div>`;
+        } else {
+            panelBody.innerHTML = `<h2>${content.title}</h2><p>${content.text}</p>`;
+        }
+
+        // Ativa o painel e o desfoque do fundo
+        panel.classList.add('active');
+        if (mainWrapper) mainWrapper.classList.add('blur');
+    }
+}
+
+// Função para fechar o painel
+function closeTab() {
+    const panel = document.getElementById('side-panel');
+    const mainWrapper = document.getElementById('main-wrapper');
+    
+    panel.classList.remove('active');
+    if (mainWrapper) mainWrapper.classList.remove('blur');
+}
