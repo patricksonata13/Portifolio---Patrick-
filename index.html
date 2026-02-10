@@ -14,6 +14,7 @@
             height: 100vh; overflow: hidden; 
         }
 
+        /* Fundo com a foto fixa */
         .hero-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -25,6 +26,7 @@
         }
         h1 { font-size: 1.6em; letter-spacing: 5px; font-weight: 400; text-align: center; }
 
+        /* Navegação */
         .nav-center { display: flex; gap: 30px; margin-top: 25px; z-index: 100; }
         .nav-right {
             position: fixed; top: 40px; right: 40px;
@@ -40,6 +42,7 @@
         }
         button:hover, button.active-btn { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
+        /* Painel Lateral (Estilo Roteiro) */
         .panel {
             position: fixed; top: 0; right: -100%; width: 40%; min-width: 350px; height: 100vh;
             background: #fff; color: #000; padding: 60px 40px;
@@ -50,6 +53,7 @@
 
         .slugline { font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; margin-bottom: 20px; font-size: 1.1em; }
         .action-text { line-height: 1.5; margin-bottom: 25px; font-size: 16px; text-align: justify; }
+        
         .cta-button {
             display: inline-block; padding: 12px 20px; border: 2px solid #000;
             color: #000; text-decoration: none; font-weight: bold; text-transform: uppercase;
@@ -57,6 +61,7 @@
         }
         .cta-button:hover { background: #000; color: #fff; }
 
+        /* Galeria de Trabalho */
         .full-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.98); display: none; z-index: 400;
@@ -68,10 +73,8 @@
 
         .close-x {
             position: absolute; top: 30px; left: 30px; font-size: 20px;
-            cursor: pointer; font-weight: bold;
+            cursor: pointer; font-weight: bold; font-family: sans-serif;
         }
-
-        .scene-heading { font-weight: bold; margin-bottom: 10px; color: #000; text-transform: uppercase; }
 
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         .blink { animation: blink 1s infinite; }
@@ -91,7 +94,7 @@
     </div>
 
     <div class="hero-bg">
-        <img src="assets/images/fotodeperfil.jpg" class="profile-main-img">
+        <img src="assets/images/fotodeperfil.jpg" class="profile-main-img" alt="Patrick Sonata">
         <h1>PATRICK SONATA</h1>
         <div class="nav-center">
             <button onclick="togglePanel('sobre')">Sobre</button>
@@ -109,12 +112,12 @@
         <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
         <div class="gallery-container">
             <h2 style="margin-bottom: 40px; letter-spacing: 5px;">PORTFÓLIO VISUAL</h2>
-            <img src="assets/images/works/pabloeluisao.webp">
-            <img src="assets/images/works/zorralogo.jpg">
-            <img src="assets/images/works/cidadecorreriapeca.webp">
-            <img src="assets/images/works/doccidadecorreria.webp">
-            <img src="assets/images/works/originais.webp">
-            <img src="assets/images/works/jongo.webp">
+            <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
+            <img src="assets/images/works/zorralogo.jpg" alt="Zorra">
+            <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
+            <img src="assets/images/works/doccidadecorreria.webp" alt="Documentário">
+            <img src="assets/images/works/originais.webp" alt="Originais">
+            <img src="assets/images/works/jongo.webp" alt="Jongo">
         </div>
     </div>
 
@@ -139,25 +142,25 @@
                     <div id="log-output">
                         <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
                         <p>> SANKOFA-PROTOCOL: Ativo.</p>
-                        <p>> STATUS: Axé em 88%. Memória Genética: Estável.</p>
+                        <p>> STATUS: Sincronia em <span id="sincronia-val">65%</span>.</p>
                     </div>
                     <div style="margin-top:10px; display:flex; border-top:1px solid #222; padding-top:5px;">
-                        <span>AXÉ_SCAN></span>
-                        <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Nome...">
+                        <span style="color:#ffae00;">AXÉ_SCAN></span>
+                        <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Digite HELP..." autofocus>
                     </div>
                 </div>`,
                 isGame: true
             },
             patika: {
                 title: "INT. PATIKA - LABORATÓRIO",
-                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na estrutura de cenas.",
+                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na organização de batidas dramáticas e estrutura de cenas.",
                 link: "projetos/patika/index.html",
                 label: "ABRIR FERRAMENTA",
                 isGame: false
             },
             aulas: {
                 title: "INT. SALA DE AULA - FORMATIVO",
-                text: "Conteúdo pedagógico focado na formação de novos roteiristas.",
+                text: "Conteúdo pedagógico e mentorias focadas na formação de novos roteiristas periféricos.",
                 link: "projetos/aulas/index.html",
                 label: "ACESSAR AULAS",
                 isGame: false
@@ -177,9 +180,13 @@
             panel.classList.add('active');
             document.getElementById('work-gallery').classList.remove('active');
 
-            // Se for a aba CDD, ativa o alerta do terminal
-            if(db[id].isGame && window.iniciarTerminalCDD) {
-                window.iniciarTerminalCDD();
+            // Inicializa o terminal se for a aba CDD
+            if(db[id].isGame) {
+                setTimeout(() => {
+                    const input = document.getElementById('game-input');
+                    if(input) input.focus();
+                    if(window.iniciarTerminalCDD) window.iniciarTerminalCDD();
+                }, 100);
             }
         }
 
@@ -192,6 +199,16 @@
             document.getElementById('side-panel').classList.remove('active');
             document.getElementById('work-gallery').classList.remove('active');
         }
+
+        // Listener global para capturar o Enter no input do jogo, mesmo sendo injetado dinamicamente
+        document.addEventListener('keydown', function(e) {
+            if (e.target && e.target.id === 'game-input' && e.key === 'Enter') {
+                if(typeof processarJogo === "function") {
+                    processarJogo(e.target.value);
+                    e.target.value = '';
+                }
+            }
+        });
     </script>
 </body>
 </html>
