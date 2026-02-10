@@ -7,92 +7,174 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
         
-        body { background-color: #000; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }
-        
-        /* Layout Principal */
-        .main-layout { display: flex; flex-direction: row; width: 100%; max-width: 1200px; margin: 0 auto; flex-grow: 1; }
+        * { box-sizing: border-box; }
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Courier Prime', monospace; 
+            margin: 0; 
+            height: 100vh; 
+            overflow: hidden; 
+        }
 
-        /* Coluna Central: Perfil e Sobre */
-        .center-column { flex: 1; padding: 60px 20px; text-align: center; }
-        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; }
-        .script-box { background: #fff; color: #000; padding: 30px; text-align: left; margin-top: 30px; font-size: 0.9em; line-height: 1.2; }
-        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        /* Estrutura de Navegação Superior */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 50px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+        }
 
-        /* Coluna Direita: Abas */
-        .right-tabs { width: 200px; padding: 60px 20px; border-left: 1px solid #222; display: flex; flex-direction: column; gap: 20px; }
-        .tab-button { background: none; border: 1px solid #444; color: #888; padding: 10px; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; text-align: left; }
-        .tab-button:hover, .tab-button.active { color: #fff; border-color: #fff; background: #111; }
+        /* Abas do Centro */
+        .center-nav {
+            display: flex;
+            gap: 30px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
 
-        /* Conteúdo Dinâmico (Carrosséis) */
-        .content-display { display: none; margin-top: 40px; padding: 20px; border-top: 1px solid #333; width: 100%; }
-        .content-display.active { display: block; animation: fadeIn 0.5s; }
+        /* Abas da Direita (Lado a lado) */
+        .right-nav {
+            display: flex;
+            gap: 20px;
+            margin-left: auto;
+        }
 
-        .carousel-wrapper { display: flex; overflow-x: auto; gap: 15px; padding-bottom: 10px; scroll-snap-type: x mandatory; }
-        .carousel-item { flex: 0 0 300px; scroll-snap-align: center; }
-        .carousel-item img { width: 100%; height: 200px; object-fit: cover; border-radius: 4px; }
+        button {
+            background: none;
+            border: none;
+            color: #444;
+            font-family: 'Courier Prime', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 5px 0;
+        }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        button:hover, button.active {
+            color: #fff;
+        }
 
+        /* --- PÁGINAS QUE SOBEM (FINAL DRAFT) --- */
+        .page {
+            position: fixed;
+            bottom: -110%; /* Escondido */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            height: 80vh;
+            background: #fff;
+            color: #000;
+            padding: 60px;
+            transition: bottom 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            overflow-y: auto;
+            box-shadow: 0 -20px 60px rgba(0,0,0,0.7);
+            z-index: 50;
+        }
+
+        .page.active {
+            bottom: 0;
+        }
+
+        .scene-heading { font-weight: bold; text-transform: uppercase; margin-bottom: 25px; border-bottom: 2px solid #000; font-size: 1.2em; }
+        .action { margin-bottom: 20px; line-height: 1.4; font-size: 17px; }
+        .profile-img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; border: 2px solid #000; }
+
+        /* Estilo das Imagens nos Trabalhos */
+        .gallery { display: flex; overflow-x: auto; gap: 15px; margin-top: 20px; }
+        .gallery img { height: 250px; border: 1px solid #000; }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            .main-layout { flex-direction: column; }
-            .right-tabs { width: 100%; flex-direction: row; border-left: none; border-bottom: 1px solid #222; order: -1; overflow-x: auto; }
+            header { flex-direction: column; padding: 15px; gap: 15px; }
+            .center-nav, .right-nav { position: static; transform: none; gap: 15px; font-size: 12px; }
+            .page { padding: 30px; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-layout">
-        <div class="center-column">
-            <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
-            <h1>Patrick Sonata</h1>
-            <div style="color:#666; letter-spacing: 3px;">ROTEIRISTA // ATOR</div>
-
-            <div class="script-box">
-                <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
-                <div class="action">PATRICK SONATA revisa a cena. O conteúdo dos trabalhos aparece ao lado.</div>
-            </div>
-
-            <div id="cdd" class="content-display">
-                <div class="scene-heading">PROJETO: CDD (CIDADE CORRERIA)</div>
-                <div class="carousel-wrapper">
-                    <div class="carousel-item"><img src="assets/images/works/cidadecorreriapeca.webp"></div>
-                    <div class="carousel-item"><img src="assets/images/works/doccidadecorreria.webp"></div>
-                </div>
-            </div>
-
-            <div id="patika" class="content-display">
-                <div class="scene-heading">PROJETO: PATIKA (PABLO & LUISÃO)</div>
-                <div class="carousel-wrapper">
-                    <div class="carousel-item"><img src="assets/images/works/pabloeluisao.webp"></div>
-                    <div class="carousel-item"><img src="assets/images/works/originais.webp"></div>
-                </div>
-            </div>
-
-            <div id="aulas" class="content-display">
-                <div class="scene-heading">PROJETO: AULAS / OUTROS</div>
-                <div class="carousel-wrapper">
-                    <div class="carousel-item"><img src="assets/images/works/jongo.webp"></div>
-                    <div class="carousel-item"><img src="assets/images/works/humornegro.webp"></div>
-                </div>
-            </div>
+    <header>
+        <div class="center-nav">
+            <button onclick="reveal('perfil')">Perfil</button>
+            <button onclick="reveal('sobre')">Sobre</button>
+            <button onclick="reveal('trabalho')">Trabalho</button>
         </div>
 
-        <div class="right-tabs">
-            <button class="tab-button" onclick="showContent('cdd')">CDD</button>
-            <button class="tab-button" onclick="showContent('patika')">PATIKA</button>
-            <button class="tab-button" onclick="showContent('aulas')">AULAS</button>
+        <div class="right-nav">
+            <button onclick="reveal('cdd')">CDD</button>
+            <button onclick="reveal('patika')">Patika</button>
+            <button onclick="reveal('aulas')">Aulas</button>
+        </div>
+    </header>
+
+    <div id="perfil" class="page">
+        <div class="scene-heading">INT. PERFIL - DIA</div>
+        <img src="assets/images/fotodeperfil.jpg" class="profile-img">
+        <div class="action">PATRICK SONATA. Ator e Roteirista carioca.</div>
+        <div class="action">Um rosto que carrega o texto e um texto que revela a imagem.</div>
+    </div>
+
+    <div id="sobre" class="page">
+        <div class="scene-heading">INT. SOBRE - NOITE</div>
+        <div class="action">Dramaturgo formado pelo corre diário do Rio de Janeiro. Patrick mescla a técnica do roteiro com a potência da atuação.</div>
+        <div class="action">Sempre focado em narrativas que transformam a vivência em cena.</div>
+    </div>
+
+    <div id="trabalho" class="page">
+        <div class="scene-heading">EXT. PORTFÓLIO GERAL - DIA</div>
+        <div class="action">Aqui reside a coletânea de obras. Selecione os itens específicos na navegação para detalhes.</div>
+    </div>
+
+    <div id="cdd" class="page">
+        <div class="scene-heading">PROJETO: CIDADE CORRERIA</div>
+        <div class="action">Abaixo, os registros da obra que traduz a pulsação periférica.</div>
+        <div class="gallery">
+            <img src="assets/images/works/cidadecorreriapeca.webp">
+            <img src="assets/images/works/doccidadecorreria.webp">
+        </div>
+    </div>
+
+    <div id="patika" class="page">
+        <div class="scene-heading">PROJETO: PABLO & LUISÃO</div>
+        <div class="action">Colaboração e roteiro para a série original.</div>
+        <div class="gallery">
+            <img src="assets/images/works/pabloeluisao.webp">
+            <img src="assets/images/works/originais.webp">
+        </div>
+    </div>
+
+    <div id="aulas" class="page">
+        <div class="scene-heading">OUTROS PROJETOS / AULAS</div>
+        <div class="action">Performance, Jongo e Humor Negro.</div>
+        <div class="gallery">
+            <img src="assets/images/works/jongo.webp">
+            <img src="assets/images/works/humornegro.webp">
+            <img src="assets/images/works/pelada.webp">
         </div>
     </div>
 
     <script>
-        function showContent(id) {
-            // Esconde tudo
-            document.querySelectorAll('.content-display').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
-            
-            // Mostra o clicado
-            document.getElementById(id).classList.add('active');
-            event.currentTarget.classList.add('active');
+        function reveal(id) {
+            const allPages = document.querySelectorAll('.page');
+            const targetPage = document.getElementById(id);
+            const isAlreadyActive = targetPage.classList.contains('active');
+
+            // Fecha todas as páginas
+            allPages.forEach(p => p.classList.remove('active'));
+
+            // Se não estava aberta, abre. Se já estava, ela fecha (toggle)
+            if (!isAlreadyActive) {
+                targetPage.classList.add('active');
+            }
         }
     </script>
 
