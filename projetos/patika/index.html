@@ -2,12 +2,126 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patika - Editor de Roteiro</title>
-    <style>body { background: #1a1a1a; color: #fff; font-family: Courier; padding: 50px; }</style>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
+
+        body {
+            background-color: #222;
+            color: #333;
+            font-family: 'Courier Prime', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Barra de Ferramentas */
+        .toolbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #111;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 1000;
+            border-bottom: 1px solid #444;
+        }
+
+        .toolbar button {
+            background: #333;
+            color: #eee;
+            border: 1px solid #555;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px;
+        }
+
+        .toolbar button:hover { background: #444; color: #fff; }
+
+        /* A "Folha" de Papel */
+        .paper {
+            background: white;
+            width: 210mm; /* Tamanho A4 */
+            min-height: 297mm;
+            padding: 25mm 25mm 25mm 35mm; /* Margens padrão de roteiro */
+            margin-top: 60px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            outline: none;
+            white-space: pre-wrap;
+            font-size: 12pt;
+            line-height: 1.2;
+            color: #000;
+        }
+
+        /* Estilização via classes que o JS vai aplicar */
+        .scene { font-weight: bold; text-transform: uppercase; margin-top: 2em; display: block; }
+        .character { text-align: center; width: 50%; margin: 1em auto 0 auto; text-transform: uppercase; display: block; }
+        .dialogue { text-align: center; width: 70%; margin: 0 auto 1em auto; display: block; }
+        .action { margin-top: 1em; display: block; }
+
+        .back-hub {
+            position: fixed; bottom: 20px; left: 20px;
+            color: #fff; text-decoration: none; font-size: 12px;
+        }
+    </style>
 </head>
 <body>
-    <h1>PATIKA</h1>
-    <p>Página em desenvolvimento: Sua ferramenta de escrita estruturada.</p>
-    <a href="../../index.html" style="color: yellow;">← Voltar ao Hub</a>
+
+    <div class="toolbar">
+        <button onclick="format('scene')">CENA (INT/EXT)</button>
+        <button onclick="format('action')">AÇÃO</button>
+        <button onclick="format('character')">PERSONAGEM</button>
+        <button onclick="format('dialogue')">DIÁLOGO</button>
+        <button onclick="saveDoc()" style="background: #28a745; border: none;">SALVAR</button>
+    </div>
+
+    <div id="editor" class="paper" contenteditable="true">
+INT. ESCRITÓRIO DO PATRICK - DIA
+
+PATRICK está sentado em frente ao MacBook. Ele sorri.
+
+PATRICK
+Agora o Patika está ganhando vida.
+    </div>
+
+    <a href="../../index.html" class="back-hub">← VOLTAR AO HUB</a>
+
+    <script>
+        // Função para aplicar a formatação
+        function format(type) {
+            const selection = window.getSelection();
+            if (!selection.rangeCount) return;
+
+            const range = selection.getRangeAt(0);
+            const span = document.createElement('span');
+            span.className = type;
+            
+            // Se for personagem, já coloca em Caps
+            if(type === 'character' || type === 'scene') {
+                span.style.textTransform = 'uppercase';
+            }
+
+            range.surroundContents(span);
+        }
+
+        // Salvar no navegador (LocalStorage)
+        function saveDoc() {
+            const content = document.getElementById('editor').innerHTML;
+            localStorage.setItem('patika_draft', content);
+            alert("Roteiro salvo no seu navegador!");
+        }
+
+        // Carregar ao abrir
+        window.onload = () => {
+            const saved = localStorage.getItem('patika_draft');
+            if (saved) document.getElementById('editor').innerHTML = saved;
+        };
+    </script>
 </body>
 </html>
