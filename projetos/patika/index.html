@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA | Workflow de Roteiro</title>
+    <title>PATIKA | O Roteiro Profissional Livre</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="css/patika-app.css">
 </head>
@@ -11,53 +11,36 @@
 
     <nav class="app-header">
         <div class="app-container">
-            <a href="../../index.html" class="back-btn">← Voltar</a>
+            <a href="../../index.html" class="back-btn">← Sair do Editor</a>
             <div class="project-info">
-                <span class="status-dot"></span>
-                <strong>Projeto:</strong> <span id="project-name">Sem Título</span>
+                <strong>PATIKA</strong> <span class="divider">|</span> <span id="project-name">Roteiro Sem Título</span>
             </div>
-            <div class="user-badge">Head: Patrick Sonata</div>
+            <div class="app-actions">
+                <button class="btn-tool" onclick="window.print()">Gerar PDF (Padrão Indústria)</button>
+            </div>
         </div>
     </nav>
 
-    <main class="app-layout">
-        <aside class="app-sidebar">
-            <nav class="sidebar-nav">
-                <div class="nav-section">
-                    <small>DESENVOLVIMENTO</small>
-                    <a href="#" class="active">Bíblia da Série</a>
-                    <a href="#">Arco da Temporada</a>
-                </div>
-                <div class="nav-section">
-                    <small>SALA DE ROTEIRO</small>
-                    <a href="#">Episódios / Escaletas</a>
-                    <a href="#">Personagens</a>
-                    <a href="#">Mapa de Conflitos</a>
-                </div>
-            </nav>
-            <div class="sidebar-footer">
-                <button class="btn-pitch">Exportar Deck de Pitch</button>
-            </div>
+    <main class="editor-main">
+        <aside class="element-picker">
+            <div class="element-hint">Pressione [Tab] para mudar</div>
+            <button class="el-btn" data-type="slugline">CENA (INT/EXT)</button>
+            <button class="el-btn" data-type="action">AÇÃO</button>
+            <button class="el-btn" data-type="character">PERSONAGEM</button>
+            <button class="el-btn" data-type="parenthetical">PARÊNTESES</button>
+            <button class="el-btn" data-type="dialogue">FALA</button>
         </aside>
 
-        <section class="app-editor">
-            <div class="editor-header">
-                <h2>Bíblia da Série</h2>
-                <p>Defina o universo e a espinha dorsal da sua narrativa.</p>
-            </div>
-            
-            <div class="workflow-cards">
-                <div class="card">
-                    <label>Logline (O Coração da Ideia)</label>
-                    <textarea placeholder="Em uma frase, do que se trata a história?"></textarea>
-                </div>
-                <div class="card">
-                    <label>Tema Central</label>
-                    <textarea placeholder="Sobre o que a série realmente fala (além da trama)?"></textarea>
-                </div>
+        <section class="paper-container">
+            <div id="script-editor" contenteditable="true" class="script-page">
+                <div class="slugline">INT. SALA DE ROTEIRO - DIA</div>
+                <div class="action">Patrick Sonata digita freneticamente. O código da PATIKA ganha vida na tela do MacBook Air.</div>
+                <div class="character">PATRICK</div>
+                <div class="dialogue">Agora o Brasil vai ter um editor de roteiro profissional e gratuito.</div>
             </div>
         </section>
     </main>
 
+    <script src="js/editor-engine.js"></script>
 </body>
 </html>
