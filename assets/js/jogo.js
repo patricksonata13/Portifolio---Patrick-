@@ -1,12 +1,10 @@
 const db_afro = {
-    'MÃE JUREMA': "MEMÓRIA VIVA: 85 anos. 'Reinventar a vida dói, mas é nossa única tecnologia'.",
-    'CAPITÃO RAFA': "ESTRATEGISTA: Ex-fuzileiro. Usa 'Táticas de Favela'. 'A CDD não cai'.",
-    'DRA LÍVIA': "MÉDICA DO LIXO: Cura com mofo e oração quântica. 'O Axé fecha a ferida'.",
-    'ORIXÁ-TEC': "KAYODÊ: Circuitos de ouro na pele. Fala com máquinas via cânticos Yorubá.",
-    'IBEJIS': "AS GÊMEAS: Yemi (Corpo) e Toke (Espírito). Vêem o rastro dos ancestrais.",
-    'BARÕES': "FACÇÃO: Controlam a água no Nova América. Relação: Tensa.",
-    'QUEIMADOS': "MUTANTES: Vivem no Gramacho. Mestres da reciclagem.",
-    'AXÉ': "SISTEMA: Sua força vital. 88% e estável."
+    'MÃE JUREMA': "MÃE JUREMA: 'O mundo morreu lá fora, mas aqui a gente reinventou a vida. E reinventar dói.'",
+    'CAPITÃO RAFA': "CAPITÃO RAFA: 'Treino todos acima de 12 anos. Se a Neocorp vier, vai sangrar no asfalto.'",
+    'DRA LÍVIA': "DRA LÍVIA: 'Antibiótico de mofo e oração. Na CDD, a cura é um ato político.'",
+    'ORIXÁ-TEC': "KAYODÊ: 'Não é chip, é axé. Eu falo com as máquinas porque elas lembram de quem as construiu.'",
+    'BARÕES': "INFO: Barões da Chuva. Controlam a água. Gananciosos, mas necessários para o comércio.",
+    'HELP': "SISTEMA: Digite o nome de um personagem ou facção para interceptar mensagens."
 };
 
 function processarJogo(cmd) {
@@ -15,48 +13,36 @@ function processarJogo(cmd) {
     
     let inputUpper = cmd.toUpperCase().trim();
     let p = document.createElement('p');
-    p.style.margin = "8px 0";
-    p.style.borderLeft = "2px solid #ffae00";
-    p.style.paddingLeft = "8px";
+    p.style.cssText = "margin:8px 0; border-left:2px solid #ffae00; padding-left:8px; color:#fff;";
 
     if (db_afro[inputUpper]) {
-        p.innerHTML = `<span style="color:#ffae00">> REGISTRO:</span> ${db_afro[inputUpper]}`;
-    } else if (inputUpper === 'HELP' || inputUpper === 'AJUDA') {
-        p.innerHTML = `<span style="color:#00ffff">> BIO-SCANNER:</span> Tente 'Mãe Jurema', 'Orixá-Tec' ou 'Barões'.`;
+        p.innerHTML = `<span style="color:#ffae00">> TRANSMISSÃO:</span> ${db_afro[inputUpper]}`;
     } else {
-        p.innerHTML = `<span style="color:#ff4444">> SIN-417:</span> DNA não identificado. Digite 'HELP'.`;
+        p.innerHTML = `<span style="color:#ff4444">> ERRO:</span> Identidade não encontrada na rede Sankofa.`;
     }
     
     out.appendChild(p);
     const term = document.getElementById('sin-terminal');
-    term.scrollTop = term.scrollHeight;
+    if(term) term.scrollTop = term.scrollHeight;
 }
 
-// ALERTA DE MISSÃO AUTOMÁTICO
-function dispararMissao() {
+// Observador de segurança: Só age se o terminal aparecer na tela
+const observer = new MutationObserver(() => {
     const out = document.getElementById('log-output');
     if (out && !document.getElementById('missao-ativa')) {
         setTimeout(() => {
             let m = document.createElement('p');
             m.id = 'missao-ativa';
-            m.style.color = "#ff4444";
-            m.style.fontWeight = "bold";
-            m.style.animation = "blink 1s infinite";
-            m.innerHTML = `⚠️ [ALERTA]: Mãe Jurema solicita sua presença no Muro da Vista. Tropas da Neocorp avançam pelo Canal.`;
+            m.style.cssText = "color:#ff4444; font-weight:bold; animation:blink 1s infinite;";
+            m.innerHTML = `⚠️ [ALERTA]: Mãe Jurema solicita sua presença. Tropas detectadas.`;
             out.appendChild(m);
-            document.getElementById('sin-terminal').scrollTop = out.scrollHeight;
-        }, 1500);
-    }
-}
-
-// Escutador para cliques nas subabas ou aba principal
-document.addEventListener('click', function(e) {
-    // Se clicar em qualquer elemento que abra o conteúdo da CDD
-    if (e.target.innerText.includes('CDD') || e.target.id.includes('cdd')) {
-        dispararMissao();
+        }, 1000);
     }
 });
 
+observer.observe(document.body, { childList: true, subtree: true });
+
+// Teclado
 document.addEventListener('keydown', function(e) {
     if (e.target.id === 'game-input' && e.key === 'Enter') {
         processarJogo(e.target.value);
@@ -64,13 +50,10 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Injeção automática de CSS para o alerta piscante
-const styleMissao = document.createElement('style');
-styleMissao.innerHTML = `
-    @keyframes blink {
-        0% { opacity: 1; }
-        50% { opacity: 0.3; }
-        100% { opacity: 1; }
-    }
-`;
-document.head.appendChild(styleMissao);
+// Estilo de animação isolado
+if (!document.getElementById('cdd-style')) {
+    const s = document.createElement('style');
+    s.id = 'cdd-style';
+    s.innerHTML = `@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }`;
+    document.head.appendChild(s);
+}
