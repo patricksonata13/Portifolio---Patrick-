@@ -24,7 +24,6 @@
             <button onclick="togglePanel('perfil')">Perfil</button>
             <button onclick="openGallery()">Trabalho</button>
         </div>
-        <div class="badge-container" id="badges"><div class="badge">⏳</div></div>
     </div>
 
     <div id="side-panel" class="panel">
@@ -36,9 +35,7 @@
         <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
         <div class="gallery-container">
             <h2>PORTFÓLIO VISUAL</h2>
-            <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
-            <img src="assets/images/works/zorralogo.jpg" alt="Zorra">
-            <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
+            <p>Carregando galeria...</p>
         </div>
     </div>
 
@@ -46,12 +43,8 @@
         <div class="slugline">CDD - 3001 | SANKOFA OS</div>
         <div id="sin-terminal">
             <div id="log-output"></div>
-            <div class="input-line">
-                <span>></span>
-                <input type="text" id="game-input" autofocus autocomplete="off">
-            </div>
+            <div class="input-line"><span>></span><input type="text" id="game-input" autofocus autocomplete="off"></div>
         </div>
-        <div class="hud">SINCRONIA: <span id="sincronia-val">100%</span></div>
     </template>
 
     <script src="assets/js/database.js"></script>
@@ -78,7 +71,6 @@
                 contentDiv.innerHTML = `<div class="slugline">${data.title}</div><div class="action-text">${data.text}</div>`;
             }
             panel.classList.add('active');
-            document.getElementById('work-gallery').classList.remove('active');
         }
 
         function openGallery() { 
@@ -87,8 +79,7 @@
         }
 
         function closeAll() { 
-            document.getElementById('side-panel').classList.remove('active'); 
-            document.getElementById('work-gallery').classList.remove('active'); 
+            document.querySelectorAll('.panel, .full-overlay').forEach(el => el.classList.remove('active'));
         }
 
         document.addEventListener('keydown', (e) => {
