@@ -2,35 +2,35 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>PATIKA | Focus Mode</title>
+    <title>PATIKA | Professional Screenwriting</title>
     <link rel="stylesheet" href="css/patika-app.css">
 </head>
 <body class="patika-app">
 
     <header class="app-header">
-        <div>
+        <div class="header-left">
             <span class="logo-patika">PATIKA</span>
-            <span class="project-name">— roteiro_v1.sdk</span>
+            <span id="project-name" class="project-name">roteiro_v1.sdk</span>
         </div>
-        <div class="header-actions">
+        <div class="header-right">
+            <button class="btn-tool" onclick="localStorage.clear(); location.reload();">Novo Roteiro</button>
             <button class="btn-export" onclick="window.print()">Exportar PDF</button>
         </div>
     </header>
 
     <main class="editor-main">
         <aside class="element-picker">
-            <button class="el-btn" title="Cena">S</button>
-            <button class="el-btn" title="Ação">A</button>
-            <button class="el-btn" title="Personagem">P</button>
-            <button class="el-btn" title="Fala">F</button>
+            <div class="tool-tip">TAB</div>
+            <button class="el-btn">S</button>
+            <button class="el-btn">A</button>
+            <button class="el-btn">P</button>
+            <button class="el-btn">F</button>
         </aside>
 
         <section class="paper-container">
             <div id="script-editor" contenteditable="true" class="script-page">
-<div class="slugline">INT. QUARTO DO PATRICK - NOITE</div>
-<div class="action">A luz do monitor reflete nos olhos de Patrick. O editor é limpo, o foco é total.</div>
-<div class="character">PATRICK</div>
-<div class="dialogue">Agora sim. Sem distrações. Apenas a história.</div>
+                <div class="slugline">INT. SALA DE TRABALHO - DIA</div>
+                <div class="action">Comece a escrever seu roteiro profissional aqui. Use Tab para mudar os elementos.</div>
             </div>
         </section>
     </main>

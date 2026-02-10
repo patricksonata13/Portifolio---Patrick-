@@ -1,57 +1,59 @@
 /**
- * PATIKA Engine - O Cérebro do Editor
- * Inteligência de Teclas: Tab e Enter
+ * PATIKA Engine v2.0 - Real Usage
+ * Lógica: Teclas + Salvamento Automático Local
  */
 
 const editor = document.getElementById('script-editor');
+const projectNameDisplay = document.getElementById('project-name');
+
+// 1. CARREGAR AO ABRIR
+window.addEventListener('DOMContentLoaded', () => {
+    const savedScript = localStorage.getItem('patika_current_script');
+    if (savedScript) {
+        editor.innerHTML = savedScript;
+    }
+});
+
+// 2. SALVAR AUTOMÁTICO
+function autoSave() {
+    localStorage.setItem('patika_current_script', editor.innerHTML);
+    // Simula um "Salvando..." discreto
+    projectNameDisplay.innerText = "roteiro_v1.sdk (Salvo)";
+    setTimeout(() => {
+        projectNameDisplay.innerText = "roteiro_v1.sdk";
+    }, 2000);
+}
 
 editor.addEventListener('keydown', (e) => {
-    // 1. Atalho de TAB (Mudar Elemento)
+    // Atalho TAB (Mudar Elemento)
     if (e.key === 'Tab') {
         e.preventDefault();
         const selection = window.getSelection();
         const currentElement = selection.anchorNode.parentElement;
-        
-        // Ciclo de elementos: Slugline -> Action -> Character -> Parenthetical -> Dialogue
         const types = ['slugline', 'action', 'character', 'parenthetical', 'dialogue'];
         let currentType = currentElement.className || 'action';
         let nextIndex = (types.indexOf(currentType) + 1) % types.length;
-        
         currentElement.className = types[nextIndex];
+        autoSave();
     }
 
-    // 2. Atalho de ENTER (Lógica de Continuidade)
+    // Atalho ENTER (Lógica Final Draft)
     if (e.key === 'Enter') {
-        // Pequeno delay para deixar o navegador criar o novo elemento
         setTimeout(() => {
             const selection = window.getSelection();
             const newElement = selection.anchorNode.parentElement;
             const prevElement = newElement.previousElementSibling;
-
             if (prevElement) {
                 const prevType = prevElement.className;
-
-                // Lógica de fluxo do Final Draft:
-                if (prevType === 'character') {
-                    newElement.className = 'dialogue'; // Depois de Personagem vem Fala
-                } else if (prevType === 'dialogue') {
-                    newElement.className = 'action';   // Depois de Fala vem Ação
-                } else if (prevType === 'slugline') {
-                    newElement.className = 'action';   // Depois de Cena vem Ação
-                } else {
-                    newElement.className = 'action';   // Padrão é Ação
-                }
+                if (prevType === 'character') newElement.className = 'dialogue';
+                else if (prevType === 'dialogue') newElement.className = 'action';
+                else if (prevType === 'slugline') newElement.className = 'action';
+                else newElement.className = 'action';
             }
+            autoSave();
         }, 10);
     }
 });
 
-// Forçar Uppercase em Personagem e Slugline
-editor.addEventListener('input', (e) => {
-    const selection = window.getSelection();
-    const currentElement = selection.anchorNode.parentElement;
-    
-    if (currentElement.className === 'character' || currentElement.className === 'slugline') {
-        currentElement.style.textTransform = 'uppercase';
-    }
-});
+// Salva em cada alteração de texto
+editor.addEventListener('input', autoSave);
