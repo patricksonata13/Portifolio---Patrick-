@@ -4,161 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Roteirista & Ator</title>
-    <link rel="stylesheet" href="assets/css/style.css">
     <style>
-        html { scroll-behavior: smooth; }
-        body { background: #000; color: #fff; margin: 0; font-family: -apple-system, sans-serif; }
+        body { background-color: #000; color: #fff; font-family: 'Courier Prime', 'Courier', monospace; margin: 0; padding: 20px; line-height: 1.2; }
+        .header { text-align: center; padding: 40px 0; border-bottom: 1px solid #333; }
+        .profile-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; margin-bottom: 20px; filter: grayscale(100%); transition: 0.3s; }
+        .profile-img:hover { filter: grayscale(0%); }
+        h1 { font-size: 2.5em; margin: 10px 0; text-transform: uppercase; letter-spacing: 2px; }
+        .slugline { color: #888; font-weight: bold; margin-bottom: 30px; }
         
-        /* Nav superior direita */
-        .top-nav {
-            position: fixed;
-            top: 40px;
-            right: 60px;
-            display: flex;
-            gap: 30px;
-            z-index: 100;
-        }
+        /* Estilo Script */
+        .script-container { max-width: 800px; margin: 40px auto; background: #fff; color: #000; padding: 60px; box-shadow: 0 0 20px rgba(255,255,255,0.1); }
+        .scene-heading { font-weight: bold; margin-top: 25px; text-transform: uppercase; }
+        .action { margin: 15px 0; }
+        .character { text-align: center; width: 50%; margin: 20px auto 0 auto; text-transform: uppercase; }
+        .parenthetical { text-align: center; width: 40%; margin: 0 auto; font-size: 0.9em; }
+        .dialogue { text-align: center; width: 70%; margin: 0 auto 20px auto; }
 
-        .nav-dev {
-            font-size: 0.65rem;
-            color: #444;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            text-decoration: none;
-            transition: color 0.4s ease;
-        }
+        /* Grade de Trabalhos */
+        .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1000px; margin: 50px auto; padding: 0 20px; }
+        .work-item { background: #111; border: 1px solid #333; overflow: hidden; border-radius: 8px; transition: transform 0.3s; }
+        .work-item:hover { transform: translateY(-10px); border-color: #fff; }
+        .work-item img { width: 100%; height: 200px; object-fit: cover; }
+        .work-info { padding: 15px; }
+        .work-title { font-weight: bold; color: #fff; margin-bottom: 5px; text-transform: uppercase; font-size: 0.9em; }
+        .work-desc { color: #888; font-size: 0.8em; }
 
-        .nav-dev:hover { color: #888; }
-
-        /* Section 1: Hero (HBO Style) */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            background: radial-gradient(circle at center, #111 0%, #000 100%);
-        }
-
-        .profile-pic {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            filter: grayscale(100%);
-            margin-bottom: 30px;
-            opacity: 0.6;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        h1 { font-size: 2.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 40px; }
-
-        .main-nav { display: flex; gap: 50px; }
-        .nav-main-link {
-            font-size: 0.75rem;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            text-decoration: none;
-            padding-bottom: 5px;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: 0.4s;
-        }
-        .nav-main-link:hover { border-bottom: 1px solid #fff; }
-
-        /* Section 2: Sobre (Final Draft Style) */
-        .about-section {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 100px 20px;
-            background: #e5e5e5; /* Cor de fundo do papel do Final Draft */
-            color: #000;
-            font-family: 'Courier Prime', 'Courier New', Courier, monospace;
-        }
-
-        .script-page {
-            width: 100%;
-            max-width: 650px;
-            text-align: left;
-            background: #fff;
-            padding: 60px 80px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            min-height: 800px;
-        }
-
-        .slugline { font-weight: bold; text-transform: uppercase; margin-bottom: 25px; font-size: 1.1rem; }
-        .action-text { margin-bottom: 30px; line-height: 1.4; font-size: 1.1rem; }
-        .character { text-align: center; width: 60%; margin: 0 auto 5px auto; text-transform: uppercase; }
-        .dialogue { text-align: center; width: 80%; margin: 0 auto 30px auto; line-height: 1.3; }
-
-        .contact-footer {
-            padding: 60px 0;
-            text-align: center;
-            background: #000;
-            width: 100%;
-        }
-
-        .contact-item {
-            font-size: 0.7rem;
-            color: #444;
-            text-decoration: none;
-            letter-spacing: 0.2em;
-            margin: 0 20px;
-        }
-
-        @media (max-width: 768px) {
-            .script-page { padding: 40px 20px; }
-            .top-nav { right: 20px; gap: 15px; }
-        }
+        footer { text-align: center; padding: 40px; color: #444; font-size: 0.8em; }
     </style>
 </head>
 <body>
 
-    <nav class="top-nav">
-        <a href="projetos/cdd/index.html" class="nav-dev">CDD</a>
-        <a href="projetos/patika/index.html" class="nav-dev">Patika</a>
-        <a href="projetos/aulas/index.html" class="nav-dev">Aulas</a>
-    </nav>
-
-    <section class="hero">
-        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-pic">
+    <div class="header">
+        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
         <h1>Patrick Sonata</h1>
-        <nav class="main-nav">
-            <a href="#sobre" class="nav-main-link">Sobre</a>
-            <a href="projetos/trabalhos/index.html" class="nav-main-link">Trabalhos</a>
-        </nav>
-    </section>
+        <div class="slugline">ROTEIRISTA // ATOR // CRIATIVO</div>
+    </div>
 
-    <section id="sobre" class="about-section">
-        <div class="script-page">
-            <div class="slugline">INT. TRAJETÓRIA - DIA</div>
-            <div class="action-text">
-                PATRICK SONATA (37) é um roteirista e comediante carioca criado na Cidade de Deus, com trajetória consolidada no humor televisivo e teatral. Sua formação artística começou em projetos sociais na comunidade, impulsionada pelo impacto cultural do filme Cidade de Deus.
-            </div>
+    <div class="script-container">
+        <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
+        <div class="action">PATRICK SONATA (37) é um roteirista e comediante carioca com trajetória consolidada no teatro e no audiovisual.</div>
+        
+        <div class="scene-heading">EXT. PORTFÓLIO - DESTAQUES</div>
+        <div class="action">Abaixo, os frames de uma carreira em constante movimento:</div>
+    </div>
 
-            <div class="slugline">EXT. APRESENTAÇÃO - CONT.</div>
-            <div class="action-text">
-                Sua carreira decolou ao integrar a equipe de roteiristas do ZORRA (2019–2021) na TV Globo. Hoje, assina como um dos roteiristas da série "PABLO & LUISÃO", lançada em 2025 no Globoplay e com estreia na TV GLOBO em 2026.
+    <div class="works-grid">
+        <div class="work-item">
+            <img src="assets/images/works/pelada.webp" alt="Pelada">
+            <div class="work-info">
+                <div class="work-title">Pelada - A Hora da Gaymada</div>
+                <div class="work-desc">Dramaturgia e performance no Coletivo Bonobando. Sucesso de crítica em 2023.</div>
             </div>
-
-            <div class="character">PATRICK</div>
-            <div class="dialogue">
-                "Meu humor é de viés ácido e crítico, alimentado por linguagens populares como a Palhaçaria Clássica e o Teatro de Mamulengo."
-            </div>
-
-            <div class="action-text">
-                No teatro, assina a dramaturgia de "Pelada – A Hora da Gaymada" (2023) e é integrante do Coletivo Bonobando. Patrick transforma vivências periféricas em narrativas potentes para cinema, TV e palco.
-            </div>
-            
-            <div style="text-align: center; margin-top: 50px; color: #ccc;">FADE OUT.</div>
         </div>
-    </section>
 
-    <footer class="contact-footer">
-        <a href="mailto:contato@patricksonata.com.br" class="contact-item">contato@patricksonata.com.br</a>
-        <a href="https://instagram.com/patricksonata" target="_blank" class="contact-item">@patricksonata</a>
+        <div class="work-item">
+            <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão">
+            <div class="work-info">
+                <div class="work-title">Pablo & Luisão (TV Globo)</div>
+                <div class="work-desc">Equipe de roteiro da nova série de humor da TV Globo (2025/2026).</div>
+            </div>
+        </div>
+
+        <div class="work-item">
+            <img src="assets/images/works/humornegro.webp" alt="Humor Negro">
+            <div class="work-info">
+                <div class="work-title">Humor Negro</div>
+                <div class="work-desc">Projeto focado em narrativas potentes e humor ácido de viés crítico.</div>
+            </div>
+        </div>
+
+        <div class="work-item">
+            <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria">
+            <div class="work-info">
+                <div class="work-title">Cidade Correria</div>
+                <div class="work-desc">Exploração das periferias em narrativas potentes para cinema e palco.</div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        FADE OUT. <br><br>
+        © 2026 PATRICK SONATA. TODOS OS DIREITOS RESERVADOS.
     </footer>
 
 </body>
