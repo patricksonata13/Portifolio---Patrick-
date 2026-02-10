@@ -7,36 +7,30 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         html { scroll-behavior: smooth; }
-        body { 
-            background: #000; 
-            color: #fff; 
-            margin: 0; 
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif; 
-            -webkit-font-smoothing: antialiased;
-        }
+        body { background: #000; color: #fff; margin: 0; font-family: -apple-system, sans-serif; }
         
-        /* Ecossistema - Canto Superior Direito */
+        /* Nav superior direita */
         .top-nav {
             position: fixed;
             top: 40px;
-            right: 50px;
+            right: 60px;
             display: flex;
-            gap: 25px;
+            gap: 30px;
             z-index: 100;
         }
 
         .nav-dev {
-            font-size: 0.6rem;
+            font-size: 0.65rem;
             color: #444;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
+            letter-spacing: 0.2em;
             text-decoration: none;
             transition: color 0.4s ease;
         }
 
-        .nav-dev:hover { color: #fff; }
+        .nav-dev:hover { color: #888; }
 
-        /* Seção Principal (Hero) */
+        /* Section 1: Hero (HBO Style) */
         .hero {
             height: 100vh;
             display: flex;
@@ -52,79 +46,58 @@
             height: 100px;
             border-radius: 50%;
             filter: grayscale(100%);
-            margin-bottom: 35px;
+            margin-bottom: 30px;
             opacity: 0.6;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-        }
-        
-        .profile-pic:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
-
-        h1 { 
-            font-size: 2.5rem; 
-            font-weight: 500; 
-            letter-spacing: -0.03em; 
-            margin: 0 0 45px 0; 
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Menu de Destaque Central */
-        .main-nav { display: flex; gap: 60px; }
-        
+        h1 { font-size: 2.5rem; font-weight: 500; letter-spacing: -0.02em; margin-bottom: 40px; }
+
+        .main-nav { display: flex; gap: 50px; }
         .nav-main-link {
             font-size: 0.75rem;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 0.35em;
+            letter-spacing: 0.3em;
             text-decoration: none;
-            padding-bottom: 6px;
+            padding-bottom: 5px;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.4s ease;
+            transition: 0.4s;
         }
+        .nav-main-link:hover { border-bottom: 1px solid #fff; }
 
-        .nav-main-link:hover { 
-            border-bottom: 1px solid #fff;
-            color: #fff;
-        }
-
-        /* Seção Sobre */
+        /* Section 2: Sobre (Final Draft Style) */
         .about-section {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
             padding: 100px 20px;
-            background: #000;
+            background: #e5e5e5; /* Cor de fundo do papel do Final Draft */
+            color: #000;
+            font-family: 'Courier Prime', 'Courier New', Courier, monospace;
         }
 
-        .about-content {
-            max-width: 550px;
-            text-align: center;
+        .script-page {
+            width: 100%;
+            max-width: 650px;
+            text-align: left;
+            background: #fff;
+            padding: 60px 80px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            min-height: 800px;
         }
 
-        .about-content h2 {
-            font-size: 0.65rem;
-            letter-spacing: 0.5em;
-            color: #333;
-            text-transform: uppercase;
-            margin-bottom: 50px;
-        }
+        .slugline { font-weight: bold; text-transform: uppercase; margin-bottom: 25px; font-size: 1.1rem; }
+        .action-text { margin-bottom: 30px; line-height: 1.4; font-size: 1.1rem; }
+        .character { text-align: center; width: 60%; margin: 0 auto 5px auto; text-transform: uppercase; }
+        .dialogue { text-align: center; width: 80%; margin: 0 auto 30px auto; line-height: 1.3; }
 
-        .about-content p {
-            font-size: 1rem;
-            line-height: 1.9;
-            color: #888;
-            font-weight: 300;
-            margin-bottom: 25px;
-        }
-
-        .about-content strong { color: #bbb; font-weight: 500; }
-
-        /* Rodapé de Contato */
         .contact-footer {
-            padding: 80px 0;
+            padding: 60px 0;
             text-align: center;
             background: #000;
-            border-top: 1px solid #111;
+            width: 100%;
         }
 
         .contact-item {
@@ -132,16 +105,12 @@
             color: #444;
             text-decoration: none;
             letter-spacing: 0.2em;
-            margin: 0 25px;
-            transition: color 0.3s;
+            margin: 0 20px;
         }
 
-        .contact-item:hover { color: #fff; }
-
         @media (max-width: 768px) {
-            .top-nav { position: relative; top: 30px; right: 0; justify-content: center; margin-bottom: -50px; }
-            .main-nav { gap: 30px; }
-            h1 { font-size: 2rem; }
+            .script-page { padding: 40px 20px; }
+            .top-nav { right: 20px; gap: 15px; }
         }
     </style>
 </head>
@@ -163,23 +132,33 @@
     </section>
 
     <section id="sobre" class="about-section">
-        <div class="about-content">
-            <h2>Bio</h2>
-            <p>
-                Patrick Sonata é roteirista e comediante carioca, cria da Cidade de Deus. Aos 37 anos, consolida uma trajetória de duas décadas dedicada ao humor e ao teatro.
-            </p>
-            <p>
-                No audiovisual, integrou a equipe de roteiristas do <strong>Zorra (TV Globo)</strong> e assina a dramaturgia da série <strong>"Pablo & Luisão"</strong> (Globoplay), com estreia na TV Globo prevista para 2026. 
-            </p>
-            <p>
-                Sua escrita transita entre o humor ácido e a crônica social, fundamentada em linguagens populares como a palhaçaria clássica e o teatro de bonecos.
-            </p>
+        <div class="script-page">
+            <div class="slugline">INT. TRAJETÓRIA - DIA</div>
+            <div class="action-text">
+                PATRICK SONATA (37) é um roteirista e comediante carioca criado na Cidade de Deus, com trajetória consolidada no humor televisivo e teatral. Sua formação artística começou em projetos sociais na comunidade, impulsionada pelo impacto cultural do filme Cidade de Deus.
+            </div>
+
+            <div class="slugline">EXT. APRESENTAÇÃO - CONT.</div>
+            <div class="action-text">
+                Sua carreira decolou ao integrar a equipe de roteiristas do ZORRA (2019–2021) na TV Globo. Hoje, assina como um dos roteiristas da série "PABLO & LUISÃO", lançada em 2025 no Globoplay e com estreia na TV GLOBO em 2026.
+            </div>
+
+            <div class="character">PATRICK</div>
+            <div class="dialogue">
+                "Meu humor é de viés ácido e crítico, alimentado por linguagens populares como a Palhaçaria Clássica e o Teatro de Mamulengo."
+            </div>
+
+            <div class="action-text">
+                No teatro, assina a dramaturgia de "Pelada – A Hora da Gaymada" (2023) e é integrante do Coletivo Bonobando. Patrick transforma vivências periféricas em narrativas potentes para cinema, TV e palco.
+            </div>
+            
+            <div style="text-align: center; margin-top: 50px; color: #ccc;">FADE OUT.</div>
         </div>
     </section>
 
     <footer class="contact-footer">
-        <a href="mailto:contato@patricksonata.com.br" class="contact-item">Email</a>
-        <a href="https://instagram.com/patricksonata" target="_blank" class="contact-item">Instagram</a>
+        <a href="mailto:contato@patricksonata.com.br" class="contact-item">contato@patricksonata.com.br</a>
+        <a href="https://instagram.com/patricksonata" target="_blank" class="contact-item">@patricksonata</a>
     </footer>
 
 </body>
