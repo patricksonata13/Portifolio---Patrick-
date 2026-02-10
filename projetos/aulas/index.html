@@ -2,36 +2,28 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Masterclass | Patrick Sonata</title>
+    <title>Aulas | Patrick Sonata</title>
     <link rel="stylesheet" href="css/aulas.css">
 </head>
-<body class="dark-mode">
+<body>
     <nav class="aulas-nav">
-        <div class="logo">SONATA CLASS</div>
-        <a href="../../index.html" class="exit-btn">Sair da Sala</a>
+        <a href="../../index.html" style="color:#888; text-decoration:none;">← Voltar</a>
+        <div style="color:#c5a059; font-weight:bold;">SONATA CLASS</div>
+        <div></div>
     </nav>
-
     <main class="masterclass-container">
         <section class="video-section">
             <div class="video-wrapper">
-                <iframe id="main-video-player" src="" frameborder="0" allowfullscreen></iframe>
+                <div style="display:flex; align-items:center; justify-content:center; height:100%; color:#444;">
+                   Player de Vídeo Conectado
+                </div>
             </div>
-            <h1 id="current-lesson-title">Selecione uma aula para começar</h1>
+            <h2 style="margin-top:20px;">01. Introdução à Narrativa</h2>
         </section>
-
         <aside class="playlist">
-            <h3>Módulo 1: A Escrita</h3>
-            <div class="lesson-item" onclick="playLesson('URL_DO_VIMEO_OU_YOUTUBE', '01. Introdução ao Roteiro', 'aula_1')" data-lesson-id="aula_1">
-                <span>01</span> O Nascimento da Ideia
-            </div>
-            <div class="lesson-item" onclick="playLesson('URL_DO_VIDEO_2', '02. Estrutura de Cena', 'aula_2')" data-lesson-id="aula_2">
-                <span>02</span> Estrutura de Cena
-            </div>
+            <div class="lesson-item active">Aula 01 - Começo</div>
+            <div class="lesson-item">Aula 02 - Estrutura</div>
         </aside>
     </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="../../assets/js/supabase-client.js"></script>
-    <script src="js/aulas-engine.js"></script>
 </body>
 </html>
