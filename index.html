@@ -14,7 +14,6 @@
             height: 100vh; overflow: hidden; 
         }
 
-        /* --- LAYOUT FIXO --- */
         .hero-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -26,10 +25,7 @@
         }
         h1 { font-size: 1.6em; letter-spacing: 5px; font-weight: 400; text-align: center; }
 
-        /* --- MENU CENTRAL (Bio e Portfólio Geral) --- */
         .nav-center { display: flex; gap: 30px; margin-top: 25px; z-index: 100; }
-
-        /* --- MENU DIREITO (As 3 Abas Independentes) --- */
         .nav-right {
             position: fixed; top: 40px; right: 40px;
             display: flex; flex-direction: column; gap: 20px; z-index: 200;
@@ -44,7 +40,6 @@
         }
         button:hover, button.active-btn { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
-        /* --- PAINEL DE CONTEÚDO (ESTILO ROTEIRO / FINAL DRAFT) --- */
         .panel {
             position: fixed; top: 0; right: -100%; width: 40%; min-width: 350px; height: 100vh;
             background: #fff; color: #000; padding: 60px 40px;
@@ -53,7 +48,6 @@
         }
         .panel.active { right: 0; }
 
-        /* Estilos Internos do Roteiro */
         .slugline { font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; margin-bottom: 20px; font-size: 1.1em; }
         .action-text { line-height: 1.5; margin-bottom: 25px; font-size: 16px; text-align: justify; }
         .cta-button {
@@ -63,7 +57,6 @@
         }
         .cta-button:hover { background: #000; color: #fff; }
 
-        /* --- GALERIA TRABALHO (Fundo Preto) --- */
         .full-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.98); display: none; z-index: 400;
@@ -77,6 +70,11 @@
             position: absolute; top: 30px; left: 30px; font-size: 20px;
             cursor: pointer; font-weight: bold;
         }
+
+        .scene-heading { font-weight: bold; margin-bottom: 10px; color: #000; text-transform: uppercase; }
+
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .blink { animation: blink 1s infinite; }
 
         @media (max-width: 768px) {
             .panel { width: 100%; }
@@ -120,103 +118,49 @@
         </div>
     </div>
 
+    <script src="assets/js/jogo.js"></script>
+
     <script>
         const db = {
             sobre: {
                 title: "INT. TRAJETÓRIA - DIA",
                 text: "PATRICK SONATA (37). Um artista que não apenas vive a Cidade de Deus, mas a traduz em dramaturgia. Com 20 anos de carreira, sua escrita une o rigor técnico do roteiro à vivência visceral das ruas.",
-                link: null
+                isGame: false
             },
             perfil: {
                 title: "INT. PERFIL PROFISSIONAL",
                 text: "Roteirista com passagens pela TV Globo (Zorra) e Globoplay (Pablo & Luisão). Especialista em comédia social, desenvolvimento de personagens e estruturas narrativas para streaming.",
-                link: null
-            },<div class="scene-heading">CIDADE DE DEUS, CIDADE DO DIABO 
-(3001)</div>
-<div class="action">A água voltou, mas a paz é uma ilusão 
-tecnológica.</div>
-
-<div id="sin-terminal" style="background:#000; color:#00ff41; 
-font-family:monospace; padding:15px; border:1px solid #333; height:250px; 
-overflow-y:auto; margin-top:20px; font-size:14px; line-height:1.4;">
-    <div id="log-output">
-        <p style="color:#ffae00">[SISTEMA SIN-417 CONECTADO]</p>
-        <p>STATUS: Hortas Verticais reativadas.</p>
-        <p>ALERTA: Tropas da Neocorp detectadas na Linha Amarela.</p>
-        <p>---</p>
-        <p>Mãe Jurema aguarda sua decisão:</p>
-    </div>
-    <div style="margin-top:15px; border-top:1px solid #222; 
-padding-top:10px;">
-        <p style="font-size:12px; color:#888;">ESCOLHA UMA AÇÃO:</p>
-        <p>[1] FORTIFICAR | [2] RITUAL | [3] ENSINAR</p>
-        <div style="display:flex;">
-            <span>></span>
-            <input type="text" id="game-input" 
-style="background:transparent; border:none; color:#00ff41; outline:none; 
-margin-left:10px; width:100%; font-family:monospace;" autofocus>
-        </div>
-    </div>
-</div>            
-cdd: {
-                title: "EXT. CIDADE DE DEUS - CULTURA",
-                <div class="scene-heading">KINDRED 3001: A NAVE BIOLÓGICA 
-CDD</div>
-    <div class="action">As paredes respiram. O sangue da terra corre nos 
-canos de PVC. 
-    Aqui, o tempo não é uma linha, é uma trança.</div>
-
-    <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; 
-font-family:'Courier New', monospace; padding:15px; border:1px solid 
-#332200; height:220px; overflow-y:auto; margin-top:15px; font-size:13px; 
-box-shadow: inset 0 0 10px #000;">
-        <div id="log-output">
-            <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
-            <p>> SANKOFA-PROTOCOL: Ativo.</p>
-            <p>> STATUS: Axé em 88%. Memória Genética: Estável.</p>
-            <p>---</p>
-            <p>Digite o nome de um aliado ou facção para escanear a 
-rede:</p>
-        </div>
-        <div style="margin-top:10px; display:flex; border-top: 1px solid 
-#222; padding-top:5px;">
-            <span style="color:#ffae00">AXÉ_SCAN></span>
-            <input type="text" id="game-input" 
-style="background:transparent; border:none; color:#fff; outline:none; 
-margin-left:10px; width:100%; font-family:monospace;" 
-placeholder="Nome...">
-        </div>
-    </div>
-
-    <div class="scene-heading" style="margin-top:20px; 
-color:#ffae00;">TECNOLOGIA ADINKRA</div>
-    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px; 
-font-size:11px; color:#aaa;">
-        <div style="border:1px solid #222; padding:5px;">
-            <b>SANKOFA:</b><br>Recupera dados do passado.
-        </div>
-        <div style="border:1px solid #222; padding:5px;">
-            <b>GYE NYAME:</b><br>Escudo de força vital.
-        </div>
-    </div>
-
-    <div class="action" style="margin-top:15px; font-style:italic;">
-        "O apocalipse tentou apagar nossa história, mas esqueceu que ela 
-está guardada no DNA."
-    </div>
-`;            
-},
+                isGame: false
+            },
+            cdd: {
+                title: "KINDRED 3001: NAVE BIOLÓGICA",
+                text: `As paredes respiram. O tempo é uma trança.
+                <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; padding:15px; border:1px solid #332200; height:220px; overflow-y:auto; margin-top:15px; font-size:13px; font-family:monospace;">
+                    <div id="log-output">
+                        <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
+                        <p>> SANKOFA-PROTOCOL: Ativo.</p>
+                        <p>> STATUS: Axé em 88%. Memória Genética: Estável.</p>
+                    </div>
+                    <div style="margin-top:10px; display:flex; border-top:1px solid #222; padding-top:5px;">
+                        <span>AXÉ_SCAN></span>
+                        <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Nome...">
+                    </div>
+                </div>`,
+                isGame: true
+            },
             patika: {
-                title: "INT. PATIKA - LABORATÓRIO DE ESCRITA",
-                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na estrutura de cenas, organização de beats e formatação profissional.",
+                title: "INT. PATIKA - LABORATÓRIO",
+                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na estrutura de cenas.",
                 link: "projetos/patika/index.html",
-                label: "ABRIR FERRAMENTA"
+                label: "ABRIR FERRAMENTA",
+                isGame: false
             },
             aulas: {
                 title: "INT. SALA DE AULA - FORMATIVO",
-                text: "Conteúdo pedagógico focado na formação de novos roteiristas. Videoaulas, materiais de apoio e exercícios práticos para dominar a arte de contar histórias.",
+                text: "Conteúdo pedagógico focado na formação de novos roteiristas.",
                 link: "projetos/aulas/index.html",
-                label: "ACESSAR AULAS"
+                label: "ACESSAR AULAS",
+                isGame: false
             }
         };
 
@@ -224,7 +168,6 @@ está guardada no DNA."
             const panel = document.getElementById('side-panel');
             const contentDiv = document.getElementById('panel-content');
             
-            // Se clicar na mesma aba, fecha. Se for outra, atualiza o conteúdo.
             contentDiv.innerHTML = `
                 <div class="slugline">${db[id].title}</div>
                 <div class="action-text">${db[id].text}</div>
@@ -233,6 +176,11 @@ está guardada no DNA."
             
             panel.classList.add('active');
             document.getElementById('work-gallery').classList.remove('active');
+
+            // Se for a aba CDD, ativa o alerta do terminal
+            if(db[id].isGame && window.iniciarTerminalCDD) {
+                window.iniciarTerminalCDD();
+            }
         }
 
         function openGallery() {
@@ -247,8 +195,3 @@ está guardada no DNA."
     </script>
 </body>
 </html>
-const db = {
-            cdd: { ... },
-            patika: { ... },
-            aulas: { ... }
-        };
