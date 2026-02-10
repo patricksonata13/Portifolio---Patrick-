@@ -3,174 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata</title>
+    <title>Patrick Sonata | Hub Criativo</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
         
-        * { box-sizing: border-box; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { 
             background-color: #000; color: #fff; 
             font-family: 'Courier Prime', monospace; 
-            margin: 0; height: 100vh; overflow: hidden; 
+            height: 100vh; overflow: hidden; 
         }
 
-        /* --- CAPA FIXA --- */
+        /* --- LAYOUT FIXO --- */
         .hero-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 1;
         }
         .profile-main-img {
-            width: 250px; height: 250px; border-radius: 50%;
+            width: 220px; height: 220px; border-radius: 50%;
             object-fit: cover; border: 2px solid #fff; margin-bottom: 20px;
         }
-        h1 { font-size: 1.8em; letter-spacing: 5px; font-weight: 400; margin-bottom: 10px; }
+        h1 { font-size: 1.6em; letter-spacing: 5px; font-weight: 400; text-align: center; }
 
-        /* --- POSICIONAMENTO DAS ABAS --- */
-        .nav-center { display: flex; gap: 30px; margin-top: 20px; }
+        /* --- MENU CENTRAL (Bio e Portfólio Geral) --- */
+        .nav-center { display: flex; gap: 30px; margin-top: 25px; z-index: 100; }
+
+        /* --- MENU DIREITO (As 3 Abas Independentes) --- */
         .nav-right {
             position: fixed; top: 40px; right: 40px;
-            display: flex; gap: 20px; z-index: 200;
+            display: flex; flex-direction: column; gap: 20px; z-index: 200;
+            align-items: flex-end;
         }
 
         button {
-            background: none; border: none; color: #555;
+            background: none; border: none; color: #666;
             text-transform: uppercase; letter-spacing: 2px;
             cursor: pointer; transition: 0.3s; font-family: 'Courier Prime', monospace;
-            font-size: 13px;
+            font-size: 13px; outline: none;
         }
-        button:hover { color: #fff; }
+        button:hover, button.active-btn { color: #fff; text-shadow: 0 0 8px rgba(255,255,255,0.5); }
 
-        /* --- ESTILO: FOLHA DE ROTEIRO (SOBRE / PERFIL) --- */
-        .script-page {
-            position: fixed; bottom: -110%; left: 50%; transform: translateX(-50%);
-            width: 90%; max-width: 750px; height: 85vh;
-            background: #fff; color: #000; padding: 60px;
-            transition: bottom 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-            z-index: 300; overflow-y: auto; box-shadow: 0 -20px 50px rgba(0,0,0,0.8);
+        /* --- PAINEL DE CONTEÚDO (ESTILO ROTEIRO / FINAL DRAFT) --- */
+        .panel {
+            position: fixed; top: 0; right: -100%; width: 40%; min-width: 350px; height: 100vh;
+            background: #fff; color: #000; padding: 60px 40px;
+            transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            z-index: 300; overflow-y: auto; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
-        .script-page.active { bottom: 0; }
-        
-        .scene-heading { font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; margin: 30px 0 15px 0; font-size: 1.1em; }
-        .scene-heading:first-child { margin-top: 0; }
-        .action { line-height: 1.4; margin-bottom: 20px; font-size: 17px; text-align: justify; }
+        .panel.active { right: 0; }
 
-        /* --- ESTILO: PORTFÓLIO VISUAL (TRABALHO / PROJETOS) --- */
-        .gallery-overlay {
+        /* Estilos Internos do Roteiro */
+        .slugline { font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #000; margin-bottom: 20px; font-size: 1.1em; }
+        .action-text { line-height: 1.5; margin-bottom: 25px; font-size: 16px; text-align: justify; }
+        .cta-button {
+            display: inline-block; padding: 12px 20px; border: 2px solid #000;
+            color: #000; text-decoration: none; font-weight: bold; text-transform: uppercase;
+            font-size: 12px; transition: 0.3s;
+        }
+        .cta-button:hover { background: #000; color: #fff; }
+
+        /* --- GALERIA TRABALHO (Fundo Preto) --- */
+        .full-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); display: none;
-            z-index: 250; overflow-y: auto; padding: 100px 40px;
+            background: rgba(0,0,0,0.98); display: none; z-index: 400;
+            overflow-y: auto; padding: 80px 20px;
         }
-        .gallery-overlay.active { display: block; }
-        .gallery-content { max-width: 900px; margin: 0 auto; text-align: center; }
-        .gallery-content img { width: 100%; margin-bottom: 30px; border: 1px solid #333; }
-        .gallery-content h2 { letter-spacing: 4px; font-size: 1.5em; margin-bottom: 10px; color: #fff; }
-        .gallery-content p { color: #888; margin-bottom: 30px; font-size: 14px; }
-        
-        .btn-link { display: inline-block; padding: 10px 20px; border: 1px solid #fff; color: #fff; text-decoration: none; text-transform: uppercase; font-size: 11px; margin-top: 10px; }
-        .btn-link:hover { background: #fff; color: #000; }
+        .full-overlay.active { display: block; }
+        .gallery-container { max-width: 1000px; margin: 0 auto; text-align: center; }
+        .gallery-container img { width: 100%; margin-bottom: 40px; border: 1px solid #333; }
 
-        .close-btn {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            background: #fff; color: #000; padding: 10px 20px; font-weight: bold;
-            cursor: pointer; z-index: 400; border: none; text-transform: uppercase;
+        .close-x {
+            position: absolute; top: 30px; left: 30px; font-size: 20px;
+            cursor: pointer; font-weight: bold;
         }
 
         @media (max-width: 768px) {
-            .nav-right { position: relative; top: 10px; right: 0; justify-content: center; margin-bottom: 20px; }
-            .script-page { padding: 30px; }
+            .panel { width: 100%; }
+            .nav-right { top: 20px; right: 20px; }
         }
     </style>
 </head>
 <body>
 
     <div class="nav-right">
-        <button onclick="openGallery('cdd')">CDD</button>
-        <button onclick="openGallery('patika')">Patika</button>
-        <button onclick="openGallery('aulas')">Aulas</button>
+        <button onclick="togglePanel('cdd')">CDD</button>
+        <button onclick="togglePanel('patika')">Patika</button>
+        <button onclick="togglePanel('aulas')">Aulas</button>
     </div>
 
     <div class="hero-bg">
         <img src="assets/images/fotodeperfil.jpg" class="profile-main-img">
         <h1>PATRICK SONATA</h1>
         <div class="nav-center">
-            <button onclick="openScript('sobre')">Sobre</button>
-            <button onclick="openScript('perfil')">Perfil</button>
-            <button onclick="openGallery('trabalho')">Trabalho</button>
+            <button onclick="togglePanel('sobre')">Sobre</button>
+            <button onclick="togglePanel('perfil')">Perfil</button>
+            <button onclick="openGallery()">Trabalho</button>
         </div>
     </div>
 
-    <div id="script-page" class="script-page">
-        <div id="script-content"></div>
+    <div id="side-panel" class="panel">
+        <div class="close-x" onclick="closeAll()">X</div>
+        <div id="panel-content"></div>
     </div>
 
-    <div id="gallery-overlay" class="gallery-overlay">
-        <div id="gallery-content" class="gallery-content"></div>
+    <div id="work-gallery" class="full-overlay">
+        <div class="close-x" onclick="closeAll()" style="color:#fff">FECHAR X</div>
+        <div class="gallery-container">
+            <h2 style="margin-bottom: 40px; letter-spacing: 5px;">PORTFÓLIO VISUAL</h2>
+            <img src="assets/images/works/pabloeluisao.webp">
+            <img src="assets/images/works/zorralogo.jpg">
+            <img src="assets/images/works/cidadecorreriapeca.webp">
+            <img src="assets/images/works/doccidadecorreria.webp">
+            <img src="assets/images/works/originais.webp">
+            <img src="assets/images/works/jongo.webp">
+        </div>
     </div>
-
-    <button id="close-all" class="close-btn" style="display:none;" onclick="closeAll()">FECHAR [X]</button>
 
     <script>
-        const data = {
-            sobre: `
-                <div class="scene-heading">INT. TRAJETÓRIA - DIA</div>
-                <div class="action">PATRICK SONATA (37) é um artista forjado na pulsação da Cidade de Deus. Com duas décadas de estrada, sua voz ecoa entre o humor crítico e a dramaturgia social.</div>
-                <div class="action">Iniciou sua jornada em projetos sociais locais, onde descobriu o poder transformador do teatro. Estudou palhaçaria clássica e linguagens populares, ferramentas que utiliza para dissecar a realidade brasileira com ironia e precisão.</div>
-                <div class="action">Foi peça-chave na redação do "Zorra" (TV Globo) entre 2019 e 2021, e colaborou na criação da série "Pablo & Luisão", projeto que reafirma sua identidade como roteirista de narrativas urbanas e potentes.</div>
-            `,
-            perfil: `
-                <div class="scene-heading">INT. PERFIL PROFISSIONAL</div>
-                <div class="action">ATRIBUTOS: Roteirista, Ator e Dramaturgo.</div>
-                <div class="action">ESPECIALIDADES: Comédia de situação, sátira social, dramaturgia periférica e roteiro para TV/Streaming.</div>
-                <div class="action">FORMAÇÃO: Coletivo Bonobando, pesquisa em Teatro de Mamulengo e Palhaçaria popular.</div>
-            `,
-            trabalho: `
-                <h2>GALERIA DE TRABALHOS</h2>
-                <img src="assets/images/works/pabloeluisao.webp">
-                <img src="assets/images/works/cidadecorreriapeca.webp">
-                <img src="assets/images/works/doccidadecorreria.webp">
-                <img src="assets/images/works/jongo.webp">
-                <img src="assets/images/works/zorralogo.jpg">
-            `,
-            cdd: `
-                <h2>CIDADE DE DEUS</h2>
-                <p>Projetos de memória e registros artísticos no território.</p>
-                <img src="assets/images/works/doccidadecorreria.webp">
-                <a href="cdd/index.html" class="btn-link">Acessar CDD</a>
-            `,
-            patika: `
-                <h2>PATIKA</h2>
-                <p>Plataforma para organização de roteiros profissionais.</p>
-                <img src="assets/images/works/originais.webp">
-                <a href="projetos/patika/index.html" class="btn-link">Abrir Patika</a>
-            `,
-            aulas: `
-                <h2>AULAS</h2>
-                <p>Materiais didáticos e workshops de atuação e escrita.</p>
-                <img src="assets/images/works/jongo.webp">
-                <a href="projetos/aulas/index.html" class="btn-link">Ver Aulas</a>
-            `
+        const db = {
+            sobre: {
+                title: "INT. TRAJETÓRIA - DIA",
+                text: "PATRICK SONATA (37). Um artista que não apenas vive a Cidade de Deus, mas a traduz em dramaturgia. Com 20 anos de carreira, sua escrita une o rigor técnico do roteiro à vivência visceral das ruas.",
+                link: null
+            },
+            perfil: {
+                title: "INT. PERFIL PROFISSIONAL",
+                text: "Roteirista com passagens pela TV Globo (Zorra) e Globoplay (Pablo & Luisão). Especialista em comédia social, desenvolvimento de personagens e estruturas narrativas para streaming.",
+                link: null
+            },
+            cdd: {
+                title: "EXT. CIDADE DE DEUS - CULTURA",
+                text: "Espaço dedicado à preservação da memória e celebração da cultura da CDD. Aqui você encontra a história da favela, suas obras, cinema e os projetos que movem o território.",
+                link: "cdd/index.html",
+                label: "EXPLORAR CDD"
+            },
+            patika: {
+                title: "INT. PATIKA - LABORATÓRIO DE ESCRITA",
+                text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na estrutura de cenas, organização de beats e formatação profissional.",
+                link: "projetos/patika/index.html",
+                label: "ABRIR FERRAMENTA"
+            },
+            aulas: {
+                title: "INT. SALA DE AULA - FORMATIVO",
+                text: "Conteúdo pedagógico focado na formação de novos roteiristas. Videoaulas, materiais de apoio e exercícios práticos para dominar a arte de contar histórias.",
+                link: "projetos/aulas/index.html",
+                label: "ACESSAR AULAS"
+            }
         };
 
-        function openScript(id) {
-            closeAll();
-            document.getElementById('script-content').innerHTML = data[id];
-            document.getElementById('script-page').classList.add('active');
-            document.getElementById('close-all').style.display = 'block';
+        function togglePanel(id) {
+            const panel = document.getElementById('side-panel');
+            const contentDiv = document.getElementById('panel-content');
+            
+            // Se clicar na mesma aba, fecha. Se for outra, atualiza o conteúdo.
+            contentDiv.innerHTML = `
+                <div class="slugline">${db[id].title}</div>
+                <div class="action-text">${db[id].text}</div>
+                ${db[id].link ? `<a href="${db[id].link}" class="cta-button">${db[id].label} →</a>` : ''}
+            `;
+            
+            panel.classList.add('active');
+            document.getElementById('work-gallery').classList.remove('active');
         }
 
-        function openGallery(id) {
+        function openGallery() {
             closeAll();
-            document.getElementById('gallery-content').innerHTML = data[id];
-            document.getElementById('gallery-overlay').classList.add('active');
-            document.getElementById('close-all').style.display = 'block';
-            document.getElementById('gallery-overlay').scrollTop = 0;
+            document.getElementById('work-gallery').classList.add('active');
         }
 
         function closeAll() {
-            document.getElementById('script-page').classList.remove('active');
-            document.getElementById('gallery-overlay').classList.remove('active');
-            document.getElementById('close-all').style.display = 'none';
+            document.getElementById('side-panel').classList.remove('active');
+            document.getElementById('work-gallery').classList.remove('active');
         }
     </script>
 </body>
