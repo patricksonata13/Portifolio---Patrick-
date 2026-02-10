@@ -2,126 +2,65 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patika - Editor de Roteiro</title>
+    <title>Patika - Professional Screenwriting Tool</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap');
-
-        body {
-            background-color: #222;
-            color: #333;
-            font-family: 'Courier Prime', monospace;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            padding: 20px;
+        
+        body { background: #1a1a1a; color: #fff; font-family: 'Courier Prime', monospace; margin: 0; }
+        
+        .toolbar { 
+            background: #000; padding: 10px; display: flex; justify-content: center; 
+            gap: 10px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333;
         }
 
-        /* Barra de Ferramentas */
-        .toolbar {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: #111;
-            padding: 10px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            z-index: 1000;
-            border-bottom: 1px solid #444;
-        }
-
-        .toolbar button {
-            background: #333;
-            color: #eee;
-            border: 1px solid #555;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-family: 'Courier Prime', monospace;
-            font-size: 12px;
-        }
-
-        .toolbar button:hover { background: #444; color: #fff; }
-
-        /* A "Folha" de Papel */
         .paper {
-            background: white;
-            width: 210mm; /* Tamanho A4 */
-            min-height: 297mm;
-            padding: 25mm 25mm 25mm 35mm; /* Margens padrão de roteiro */
-            margin-top: 60px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            outline: none;
-            white-space: pre-wrap;
-            font-size: 12pt;
-            line-height: 1.2;
-            color: #000;
+            background: #fff; color: #000; width: 210mm; min-height: 297mm;
+            margin: 40px auto; padding: 25mm 25mm 25mm 35mm;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); outline: none;
+            font-size: 12pt; line-height: 1.2; white-space: pre-wrap;
         }
 
-        /* Estilização via classes que o JS vai aplicar */
-        .scene { font-weight: bold; text-transform: uppercase; margin-top: 2em; display: block; }
-        .character { text-align: center; width: 50%; margin: 1em auto 0 auto; text-transform: uppercase; display: block; }
-        .dialogue { text-align: center; width: 70%; margin: 0 auto 1em auto; display: block; }
-        .action { margin-top: 1em; display: block; }
+        button { 
+            background: #222; color: #fff; border: 1px solid #444; 
+            padding: 5px 15px; cursor: pointer; font-family: 'Courier Prime';
+        }
+        button:hover { background: #fff; color: #000; }
 
-        .back-hub {
-            position: fixed; bottom: 20px; left: 20px;
-            color: #fff; text-decoration: none; font-size: 12px;
+        @media print {
+            .toolbar, .back-btn { display: none; }
+            body { background: #fff; }
+            .paper { margin: 0; box-shadow: none; border: none; }
         }
     </style>
 </head>
 <body>
-
     <div class="toolbar">
-        <button onclick="format('scene')">CENA (INT/EXT)</button>
-        <button onclick="format('action')">AÇÃO</button>
-        <button onclick="format('character')">PERSONAGEM</button>
-        <button onclick="format('dialogue')">DIÁLOGO</button>
-        <button onclick="saveDoc()" style="background: #28a745; border: none;">SALVAR</button>
+        <button onclick="document.execCommand('bold')">B</button>
+        <button onclick="printDoc()">EXPORTAR PDF / IMPRIMIR</button>
+        <button onclick="saveLocal()" style="color: #00ff00;">SALVAR</button>
     </div>
+
+    <a href="../../index.html" class="back-btn" style="position:fixed; left:20px; bottom:20px; color:#555; text-decoration:none;">← HUB</a>
 
     <div id="editor" class="paper" contenteditable="true">
-INT. ESCRITÓRIO DO PATRICK - DIA
+INT. CIDADE DE DEUS - DIA
 
-PATRICK está sentado em frente ao MacBook. Ele sorri.
+PATRICK (37) encara a tela do computador. Ele sorri enquanto finaliza o sistema.
 
 PATRICK
-Agora o Patika está ganhando vida.
+Tudo conforme o planejado.
     </div>
 
-    <a href="../../index.html" class="back-hub">← VOLTAR AO HUB</a>
-
     <script>
-        // Função para aplicar a formatação
-        function format(type) {
-            const selection = window.getSelection();
-            if (!selection.rangeCount) return;
-
-            const range = selection.getRangeAt(0);
-            const span = document.createElement('span');
-            span.className = type;
-            
-            // Se for personagem, já coloca em Caps
-            if(type === 'character' || type === 'scene') {
-                span.style.textTransform = 'uppercase';
-            }
-
-            range.surroundContents(span);
+        function saveLocal() {
+            localStorage.setItem('patika_script', document.getElementById('editor').innerHTML);
+            alert("Roteiro salvo no navegador!");
         }
-
-        // Salvar no navegador (LocalStorage)
-        function saveDoc() {
-            const content = document.getElementById('editor').innerHTML;
-            localStorage.setItem('patika_draft', content);
-            alert("Roteiro salvo no seu navegador!");
-        }
-
-        // Carregar ao abrir
+        function printDoc() { window.print(); }
         window.onload = () => {
-            const saved = localStorage.getItem('patika_draft');
-            if (saved) document.getElementById('editor').innerHTML = saved;
-        };
+            const saved = localStorage.getItem('patika_script');
+            if(saved) document.getElementById('editor').innerHTML = saved;
+        }
     </script>
 </body>
 </html>
