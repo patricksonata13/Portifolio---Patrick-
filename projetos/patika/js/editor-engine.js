@@ -1,59 +1,61 @@
-/**
- * PATIKA Engine v2.0 - Real Usage
- * Lógica: Teclas + Salvamento Automático Local
- */
-
 const editor = document.getElementById('script-editor');
-const projectNameDisplay = document.getElementById('project-name');
+let saveTimeout;
 
-// 1. CARREGAR AO ABRIR
-window.addEventListener('DOMContentLoaded', () => {
-    const savedScript = localStorage.getItem('patika_current_script');
-    if (savedScript) {
-        editor.innerHTML = savedScript;
+// 1. Carregar roteiro do Banco de Dados ao iniciar
+async function loadScript() {
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (!user) return;
+
+    const { data, error } = await window.supabaseClient
+        .from('roteiros')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('updated_at', { ascending: false })
+        .limit(1)
+        .single();
+
+    if (data) {
+        editor.innerHTML = data.corpo;
     }
-});
-
-// 2. SALVAR AUTOMÁTICO
-function autoSave() {
-    localStorage.setItem('patika_current_script', editor.innerHTML);
-    // Simula um "Salvando..." discreto
-    projectNameDisplay.innerText = "roteiro_v1.sdk (Salvo)";
-    setTimeout(() => {
-        projectNameDisplay.innerText = "roteiro_v1.sdk";
-    }, 2000);
 }
 
+// 2. Salvar no Banco de Dados (com Debounce para não sobrecarregar)
+async function saveToCloud() {
+    const { data: { user } } = await window.supabaseClient.auth.getUser();
+    if (!user) return;
+
+    const content = editor.innerHTML;
+    
+    const { error } = await window.supabaseClient
+        .from('roteiros')
+        .upsert({ 
+            user_id: user.id, 
+            corpo: content,
+            updated_at: new Date() 
+        }, { onConflict: 'user_id' }); // Mantém um roteiro por usuário por enquanto
+
+    if (!error) {
+        console.log("Salvo na nuvem!");
+    }
+}
+
+// 3. Lógica de Teclas (Tab/Enter)
 editor.addEventListener('keydown', (e) => {
-    // Atalho TAB (Mudar Elemento)
     if (e.key === 'Tab') {
         e.preventDefault();
         const selection = window.getSelection();
-        const currentElement = selection.anchorNode.parentElement;
+        const element = selection.anchorNode.parentElement;
         const types = ['slugline', 'action', 'character', 'parenthetical', 'dialogue'];
-        let currentType = currentElement.className || 'action';
-        let nextIndex = (types.indexOf(currentType) + 1) % types.length;
-        currentElement.className = types[nextIndex];
-        autoSave();
-    }
-
-    // Atalho ENTER (Lógica Final Draft)
-    if (e.key === 'Enter') {
-        setTimeout(() => {
-            const selection = window.getSelection();
-            const newElement = selection.anchorNode.parentElement;
-            const prevElement = newElement.previousElementSibling;
-            if (prevElement) {
-                const prevType = prevElement.className;
-                if (prevType === 'character') newElement.className = 'dialogue';
-                else if (prevType === 'dialogue') newElement.className = 'action';
-                else if (prevType === 'slugline') newElement.className = 'action';
-                else newElement.className = 'action';
-            }
-            autoSave();
-        }, 10);
+        let currentIdx = types.indexOf(element.className);
+        element.className = types[(currentIdx + 1) % types.length];
     }
 });
 
-// Salva em cada alteração de texto
-editor.addEventListener('input', autoSave);
+// 4. Auto-save disparado por qualquer alteração
+editor.addEventListener('input', () => {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveToCloud, 2000); // Salva 2 segundos após parar de digitar
+});
+
+// Inicialização
+loadScript();

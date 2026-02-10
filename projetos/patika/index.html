@@ -2,41 +2,24 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>PATIKA | Professional Screenwriting</title>
+    <title>Patika | Editor de Roteiro</title>
     <link rel="stylesheet" href="css/patika-app.css">
 </head>
-<body class="patika-app">
+<body>
+    <nav class="editor-nav">
+        <a href="../../index.html">← Voltar</a>
+        <span id="save-indicator">Sincronizado na Nuvem</span>
+    </nav>
 
-    <header class="app-header">
-        <div class="header-left">
-            <span class="logo-patika">PATIKA</span>
-            <span id="project-name" class="project-name">roteiro_v1.sdk</span>
+    <main class="editor-container">
+        <div id="script-editor" contenteditable="true" class="script-page">
+            <div class="slugline">INT. SALA DE ROTEIRO - DIA</div>
+            <div class="action">Comece a escrever e veja a mágica do salvamento automático.</div>
         </div>
-        <div class="header-right">
-            <button class="btn-tool" onclick="localStorage.clear(); location.reload();">Novo Roteiro</button>
-            <button class="btn-export" onclick="window.print()">Exportar PDF</button>
-        </div>
-    </header>
-
-    <main class="editor-main">
-        <aside class="element-picker">
-            <div class="tool-tip">TAB</div>
-            <button class="el-btn">S</button>
-            <button class="el-btn">A</button>
-            <button class="el-btn">P</button>
-            <button class="el-btn">F</button>
-        </aside>
-
-        <section class="paper-container">
-            <div id="script-editor" contenteditable="true" class="script-page">
-                <div class="slugline">INT. SALA DE TRABALHO - DIA</div>
-                <div class="action">Comece a escrever seu roteiro profissional aqui. Use Tab para mudar os elementos.</div>
-            </div>
-        </section>
     </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase-config.js"></script><script src="js/supabase-config.js"></script>    <script src="js/editor-engine.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../assets/js/supabase-client.js"></script>
+    <script src="js/editor-engine.js"></script>
 </body>
 </html>
