@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/hub.css">
 </head>
-<body>
+<body><button id="audio-control" onclick="toggleMute()">🔊 SOM: ON</button>
 
     <div class="nav-right">
         <button onclick="togglePanel('cdd')">CDD</button>
@@ -90,3 +90,21 @@
     </script>
 </body>
 </html>
+<script>
+    let isMuted = false;
+    function toggleMute() {
+        isMuted = !isMuted;
+        const btn = document.getElementById('audio-control');
+        
+        if (isMuted) {
+            btn.innerText = "🔇 SOM: OFF";
+            btn.classList.add('muted');
+            // Se o AudioContext existir no jogo, suspendemos ele
+            if (window.audioCtx) window.audioCtx.suspend();
+        } else {
+            btn.innerText = "🔊 SOM: ON";
+            btn.classList.remove('muted');
+            if (window.audioCtx) window.audioCtx.resume();
+        }
+    }
+</script>

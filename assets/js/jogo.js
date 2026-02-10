@@ -247,3 +247,26 @@ window.dispararFinalizacao = function() {
     if(finalOriginal) finalOriginal();
     desbloquearConquista('⏳'); // Badge de Sincronia
 };
+
+// Ajuste para respeitar o Mute Global
+const tocarSomOriginal = window.tocarSom;
+window.tocarSom = function(f, t, d) {
+    if (window.isMuted) return; // Não emite som se estiver mutado
+    
+    // Resume o contexto se estiver pausado (requisito de segurança dos browsers)
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+    }
+    
+    if (tocarSomOriginal) {
+        tocarSomOriginal(f, t, d);
+    } else {
+        // Fallback caso a função original não tenha sido carregada ainda
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = t; o.frequency.value = f;
+        g.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + d);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(); o.stop(audioCtx.currentTime + d);
+    }
+};
