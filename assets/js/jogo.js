@@ -1,54 +1,67 @@
+let canvas, ctx, animationId;
 const SISTEMA_3001 = {
     sincronia: 65,
+    player: { x: 140, y: 70, color: "#00ff41", jumping: false, yTarget: 70 },
     db: {
-        'FERRO': { nome: "SENTINELA", msg: "O SENTINELA: 'O metal que te fere hoje é o mesmo que te acorrentou ontem.'", cor: "#ffae00" },
-        'AGUA': { nome: "A VELHA", msg: "A VELHA: 'Onde você vê esgoto, eu vejo o rio sagrado.'", cor: "#00ccff" },
-        'PEDRA': { nome: "O JUIZ", msg: "O JUIZ: 'A justiça dos homens é de papel, a minha é de granito.'", cor: "#999999" },
-        'VENTO': { nome: "A MENINA", msg: "A MENINA: 'Não corra como quem foge, corra como quem flutua.'", cor: "#00ff41" },
-        'JUREMA': { nome: "MÃE JUREMA", msg: "MÃE JUREMA: 'O solo está sangrando, meu filho. Cure o passado.'", cor: "#ff4444" },
-        'SONATA': { nome: "O AUTOR", msg: "SISTEMA: 'Sincronia Total detectada. O futuro está sendo escrito agora.'", cor: "#fff" },
-        'HELP': { nome: "SANKOFA", msg: "COMANDOS DISPONÍVEIS: FERRO, AGUA, PEDRA, VENTO, JUREMA, SONATA.", cor: "#ffffff" }
+        'FERRO': { n: "SENTINELA", m: "O metal protege a favela!", c: "#ffae00", cmd: () => mover(20) },
+        'AGUA': { n: "A VELHA", m: "A maré está subindo.", c: "#00ccff", cmd: () => mudarCor("#00ccff") },
+        'JUREMA': { n: "MÃE JUREMA", m: "O tempo é um círculo.", c: "#ff4444", cmd: () => pular() },
+        'SONATA': { n: "O AUTOR", m: "Sincronia Total.", c: "#fff", cmd: () => turbo() },
+        'HELP': { n: "SANKOFA", m: "Tente: FERRO, AGUA, JUREMA, SONATA.", c: "#fff", cmd: () => {} }
     }
 };
-
-function processarJogo(cmd) {
-    const out = document.getElementById('log-output');
-    const term = document.getElementById('sin-terminal');
-    if(!out) return;
-    let inputUpper = cmd.toUpperCase().trim();
-    if (SISTEMA_3001.db[inputUpper]) {
-        const data = SISTEMA_3001.db[inputUpper];
-        let p = document.createElement('p');
-        p.style.cssText = "margin:10px 0; border-left:3px solid " + data.cor + "; padding-left:12px; color:#fff; font-family:monospace;";
-        p.innerHTML = `<span style="color:${data.cor}; font-weight:bold;">>> ${data.nome}:</span> ${data.msg}`;
-        out.appendChild(p);
-        SISTEMA_3001.sincronia = Math.min(100, SISTEMA_3001.sincronia + 7);
-    } else {
-        let p = document.createElement('p');
-        p.style.cssText = "margin:10px 0; border-left:3px solid #ff4444; padding-left:12px; color:#fff;";
-        p.innerHTML = `<span style="color:#ff4444">> ERRO:</span> Frequência não identificada na rede SANKOFA.`;
-        out.appendChild(p);
-        SISTEMA_3001.sincronia = Math.max(0, SISTEMA_3001.sincronia - 5);
-    }
-    if(term) term.scrollTop = term.scrollHeight;
-    const hud = document.getElementById('sincronia-val');
-    if(hud) hud.innerText = SISTEMA_3001.sincronia + "%";
-}
 
 window.iniciarTerminalCDD = function() {
-    const out = document.getElementById('log-output');
-    if (out && !document.getElementById('alerta-inicial')) {
-        const m = document.createElement('div');
-        m.id = 'alerta-inicial';
-        m.innerHTML = '<p style="color:#00ff41; font-size:11px;">[SANKOFA OS V.3001]</p><p style="color:#ffae00; font-weight:bold;">⚠️ ALERTA: Fenda temporal detectada. Digite HELP.</p>';
-        out.appendChild(m);
+    canvas = document.getElementById('game-canvas');
+    if (canvas) {
+        ctx = canvas.getContext('2d');
+        if (animationId) cancelAnimationFrame(animationId);
+        render();
     }
 };
 
-document.addEventListener('keydown', function(e) {
-    const input = document.getElementById('game-input');
-    if (e.target === input && e.key === 'Enter') {
-        processarJogo(input.value);
-        input.value = '';
+function render() {
+    if (!ctx) return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Suavização do pulo
+    if (SISTEMA_3001.player.jumping) {
+        SISTEMA_3001.player.y -= 4;
+        if (SISTEMA_3001.player.y <= 30) SISTEMA_3001.player.jumping = false;
+    } else if (SISTEMA_3001.player.y < SISTEMA_3001.player.yTarget) {
+        SISTEMA_3001.player.y += 4;
     }
-});
+
+    // Desenha o Boneco
+    ctx.shadowBlur = 15;
+    ctx.shadowColor = SISTEMA_3001.player.color;
+    ctx.fillStyle = SISTEMA_3001.player.color;
+    ctx.fillRect(SISTEMA_3001.player.x, SISTEMA_3001.player.y, 15, 30);
+    
+    // Chão
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "#332200";
+    ctx.fillRect(20, 100, 260, 2);
+    
+    animationId = requestAnimationFrame(render);
+}
+
+function mover(v) { SISTEMA_3001.player.x = (SISTEMA_3001.player.x + v) % 260; }
+function mudarCor(c) { SISTEMA_3001.player.color = c; }
+function pular() { if (SISTEMA_3001.player.y >= 70) SISTEMA_3001.player.jumping = true; }
+function turbo() { SISTEMA_3001.player.color = "#fff"; pular(); mover(40); }
+
+window.processarJogo = function(cmd) {
+    const out = document.getElementById('log-output');
+    const inputUpper = cmd.toUpperCase().trim();
+    if (SISTEMA_3001.db[inputUpper]) {
+        const d = SISTEMA_3001.db[inputUpper];
+        const p = document.createElement('p');
+        p.style.cssText = "margin:5px 0; border-left:2px solid "+d.c+"; padding-left:8px;";
+        p.innerHTML = `<span style="color:${d.c}">>> ${d.n}:</span> ${d.m}`;
+        out.appendChild(p);
+        d.cmd();
+        const term = document.getElementById('sin-terminal');
+        term.scrollTop = term.scrollHeight;
+    }
+};

@@ -136,21 +136,23 @@
                 isGame: false
             },
             cdd: {
-                title: "KINDRED 3001: NAVE BIOLÓGICA",
-                text: `As paredes respiram. O tempo é uma trança.
-                <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; padding:15px; border:1px solid #332200; height:220px; overflow-y:auto; margin-top:15px; font-size:13px; font-family:monospace;">
-                    <div id="log-output">
-                        <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
-                        <p>> SANKOFA-PROTOCOL: Ativo.</p>
-                        <p>> STATUS: Sincronia em <span id="sincronia-val">65%</span>.</p>
-                    </div>
-                    <div style="margin-top:10px; display:flex; border-top:1px solid #222; padding-top:5px;">
-                        <span style="color:#ffae00;">AXÉ_SCAN></span>
-                        <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Digite HELP..." autofocus>
-                    </div>
-                </div>`,
-                isGame: true
-            },
+    title: "KINDRED 3001: NAVE BIOLÓGICA",
+    text: `As paredes respiram. O tempo é uma trança.
+    <div id="game-container" style="background:#000; border:1px solid #332200; border-bottom:none; margin-top:15px; display:flex; justify-content:center;">
+        <canvas id="game-canvas" width="300" height="120"></canvas>
+    </div>
+    <div id="sin-terminal" style="background:#0a0a0a; color:#ffae00; padding:15px; border:1px solid #332200; height:220px; overflow-y:auto; font-size:13px; font-family:monospace;">
+        <div id="log-output">
+            <p style="color:#00ff41">[CONEXÃO ANCESTRAL ESTABELECIDA]</p>
+            <p>> SANKOFA-PROTOCOL: Ativo.</p>
+        </div>
+        <div style="margin-top:10px; display:flex; border-top:1px solid #222; padding-top:5px;">
+            <span style="color:#ffae00;">AXÉ_SCAN></span>
+            <input type="text" id="game-input" style="background:transparent; border:none; color:#fff; outline:none; margin-left:10px; width:100%; font-family:monospace;" placeholder="Digite HELP..." autofocus>
+        </div>
+    </div>`,
+    isGame: true
+},
             patika: {
                 title: "INT. PATIKA - LABORATÓRIO",
                 text: "Patika é a ferramenta definitiva para o roteirista moderno. Um ambiente focado na organização de batidas dramáticas e estrutura de cenas.",
