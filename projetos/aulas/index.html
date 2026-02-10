@@ -1,51 +1,57 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Videoaulas | Patrick Sonata</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; background: #000; color: #fff; padding: 20px; max-width: 800px; margin: 0 auto; }
-        h1 { text-align: center; margin: 40px 0 20px; font-size: 2.5em; }
-        .subtitle { text-align: center; color: #999; margin-bottom: 40px; }
-        .aula-card { background: #111; border: 1px solid #333; border-radius: 10px; padding: 20px; margin: 20px 0; }
-        .aula-card h3 { color: #fff; margin-bottom: 10px; }
-        .aula-card p { color: #999; margin-bottom: 15px; }
-        .btn { display: inline-block; padding: 10px 20px; background: #222; color: white; text-decoration: none; border-radius: 8px; margin-right: 10px; }
-        .btn:hover { background: #333; }
-        .btn-primary { background: #000; border: 1px solid #fff; font-weight: bold; }
-        .footer { text-align: center; margin-top: 60px; color: #666; }
-        .back-link { display: inline-block; margin-top: 20px; color: #999; text-decoration: none; }
-    </style>
+    <title>Aulas | Patrick Sonata Masterclass</title>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="css/aulas.css">
 </head>
-<body>
-    <h1>🎬 Videoaulas</h1>
-    <p class="subtitle">Aprenda roteiro, humor e dramaturgia com Patrick Sonata</p>
-    
-    <div class="aula-card">
-        <h3>Teoria da Proximidade na Prática</h3>
-        <p>Como aplicar o "quase" em roteiros de comédia e drama. Exemplos reais de Zorra e Pablo & Luisão.</p>
-        <a href="player.html?id=1" class="btn btn-primary">Assistir Aula</a>
-        <span style="color: #666; margin-left: 15px;"><i class="far fa-clock"></i> 25 min</span>
-    </div>
-    
-    <div class="aula-card">
-        <h3>Estrutura de Esquete de Humor</h3>
-        <p>Do conceito à piada final. Análise de esquete do Programa Zorra e construção passo a passo.</p>
-        <a href="player.html?id=2" class="btn btn-primary">Assistir Aula</a>
-        <span style="color: #666; margin-left: 15px;"><i class="far fa-clock"></i> 32 min</span>
-    </div>
-    
-    <div class="aula-card">
-        <h3>Do Teatro à TV: Adaptando Personagens</h3>
-        <p>Como transformar personagens teatrais em personagens de TV. Caso: Pelada (teatro) para TV.</p>
-        <a href="player.html?id=3" class="btn">Ver Preview</a>
-        <span style="color: #666; margin-left: 15px;"><i class="fas fa-lock"></i> Em breve</span>
-    </div>
-    
-    <div class="footer">
-        <p>Conteúdo baseado na <strong>Teoria da Proximidade</strong> e 20 anos de experiência</p>
-        <a href="../" class="back-link">← Voltar ao site principal</a>
-    </div>
+<body class="aulas-platform">
+
+    <nav class="aulas-nav">
+        <a href="../../index.html" class="back-link">← Voltar ao Portfólio</a>
+        <div class="user-progress">
+            <span>Progresso: 45%</span>
+            <div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <section class="video-container">
+            <div class="main-video">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="video-info">
+                <h2>Módulo 1: A Arquitetura do Roteiro de Comédia</h2>
+                <p>Nesta aula, exploramos como transformar premissas simples em estruturas de esquetes para TV aberta.</p>
+                <div class="materials">
+                    <a href="assets/docs/aula1.pdf" download class="btn-material">📄 Baixar Material de Apoio (.PDF)</a>
+                </div>
+            </div>
+        </section>
+
+        <aside class="playlist">
+            <h3>Conteúdo do Curso</h3>
+            <div class="module">
+                <span class="module-title">Módulo 1: Fundamentos</span>
+                <div class="lesson active">
+                    <span class="status">●</span> 01. O que é um roteiro?
+                </div>
+                <div class="lesson">
+                    <span class="status">○</span> 02. Estrutura em 3 atos
+                </div>
+            </div>
+            <div class="module">
+                <span class="module-title">Módulo 2: O Mercado</span>
+                <div class="lesson">
+                    <span class="status">○</span> 03. Como vender seu projeto
+                </div>
+                <div class="lesson">
+                    <span class="status">○</span> 04. Escrita para Streaming
+                </div>
+            </div>
+        </aside>
+    </main>
+
 </body>
 </html>
