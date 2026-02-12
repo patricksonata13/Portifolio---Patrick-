@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AULAS • Área do Aluno</title>
+    <style>
+        :root {
+            --terminal-green: #6c9a8f;
+            --terminal-dark: #0a0a0a;
+            --terminal-panel: #0f0f0f;
+            --terminal-border: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--terminal-dark);
+            color: white;
+            font-family: 'Courier New', monospace;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: var(--terminal-panel);
+            border: 1px solid var(--terminal-border);
+        }
+
+        h1 {
+            color: var(--terminal-green);
+            margin-bottom: 30px;
+            font-size: 2rem;
+            letter-spacing: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            color: var(--terminal-green);
+            margin-bottom: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            background: black;
+            border: 1px solid var(--terminal-border);
+            color: white;
+            font-family: 'Courier New';
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: 2px solid var(--terminal-green);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 2px solid var(--terminal-green);
+            color: var(--terminal-green);
+            font-family: 'Courier New';
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: var(--terminal-green);
+            color: black;
+        }
+
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: black;
+            color: white;
+            border: 2px solid var(--terminal-green);
+            padding: 12px 24px;
+            cursor: pointer;
+            width: auto;
+        }
+
+        .info {
+            margin-top: 30px;
+            padding: 20px;
+            background: black;
+            border: 1px solid var(--terminal-border);
+            color: #888;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔐 ÁREA DO ALUNO</h1>
+        
+        <div class="form-group">
+            <label>login:</label>
+            <input type="text" placeholder="aluno@aulas.com">
+        </div>
+        
+        <div class="form-group">
+            <label>senha:</label>
+            <input type="password" placeholder="••••••••">
+        </div>
+        
+        <button onclick="alert('🔐 Matrículas abertas para 2026.2')">[ ENTRAR ]</button>
+        
+        <div class="info">
+            <p>🎓 23 alunos matriculados</p>
+            <p style="margin-top: 10px;">Próximas turmas: Março/2026</p>
+            <p style="margin-top: 20px; color: var(--terminal-green);">patrick@aulas:~$ ./acesso --ajuda</p>
+        </div>
+    </div>
+
+    <button onclick="window.location.href='../index.html'" class="back-button">
+        ← VOLTAR
+    </button>
+</body>
+</html>
