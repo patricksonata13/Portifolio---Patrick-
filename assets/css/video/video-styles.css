@@ -1,0 +1,88 @@
+/* ========================================
+   SISTEMA DE VÍDEO PROFISSIONAL
+   ======================================== */
+
+/* Container do player */
+.js-player {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+/* Plyr customizado */
+.plyr {
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+}
+
+.plyr--video {
+    background: #000;
+}
+
+.plyr__control--overlaid {
+    background: #6c9a8f;
+    padding: 20px;
+}
+
+.plyr__control--overlaid:hover {
+    background: #5a8a7f;
+}
+
+.plyr--video .plyr__control.plyr__tab-focus,
+.plyr--video .plyr__control:hover,
+.plyr--video .plyr__control[aria-expanded=true] {
+    background: #6c9a8f;
+}
+
+/* Grid de vídeos */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+/* Card de vídeo */
+.video-card {
+    background: #111;
+    border: 1px solid #2a2a2a;
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+.video-card:hover {
+    border-color: #6c9a8f;
+    transform: translateY(-4px);
+}
+
+.video-meta {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.video-tag {
+    background: #2a2a2a;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+.video-duracao {
+    color: #6c9a8f;
+    border: 1px solid #6c9a8f;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .videos-grid {
+        grid-template-columns: 1fr;
+    }
+}
