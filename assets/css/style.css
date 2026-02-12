@@ -249,3 +249,44 @@ transition: 0.6s cubic-bezier(0.19, 1, 0.22, 1); padding: 80px 50px; box-sizing:
         right: -2px;
     }
 }
+/* ========================================
+   BOTÃO VOLTAR PADRÃO - TODAS AS PÁGINAS
+   ======================================== */
+.back-button-padrao {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: #0a0a0a;
+    color: #c0c0c0;
+    border: 1px solid #2a2a2a;
+    padding: 12px 24px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.back-button-padrao:hover {
+    border-color: #6c9a8f;
+    color: #6c9a8f;
+    background: rgba(108, 154, 143, 0.1);
+    transform: translateY(-2px);
+}
+
+.back-button-padrao .back-arrow {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    .back-button-padrao {
+        bottom: 20px;
+        right: 20px;
+        padding: 10px 20px;
+        font-size: 0.75rem;
+    }
+}
