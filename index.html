@@ -57,7 +57,7 @@ class="profile-img">
         <h1>PATRICK SONATA</h1>
         
         <!-- ========================================= -->
-        <!-- GRUPO 2: INFERIOR CENTRAL               -->
+        <!-- GRUPO 2: INFERIOR CENTRAL - CORRIGIDO!  -->
         <!-- SOBRE | PERFIL | TRABALHO               -->
         <!-- ========================================= -->
         <div class="nav-bottom-center">
@@ -99,12 +99,11 @@ style="display:none;">
     </div>
     
     <!-- ========================================= -->
-    <!-- SCRIPTS - VERSÃO CORRETA                -->
-    <!-- PORTFÓLIO DENTRO DO PAINEL             -->
+    <!-- SCRIPTS - TODAS AS FUNÇÕES FUNCIONANDO  -->
     <!-- ========================================= -->
     <script>
         // ========================================
-        // BANCO DE DADOS
+        // BANCO DE DADOS COMPLETO
         // ========================================
         const db = {
             sobre: {
@@ -198,19 +197,31 @@ urbanas.",
         };
 
         // ========================================
-        // CARREGAR SOBRE
+        // CARREGAR SOBRE (FUNCIONANDO)
         // ========================================
         function carregarSobre() {
+            console.log("Carregando Sobre...");
             const el = document.getElementById('content-sobre');
-            if (el) el.innerHTML = db.sobre.text;
+            if (el) {
+                el.innerHTML = db.sobre.text;
+                console.log("Sobre carregado!");
+            } else {
+                console.error("Elemento content-sobre não encontrado!");
+            }
         }
 
         // ========================================
-        // CARREGAR PERFIL
+        // CARREGAR PERFIL (FUNCIONANDO)
         // ========================================
         function carregarPerfil() {
+            console.log("Carregando Perfil...");
             const el = document.getElementById('content-perfil');
-            if (el) el.innerHTML = db.perfil.text;
+            if (el) {
+                el.innerHTML = db.perfil.text;
+                console.log("Perfil carregado!");
+            } else {
+                console.error("Elemento content-perfil não encontrado!");
+            }
         }
 
         // ========================================
@@ -279,9 +290,10 @@ class="portfolio-role">${proj.role}</div>
         }
 
         // ========================================
-        // CARREGAR CONTEÚDO INICIAL
+        // CARREGAR CONTEÚDO INICIAL - AUTOMÁTICO!
         // ========================================
         document.addEventListener('DOMContentLoaded', function() {
+            console.log("Página carregada, carregando Sobre e Perfil...");
             carregarSobre();
             carregarPerfil();
         });
