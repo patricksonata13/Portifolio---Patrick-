@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata | Roteirista</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- MENU SUPERIOR -->
+    <div class="main-container" id="home">
+        <nav class="nav-top-right">
+            <button onclick="window.location.href='cdd/index.html'">CDD 
+3001</button>
+            <button onclick="window.location.href='patika/index.html'" 
+class="patika-btn">PATIKA</button>
+            <button 
+onclick="window.location.href='aulas/index.html'">AULAS</button>
+        </nav>
+
+        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" 
+class="profile-img">
+        <h1>PATRICK SONATA</h1>
+        
+        <!-- MENU INFERIOR - CORRIGIDO -->
+        <div class="nav-bottom-center">
+            <button onclick="mostrarSobre()">Sobre</button>
+            <button onclick="mostrarPerfil()">Perfil</button>
+            <button onclick="abrirTrabalho()">Trabalho</button>
+        </div>
+    </div>
+    
+    <!-- SEÇÃO SOBRE -->
+    <div id="sobre-section" style="display: none; padding: 40px; 
+background: black; color: white; font-family: 'Courier New';">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="color: #6c9a8f; margin-bottom: 30px;">▷ SOBRE</h2>
+            <div style="border-left: 4px solid #6c9a8f; padding-left: 
+20px;">
+                <p style="color: #aaa; margin-bottom: 20px;">FADE IN:</p>
+                <p style="color: #6c9a8f; margin-bottom: 10px;">INT. 
+CIDADE DE DEUS - RIO DE JANEIRO - DIA</p>
+                <p style="color: white; margin-bottom: 20px;">Patrick 
+Sonata caminha pelas ruas que moldaram seu olhar. A câmera foca na 
+vivacidade do ambiente.</p>
+                <p style="color: #6c9a8f; margin-bottom: 10px;">NARRADOR 
+(V.O.)</p>
+                <p style="color: white; margin-bottom: 20px;">"Trinta e 
+sete anos de vida. Vinte de estrada. Patrick não apenas observa a 
+periferia; ele a traduz em narrativa."</p>
+                <p style="color: #6c9a8f; margin-bottom: 
+10px;">PATRICK</p>
+                <p style="color: white; margin-bottom: 20px;">"O teatro me 
+deu a voz, mas a Cidade de Deus me deu o repertório."</p>
+                <p style="color: #aaa;">FADE OUT.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SEÇÃO PERFIL -->
+    <div id="perfil-section" style="display: none; padding: 40px; 
+background: black; color: white; font-family: 'Courier New';">
+        <div style="max-width: 800px; margin: 0 auto;">
+            <h2 style="color: #6c9a8f; margin-bottom: 30px;">▷ PERFIL 
+PROFISSIONAL</h2>
+            <div style="border-left: 4px solid #6c9a8f; padding-left: 
+20px;">
+                <p style="color: white; margin-bottom: 20px;">Roteirista, 
+Ator e Especialista em Narrativas Periféricas.</p>
+                <p style="color: #6c9a8f; margin-bottom: 10px;">SKILLS EM 
+DESTAQUE</p>
+                <ul style="color: white; list-style: none; padding: 0;">
+                    <li style="margin-bottom: 10px;">• Dramaturgia Urbana 
+e Humor Crítico</li>
+                    <li style="margin-bottom: 10px;">• Formação em 
+Palhaçaria Clássica</li>
+                    <li style="margin-bottom: 10px;">• Consultoria para 
+Projetos de Identidade Afro-brasileira</li>
+                </ul>
+                <p style="color: #6c9a8f; margin-bottom: 10px; margin-top: 
+30px;">VISÃO</p>
+                <p style="color: white;">"Escrever a quebrada sem 
+estereótipos, focando na humanidade e na potência estética do real."</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- PAINEL DO TRABALHO -->
+    <div id="trabalho-painel" style="display: none; position: fixed; top: 
+0; right: 0; width: 100%; height: 100vh; background: black; z-index: 9999; 
+padding: 40px; overflow-y: auto;">
+        <button onclick="fecharTrabalho()" style="position: fixed; top: 
+30px; right: 30px; background: black; color: white; border: 2px solid 
+#6c9a8f; padding: 10px 20px; cursor: pointer;">FECHAR [X]</button>
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="color: #6c9a8f; font-size: 2rem; margin-bottom: 
+40px;">▷ PORTFÓLIO</h2>
+            <div style="display: grid; grid-template-columns: repeat(3, 
+1fr); gap: 30px;">
+                <div style="border: 1px solid #333; padding: 20px; 
+background: #0a0a0a;">
+                    <div style="width: 100%; height: 200px; background: 
+#1a1a1a; margin-bottom: 20px; display: flex; align-items: center; 
+justify-content: center; color: #6c9a8f;">🎬</div>
+                    <h3 style="color: white;">PABLO E LUISÃO</h3>
+                    <p style="color: #6c9a8f; font-size: 
+0.8rem;">Roteirista</p>
+                    <p style="color: #aaa; font-size: 0.9rem; margin-top: 
+10px;">Série Original Globoplay</p>
+                </div>
+                <div style="border: 1px solid #333; padding: 20px; 
+background: #0a0a0a;">
+                    <div style="width: 100%; height: 200px; background: 
+#1a1a1a; margin-bottom: 20px; display: flex; align-items: center; 
+justify-content: center; color: #6c9a8f;">🎭</div>
+                    <h3 style="color: white;">HUMOR NEGRO</h3>
+                    <p style="color: #6c9a8f; font-size: 
+0.8rem;">Roteirista</p>
+                    <p style="color: #aaa; font-size: 0.9rem; margin-top: 
+10px;">Multishow/Globoplay</p>
+                </div>
+                <div style="border: 1px solid #333; padding: 20px; 
+background: #0a0a0a;">
+                    <div style="width: 100%; height: 200px; background: 
+#1a1a1a; margin-bottom: 20px; display: flex; align-items: center; 
+justify-content: center; color: #6c9a8f;">🎪</div>
+                    <h3 style="color: white;">CIDADE CORRERIA</h3>
+                    <p style="color: #6c9a8f; font-size: 0.8rem;">Autor e 
+Ator</p>
+                    <p style="color: #aaa; font-size: 0.9rem; margin-top: 
+10px;">Teatro e Documentário</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // FUNÇÕES SIMPLES - 100% FUNCIONAIS
+        // ========================================
+        
+        function mostrarSobre() {
+            document.getElementById('sobre-section').style.display = 
+'block';
+            document.getElementById('perfil-section').style.display = 
+'none';
+            document.getElementById('trabalho-painel').style.display = 
+'none';
+        }
+        
+        function mostrarPerfil() {
+            document.getElementById('perfil-section').style.display = 
+'block';
+            document.getElementById('sobre-section').style.display = 
+'none';
+            document.getElementById('trabalho-painel').style.display = 
+'none';
+        }
+        
+        function abrirTrabalho() {
+            document.getElementById('trabalho-painel').style.display = 
+'block';
+            document.getElementById('sobre-section').style.display = 
+'none';
+            document.getElementById('perfil-section').style.display = 
+'none';
+        }
+        
+        function fecharTrabalho() {
+            document.getElementById('trabalho-painel').style.display = 
+'none';
+        }
+    </script>
+</body>
+</html>

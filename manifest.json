@@ -1,0 +1,25 @@
+{
+  "name": "Patrick Sonata | Roteirista",
+  "short_name": "Patrick Sonata",
+  "description": "Portfólio profissional de Patrick Sonata - Roteirista, ator e comediante",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#6c9a8f",
+  "orientation": "portrait",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/assets/images/fotodeperfil.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/images/fotodeperfil.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg",
+      "purpose": "any maskable"
+    }
+  ]
+}

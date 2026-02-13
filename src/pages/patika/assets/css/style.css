@@ -1,0 +1,206 @@
+/* ========================================
+   PATIKA - PLATAFORMA DE ESCRITA v8.0
+   Cores Oficiais • Terminal Aesthetic
+   ======================================== */
+
+:root {
+    --patika-primary: #6c9a8f;
+    --patika-dark: #0a0a0a;
+    --patika-panel: #0f0f0f;
+    --patika-border: #2a2a2a;
+    --patika-success: #6c9a8f;
+    --patika-warning: #e6c07b;
+    --patika-error: #cc6666;
+    --patika-info: #51afef;
+    --text-primary: #ffffff;
+    --text-secondary: #c0c0c0;
+    --text-tertiary: #888888;
+    --text-quaternary: #4a4a4a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--patika-dark);
+    color: var(--text-primary);
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+/* TERMINAL BAR */
+.terminal-bar {
+    background: var(--patika-panel);
+    border-bottom: 2px solid var(--patika-border);
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.terminal-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--patika-primary);
+}
+
+.terminal-path {
+    color: var(--text-tertiary);
+}
+
+.terminal-path span {
+    color: var(--patika-primary);
+    margin: 0 4px;
+}
+
+.terminal-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-btn {
+    background: transparent;
+    border: 1px solid var(--patika-border);
+    color: var(--text-secondary);
+    padding: 6px 12px;
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.terminal-btn:hover {
+    border-color: var(--patika-primary);
+    color: var(--text-primary);
+}
+
+/* BOTÃO PADRÃO */
+.btn {
+    padding: 10px 20px;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 2px solid;
+}
+
+.btn-primary {
+    background: var(--patika-primary);
+    border-color: var(--patika-primary);
+    color: var(--patika-dark);
+}
+
+.btn-primary:hover {
+    background: transparent;
+    color: var(--text-primary);
+}
+
+.btn-secondary {
+    background: transparent;
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+    background: var(--text-primary);
+    color: var(--patika-dark);
+}
+
+/* STATUS INDICATOR */
+.status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border: 1px solid;
+    font-size: 12px;
+}
+
+.status-saved {
+    border-color: var(--patika-success);
+    color: var(--patika-success);
+}
+
+.status-unsaved {
+    border-color: var(--patika-warning);
+    color: var(--patika-warning);
+}
+
+/* GRID LAYOUT */
+.platform-grid {
+    display: grid;
+    gap: 24px;
+    padding: 24px;
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* CARDS */
+.card {
+    background: var(--patika-panel);
+    border: 1px solid var(--patika-border);
+    padding: 24px;
+    transition: all 0.2s;
+}
+
+.card:hover {
+    border-color: var(--patika-primary);
+    transform: translateY(-2px);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .terminal-bar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px;
+    }
+    
+    .grid-2, .grid-3, .grid-4 {
+        grid-template-columns: 1fr;
+    }
+    
+    .terminal-actions {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+/* ANIMAÇÕES */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.cursor {
+    animation: blink 1s infinite;
+    color: var(--patika-primary);
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--patika-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--patika-border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--patika-primary);
+}

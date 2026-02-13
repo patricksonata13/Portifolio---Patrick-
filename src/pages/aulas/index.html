@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AULAS • Patrick Sonata | Laboratório de Roteiro</title>
+    <style>
+        :root {
+            --terminal-green: #6c9a8f;
+            --terminal-dark: #0a0a0a;
+            --terminal-panel: #0f0f0f;
+            --terminal-border: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #c0c0c0;
+            --text-tertiary: #888888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--terminal-dark);
+            color: var(--text-primary);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+        }
+
+        /* TERMINAL BAR */
+        .terminal-bar {
+            background: var(--terminal-panel);
+            border-bottom: 2px solid var(--terminal-border);
+            padding: 16px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .terminal-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--terminal-green);
+        }
+
+        .terminal-path {
+            color: var(--text-tertiary);
+        }
+
+        .terminal-path span {
+            color: var(--terminal-green);
+            margin: 0 4px;
+        }
+
+        .terminal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .terminal-btn {
+            background: transparent;
+            border: 1px solid var(--terminal-border);
+            color: var(--text-secondary);
+            padding: 8px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .terminal-btn:hover {
+            border-color: var(--terminal-green);
+            color: var(--text-primary);
+        }
+
+        /* HERO */
+        .hero {
+            padding: 80px 40px;
+            text-align: center;
+            border-bottom: 1px solid var(--terminal-border);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 100;
+            letter-spacing: 8px;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--terminal-green);
+            border-bottom: 2px solid var(--terminal-green);
+            padding-bottom: 8px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-tertiary);
+            max-width: 700px;
+            margin: 30px auto;
+        }
+
+        .cursor {
+            animation: blink 1s infinite;
+            color: var(--terminal-green);
+            font-size: 1.5rem;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* NAVEGAÇÃO */
+        .nav-modules {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+            padding: 30px;
+            background: var(--terminal-panel);
+            border-bottom: 1px solid var(--terminal-border);
+            flex-wrap: wrap;
+        }
+
+        .module-btn {
+            background: transparent;
+            border: 1px solid var(--terminal-border);
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            letter-spacing: 1px;
+        }
+
+        .module-btn:hover {
+            border-color: var(--terminal-green);
+            color: var(--text-primary);
+            background: rgba(108, 154, 143, 0.1);
+        }
+
+        .module-btn.active {
+            border-color: var(--terminal-green);
+            color: var(--text-primary);
+            background: rgba(108, 154, 143, 0.2);
+        }
+
+        /* CONTEÚDO */
+        .content {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 30px;
+        }
+
+        /* GRADE DE MÓDULOS */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background: var(--terminal-panel);
+            border: 1px solid var(--terminal-border);
+            padding: 30px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .module-card:hover {
+            border-color: var(--terminal-green);
+            transform: translateY(-4px);
+        }
+
+        .module-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .module-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .module-card p {
+            color: var(--text-tertiary);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .module-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--terminal-green);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--terminal-border);
+            padding-top: 20px;
+        }
+
+        /* STATUS BAR */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 30px;
+            background: var(--terminal-panel);
+            border-top: 1px solid var(--terminal-border);
+            color: var(--text-tertiary);
+            font-size: 0.8rem;
+            margin-top: 60px;
+        }
+
+        /* BACK BUTTON */
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: black;
+            color: white;
+            border: 2px solid var(--terminal-green);
+            padding: 12px 24px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            z-index: 1000;
+            transition: all 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .back-button:hover {
+            background: var(--terminal-green);
+            color: black;
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 1024px) {
+            .module-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .module-grid { grid-template-columns: 1fr; }
+            .terminal-bar { flex-direction: column; gap: 12px; }
+            .nav-modules { flex-direction: column; }
+            .module-btn { width: 100%; }
+            .back-button { bottom: 20px; right: 20px; }
+        }
+    </style>
+    <!-- Plyr - Player de Vídeo -->
+    <link rel="stylesheet" href="/assets/css/video/video-styles.css">
+    <script src="/assets/js/video/plyr-loader.js" defer></script></head>
+<body>
+    <!-- TERMINAL BAR -->
+    <div class="terminal-bar">
+        <div class="terminal-title">
+            <span>⌘</span>
+            <span>AULAS</span>
+            <span class="terminal-path">~/laboratorio/<span>roteiro</span></span>
+        </div>
+        <div class="terminal-actions">
+            <button class="terminal-btn" onclick="window.location.href='aluno/'">ÁREA DO ALUNO</button>
+            <span class="terminal-btn" style="border-color: var(--terminal-green);">⏻ ONLINE</span>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+        <h1><span>LABORATÓRIO</span> DE ROTEIRO</h1>
+        <p>Formação profissional em dramaturgia e roteiro audiovisual.<br>Da ideia à tela.</p>
+        <div style="margin-top: 40px;">
+            <span class="cursor">█</span>
+        </div>
+    </div>
+
+    <!-- MÓDULOS -->
+    <div class="nav-modules">
+        <button class="module-btn active" onclick="window.location.href='#'">TODOS</button>
+        <button class="module-btn" onclick="window.location.href='roteiro/'">ROTEIRO</button>
+        <button class="module-btn" onclick="window.location.href='praticas/'">PRÁTICAS</button>
+        <button class="module-btn" onclick="window.location.href='mentoria/'">MENTORIA</button>
+        <button class="module-btn" onclick="window.location.href='aluno/'">ALUNO</button>
+    </div>
+
+    <!-- CONTEÚDO -->
+    <div class="content">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+            <h2 style="color: var(--text-primary); font-size: 1.8rem; letter-spacing: 2px;">▷ MÓDULOS DISPONÍVEIS</h2>
+            <span style="color: var(--terminal-green);">12 cursos • 48 aulas</span>
+        </div>
+
+        <div class="module-grid">
+            <!-- MÓDULO 1 -->
+            <div class="module-card" onclick="window.location.href='roteiro/fundamentos/'">
+                <div class="module-icon">📝</div>
+                <h3>Fundamentos do Roteiro</h3>
+                <p>Formato, estrutura clássica, conflito e jornada do herói.</p>
+                <div class="module-meta">
+                    <span>8 aulas</span>
+                    <span>20h</span>
+                </div>
+            </div>
+
+            <!-- MÓDULO 2 -->
+            <div class="module-card" onclick="window.location.href='roteiro/estrutura/'">
+                <div class="module-icon">📊</div>
+                <h3>Estrutura Narrativa</h3>
+                <p>3 atos, sequências, pontos de virada e escaleta.</p>
+                <div class="module-meta">
+                    <span>6 aulas</span>
+                    <span>15h</span>
+                </div>
+            </div>
+
+            <!-- MÓDULO 3 -->
+            <div class="module-card" onclick="window.location.href='roteiro/personagens/'">
+                <div class="module-icon">🎭</div>
+                <h3>Criação de Personagens</h3>
+                <p>Arcos, conflitos internos, diálogos e subtexto.</p>
+                <div class="module-meta">
+                    <span>8 aulas</span>
+                    <span>20h</span>
+                </div>
+            </div>
+
+            <!-- MÓDULO 4 -->
+            <div class="module-card" onclick="window.location.href='roteiro/humor/'">
+                <div class="module-icon">😂</div>
+                <h3>Roteiro de Humor</h3>
+                <p>Timing, sátira, sitcom e comédia dramática.</p>
+                <div class="module-meta">
+                    <span>6 aulas</span>
+                    <span>15h</span>
+                </div>
+            </div>
+
+            <!-- MÓDULO 5 -->
+            <div class="module-card" onclick="window.location.href='roteiro/documentario/'">
+                <div class="module-icon">🎬</div>
+                <h3>Documentário</h3>
+                <p>Narrativas do real, entrevista e estrutura documental.</p>
+                <div class="module-meta">
+                    <span>4 aulas</span>
+                    <span>12h</span>
+                </div>
+            </div>
+
+            <!-- MÓDULO 6 -->
+            <div class="module-card" onclick="window.location.href='praticas/exercicios/'">
+                <div class="module-icon">✍️</div>
+                <h3>Práticas de Roteiro</h3>
+                <p>Exercícios, reescrita e análise de cenas.</p>
+                <div class="module-meta">
+                    <span>6 aulas</span>
+                    <span>18h</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ÁREA DO ALUNO DESTAQUE -->
+        <div style="margin-top: 80px; background: var(--terminal-panel); border: 1px solid var(--terminal-border); padding: 40px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+            <div>
+                <h3 style="color: var(--text-primary); font-size: 1.5rem; margin-bottom: 10px;">🔐 ÁREA DO ALUNO</h3>
+                <p style="color: var(--text-tertiary);">Acesse seu painel, materiais e mentorias.</p>
+            </div>
+            <button onclick="window.location.href='aluno/'" style="background: transparent; border: 2px solid var(--terminal-green); color: var(--terminal-green); padding: 12px 30px; font-family: 'Courier New'; cursor: pointer; font-size: 1rem;">
+                [ ENTRAR ]
+            </button>
+        </div>
+    </div>
+
+    <!-- STATUS BAR -->
+    <div class="status-bar">
+        <span>👤 23 alunos online</span>
+        <span>📊 4 turmas em andamento</span>
+        <span>⏳ Próxima aula: 15/02 - Estruturas não-lineares</span>
+    </div>
+
+    <!-- BACK BUTTON -->
+    <button onclick="window.location.href='../index.html'" class="back-button">
+        ← VOLTAR AO PORTFÓLIO
+    </button>
+    <!-- ======================================== -->
+    <!-- VIDEOAULAS -->
+    <!-- ======================================== -->
+    <div style="margin-top: 80px; padding: 60px 20px; background: #0a0a0a; border-top: 1px solid #2a2a2a;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="color: #6c9a8f; font-size: 2rem; margin-bottom: 20px; letter-spacing: 2px;">
+                ▷ VIDEOAULAS
+            </h2>
+            <p style="color: #888; margin-bottom: 40px;">Aulas gravadas do laboratório de roteiro</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">28:45</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 1</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Estrutura em 3 Atos</h4>
+                    <p style="color: #aaa;">Fundamentos da dramaturgia clássica aplicados ao roteiro.</p>
+                </div>
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">32:10</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 1</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Criação de Personagens</h4>
+                    <p style="color: #aaa;">Jornada do herói, arcos de transformação e conflitos.</p>
+                </div>
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">25:30</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 2</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Diálogos e Subtexto</h4>
+                    <p style="color: #aaa;">O que os personagens dizem e o que realmente querem dizer.</p>
+                </div>
+            </div>
+        </div>
+    </div></body>
+</html>
+    <!-- BOTÃO VOLTAR PADRÃO -->
+    <button onclick="window.location.href='../index.html'" class="back-button-padrao">
+        ← VOLTAR
+    </button>
+    <!-- ======================================== -->
+    <!-- VIDEOAULAS -->
+    <!-- ======================================== -->
+    <div style="margin-top: 80px; padding: 60px 20px; background: #0a0a0a; border-top: 1px solid #2a2a2a;">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <h2 style="color: #6c9a8f; font-size: 2rem; margin-bottom: 20px; letter-spacing: 2px;">
+                ▷ VIDEOAULAS
+            </h2>
+            <p style="color: #888; margin-bottom: 40px;">Aulas gravadas do laboratório de roteiro</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">28:45</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 1</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Estrutura em 3 Atos</h4>
+                    <p style="color: #aaa;">Fundamentos da dramaturgia clássica aplicados ao roteiro.</p>
+                </div>
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">32:10</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 1</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Criação de Personagens</h4>
+                    <p style="color: #aaa;">Jornada do herói, arcos de transformação e conflitos.</p>
+                </div>
+                <div style="background: #111; border: 1px solid #2a2a2a; padding: 20px;">
+                    <div class="js-player" data-plyr-provider="youtube" data-plyr-embed-id="dQw4w9WgXcQ"></div>
+                    <div style="display: flex; gap: 10px; margin: 15px 0;">
+                        <span style="color: #6c9a8f; border: 1px solid #6c9a8f; padding: 4px 12px; border-radius: 20px;">25:30</span>
+                        <span style="background: #2a2a2a; padding: 4px 12px; border-radius: 20px;">Módulo 2</span>
+                    </div>
+                    <h4 style="color: #fff; font-size: 1.2rem;">Diálogos e Subtexto</h4>
+                    <p style="color: #aaa;">O que os personagens dizem e o que realmente querem dizer.</p>
+                </div>
+            </div>
+        </div>
+    </div></body>
+</html>
