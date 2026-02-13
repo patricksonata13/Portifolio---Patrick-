@@ -89,12 +89,54 @@ potência estética do real.</div>
             }
         ]
     },
-    cdd: { 
-        title: "CDD - 3001", 
-        isGame: true,
-        text: "Projeto transmídia explorando o futuro da Cidade de Deus."
-    },
-    patika: { 
+    cdd: {
+        title: "CDD 3001 - O JOGO",
+        text: `
+            <div style="text-align:center; padding:40px; 
+background:#0a0a0a; border:2px solid #00FF41;">
+                <h2 style="color:#00FF41; font-size:2rem; 
+margin-bottom:20px;">🎮 CDD 3001: A RESISTÊNCIA</h2>
+                
+                <p style="color:#fff; margin:20px 0; line-height:1.8;">
+                    Jogo afrofuturista de ação 2D ambientado na Cidade de 
+Deus em 3001.<br>
+                    Resgate os 5 moradores, lute contra os monstros 
+brancos e restaure a cor do território.
+                </p>
+                
+                <div style="display:grid; 
+grid-template-columns:repeat(3,1fr); gap:20px; margin:40px 0;">
+                    <div style="border:1px solid #00FF41; padding:20px;">
+                        <span style="font-size:2rem;">🏍️</span>
+                        <p style="color:#00FF41;">Moto Sankofa-X</p>
+                    </div>
+                    <div style="border:1px solid #00FF41; padding:20px;">
+                        <span style="font-size:2rem;">⚡</span>
+                        <p style="color:#00FF41;">Power-ups</p>
+                    </div>
+                    <div style="border:1px solid #00FF41; padding:20px;">
+                        <span style="font-size:2rem;">👾</span>
+                        <p style="color:#00FF41;">3 Níveis</p>
+                    </div>
+                </div>
+                
+                <a href="game-cdd3001/index.html" target="_blank"
+                   style="display:inline-block; padding:15px 40px; 
+                          background:#00FF41; color:#000; 
+                          text-decoration:none; font-weight:bold; 
+                          border:none; cursor:pointer; margin:20px 0;
+                          font-size:1.2rem;">
+                    🎮 JOGAR AGORA
+                </a>
+                
+                <p style="color:#888; font-size:0.8rem; margin-top:20px;">
+                    Setas: mover | Espaço: pular | X: atacar | E: moto | 
+F: pulso
+                </p>
+            </div>
+        `
+    },    
+patika: { 
         title: "PATIKA", 
         text: "Software de auxílio para roteiristas focado em escaletas e estruturação 
 narrativa para criadores independentes." 

@@ -1,20 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>404 - FENDA TEMPORAL</title>
+    <title>404 - SANKOFA OS</title>
     <style>
-        body { background: #000; color: #00ff41; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; overflow: hidden; }
-        .glitch { font-size: 100px; font-weight: bold; position: relative; animation: noise 2s infinite; }
-        @keyframes noise { 0% { transform: skew(0deg); } 10% { transform: skew(10deg); color: #ff4444; } 20% { transform: skew(-10deg); } 100% { transform: skew(0deg); } }
-        a { color: #fff; text-decoration: none; border: 1px solid #fff; padding: 10px 20px; margin-top: 20px; transition: 0.3s; }
-        a:hover { background: #fff; color: #000; }
+        body { background: #000; color: #00FF41; font-family: 'Courier New'; 
+               display: flex; justify-content: center; align-items: center; 
+               height: 100vh; text-align: center; padding: 20px; }
+        .terminal { border: 2px solid #00FF41; padding: 40px; }
+        .glitch { animation: glitch 2s infinite; }
+        @keyframes glitch { 
+            0% { opacity: 1; } 90% { opacity: 1; } 
+            91% { opacity: 0; } 92% { opacity: 1; } 
+            93% { opacity: 0; } 94% { opacity: 1; } 
+        }
     </style>
 </head>
 <body>
-    <div class="glitch">404</div>
-    <p>> ERRO CRÍTICO: Coordenadas não encontradas no SANKOFA OS.</p>
-    <p>> O local que você procura foi apagado pela NEOCORP ou ainda não foi escrito.</p>
-    <a href="index.html">VOLTAR AO PRESENTE</a>
+    <div class="terminal">
+        <h1 class="glitch">ERRO CRÍTICO</h1>
+        <p>Coordenadas não encontradas no SANKOFA OS.</p>
+        <p>O local que você procura foi apagado pela NEOCORP</p>
+        <p>ou ainda não foi escrito.</p>
+        <br>
+        <a href="/" style="color:#00FF41;">→ VOLTAR AO SISTEMA</a>
+    </div>
 </body>
 </html>

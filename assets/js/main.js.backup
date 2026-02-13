@@ -1,3 +1,8 @@
+// ============================================
+// PATRICK SONATA - APENAS PORTFÓLIO
+// CDD/PATIKA/AULAS abrem como páginas separadas
+// ============================================
+
 document.addEventListener('DOMContentLoaded', () => {
     // Carrega Sobre e Perfil (rolagem na página)
     if (window.db) {
@@ -9,21 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Função única: ABRE O PAINEL DO PORTFÓLIO
 function openTab(id) {
     // Só funciona para TRABALHO e PORTFÓLIO
     if (id !== 'trabalho' && id !== 'portfolio') return;
     
     const data = window.db ? window.db[id] : null;
     if (!data) return;
+
     const title = document.getElementById('tab-title');
     const text = document.getElementById('tab-text');
     const panel = document.getElementById('side-panel');
     const carouselContainer = document.getElementById('carousel-container');
+
     if (title) title.innerText = data.title || "TRABALHO";
     if (panel) panel.classList.add('active');
     
     // Esconde carrossel
     if (carouselContainer) carouselContainer.style.display = 'none';
+
     // CASO 1: TRABALHO - Mostra botão PORTFÓLIO
     if (id === 'trabalho' && data.hasSubmenu) {
         if (text) {
@@ -57,10 +67,14 @@ function openTab(id) {
         }
     }
 }
+
+// Fecha o painel
 function closeTab() {
     const panel = document.getElementById('side-panel');
     if (panel) panel.classList.remove('active');
 }
+
+// Função carrossel (mantida para não quebrar)
 function moveCarousel(direction) {
     const track = document.getElementById('carousel-track');
     const slides = document.querySelectorAll('.carousel-item');
@@ -68,6 +82,9 @@ function moveCarousel(direction) {
     currentSlide = (currentSlide + direction + slides.length) % slides.length;
     track.style.transform = `translateX(-${currentSlide * 100}%)`;
 }
+// ========================================
+// FUNÇÃO VOLTAR HOME - LOGO P
+// ========================================
 function voltarHome() {
     // Fecha painel se estiver aberto
     const panel = document.getElementById('side-panel');
@@ -82,6 +99,9 @@ function voltarHome() {
     // Volta para o início (recarrega a página)
     window.location.href = '/';
 }
+// ========================================
+// NAVEGAÇÃO PROFISSIONAL - VOLTAR AO PERFIL
+// ========================================
 function voltarParaPerfil() {
     
     // 1. FECHA O PAINEL DO TRABALHO SE ESTIVER ABERTO
@@ -115,6 +135,10 @@ function voltarParaPerfil() {
     
     console.log('🏠 Voltou ao perfil');
 }
+
+// ========================================
+// TAMBÉM FUNCIONA COM O BOTÃO VOLTAR DO NAVEGADOR
+// ========================================
 window.addEventListener('popstate', function() {
     voltarParaPerfil();
 });
