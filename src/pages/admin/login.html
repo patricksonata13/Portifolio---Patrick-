@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Patrick Sonata</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .terminal {
+            width: 400px;
+            background: #0f0f0f;
+            border: 1px solid #2a2a2a;
+        }
+        .terminal-header {
+            background: #1a1a1a;
+            padding: 15px 20px;
+            border-bottom: 2px solid #6c9a8f;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .terminal-title {
+            color: #6c9a8f;
+            font-size: 14px;
+        }
+        .terminal-content {
+            padding: 30px;
+        }
+        h1 {
+            color: #6c9a8f;
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            border-left: 4px solid #6c9a8f;
+            padding-left: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0 20px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: transparent;
+            border: 2px solid #6c9a8f;
+            color: #6c9a8f;
+            font-family: 'Courier New', monospace;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #6c9a8f;
+            color: #000;
+        }
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0a0a0a;
+            color: #c0c0c0;
+            border: 1px solid #2a2a2a;
+            padding: 12px 24px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-title">⌘</span>
+            <span class="terminal-title">admin@painel:~$ ./login</span>
+        </div>
+        <div class="terminal-content">
+            <h1>▷ ACESSO RESTRITO</h1>
+            <form id="loginForm">
+                <label>SENHA</label>
+                <input type="password" id="senha" placeholder="digite a senha">
+                <button type="submit">[ ENTRAR ]</button>
+            </form>
+            <div id="status" style="color: #6c9a8f; margin-top: 20px; text-align: center;"></div>
+        </div>
+    </div>
+    
+    <a href="/" class="back-button">← VOLTAR</a>
+    
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const senha = document.getElementById('senha').value;
+            const status = document.getElementById('status');
+            
+            // Senha simples (troque para a que quiser)
+            if (senha === 'cdd3001') {
+                status.innerHTML = '✅ Acesso permitido. Redirecionando...';
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1000);
+            } else {
+                status.innerHTML = '❌ Senha incorreta. Tente novamente.';
+                setTimeout(() => { status.innerHTML = ''; }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
