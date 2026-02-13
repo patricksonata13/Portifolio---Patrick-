@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Patrick Sonata">
+    <meta name="theme-color" content="#6c9a8f">    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Roteirista</title>
     
@@ -24,7 +28,11 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
 </head>
 <head>
-    <meta charset="UTF-8">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Patrick Sonata">
+    <meta name="theme-color" content="#6c9a8f">    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Roteirista</title>
     <link rel="stylesheet" href="assets/css/style.css">
@@ -372,6 +380,7 @@
             <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
             <button onclick="window.location.href='patika/index.html'" class="patika-btn">PATIKA</button>
             <button onclick="window.location.href='aulas/index.html'">AULAS</button>
+            <button onclick="window.location.href='contato.html'">CONTATO</button>
         </nav>
 
         <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
@@ -740,5 +749,11 @@ Morro da Serrinha ao Império Serrano.
     <!-- Scripts externos -->
     <script src="assets/js/database.js"></script>
     <script src="assets/js/main.js"></script>
-    <script src="assets/js/airtable-loader.js"></script></body>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("/sw.js");
+            });
+        }
+    </script>    <script src="assets/js/airtable-loader.js"></script></body>
 </html>
