@@ -1,10 +1,24 @@
-old-site/
-node_modules/
+# OS
 .DS_Store
-*.log
-*.backup
-*.tar.gz
-*.zip
 Thumbs.db
+desktop.ini
+
+# Build
+dist/
+*.log
+
+# Backups
+*.tar.gz
+backup-*/
+BACKUP-*/
+
+# IDE
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Dependências
+node_modules/
+package-lock.json

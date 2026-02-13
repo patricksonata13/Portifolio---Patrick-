@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata | Roteirista</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    
+    <!-- Umami Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
+    
+    <style>
+        /* Garantia que o painel abre em tela cheia */
+        .side-panel.active {
+            right: 0 !important;
+            width: 100vw !important;
+        }
+        .submenu-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        .submenu-btn {
+            padding: 15px 30px;
+            background: transparent;
+            border: 2px solid #fff;
+            color: #fff;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+        }
+        .submenu-btn:hover {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- ========================================= -->
+    <!-- GRUPO 1: SUPERIOR DIREITA - FIXO         -->
+    <!-- CDD 3001 | PATIKA | AULAS - NÃO MEXER    -->
+    <!-- ========================================= -->
+    <div class="main-container" id="home">
+        <nav class="nav-top-right">
+            <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
+            <button onclick="window.location.href='patika/index.html'" class="patika-btn">PATIKA</button>
+            <button onclick="window.location.href='aulas/index.html'">AULAS</button>
+        </nav>
+
+        <!-- FOTO E NOME CENTRAL -->
+        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
+        <h1>PATRICK SONATA</h1>
+        
+        <!-- ========================================= -->
+        <!-- GRUPO 2: INFERIOR CENTRAL               -->
+        <!-- SOBRE | PERFIL | TRABALHO - CORRIGIDO   -->
+        <!-- ========================================= -->
+        <div class="nav-bottom-center">
+            <a href="#sobre-anchor"><button onclick="carregarSobre()">Sobre</button></a>
+            <a href="#perfil-anchor"><button onclick="carregarPerfil()">Perfil</button></a>
+            <button onclick="abrirTrabalho()">Trabalho</button>
+        </div>
+    </div>
+    
+    <!-- ========================================= -->
+    <!-- SEÇÃO SOBRE - ÂNCORA                    -->
+    <!-- ========================================= -->
+    <div id="sobre-anchor"></div>
+    <section class="script-page">
+        <div class="script-content" id="content-sobre">
+            <!-- CONTEÚDO SERÁ INSERIDO VIA JAVASCRIPT -->
+        </div>
+    </section>
+    
+    <!-- ========================================= -->
+    <!-- SEÇÃO PERFIL - ÂNCORA                   -->
+    <!-- ========================================= -->
+    <div id="perfil-anchor"></div>
+    <section class="script-page"> 
+        <div class="script-content" id="content-perfil">
+            <!-- CONTEÚDO SERÁ INSERIDO VIA JAVASCRIPT -->
+        </div>
+    </section>
+    
+    <!-- ========================================= -->
+    <!-- PAINEL LATERAL - TRABALHO/PORTFÓLIO      -->
+    <!-- ========================================= -->
+    <div id="side-panel" class="side-panel">
+        <div class="close-btn" onclick="fecharPainel()">FECHAR [X]</div>
+        <h2 id="tab-title" class="content-title"></h2>
+        <div id="carousel-container" class="carousel-wrapper" style="display:none;">
+            <div class="carousel-track" id="carousel-track"></div>
+            <div class="carousel-nav">
+                <button onclick="moveCarousel(-1)">❮</button>
+                <button onclick="moveCarousel(1)">❯</button> 
+            </div>
+        </div>
+        <div id="tab-text" class="content-text"></div>
+    </div>
+    
+    <!-- ========================================= -->
+    <!-- SCRIPTS - VERSÃO AUTOCONTIDA            -->
+    <!-- TUDO EM UM ÚNICO ARQUIVO PARA GARANTIR  -->
+    <!-- ========================================= -->
+    <script>
+        // ========================================
+        // BANCO DE DADOS FRONT-END
+        // ========================================
+        const db = {
+            sobre: {
+                title: "SOBRE",
+                text: `
+                    <div class="script-transition">FADE IN:</div>
+                    
+                    <div class="script-scene">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
+                    
+                    Patrick Sonata caminha pelas ruas que moldaram seu olhar. A câmera foca na vivacidade do ambiente.
+                    
+                    <div class="script-char">NARRADOR (V.O.)</div>
+                    
+                    <div class="script-dialog">Trinta e sete anos de vida. Vinte de estrada. Patrick não apenas observa a periferia; ele a traduz em narrativa.</div>
+                    
+                    <div class="script-scene">INT. TEATRO / COLETIVO BONOBANDO - NOITE</div>
+                    
+                    O suor no palco reflete anos de dedicação. A formação que veio do asfalto e dos projetos sociais.
+                    
+                    <div class="script-char">PATRICK</div>
+                    
+                    <div class="script-dialog">O teatro me deu a voz, mas a Cidade de Deus me deu o repertório. Minha trajetória é um mapa de vivências que o roteiro organiza.</div>
+                    
+                    <div class="script-transition">FADE OUT.</div>
+                `
+            },
+            perfil: {
+                title: "PERFIL",
+                text: `
+                    <div class="script-scene">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
+                    
+                    Luz focada em uma mesa de trabalho. Pilhas de escaletas e livros de dramaturgia.
+                    
+                    <div class="script-char">PERFIL PROFISSIONAL</div>
+                    
+                    <div class="script-dialog">Roteirista, Ator e Especialista em Narrativas Periféricas.</div>
+                    
+                    <div class="script-scene">SKILLS EM DESTAQUE</div>
+                    
+                    - Dramaturgia Urbana e Humor Crítico.<br>
+                    - Formação em Palhaçaria Clássica.<br>
+                    - Consultoria para Projetos de Identidade Afro-brasileira.
+                    
+                    <div class="script-char">VISÃO</div>
+                    
+                    <div class="script-dialog">Escrever a quebrada sem estereótipos, focando na humanidade e na potência estética do real.</div>
+                    
+                    <div class="script-transition">CORTE PARA PRETO.</div>
+                `
+            },
+            portfolio: {
+                title: "PORTFÓLIO DE PROJETOS",
+                projects: [
+                    {
+                        title: "PABLO E LUISÃO",
+                        role: "Roteirista",
+                        info: "Série Original Globoplay. Criação de Paulo Vieira.",
+                        cover: "assets/images/works/pabloeluisao.webp"
+                    },
+                    {
+                        title: "HUMOR NEGRO",
+                        role: "Roteirista",
+                        info: "Especial e Série - Multishow/Globoplay.",
+                        cover: "assets/images/works/humornegro.webp"
+                    },
+                    {
+                        title: "CIDADE CORRERIA",
+                        role: "Autor e Ator",
+                        info: "Teatro e Documentário sobre vivências urbanas.",
+                        cover: "assets/images/works/cidadecorreriapeca.webp"
+                    },
+                    {
+                        title: "PELADA",
+                        role: "Roteirista",
+                        info: "Longa-metragem de ficção (Comédia).",
+                        cover: "assets/images/works/pelada.webp"
+                    },
+                    {
+                        title: "JONGO",
+                        role: "Direção Narrativa",
+                        info: "Audiovisual, Memória e Ancestralidade.",
+                        cover: "assets/images/works/jongo.webp"
+                    },
+                    {
+                        title: "ZORRA",
+                        role: "Roteirista",
+                        info: "Programa de Humor - TV Globo",
+                        cover: "assets/images/works/zorralogo.jpg"
+                    }
+                ]
+            }
+        };
+
+        // ========================================
+        // CARREGAR SOBRE
+        // ========================================
+        function carregarSobre() {
+            const el = document.getElementById('content-sobre');
+            if (el) {
+                el.innerHTML = db.sobre.text;
+            }
+        }
+
+        // ========================================
+        // CARREGAR PERFIL
+        // ========================================
+        function carregarPerfil() {
+            const el = document.getElementById('content-perfil');
+            if (el) {
+                el.innerHTML = db.perfil.text;
+            }
+        }
+
+        // ========================================
+        // ABRIR TRABALHO (PAINEL COM PORTFÓLIO)
+        // ========================================
+        function abrirTrabalho() {
+            const panel = document.getElementById('side-panel');
+            const title = document.getElementById('tab-title');
+            const text = document.getElementById('tab-text');
+            const carousel = document.getElementById('carousel-container');
+            
+            if (title) title.innerText = "TRABALHO";
+            if (panel) panel.classList.add('active');
+            if (carousel) carousel.style.display = 'none';
+            
+            if (text) {
+                text.innerHTML = `
+                    <div class="submenu-buttons">
+                        <button onclick="abrirPortfolio()" class="submenu-btn">PORTFÓLIO</button>
+                    </div>
+                    <p style="margin-top: 30px; text-align: center; color: #aaa;">Selecione PORTFÓLIO para ver os projetos realizados.</p>
+                `;
+            }
+        }
+
+        // ========================================
+        // ABRIR PORTFÓLIO (GRADE 3x3)
+        // ========================================
+        function abrirPortfolio() {
+            const title = document.getElementById('tab-title');
+            const text = document.getElementById('tab-text');
+            
+            if (title) title.innerText = "PORTFÓLIO DE PROJETOS";
+            
+            if (text) {
+                text.innerHTML = `
+                    <div class="portfolio-grid">
+                        ${db.portfolio.projects.map(proj => `
+                            <div class="portfolio-card">
+                                <img src="${proj.cover}" alt="${proj.title}" 
+                                    onerror="this.src='https://via.placeholder.com/400x400?text=Imagem'">
+                                <div class="portfolio-info">
+                                    <h3>${proj.title}</h3>
+                                    <div class="portfolio-role">${proj.role}</div>
+                                    <p>${proj.info}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // ========================================
+        // FECHAR PAINEL
+        // ========================================
+        function fecharPainel() {
+            const panel = document.getElementById('side-panel');
+            if (panel) panel.classList.remove('active');
+        }
+
+        // ========================================
+        // CARREGAR CONTEÚDO INICIAL
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            carregarSobre();
+            carregarPerfil();
+        });
+
+        // ========================================
+        // FUNÇÃO CARROSSEL (NÃO USADA)
+        // ========================================
+        let currentSlide = 0;
+        function moveCarousel(direction) {
+            const track = document.getElementById('carousel-track');
+            const slides = document.querySelectorAll('.carousel-item');
+            if (!track || slides.length === 0) return;
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+    </script>
+    
+    <!-- BACKUP: Manter referência aos arquivos originais (não atrapalha) -->
+    <script src="assets/js/database.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato | Patrick Sonata</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { background: #0a0a0a; color: #fff; font-family: 'Courier New', monospace; padding: 40px 20px; }
+        .container { max-width: 600px; margin: 0 auto; background: #111; border: 1px solid #2a2a2a; padding: 40px; border-radius: 4px; }
+        h1 { color: #6c9a8f; border-left: 4px solid #6c9a8f; padding-left: 20px; margin-bottom: 30px; }
+        input, textarea { 
+            width: 100%; padding: 12px; margin: 10px 0; 
+            background: #0a0a0a; border: 1px solid #2a2a2a; 
+            color: #fff; font-family: 'Courier New', monospace;
+        }
+        button { 
+            background: #6c9a8f; color: #000; border: none; 
+            padding: 15px 30px; cursor: pointer; width: 100%;
+            font-family: 'Courier New', monospace; font-size: 1rem;
+            letter-spacing: 2px; margin-top: 20px;
+        }
+        button:hover { background: #5a8a7f; }
+        .back-button { 
+            position: fixed; bottom: 30px; right: 30px; 
+            background: #0a0a0a; color: #c0c0c0; 
+            border: 1px solid #2a2a2a; padding: 12px 24px; 
+            text-decoration: none; font-family: 'Courier New', monospace;
+        }
+        .back-button:hover { border-color: #6c9a8f; color: #6c9a8f; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>▷ CONTATO</h1>
+        <p style="color: #888; margin-bottom: 30px;">Envie sua mensagem direto para meu banco de dados.</p>
+        
+        <form id="contactForm">
+            <input type="text" id="nome" placeholder="Seu nome" required>
+            <input type="email" id="email" placeholder="Seu email" required>
+            <textarea id="mensagem" rows="5" placeholder="Sua mensagem" required></textarea>
+            <button type="submit">ENVIAR MENSAGEM</button>
+        </form>
+        <div id="status" style="margin-top: 20px; color: #6c9a8f; text-align: center;"></div>
+    </div>
+    
+    <a href="index.html" class="back-button">← VOLTAR</a>
+    
+    <script src="assets/js/airtable-config.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const status = document.getElementById('status');
+            status.innerHTML = '⏳ Enviando...';
+            
+            const nome = document.getElementById('nome').value;
+            const email = document.getElementById('email').value;
+            const mensagem = document.getElementById('mensagem').value;
+            
+            // Simulação de envio (substituir pela API real depois)
+            setTimeout(() => {
+                status.innerHTML = '✅ Mensagem enviada com sucesso!';
+                this.reset();
+                setTimeout(() => { status.innerHTML = ''; }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
