@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin IA | Patrick Sonata</title>
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/ia-assistant.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            padding: 40px 20px;
+        }
+        
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #6c9a8f;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-left: 4px solid #6c9a8f;
+            padding-left: 20px;
+        }
+        
+        .subtitle {
+            color: #888;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            background: #111;
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .card {
+            background: #111;
+            border: 2px solid #2a2a2a;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            border-color: #6c9a8f;
+            transform: translateY(-5px);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+        
+        .card-titulo {
+            color: #6c9a8f;
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+        
+        .card-badge {
+            background: #6c9a8f;
+            color: #000;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .card-content {
+            margin-bottom: 20px;
+        }
+        
+        .card-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #0a0a0a;
+            border-left: 3px solid #6c9a8f;
+        }
+        
+        .card-item-titulo {
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .card-item-desc {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .card-acoes {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: #6c9a8f;
+            color: #000;
+        }
+        
+        .btn-primary:hover {
+            background: #4a7c71;
+        }
+        
+        .btn-secondary {
+            background: #2a2a2a;
+            color: #fff;
+        }
+        
+        .btn-secondary:hover {
+            background: #3a3a3a;
+        }
+        
+        .btn-danger {
+            background: #ff6b6b;
+            color: #000;
+        }
+        
+        .btn-danger:hover {
+            background: #ff5252;
+        }
+        
+        .config-panel {
+            background: #111;
+            border: 2px solid #6c9a8f;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        .config-panel h2 {
+            color: #6c9a8f;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+        
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            background: #0a0a0a;
+            border: 1px solid #2a2a2a;
+            color: #fff;
+            font-family: 'Courier New', monospace;
+            border-radius: 5px;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #6c9a8f;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: #111;
+            border: 2px solid #2a2a2a;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6c9a8f;
+        }
+        
+        .stat-label {
+            color: #aaa;
+            margin-top: 5px;
+        }
+        
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0a0a0a;
+            color: #c0c0c0;
+            border: 1px solid #2a2a2a;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .back-button:hover {
+            border-color: #6c9a8f;
+            color: #6c9a8f;
+        }
+        
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .back-button { bottom: 20px; right: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>▷ PAINEL DE GERENCIAMENTO IA</h1>
+        <p class="subtitle">Sistemas internos - acesso restrito</p>
+        
+        <div class="warning-box">
+            <strong>🔒 ÁREA RESTRITA</strong> - Esta página é apenas para 
+gerenciamento interno. Não compartilhe o link.
+        </div>
+        
+        <!-- Estatísticas -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="total-ias">0</div>
+                <div class="stat-label">IAs no sistema</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-paginas">0</div>
+                <div class="stat-label">Páginas com IA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="total-opcoes">0</div>
+                <div class="stat-label">Opções totais</div>
+            </div>
+        </div>
+        
+        <!-- Gerenciamento por Página -->
+        <h2 style="color: #6c9a8f; margin-bottom: 20px;">📌 IAs por 
+Página</h2>
+        
+        <div class="grid" id="paginas-grid">
+            <!-- HOME -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">🏠 HOME</span>
+                    <span class="card-badge" id="count-home">5 IAs</span>
+                </div>
+                <div class="card-content" id="home-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('home')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('home')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- CDD 3001 -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">🎮 CDD 3001</span>
+                    <span class="card-badge" id="count-cdd">4 IAs</span>
+                </div>
+                <div class="card-content" id="cdd-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('cdd')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('cdd')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- PATIKA -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">🎭 PATIKA</span>
+                    <span class="card-badge" id="count-patika">3 
+IAs</span>
+                </div>
+                <div class="card-content" id="patika-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('patika')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('patika')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- AULAS -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">📚 AULAS</span>
+                    <span class="card-badge" id="count-aulas">4 IAs</span>
+                </div>
+                <div class="card-content" id="aulas-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('aulas')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('aulas')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- TRABALHO -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">💼 TRABALHO</span>
+                    <span class="card-badge" id="count-trabalho">4 
+IAs</span>
+                </div>
+                <div class="card-content" id="trabalho-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('trabalho')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('trabalho')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- CONTATO -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">📧 CONTATO</span>
+                    <span class="card-badge" id="count-contato">3 
+IAs</span>
+                </div>
+                <div class="card-content" id="contato-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('contato')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('contato')">👁️ Visualizar</button>
+                </div>
+            </div>
+            
+            <!-- SOBRE/PERFIL -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">📄 SOBRE/PERFIL</span>
+                    <span class="card-badge" id="count-sobre">3 IAs</span>
+                </div>
+                <div class="card-content" id="sobre-ias">
+                    <!-- Será preenchido via JS -->
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="editarPagina('sobre')">✏️ Editar</button>
+                    <button class="btn btn-secondary" 
+onclick="testarPagina('perfil')">👁️ Visualizar</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Painel de Configuração -->
+        <div class="config-panel" id="config-panel" style="display: 
+none;">
+            <h2 id="config-titulo">✏️ Editar Configurações</h2>
+            
+            <div class="form-group">
+                <label>Página:</label>
+                <input type="text" id="config-pagina" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label>Contexto (título do menu):</label>
+                <input type="text" id="config-contexto">
+            </div>
+            
+            <h3 style="color: #6c9a8f; margin: 20px 0;">Opções de IA</h3>
+            
+            <div id="opcoes-container">
+                <!-- Opções serão inseridas aqui via JS -->
+            </div>
+            
+            <button class="btn btn-secondary" 
+onclick="adicionarOpcao()">➕ Adicionar Opção</button>
+            
+            <div style="margin-top: 30px; display: flex; gap: 15px;">
+                <button class="btn btn-primary" 
+onclick="salvarConfig()">💾 Salvar</button>
+                <button class="btn btn-danger" 
+onclick="cancelarEdicao()">❌ Cancelar</button>
+            </div>
+        </div>
+        
+        <!-- Ferramentas Adicionais -->
+        <h2 style="color: #6c9a8f; margin: 40px 0 20px;">⚙️ Ferramentas do 
+Sistema</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">📊 Exportar Config</span>
+                </div>
+                <div class="card-content">
+                    <p style="color: #aaa;">Exportar todas as 
+configurações das IAs para backup.</p>
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="exportarConfig()">📥 Exportar</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">📥 Importar Config</span>
+                </div>
+                <div class="card-content">
+                    <p style="color: #aaa;">Importar configurações de 
+backup.</p>
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-primary" 
+onclick="importarConfig()">📤 Importar</button>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-titulo">🔄 Reset</span>
+                </div>
+                <div class="card-content">
+                    <p style="color: #aaa;">Restaurar configurações 
+padrão.</p>
+                </div>
+                <div class="card-acoes">
+                    <button class="btn btn-danger" 
+onclick="resetConfig()">⚠️ Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <a href="index.html" class="back-button">← VOLTAR</a>
+    
+    <script>
+        // ================================================
+        // PAINEL DE GERENCIAMENTO IA - CONFIGURAÇÕES
+        // ================================================
+        
+        // Configurações atuais (carregadas do ia-assistant.js)
+        let configAtual = {
+            home: {
+                contexto: 'Bem-vindo! Escolha uma ferramenta:',
+                opcoes: [
+                    { icon: '🎬', titulo: 'Desenvolver Roteiro', 
+descricao: 'Criar sinopses, diálogos e personagens', url: 
+'https://claude.ai', prompt: 'Sou um roteirista brasileiro. Me ajude a 
+desenvolver roteiros de humor e drama.' },
+                    { icon: '💬', titulo: 'Brainstorming', descricao: 
+'Gerar ideias rápidas', url: 'https://chat.openai.com', prompt: 'Preciso 
+de ideias criativas para projetos de comédia e roteiro.' },
+                    { icon: '🎨', titulo: 'Criar Imagens', descricao: 
+'Gerar arte e conceitos visuais', url: 'https://leonardo.ai', prompt: '' 
+},
+                    { icon: '🚀', titulo: 'GPT-4 Grátis', descricao: 
+'Microsoft Copilot', url: 'https://copilot.microsoft.com', prompt: '' },
+                    { icon: '🧪', titulo: 'Arena AI', descricao: 'Teste 
+vários modelos num só lugar', url: 'https://arena.ai/pt', prompt: 'Como 
+posso testar diferentes IAs para roteiro aqui?' }
+                ]
+            },
+            cdd: {
+                contexto: 'Assistente para o Game CDD 3001:',
+                opcoes: [
+                    { icon: '🎮', titulo: 'Criar Missão', descricao: 
+'Gerar nova missão do jogo', url: 'https://claude.ai', prompt: 'Sou 
+roteirista do game CDD 3001 sobre a Cidade de Deus.' },
+                    { icon: '👤', titulo: 'Desenvolver Personagem', 
+descricao: 'Criar perfil e backstory', url: 'https://claude.ai', prompt: 
+'Preciso desenvolver um personagem para o game CDD 3001.' },
+                    { icon: '💬', titulo: 'Escrever Diálogos', descricao: 
+'Criar conversas realistas', url: 'https://claude.ai', prompt: 'Escreva 
+diálogos realistas para personagens da Cidade de Deus.' },
+                    { icon: '⚔️', titulo: 'Sugerir Conflitos', descricao: 
+'Propor desafios narrativos', url: 'https://chat.openai.com', prompt: 
+'Sugira conflitos dramáticos para o game CDD 3001.' }
+                ]
+            },
+            patika: {
+                contexto: 'Assistente para PATIKA:',
+                opcoes: [
+                    { icon: '🎭', titulo: 'Desenvolver Show', descricao: 
+'Criar estrutura de stand-up', url: 'https://claude.ai', prompt: 'Me ajude 
+a desenvolver um show de stand-up.' },
+                    { icon: '😂', titulo: 'Escrever Piadas', descricao: 
+'Gerar material de comédia', url: 'https://chat.openai.com', prompt: 'Me 
+ajude a escrever piadas inteligentes.' },
+                    { icon: '📝', titulo: 'Roteiro de Esquete', descricao: 
+'Criar esquetes curtas', url: 'https://claude.ai', prompt: 'Escreva um 
+roteiro de esquete de 3-5 minutos.' }
+                ]
+            },
+            aulas: {
+                contexto: 'Assistente para Aulas e Cursos:',
+                opcoes: [
+                    { icon: '📚', titulo: 'Planejar Aula', descricao: 
+'Criar plano de aula', url: 'https://claude.ai', prompt: 'Me ajude a criar 
+um plano de aula sobre roteiro.' },
+                    { icon: '✏️', titulo: 'Criar Exercícios', descricao: 
+'Gerar atividades práticas', url: 'https://claude.ai', prompt: 'Crie 
+exercícios práticos de roteiro.' },
+                    { icon: '📊', titulo: 'Organizar Cronograma', 
+descricao: 'Estruturar curso completo', url: 'https://chat.openai.com', 
+prompt: 'Me ajude a organizar um cronograma de curso.' },
+                    { icon: '💡', titulo: 'Sugerir Temas', descricao: 
+'Ideias para workshops', url: 'https://chat.openai.com', prompt: 'Sugira 
+temas para workshops de roteiro.' }
+                ]
+            },
+            trabalho: {
+                contexto: 'Assistente para Portfólio:',
+                opcoes: [
+                    { icon: '📝', titulo: 'Escrever Sinopse', descricao: 
+'Criar descrição profissional', url: 'https://claude.ai', prompt: 'Escreva 
+uma sinopse profissional para o projeto.' },
+                    { icon: '🎯', titulo: 'Pitch de Venda', descricao: 
+'Texto para apresentação', url: 'https://claude.ai', prompt: 'Crie um 
+pitch convincente para vender o projeto.' },
+                    { icon: '🌐', titulo: 'Traduzir para Inglês', 
+descricao: 'Versão internacional', url: 'https://chat.openai.com', prompt: 
+'Traduza para inglês profissional.' },
+                    { icon: '✨', titulo: 'Melhorar Descrição', descricao: 
+'Otimizar texto existente', url: 'https://claude.ai', prompt: 'Melhore 
+esta descrição de projeto.' }
+                ]
+            },
+            contato: {
+                contexto: 'Assistente para Contato:',
+                opcoes: [
+                    { icon: '💼', titulo: 'Gerar Orçamento', descricao: 
+'Calcular valores de projeto', url: 'https://claude.ai', prompt: 'Me ajude 
+a criar um orçamento profissional.' },
+                    { icon: '📧', titulo: 'Responder E-mail', descricao: 
+'Sugestões de resposta', url: 'https://claude.ai', prompt: 'Me ajude a 
+responder este e-mail profissionalmente.' },
+                    { icon: '📅', titulo: 'Agendar Reunião', descricao: 
+'Propor datas e horários', url: 'https://chat.openai.com', prompt: 
+'Escreva um e-mail propondo reunião.' }
+                ]
+            },
+            sobre: {
+                contexto: 'Assistente para Bio e Perfil:',
+                opcoes: [
+                    { icon: '📄', titulo: 'Otimizar Bio', descricao: 
+'Melhorar texto de apresentação', url: 'https://claude.ai', prompt: 
+'Otimize minha bio profissional.' },
+                    { icon: '🎤', titulo: 'Pitch de Elevador', descricao: 
+'Apresentação em 30 segundos', url: 'https://claude.ai', prompt: 'Crie um 
+pitch de elevador para Patrick Sonata.' },
+                    { icon: '🌍', titulo: 'Versão Internacional', 
+descricao: 'Bio em inglês', url: 'https://chat.openai.com', prompt: 
+'Traduza minha bio para inglês.' }
+                ]
+            }
+        };
+        
+        let paginaEditando = null;
+        
+        // Carregar dados ao iniciar
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarDados();
+        });
+        
+        function carregarDados() {
+            // Atualizar contadores
+            document.getElementById('total-ias').textContent = 
+Object.keys(configAtual).length;
+            
+            let totalOpcoes = 0;
+            for (let pagina in configAtual) {
+                totalOpcoes += configAtual[pagina].opcoes.length;
+                
+                // Atualizar badge de contagem
+                let badge = document.getElementById(`count-${pagina}`);
+                if (badge) badge.textContent = 
+`${configAtual[pagina].opcoes.length} IAs`;
+                
+                // Preencher lista de IAs
+                let container = document.getElementById(`${pagina}-ias`);
+                if (container) {
+                    container.innerHTML = '';
+                    configAtual[pagina].opcoes.slice(0, 3).forEach(op => {
+                        container.innerHTML += `
+                            <div class="card-item">
+                                <div class="card-item-titulo">${op.icon} 
+${op.titulo}</div>
+                                <div 
+class="card-item-desc">${op.descricao.substring(0, 50)}...</div>
+                            </div>
+                        `;
+                    });
+                    if (configAtual[pagina].opcoes.length > 3) {
+                        container.innerHTML += `<div style="color: 
+#6c9a8f; margin-top: 5px;">+${configAtual[pagina].opcoes.length - 3} 
+mais...</div>`;
+                    }
+                }
+            }
+            
+            document.getElementById('total-opcoes').textContent = 
+totalOpcoes;
+            document.getElementById('total-paginas').textContent = '7';
+        }
+        
+        function editarPagina(pagina) {
+            paginaEditando = pagina;
+            let config = configAtual[pagina];
+            
+            document.getElementById('config-panel').style.display = 
+'block';
+            document.getElementById('config-titulo').textContent = `✏️ 
+Editando ${pagina.toUpperCase()}`;
+            document.getElementById('config-pagina').value = pagina;
+            document.getElementById('config-contexto').value = 
+config.contexto;
+            
+            let container = document.getElementById('opcoes-container');
+            container.innerHTML = '';
+            
+            config.opcoes.forEach((opcao, index) => {
+                adicionarCampoOpcao(opcao, index);
+            });
+            
+            // Rolar até o painel
+            document.getElementById('config-panel').scrollIntoView({ 
+behavior: 'smooth' });
+        }
+        
+        function adicionarCampoOpcao(opcao, index) {
+            let container = document.getElementById('opcoes-container');
+            let div = document.createElement('div');
+            div.className = 'opcao-item';
+            div.style.cssText = 'background: #0a0a0a; padding: 20px; 
+margin-bottom: 20px; border-left: 3px solid #6c9a8f;';
+            div.innerHTML = `
+                <div style="display: flex; justify-content: space-between; 
+margin-bottom: 15px;">
+                    <span style="color: #6c9a8f; font-weight: bold;">Opção 
+#${index + 1}</span>
+                    <button class="btn btn-danger" style="padding: 5px 
+10px;" onclick="removerOpcao(${index})">✕</button>
+                </div>
+                
+                <div class="form-group">
+                    <label>Ícone:</label>
+                    <input type="text" class="opcao-icon" 
+value="${opcao.icon}" placeholder="ex: 🎬">
+                </div>
+                
+                <div class="form-group">
+                    <label>Título:</label>
+                    <input type="text" class="opcao-titulo" 
+value="${opcao.titulo}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Descrição:</label>
+                    <textarea class="opcao-descricao" 
+rows="2">${opcao.descricao}</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>URL:</label>
+                    <input type="text" class="opcao-url" 
+value="${opcao.url}">
+                </div>
+                
+                <div class="form-group">
+                    <label>Prompt (opcional):</label>
+                    <textarea class="opcao-prompt" rows="3">${opcao.prompt 
+|| ''}</textarea>
+                </div>
+            `;
+            container.appendChild(div);
+        }
+        
+        function adicionarOpcao() {
+            if (!paginaEditando) return;
+            let index = configAtual[paginaEditando].opcoes.length;
+            adicionarCampoOpcao({ icon: '🤖', titulo: 'Nova IA', 
+descricao: 'Descrição aqui', url: 'https://', prompt: '' }, index);
+        }
+        
+        function removerOpcao(index) {
+            if (confirm('Remover esta opção?')) {
+                configAtual[paginaEditando].opcoes.splice(index, 1);
+                // Recarregar o painel de edição
+                editarPagina(paginaEditando);
+            }
+        }
+        
+        function salvarConfig() {
+            // Salvar contexto
+            configAtual[paginaEditando].contexto = 
+document.getElementById('config-contexto').value;
+            
+            // Salvar opções
+            let novasOpcoes = [];
+            let opcoesItems = document.querySelectorAll('.opcao-item');
+            
+            opcoesItems.forEach(item => {
+                let novaOpcao = {
+                    icon: item.querySelector('.opcao-icon').value,
+                    titulo: item.querySelector('.opcao-titulo').value,
+                    descricao: 
+item.querySelector('.opcao-descricao').value,
+                    url: item.querySelector('.opcao-url').value,
+                    prompt: item.querySelector('.opcao-prompt').value
+                };
+                novasOpcoes.push(novaOpcao);
+            });
+            
+            configAtual[paginaEditando].opcoes = novasOpcoes;
+            
+            // Fechar painel
+            document.getElementById('config-panel').style.display = 
+'none';
+            
+            // Recarregar dados
+            carregarDados();
+            
+            // Mostrar código gerado
+            gerarCodigo();
+        }
+        
+        function cancelarEdicao() {
+            document.getElementById('config-panel').style.display = 
+'none';
+            paginaEditando = null;
+        }
+        
+        function gerarCodigo() {
+            // Gerar código JavaScript para substituir no ia-assistant.js
+            let codigo = '// Configurações atualizadas\n\n';
+            
+            for (let pagina in configAtual) {
+                codigo += `// ${pagina.toUpperCase()}\n`;
+                codigo += `else if (path.includes('${pagina}')) {\n`;
+                codigo += `    contexto = 
+'${configAtual[pagina].contexto}';\n`;
+                codigo += `    opcoes = [\n`;
+                
+                configAtual[pagina].opcoes.forEach(op => {
+                    codigo += `        { icon: '${op.icon}', titulo: 
+'${op.titulo}', descricao: '${op.descricao}', url: '${op.url}', prompt: 
+'${op.prompt}' },\n`;
+                });
+                
+                codigo += `    ];\n`;
+                codigo += `}\n\n`;
+            }
+            
+            console.log(codigo);
+            alert('Código gerado! Verifique o console (F12)');
+        }
+        
+        function testarPagina(pagina) {
+            window.open(`/${pagina}.html`, '_blank');
+        }
+        
+        function exportarConfig() {
+            let dataStr = JSON.stringify(configAtual, null, 2);
+            let dataUri = 'data:application/json;charset=utf-8,'+ 
+encodeURIComponent(dataStr);
+            let exportFileDefaultName = `ia-config-${new 
+Date().toISOString().slice(0,10)}.json`;
+            
+            let linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+        
+        function importarConfig() {
+            let input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = e => {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                reader.readAsText(file, 'UTF-8');
+                reader.onload = readerEvent => {
+                    try {
+                        configAtual = 
+JSON.parse(readerEvent.target.result);
+                        carregarDados();
+                        alert('Configurações importadas com sucesso!');
+                    } catch (error) {
+                        alert('Arquivo inválido!');
+                    }
+                };
+            };
+            
+            input.click();
+        }
+        
+        function resetConfig() {
+            if (confirm('Tem certeza? Isso vai restaurar as configurações 
+padrão.')) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
