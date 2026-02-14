@@ -1,0 +1,46 @@
+/* CSS EXCLUSIVO CDD 3001 - NÃO AFETA O PORTFÓLIO */
+.moto-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, #111 0%, #000 100%);
+}
+
+.moto-sprite {
+    width: 250px;
+    height: 120px;
+    position: relative;
+    border: 2px solid var(--neon-green);
+    border-radius: 40% 60% 10% 10%;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    animation: idle 0.2s infinite alternate;
+}
+
+.moto-sprite::before, .moto-sprite::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    width: 50px;
+    height: 50px;
+    border: 4px solid var(--neon-green);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--neon-green);
+}
+
+.moto-sprite::before { left: 20px; }
+.moto-sprite::after { right: 20px; }
+
+@keyframes idle {
+    from { transform: translateY(0); }
+    to { transform: translateY(-3px); }
+}
+
+.stat-bar {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    color: var(--neon-red);
+}
