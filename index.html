@@ -6,8 +6,8 @@
     <title>Patrick Sonata | Roteirista</title>
     
     <!-- CSS Principal -->
-<link rel="stylesheet" 
-href="/src/pages/patika/assets/css/style.css">    
+    <link rel="stylesheet" href="/src/pages/patika/assets/css/style.css">
+    
     <!-- Meta tags de SEO -->
     <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
     <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
@@ -45,10 +45,10 @@ href="/src/pages/patika/assets/css/style.css">
     <!-- Página Principal -->
     <div class="main-container" id="home">
         <nav class="nav-top-right">
-            <button onclick="window.location.href="src/pages/cdd/index.html"">CDD 3001</button>
-            <button onclick="window.location.href="src/pages/patika/index.html"">PATIKA</button>
-            <button onclick="window.location.href="src/pages/aulas/index.html"">AULAS</button>
-            <button onclick="window.location.href="src/pages/contato/index.html"">CONTATO</button>
+            <button onclick="window.location.href='src/pages/cdd/index.html'">CDD 3001</button>
+            <button onclick="window.location.href='src/pages/patika/index.html'">PATIKA</button>
+            <button onclick="window.location.href='src/pages/aulas/index.html'">AULAS</button>
+            <button onclick="window.location.href='src/pages/contato/index.html'">CONTATO</button>
             <a href="src/pages/admin/login.html" style="display:none;">admin</a>
         </nav>
 
@@ -66,9 +66,15 @@ href="/src/pages/patika/assets/css/style.css">
     <script src="src/assets/js/main.js"></script>
     <script src="src/assets/js/airtable-loader.js"></script>
     <script src="assets/js/database.js"></script>
-    <!-- Sistema de navegação global -->
     <script src="assets/js/navigation/gestos.js"></script>
     <script src="assets/js/navigation/integrador.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("/sw.js");
+            });
+        }
+    </script>
     
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
