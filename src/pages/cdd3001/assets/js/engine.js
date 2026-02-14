@@ -3,24 +3,29 @@ const choicesContainer = document.getElementById('choices-container');
 const visualDisplay = document.getElementById('visual-display');
 
 let player = {
-    hp: 80, // Começa um pouco ferido para testar o café
+    hp: 100,
     creditos: 100,
     inventario: [],
-    integridadeMoto: 70,
+    integridadeMoto: 100,
     xp: 0,
-    level: 1
+    missaoAtiva: false
 };
 
 let isTyping = false;
 
+function toggleAlert(status) {
+    if (status) document.body.classList.add('alert-mode');
+    else document.body.classList.remove('alert-mode');
+}
+
 function updateHUD(npcKey = null) {
     let visualHTML = `
         <div class="stat-bar">
-            LVL: ${player.level} | XP: ${player.xp}/100 | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | $: ${player.creditos}
+            XP: ${player.xp} | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | $: ${player.creditos}
         </div>
         <div id="inventory-display">
-            <b>MOCHILA:</b><br>
-            ${player.inventario.length > 0 ? player.inventario.join('<br>') : '[ VAZIA ]'}
+            <b>${player.missaoAtiva ? '⚠️ EM MISSÃO' : 'DISPONÍVEL'}</b><br>
+            ${player.inventario.join('<br>')}
         </div>
         <div class="moto-container">
             <div class="moto-sprite"></div>
@@ -41,33 +46,48 @@ function updateHUD(npcKey = null) {
 
 const story = {
     start: {
-        text: "Estás diante do 'Neon-Brew', um café iluminado por luzes violetas. O cheiro de café sintético mistura-se com o ozono da rua.",
-        npc: "vendedor-cafe",
+        text: "M-THUZA conecta-se ao teu rádio: 'Patrick, tenho um pacote de dados que precisa chegar ao Setor Norte. A milícia está à caça. Aceitas?'",
+        npc: "m-thuza",
         choices: [
-            { text: "Comprar Café (10$)", next: "comprar_cafe", condition: () => player.creditos >= 10 },
-            { text: "Comprar Kit Reparo (25$)", next: "comprar_kit", condition: () => player.creditos >= 25 },
-            { text: "Sair para o Setor 7", next: "setor7" }
+            { text: "Aceitar Contrato (50$)", next: "missao_iniciada", condition: () => !player.missaoAtiva },
+            { text: "Recusar e ir ao Café", next: "cafe" }
         ]
     },
-    comprar_cafe: {
-        text: "Kaito-San serve o café fumegante. Sentas-te por um momento. HP recuperado!",
-        action: () => { 
-            player.creditos -= 10;
-            player.hp = Math.min(100, player.hp + 20);
-        },
-        choices: [{ text: "Voltar ao balcão", next: "start" }]
-    },
-    comprar_kit: {
-        text: "Usas os nano-bots para selar as rachaduras na fuselagem da moto. O ronco parece mais limpo.",
+    missao_iniciada: {
+        text: "PACOTE RECEBIDO. As sirenes começam a tocar ao longe. A cidade ficou vermelha. ACELERA!",
         action: () => {
-            player.creditos -= 25;
-            player.integridadeMoto = Math.min(100, player.integridadeMoto + 30);
+            player.missaoAtiva = true;
+            player.inventario.push("Dados Criptografados");
+            toggleAlert(true);
         },
-        choices: [{ text: "Voltar ao balcão", next: "start" }]
+        choices: [{ text: "Cortar caminho pelos becos", next: "perigo" }]
     },
-    setor7: {
-        text: "A estrada aberta chama. A música Phonk aumenta no teu sistema neural.",
-        choices: [{ text: "Acelerar", next: "start" }]
+    perigo: {
+        text: "Um drone de patrulha aparece! Ele tenta bloquear a passagem.",
+        choices: [
+            { text: "Dar um drift arriscado", next: "entrega_final" },
+            { text: "Atravessar o drone (Dano)", next: "dano_missao" }
+        ]
+    },
+    dano_missao: {
+        text: "Bates no drone, mas continuas em frente. A moto está a fumegar!",
+        action: () => { player.integridadeMoto -= 40; },
+        choices: [{ text: "Seguir para o ponto de entrega", next: "entrega_final" }]
+    },
+    entrega_final: {
+        text: "Consegues entregar os dados no ponto cego do radar. O alerta termina. Recebeste a recompensa!",
+        action: () => {
+            player.missaoAtiva = false;
+            player.inventario = player.inventario.filter(i => i !== "Dados Criptografados");
+            player.creditos += 50;
+            player.xp += 30;
+            toggleAlert(false);
+        },
+        choices: [{ text: "Voltar para a base", next: "start" }]
+    },
+    cafe: {
+        text: "Decides que hoje não é dia de correr riscos.",
+        choices: [{ text: "Voltar", next: "start" }]
     }
 };
 
