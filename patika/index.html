@@ -3,200 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA • Plataforma de Escrita</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>PATIKA - Ferramenta de Roteiro</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
-        .login-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --patika-primary: #6c9a8f;
+            --patika-secondary: #e0e0e0;
+            --patika-dark: #0a0a0a;
+            --patika-panel: #0f0f0f;
+            --patika-text: #ffffff;
         }
         
-        .login-card {
-            background: var(--patika-panel);
-            border: 2px solid var(--patika-border);
-            padding: 40px 30px;
-            text-align: center;
+        body {
+            background: var(--patika-dark);
+            color: var(--patika-text);
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+        }
+        
+        .patika-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid var(--patika-primary);
+            margin-bottom: 30px;
+        }
+        
+        .patika-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .patika-logo svg {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .patika-logo h1 {
+            color: var(--patika-primary);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .patika-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .patika-nav button {
+            background: transparent;
+            border: 1px solid var(--patika-secondary);
+            color: var(--patika-text);
+            padding: 10px 20px;
             cursor: pointer;
             transition: all 0.3s;
         }
         
-        .login-card:hover {
+        .patika-nav button:hover {
+            background: var(--patika-primary);
+            color: var(--patika-dark);
             border-color: var(--patika-primary);
-            transform: translateY(-4px);
         }
         
-        .login-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
-        
-        .login-card h3 {
-            color: var(--text-primary);
-            margin-bottom: 12px;
-        }
-        
-        .login-card p {
-            color: var(--text-tertiary);
-            font-size: 14px;
-            margin-bottom: 24px;
-        }
-        
-        .features-list {
-            max-width: 800px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-        
-        .feature-item {
-            display: flex;
-            align-items: center;
+        .patika-main {
+            display: grid;
+            grid-template-columns: 300px 1fr;
             gap: 20px;
-            padding: 20px;
-            border-bottom: 1px solid var(--patika-border);
+            height: calc(100vh - 150px);
         }
         
-        .feature-icon {
-            font-size: 24px;
+        .patika-sidebar {
+            background: var(--patika-panel);
+            border: 1px solid var(--patika-secondary);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .patika-editor {
+            background: var(--patika-panel);
+            border: 1px solid var(--patika-secondary);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .patika-toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-bottom: 1px solid var(--patika-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .patika-toolbar button {
+            background: transparent;
+            border: 1px solid var(--patika-secondary);
+            color: var(--patika-text);
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .patika-toolbar button:hover {
+            background: var(--patika-primary);
+        }
+        
+        #editor-textarea {
+            width: 100%;
+            flex: 1;
+            background: var(--patika-dark);
+            border: none;
+            color: var(--patika-text);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            padding: 20px;
+            resize: none;
+        }
+        
+        #editor-textarea:focus {
+            outline: 2px solid var(--patika-primary);
+        }
+        
+        .projeto-item {
+            padding: 15px;
+            border: 1px solid var(--patika-secondary);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .projeto-item:hover {
+            border-color: var(--patika-primary);
+            background: rgba(108, 154, 143, 0.1);
+        }
+        
+        .projeto-item.titulo {
+            color: var(--patika-primary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .projeto-item.data {
+            color: var(--patika-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .projeto-item.ativo {
+            border-color: var(--patika-primary);
+            background: rgba(108, 154, 143, 0.2);
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: var(--patika-panel);
+            border-top: 1px solid var(--patika-secondary);
+            color: var(--patika-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .status-salvo {
+            color: var(--patika-primary);
+        }
+        
+        .status-nao-salvo {
+            color: #cc6666;
+        }
+        
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--patika-dark);
+            color: var(--patika-secondary);
+            border: 1px solid var(--patika-secondary);
+            padding: 12px 24px;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            border-color: var(--patika-primary);
             color: var(--patika-primary);
         }
         
         @media (max-width: 768px) {
-            .login-grid {
+            .patika-main {
                 grid-template-columns: 1fr;
+            }
+            .patika-sidebar {
+                display: none;
+            }
+            .patika-sidebar.active {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100vh;
+                z-index: 1000;
             }
         }
     </style>
 </head>
 <body>
-    <div class="terminal-bar">
-        <div class="terminal-title">
-            <span>⌘</span>
-            <span>PATIKA</span>
-            <span class="terminal-path">~/<span>plataforma-escrita</span></span>
+    
+    <div class="patika-header">
+        <div class="patika-logo">
+            <svg viewBox="0 0 100 100">
+                <path d="M 20 20 L 20 80 L 50 80 Q 70 80 70 60 Q 70 40 50 40 L 20 40" 
+                      stroke="#6c9a8f" stroke-width="6" fill="none"/>
+            </svg>
+            <h1>PATIKA</h1>
         </div>
-        <div class="terminal-actions">
-            <button class="terminal-btn" onclick="window.location.href='https://github.com/patricksonata/patika'">DOCS</button>
+        <div class="patika-nav">
+            <button onclick="novoProjeto()">📄 NOVO</button>
+            <button onclick="exportarPDF()">📥 PDF</button>
+            <button onclick="exportarFDX()">📁 FDX</button>
         </div>
     </div>
     
-    <div style="text-align: center; padding: 80px 20px 40px;">
-        <h1 style="font-size: 48px; letter-spacing: 4px; color: var(--text-primary);">
-            <span style="color: var(--patika-primary);">PATIKA</span> v8.0
-        </h1>
-        <p style="color: var(--text-tertiary); font-size: 18px; margin-top: 20px;">
-            Escreva. Estruture. Conecte.
-        </p>
-        <div style="margin-top: 40px;">
-            <span class="cursor" style="font-size: 24px;">█</span>
+    <div class="patika-main">
+        <!-- Sidebar com projetos -->
+        <div class="patika-sidebar" id="sidebar">
+            <h2 style="color: var(--patika-primary); margin-bottom: 20px;">PROJETOS</h2>
+            <div id="lista-projetos"></div>
+            <button onclick="novoProjeto()" style="width:100%; margin-top:20px; padding:15px; background:transparent; border:2px solid var(--patika-primary); color:var(--patika-primary);">+ NOVO PROJETO</button>
+        </div>
+        
+        <!-- Editor principal -->
+        <div class="patika-editor">
+            <div class="patika-toolbar">
+                <button onclick="inserirElemento('INT.')">INT.</button>
+                <button onclick="inserirElemento('EXT.')">EXT.</button>
+                <button onclick="inserirElemento(' - DIA')">DIA</button>
+                <button onclick="inserirElemento(' - NOITE')">NOITE</button>
+                <button onclick="inserirPersonagem()">PERSONAGEM</button>
+                <button onclick="inserirDialogo()">DIÁLOGO</button>
+                <button onclick="inserirTransicao()">TRANSIÇÃO</button>
+                <button onclick="formatarNegrito()">N</button>
+                <button onclick="formatarItalico()">I</button>
+            </div>
+            
+            <textarea id="editor-textarea" placeholder="Comece a escrever seu roteiro..."></textarea>
         </div>
     </div>
     
-    <div class="login-grid">
-        <div class="login-card" onclick="window.location.href='editor/?mode=guest'">
-            <div class="login-icon">👤</div>
-            <h3>MODO CONVIDADO</h3>
-            <p>Acesso imediato • 1 projeto • Não salva</p>
-            <button class="btn btn-secondary" style="margin-top: 20px;">ENTRAR</button>
-        </div>
-        
-        <div class="login-card" onclick="window.location.href='editor/?mode=local'">
-            <div class="login-icon">💾</div>
-            <h3>MODO LOCAL</h3>
-            <p>Salva no navegador • 5 projetos • Auto-save</p>
-            <button class="btn btn-secondary" style="margin-top: 20px;">ENTRAR</button>
-        </div>
-        
-        <div class="login-card" onclick="window.location.href='editor/?mode=pro'">
-            <div class="login-icon">🚀</div>
-            <h3>MODO PROFISSIONAL</h3>
-            <p>Projetos ilimitados • Colaboração • API</p>
-            <button class="btn btn-primary" style="margin-top: 20px;">ENTRAR</button>
-        </div>
+    <div class="status-bar">
+        <span id="projeto-atual">📁 Nenhum projeto aberto</span>
+        <span id="status-salvo">💾 Salvo</span>
+        <span id="contador-palavras">📝 0 palavras</span>
     </div>
     
-    <div class="features-list">
-        <div style="border-bottom: 2px solid var(--patika-primary); padding-bottom: 20px; margin-bottom: 20px;">
-            <h2 style="color: var(--text-primary);">▷ FUNCIONALIDADES</h2>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">📝</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Editor de Roteiro</h3>
-                <p style="color: var(--text-tertiary);">Formatação automática, Fountain syntax, auto-save</p>
-            </div>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">📊</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Escaleta Inteligente</h3>
-                <p style="color: var(--text-tertiary);">Organize cenas, atos e arcos narrativos</p>
-            </div>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">🎭</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Banco de Personagens</h3>
-                <p style="color: var(--text-tertiary);">Fichas completas, relacionamentos, arcos</p>
-            </div>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">👥</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Colaboração</h3>
-                <p style="color: var(--text-tertiary);">Edição em tempo real, comentários, versões</p>
-            </div>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">📱</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Mobile Ready</h3>
-                <p style="color: var(--text-tertiary);">Escreva de qualquer lugar, design responsivo</p>
-            </div>
-        </div>
-        
-        <div class="feature-item">
-            <span class="feature-icon">🔗</span>
-            <div>
-                <h3 style="color: var(--text-primary);">Compartilhamento</h3>
-                <p style="color: var(--text-tertiary);">Links, permissões, exportação PDF/FDX</p>
-            </div>
-        </div>
-    </div>
-    
-    <div style="text-align: center; padding: 60px 20px; background: var(--patika-panel); margin-top: 40px;">
-        <p style="color: var(--text-tertiary); margin-bottom: 20px;">
-            [ patrick@patika:~$ _ ]
-        </p>
-        <p style="color: var(--text-quaternary); font-size: 12px;">
-            © 2026 Patrick Sonata • Plataforma de Escrita Profissional
-        </p>
-    </div>
-    
-    <button onclick="window.location.href='../index.html'" 
-            style="position: fixed; bottom: 30px; right: 30px; background: black; color: white; border: 2px solid var(--patika-primary); padding: 12px 24px; cursor: pointer; font-family: 'Courier New', monospace; z-index: 1000;">
-        ← VOLTAR AO PORTFÓLIO
-    </button>
-    
-    <script src="assets/js/auth.js"></script>
-</body>    <!-- BOTÃO VOLTAR AO PORTFÓLIO -->
-    <button onclick="window.location.href='../index.html'" 
-            style="position: fixed; bottom: 30px; right: 30px; background: black; color: white; border: 2px solid #6c9a8f; padding: 12px 24px; cursor: pointer; font-family: 'Courier New', monospace; 
-font-size: 14px; z-index: 1000; transition: all 0.3s;">
-        ← VOLTAR AO PORTFÓLIO
-    </button>
-</html>
-    <!-- BOTÃO VOLTAR PADRÃO -->
-    <button onclick="window.location.href='../index.html'" class="back-button-padrao">
-        ← VOLTAR
-    </button>
-</body>
+    <script src="js/patika.js"></script>
+    <a href="../index.html" class="back-button">← VOLTAR AO PORTFÓLIO</a></body>
 </html>
