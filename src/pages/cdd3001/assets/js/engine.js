@@ -2,58 +2,69 @@ const textDisplay = document.getElementById('text-display');
 const choicesContainer = document.getElementById('choices-container');
 const visualDisplay = document.getElementById('visual-display');
 
-// Status Inicial do Patrick
 let player = {
     hp: 100,
     creditos: 50,
-    implante: "Neural Link v1"
+    inventario: []
 };
 
-function updateHUD() {
-    visualDisplay.innerHTML = `
-        <div class="stat-bar">HP: ${player.hp}% | CRED: ${player.creditos} | ${player.implante}</div>
+function updateHUD(npcKey = null) {
+    let visualHTML = `
+        <div class="stat-bar">HP: ${player.hp}% | CRED: ${player.creditos}</div>
         <div class="moto-container">
             <div class="moto-sprite"></div>
         </div>
     `;
+
+    // Se houver um NPC na cena, exibe o card dele
+    if (npcKey && NPC_DB[npcKey]) {
+        const npc = NPC_DB[npcKey];
+        visualHTML += `
+            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:12px;">
+                <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br>
+                <small>${npc.classe}</small>
+            </div>
+        `;
+    }
+    visualDisplay.innerHTML = visualHTML;
 }
 
 const story = {
     start: {
-        text: "ANO 3001. A chuva ácida queima o metal da sua moto. O radar indica uma patrulha à frente. Seus créditos estão baixos.",
+        text: "O asfalto brilha com o reflexo dos neons. Você vê uma figura encapuzada na esquina.",
+        npc: "m-thuza",
         choices: [
-            { text: "Acelerar e furar o bloqueio", next: "bloqueio" },
-            { text: "Tentar subornar o guarda (20 cred)", next: "suborno" }
+            { text: "Falar com M-THUZA", next: "conversa_m" },
+            { text: "Ignorar e seguir", next: "bloqueio" }
+        ]
+    },
+    conversa_m: {
+        text: "'Patrick, os dados que você pegou no Patika... eles são a chave para derrubar o firewall da cidade.'",
+        npc: "m-thuza",
+        choices: [
+            { text: "Entregar os dados", next: "start" },
+            { text: "Pedir créditos em troca", next: "suborno" }
         ]
     },
     bloqueio: {
-        text: "Você acelera! Balas de plasma passam raspando. Você escapou, mas a moto sofreu danos.",
-        action: () => { player.hp -= 20; },
+        text: "Um guarda bloqueia seu caminho. 'Documentos ou créditos, lixo eletrônico.'",
+        npc: "guarda-milicia",
+        action: () => { player.hp -= 5; },
         choices: [
-            { text: "Continuar fugindo", next: "start" }
-        ]
-    },
-    suborno: {
-        text: "O guarda aceita os créditos. 'Passe logo, Sonata. Antes que eu mude de ideia.'",
-        action: () => { player.creditos -= 20; },
-        choices: [
-            { text: "Seguir para o centro", next: "start" }
+            { text: "Pagar", next: "start" }
         ]
     }
 };
 
 function loadStory(node) {
     const scene = story[node];
-    
-    // Executa ação da cena se existir
     if (scene.action) scene.action();
     
-    updateHUD();
+    updateHUD(scene.npc);
     
-    // Efeito de digitação simples
     textDisplay.innerText = scene.text;
-    
     choicesContainer.innerHTML = '';
+    
     scene.choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.innerText = `> ${choice.text}`;
