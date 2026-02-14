@@ -1,0 +1,71 @@
+/* ========================================
+   TEMA FINAL DRAFT - EDITOR DE ROTEIRO
+   Cores oficiais da indústria
+   ======================================== */
+
+:root {
+    --fd-bg: #f5f5f5;
+    --fd-paper: #ffffff;
+    --fd-text: #000000;
+    --fd-border: #cccccc;
+    --fd-highlight: #e6e6e6;
+    --fd-meta: #666666;
+}
+
+body.finaldraft-mode {
+    background: var(--fd-bg) !important;
+}
+
+.finaldraft-mode .editor-container {
+    background: var(--fd-bg);
+}
+
+.finaldraft-mode .editor-paper {
+    background: var(--fd-paper);
+    color: var(--fd-text);
+    border: 1px solid var(--fd-border);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 60px 70px;
+}
+
+.finaldraft-mode .script-scene {
+    color: var(--fd-text);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 25px 0 10px;
+}
+
+.finaldraft-mode .script-char {
+    color: var(--fd-text);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 20px 0 5px;
+}
+
+.finaldraft-mode .script-dialog {
+    color: var(--fd-text);
+    margin-left: 40px;
+    max-width: 600px;
+}
+
+.finaldraft-mode .script-action {
+    color: var(--fd-text);
+    margin: 15px 0;
+    font-style: italic;
+}
+
+.finaldraft-mode .script-transition {
+    color: var(--fd-meta);
+    text-align: right;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+
+.finaldraft-mode .editor-footer {
+    background: var(--fd-paper);
+    border-top: 1px solid var(--fd-border);
+    color: var(--fd-meta);
+}
