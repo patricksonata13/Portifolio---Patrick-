@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATIKA - Ferramenta de Roteiro</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --patika-primary: #6c9a8f;
+            --patika-secondary: #e0e0e0;
+            --patika-dark: #0a0a0a;
+            --patika-panel: #0f0f0f;
+            --patika-text: #ffffff;
+        }
+        
+        body {
+            background: var(--patika-dark);
+            color: var(--patika-text);
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+        }
+        
+        .patika-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 2px solid var(--patika-primary);
+            margin-bottom: 30px;
+        }
+        
+        .patika-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .patika-logo svg {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .patika-logo h1 {
+            color: var(--patika-primary);
+            font-size: 2rem;
+            letter-spacing: 2px;
+        }
+        
+        .patika-nav {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .patika-nav button {
+            background: transparent;
+            border: 1px solid var(--patika-secondary);
+            color: var(--patika-text);
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .patika-nav button:hover {
+            background: var(--patika-primary);
+            color: var(--patika-dark);
+            border-color: var(--patika-primary);
+        }
+        
+        .patika-main {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            height: calc(100vh - 150px);
+        }
+        
+        .patika-sidebar {
+            background: var(--patika-panel);
+            border: 1px solid var(--patika-secondary);
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .patika-editor {
+            background: var(--patika-panel);
+            border: 1px solid var(--patika-secondary);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .patika-toolbar {
+            display: flex;
+            gap: 10px;
+            padding: 15px;
+            border-bottom: 1px solid var(--patika-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .patika-toolbar button {
+            background: transparent;
+            border: 1px solid var(--patika-secondary);
+            color: var(--patika-text);
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .patika-toolbar button:hover {
+            background: var(--patika-primary);
+        }
+        
+        #editor-textarea {
+            width: 100%;
+            flex: 1;
+            background: var(--patika-dark);
+            border: none;
+            color: var(--patika-text);
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.8;
+            padding: 20px;
+            resize: none;
+        }
+        
+        #editor-textarea:focus {
+            outline: 2px solid var(--patika-primary);
+        }
+        
+        .projeto-item {
+            padding: 15px;
+            border: 1px solid var(--patika-secondary);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .projeto-item:hover {
+            border-color: var(--patika-primary);
+            background: rgba(108, 154, 143, 0.1);
+        }
+        
+        .projeto-item.titulo {
+            color: var(--patika-primary);
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .projeto-item.data {
+            color: var(--patika-secondary);
+            font-size: 0.8rem;
+        }
+        
+        .projeto-item.ativo {
+            border-color: var(--patika-primary);
+            background: rgba(108, 154, 143, 0.2);
+        }
+        
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: var(--patika-panel);
+            border-top: 1px solid var(--patika-secondary);
+            color: var(--patika-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .status-salvo {
+            color: var(--patika-primary);
+        }
+        
+        .status-nao-salvo {
+            color: #cc6666;
+        }
+        
+        .back-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--patika-dark);
+            color: var(--patika-secondary);
+            border: 1px solid var(--patika-secondary);
+            padding: 12px 24px;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            border-color: var(--patika-primary);
+            color: var(--patika-primary);
+        }
+        
+        @media (max-width: 768px) {
+            .patika-main {
+                grid-template-columns: 1fr;
+            }
+            .patika-sidebar {
+                display: none;
+            }
+            .patika-sidebar.active {
+                display: block;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 80%;
+                height: 100vh;
+                z-index: 1000;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="patika-header">
+        <div class="patika-logo">
+            <svg viewBox="0 0 100 100">
+                <path d="M 20 20 L 20 80 L 50 80 Q 70 80 70 60 Q 70 40 50 40 L 20 40" 
+                      stroke="#6c9a8f" stroke-width="6" fill="none"/>
+            </svg>
+            <h1>PATIKA</h1>
+        </div>
+        <div class="patika-nav">
+            <button onclick="novoProjeto()">📄 NOVO</button>
+            <button onclick="exportarPDF()">📥 PDF</button>
+            <button onclick="exportarFDX()">📁 FDX</button>
+        </div>
+    </div>
+    
+    <div class="patika-main">
+        <!-- Sidebar com projetos -->
+        <div class="patika-sidebar" id="sidebar">
+            <h2 style="color: var(--patika-primary); margin-bottom: 20px;">PROJETOS</h2>
+            <div id="lista-projetos"></div>
+            <button onclick="novoProjeto()" style="width:100%; margin-top:20px; padding:15px; background:transparent; border:2px solid var(--patika-primary); color:var(--patika-primary);">+ NOVO PROJETO</button>
+        </div>
+        
+        <!-- Editor principal -->
+        <div class="patika-editor">
+            <div class="patika-toolbar">
+                <button onclick="inserirElemento('INT.')">INT.</button>
+                <button onclick="inserirElemento('EXT.')">EXT.</button>
+                <button onclick="inserirElemento(' - DIA')">DIA</button>
+                <button onclick="inserirElemento(' - NOITE')">NOITE</button>
+                <button onclick="inserirPersonagem()">PERSONAGEM</button>
+                <button onclick="inserirDialogo()">DIÁLOGO</button>
+                <button onclick="inserirTransicao()">TRANSIÇÃO</button>
+                <button onclick="formatarNegrito()">N</button>
+                <button onclick="formatarItalico()">I</button>
+            </div>
+            
+            <textarea id="editor-textarea" placeholder="Comece a escrever seu roteiro..."></textarea>
+        </div>
+    </div>
+    
+    <div class="status-bar">
+        <span id="projeto-atual">📁 Nenhum projeto aberto</span>
+        <span id="status-salvo">💾 Salvo</span>
+        <span id="contador-palavras">📝 0 palavras</span>
+    </div>
+    
+    <script src="js/patika.js"></script>
+    <a href="../index.html" class="back-button">← VOLTAR AO PORTFÓLIO</a></body>
+</html>
