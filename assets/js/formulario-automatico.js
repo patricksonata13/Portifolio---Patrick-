@@ -1,4 +1,5 @@
 // SISTEMA DE FORMULÁRIO AUTOMÁTICO - PATRICK SONATA
+<<<<<<< HEAD
 // Integração com Airtable + E-mails automáticos
 // CONFIGURAÇÕES - PREENCHIDAS!
 // Base ID: app1lUWbmq98n18cA
@@ -12,6 +13,27 @@ fallback local
     this.token = window.AIRTABLE_TOKEN || '';
     this.init();
 }    
+=======
+// Integração com Airtable (seguro - token fica local)
+
+class FormularioAutomatico {
+    constructor() {
+        // Tenta carregar configuração local (se existir)
+        this.baseId = 'app1lUWbmq98n18cA';  // ID público - pode ficar
+        this.tableName = 'Contatos';         // Nome público - pode ficar
+        this.token = '';                      // Token vazio no GitHub!
+        
+        // Se existir config local, usa ela
+        if (typeof window.AIRTABLE_CONFIG !== 'undefined') {
+            this.baseId = window.AIRTABLE_CONFIG.baseId || this.baseId;
+            this.tableName = window.AIRTABLE_CONFIG.tableName || this.tableName;
+            this.token = window.AIRTABLE_CONFIG.token || '';
+        }
+        
+        this.init();
+    }
+    
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
     init() {
         this.criarFormulario();
     }
@@ -20,6 +42,12 @@ fallback local
         // Verificar se já existe formulário na página
         if (document.getElementById('formulario-contato-automatico')) return;
         
+<<<<<<< HEAD
+=======
+        // Só criar se estiver na página de contato
+        if (!window.location.pathname.includes('contato')) return;
+        
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
         // Criar container do formulário
         const container = document.createElement('div');
         container.id = 'formulario-contato-automatico';
@@ -66,12 +94,18 @@ fallback local
             <div id="form-status" style="margin-top: 15px; text-align: center; color: #6c9a8f;"></div>
         `;
         
+<<<<<<< HEAD
         // Adicionar apenas se estiver na página de contato
         if (window.location.pathname.includes('contato')) {
             // Tentar encontrar o container principal
             const mainContainer = document.querySelector('.main-container') || document.body;
             mainContainer.appendChild(container);
         }
+=======
+        // Adicionar ao final da página de contato
+        const contatoPage = document.querySelector('.main-container') || document.body;
+        contatoPage.appendChild(container);
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
         
         // Adicionar evento de submit
         document.getElementById('form-airtable')?.addEventListener('submit', (e) => this.enviarFormulario(e));
@@ -80,26 +114,48 @@ fallback local
     async enviarFormulario(event) {
         event.preventDefault();
         
+<<<<<<< HEAD
+=======
+        // Se não tiver token, mostra mensagem amigável
+        if (!this.token) {
+            document.getElementById('form-status').innerHTML = '⚠️ Formulário disponível apenas em ambiente local.';
+            return;
+        }
+        
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
         const btn = document.getElementById('btn-submit-form');
         const status = document.getElementById('form-status');
         const form = document.getElementById('form-airtable');
         
+<<<<<<< HEAD
         // Desabilitar botão durante envio
         btn.disabled = true;
         btn.textContent = '⏳ Enviando...';
         
         // Coletar dados
+=======
+        btn.disabled = true;
+        btn.textContent = '⏳ Enviando...';
+        
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
         const dados = {
             nome: document.getElementById('form-nome').value,
             email: document.getElementById('form-email').value,
             mensagem: document.getElementById('form-mensagem').value,
             data: new Date().toLocaleString('pt-BR'),
+<<<<<<< HEAD
             pagina: window.location.pathname,
             origem: window.location.hostname
         };
         
         try {
             // Enviar para Airtable
+=======
+            pagina: window.location.pathname
+        };
+        
+        try {
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
             const response = await fetch(`https://api.airtable.com/v0/${this.baseId}/${this.tableName}`, {
                 method: 'POST',
                 headers: {
@@ -113,35 +169,54 @@ fallback local
                             'Email': dados.email,
                             'Mensagem': dados.mensagem,
                             'Data': dados.data,
+<<<<<<< HEAD
                             'Página': dados.pagina,
                             'Origem': dados.origem,
                             'Status': 'Novo'
+=======
+                            'Página': dados.pagina
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
                         }
                     }]
                 })
             });
             
             if (response.ok) {
+<<<<<<< HEAD
                 status.innerHTML = '✅ Mensagem enviada com sucesso! Em breve responderei.';
                 form.reset();
                 this.mostrarNotificacao('📬 Mensagem recebida!');
             } else {
                 const erro = await response.text();
                 console.error('Erro Airtable:', erro);
+=======
+                status.innerHTML = '✅ Mensagem enviada com sucesso!';
+                form.reset();
+                this.mostrarNotificacao('📬 Mensagem recebida!');
+            } else {
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
                 throw new Error('Erro no envio');
             }
             
         } catch (error) {
+<<<<<<< HEAD
             console.error('Erro:', error);
+=======
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
             status.innerHTML = '❌ Erro ao enviar. Tente novamente.';
             this.mostrarNotificacao('❌ Falha no envio');
         }
         
+<<<<<<< HEAD
         // Reativar botão
         btn.disabled = false;
         btn.textContent = '📨 ENVIAR MENSAGEM';
         
         // Limpar status após 5 segundos
+=======
+        btn.disabled = false;
+        btn.textContent = '📨 ENVIAR MENSAGEM';
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
         setTimeout(() => status.innerHTML = '', 5000);
     }
     

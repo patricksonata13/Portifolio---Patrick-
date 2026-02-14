@@ -31,6 +31,10 @@
     color: white;
     border-radius: 5px;
     font-family: 'Courier New', monospace;
+<<<<<<< HEAD
+=======
+    box-sizing: border-box;
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
 }
 
 #formulario-contato-automatico input:focus,
@@ -41,6 +45,10 @@
 
 #formulario-contato-automatico textarea {
     resize: vertical;
+<<<<<<< HEAD
+=======
+    min-height: 100px;
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
 }
 
 #btn-submit-form {
@@ -70,6 +78,7 @@
     margin-top: 15px;
     text-align: center;
     color: #6c9a8f;
+<<<<<<< HEAD
 }
 
 .formulario-notificacao {
@@ -88,15 +97,25 @@
     transition: opacity 0.3s;
 }
 
+=======
+    font-family: 'Courier New', monospace;
+}
+
+/* Responsivo */
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
 @media (max-width: 768px) {
     #formulario-contato-automatico {
         width: 90%;
         padding: 20px;
+<<<<<<< HEAD
     }
     
     .formulario-notificacao {
         bottom: 100px;
         right: 20px;
         padding: 12px 20px;
+=======
+        margin: 20px auto;
+>>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
     }
 }
