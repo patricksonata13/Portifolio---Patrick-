@@ -39,3 +39,5 @@ assets/js/airtable-config.local.js
 *.backup-*
 index.html.backup-*
 >>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
+assets/js/airtable-config.local.js
+src/assets/js/formulario-automatico.js
