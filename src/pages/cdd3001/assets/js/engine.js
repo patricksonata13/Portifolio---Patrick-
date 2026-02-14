@@ -3,43 +3,34 @@ const choicesContainer = document.getElementById('choices-container');
 const visualDisplay = document.getElementById('visual-display');
 
 let player = {
-    hp: 100,
-    creditos: 50,
+    hp: 80, // Começa um pouco ferido para testar o café
+    creditos: 100,
     inventario: [],
-    integridadeMoto: 100,
+    integridadeMoto: 70,
     xp: 0,
     level: 1
 };
 
 let isTyping = false;
 
-function ganharXP(qtd) {
-    player.xp += qtd;
-    if (player.xp >= 100) {
-        player.level++;
-        player.xp = 0;
-        alert(`LEVEL UP! Patrick agora é Nível ${player.level}`);
-    }
-}
-
 function updateHUD(npcKey = null) {
     let visualHTML = `
         <div class="stat-bar">
-            LVL: ${player.level} | XP: ${player.xp}/100 | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}%
+            LVL: ${player.level} | XP: ${player.xp}/100 | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | $: ${player.creditos}
         </div>
         <div id="inventory-display">
-            <b>INVENTÁRIO:</b><br>
-            ${player.inventario.length > 0 ? player.inventario.join('<br>') : '[ VAZIO ]'}
+            <b>MOCHILA:</b><br>
+            ${player.inventario.length > 0 ? player.inventario.join('<br>') : '[ VAZIA ]'}
         </div>
         <div class="moto-container">
-            <div class="moto-sprite" id="player-moto"></div>
+            <div class="moto-sprite"></div>
         </div>
     `;
 
     if (npcKey && NPC_DB[npcKey]) {
         const npc = NPC_DB[npcKey];
         visualHTML += `
-            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:12px; border-radius:5px; z-index:3;">
+            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:11px; border-radius:5px; z-index:3;">
                 <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br>
                 <small>${npc.classe}</small>
             </div>
@@ -50,20 +41,33 @@ function updateHUD(npcKey = null) {
 
 const story = {
     start: {
-        text: "O som do Synthwave vindo das colunas neurais da cidade mistura-se com o ronco da tua moto. M-THUZA envia coordenadas de um armazém.",
-        npc: "m-thuza",
+        text: "Estás diante do 'Neon-Brew', um café iluminado por luzes violetas. O cheiro de café sintético mistura-se com o ozono da rua.",
+        npc: "vendedor-cafe",
         choices: [
-            { text: "Explorar armazém (+20 XP)", next: "armazem" },
-            { text: "Patrulhar as ruas", next: "start" }
+            { text: "Comprar Café (10$)", next: "comprar_cafe", condition: () => player.creditos >= 10 },
+            { text: "Comprar Kit Reparo (25$)", next: "comprar_kit", condition: () => player.creditos >= 25 },
+            { text: "Sair para o Setor 7", next: "setor7" }
         ]
     },
-    armazem: {
-        text: "Dentro do armazém, encontras peças de reposição e dados antigos. Estás a tornar-te um mestre da zona norte.",
+    comprar_cafe: {
+        text: "Kaito-San serve o café fumegante. Sentas-te por um momento. HP recuperado!",
         action: () => { 
-            ganharXP(20);
-            player.integridadeMoto = Math.min(100, player.integridadeMoto + 10);
+            player.creditos -= 10;
+            player.hp = Math.min(100, player.hp + 20);
         },
-        choices: [{ text: "Voltar à estrada", next: "start" }]
+        choices: [{ text: "Voltar ao balcão", next: "start" }]
+    },
+    comprar_kit: {
+        text: "Usas os nano-bots para selar as rachaduras na fuselagem da moto. O ronco parece mais limpo.",
+        action: () => {
+            player.creditos -= 25;
+            player.integridadeMoto = Math.min(100, player.integridadeMoto + 30);
+        },
+        choices: [{ text: "Voltar ao balcão", next: "start" }]
+    },
+    setor7: {
+        text: "A estrada aberta chama. A música Phonk aumenta no teu sistema neural.",
+        choices: [{ text: "Acelerar", next: "start" }]
     }
 };
 
@@ -83,18 +87,17 @@ function loadStory(node) {
             clearInterval(interval);
             isTyping = false;
         }
-    }, 30);
+    }, 25);
 
     choicesContainer.innerHTML = '';
     scene.choices.forEach(choice => {
-        const btn = document.createElement('button');
-        btn.innerText = `> ${choice.text}`;
-        btn.className = 'choice-btn';
-        btn.onclick = () => {
-            if (typeof playEngineSound === "function") playEngineSound();
-            loadStory(choice.next);
-        };
-        choicesContainer.appendChild(btn);
+        if (!choice.condition || choice.condition()) {
+            const btn = document.createElement('button');
+            btn.innerText = `> ${choice.text}`;
+            btn.className = 'choice-btn';
+            btn.onclick = () => loadStory(choice.next);
+            choicesContainer.appendChild(btn);
+        }
     });
 }
 
