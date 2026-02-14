@@ -5,20 +5,23 @@ const visualDisplay = document.getElementById('visual-display');
 let player = {
     hp: 100,
     creditos: 50,
-    inventario: []
+    inventario: [],
+    integridadeMoto: 100
 };
 
 let isTyping = false;
 
 function updateHUD(npcKey = null) {
     let visualHTML = `
-        <div class="stat-bar">HP: ${player.hp}% | CRED: ${player.creditos}</div>
+        <div class="stat-bar">
+            HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | CRED: ${player.creditos}
+        </div>
         <div id="inventory-display">
             <b>INVENTÁRIO:</b><br>
             ${player.inventario.length > 0 ? player.inventario.join('<br>') : '[ VAZIO ]'}
         </div>
         <div class="moto-container">
-            <div class="moto-sprite"></div>
+            <div class="moto-sprite" id="player-moto"></div>
         </div>
     `;
 
@@ -36,28 +39,21 @@ function updateHUD(npcKey = null) {
 
 const story = {
     start: {
-        text: "As luzes de mercúrio da CDD 3001 piscam. M-THUZA te entrega um chip estranho. 'Isso é um Cyber-Deck pirata, Patrick. Use com cuidado.'",
-        npc: "m-thuza",
-        action: () => { 
-            if(!player.inventario.includes("Cyber-Deck")) player.inventario.push("Cyber-Deck");
-        },
+        text: "O ronco da sua moto ecoa pelo viaduto. O sistema detecta um drone de combate da milícia aproximando-se por trás!",
         choices: [
-            { text: "Seguir para o Posto Policial", next: "bloqueio" }
+            { text: "Tentar Esquiva Brusca", next: "esquiva" },
+            { text: "Acelerar Tudo", next: "dano" }
         ]
     },
-    bloqueio: {
-        text: "A milícia te para. O guarda checa sua placa. Se você tivesse uma ferramenta, poderia invadir o sistema dele...",
-        npc: "guarda-milicia",
-        choices: [
-            { text: "Tentar Hackear (Requer Deck)", next: "hack_sucesso", condition: () => player.inventario.includes("Cyber-Deck") },
-            { text: "Pagar propina (30 cred)", next: "start", condition: () => player.creditos >= 30 }
-        ]
+    esquiva: {
+        text: "Você inclina a moto quase tocando o asfalto. O tiro de plasma passa por cima! Sucesso.",
+        action: () => { player.creditos += 5; },
+        choices: [{ text: "Continuar", next: "start" }]
     },
-    hack_sucesso: {
-        text: "SISTEMA INVASO. O guarda fica confuso enquanto as luzes da armadura dele piscam em rosa. Você passa rindo.",
-        choices: [
-            { text: "Acelerar para a Vitória", next: "start" }
-        ]
+    dano: {
+        text: "O drone atinge a traseira da moto! A fuselagem solta faíscas.",
+        action: () => { player.integridadeMoto -= 25; },
+        choices: [{ text: "Reparar no próximo Deck", next: "start" }]
     }
 };
 
@@ -67,10 +63,8 @@ function loadStory(node) {
     if (scene.action) scene.action();
     updateHUD(scene.npc);
     
-    // Typewriter
     isTyping = true;
     textDisplay.innerHTML = "";
-    choicesContainer.style.display = "none";
     let i = 0;
     const interval = setInterval(() => {
         textDisplay.innerHTML += scene.text.charAt(i);
@@ -78,20 +72,19 @@ function loadStory(node) {
         if (i >= scene.text.length) {
             clearInterval(interval);
             isTyping = false;
-            choicesContainer.style.display = "flex";
         }
     }, 30);
 
     choicesContainer.innerHTML = '';
     scene.choices.forEach(choice => {
-        // Só mostra a opção se a condição for verdadeira ou se não houver condição
-        if (!choice.condition || choice.condition()) {
-            const btn = document.createElement('button');
-            btn.innerText = `> ${choice.text}`;
-            btn.className = 'choice-btn';
-            btn.onclick = () => loadStory(choice.next);
-            choicesContainer.appendChild(btn);
-        }
+        const btn = document.createElement('button');
+        btn.innerText = `> ${choice.text}`;
+        btn.className = 'choice-btn';
+        btn.onclick = () => {
+            if (typeof playEngineSound === "function") playEngineSound();
+            loadStory(choice.next);
+        };
+        choicesContainer.appendChild(btn);
     });
 }
 
