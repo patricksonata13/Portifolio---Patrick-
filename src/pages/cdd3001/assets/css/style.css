@@ -62,3 +62,18 @@ body {
 #high-score { position: absolute; top: 10px; right: 10px; font-size: 0.8rem; color: gold; }
 
 @keyframes idle { from { transform: translateY(0); } to { transform: translateY(-3px); } }
+
+/* EFEITO DE VELOCIDADE */
+.speed-line {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--moto-color));
+    opacity: 0.5;
+    animation: moveLine linear infinite;
+    z-index: 1;
+}
+
+@keyframes moveLine {
+    from { transform: translateX(500px); }
+    to { transform: translateX(-1000px); }
+}
