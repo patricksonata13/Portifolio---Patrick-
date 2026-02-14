@@ -2,66 +2,97 @@ const textDisplay = document.getElementById('text-display');
 const choicesContainer = document.getElementById('choices-container');
 const visualDisplay = document.getElementById('visual-display');
 
-let player = {
-    hp: 100, creditos: 150, inventario: [], 
-    missõesConcluidas: parseInt(localStorage.getItem('cdd3001_score')) || 0,
-    corAtual: localStorage.getItem('cdd3001_color') || '#00ff41',
-    isGhost: false
+// Carrega dados ou inicia novo
+let player = JSON.parse(localStorage.getItem('cdd3001_player_state')) || {
+    hp: 100,
+    creditos: 100,
+    inventario: [],
+    integridadeMoto: 100,
+    xp: 0,
+    level: 1,
+    missaoAtiva: false,
+    currentNode: 'start',
+    corAtual: '#00ff41'
 };
 
-// --- SISTEMA DE PASSWORDS ---
-window.addEventListener('keydown', (e) => {
-    if (e.key === 'p') {
-        let code = prompt("INTRODUZ CÓDIGO DE ACESSO NEURAL:");
-        if (code === 'SONATA3001') {
-            alert("MOTO FANTASMA DESBLOQUEADA! [VELOCIDADE CRÍTICA]");
-            player.isGhost = true;
-            document.querySelector('.moto-sprite').style.opacity = "0.4";
-            setInterval(createSpeedLines, 100);
-        }
+let isTyping = false;
+
+function saveGame(node) {
+    player.currentNode = node;
+    localStorage.setItem('cdd3001_player_state', JSON.stringify(player));
+}
+
+function toggleAlert(status) {
+    if (status) document.body.classList.add('alert-mode');
+    else document.body.classList.remove('alert-mode');
+}
+
+function updateHUD(npcKey = null) {
+    document.documentElement.style.setProperty('--moto-color', player.corAtual);
+    
+    let visualHTML = `
+        <div class="stat-bar">
+            LVL: ${player.level} | HP: ${player.hp}% | $: ${player.creditos}
+        </div>
+        <div id="inventory-display">
+            <b>STATUS:</b> ${player.missaoAtiva ? '⚠️ ALERTA' : 'OFFLINE'}<br>
+            ${player.inventario.join(', ') || 'Sem itens'}
+        </div>
+        <div class="moto-container">
+            <div class="moto-sprite" style="opacity: ${player.isGhost ? '0.4' : '1'}"></div>
+        </div>
+    `;
+
+    if (npcKey && NPC_DB[npcKey]) {
+        const npc = NPC_DB[npcKey];
+        visualHTML += `
+            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:11px; border-radius:5px; z-index:3;">
+                <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br>
+                <small>${npc.classe}</small>
+            </div>
+        `;
     }
-});
-
-function createSpeedLines() {
-    const container = document.querySelector('.moto-container');
-    if (!container) return;
-    let line = document.createElement('div');
-    line.className = 'speed-line';
-    line.style.top = Math.random() * 100 + '%';
-    line.style.animationDuration = '0.2s';
-    container.appendChild(line);
-    setTimeout(() => line.remove(), 200);
+    visualDisplay.innerHTML = visualHTML;
 }
 
-function showCredits() {
-    visualDisplay.innerHTML = `<div id="credits-roll">
-        <h2 style="color:var(--moto-color)">CDD 3001: RISING</h2>
-        <p>Escrito por: Patrick Sonata</p>
-        <p>Direção de Arte: Motor CSS Neon</p>
-        <p>Banda Sonora: Phonk & Synthwave</p>
-        <p>--- OBRIGADO POR JOGAR ---</p>
-    </div>`;
-    document.getElementById('credits-roll').style.animation = "roll 10s linear forwards";
-}
-
+// ... (O objeto 'story' permanece o mesmo que definimos anteriormente) ...
 const story = {
     start: {
-        text: "A missão final foi concluída. O horizonte da Cidade de Deus 3001 brilha sob a chuva ácida. O que queres fazer agora, Lenda?",
+        text: "Bem-vindo de volta à Cidade de Deus 3001, Patrick. Os sistemas estão online.",
+        npc: "m-thuza",
         choices: [
-            { text: "Ver Créditos Finais", action: () => showCredits() },
-            { text: "Continuar a Patrulhar", next: "patrulha" }
+            { text: "Iniciar Patrulha", next: "patrulha" },
+            { text: "Ir ao Café", next: "cafe" }
         ]
     },
     patrulha: {
-        text: "A estrada é infinita. Prime 'P' para inserir códigos se os tiveres.",
-        choices: [{ text: "Voltar", next: "start" }]
-    }
+        text: "As luzes neon refletem no asfalto molhado. O radar indica movimento no Setor Norte.",
+        choices: [{ text: "Investigar", next: "missao_iniciada" }]
+    },
+    // Adicione aqui as outras cenas que criamos (missao_iniciada, cafe, etc)
 };
 
 function loadStory(node) {
+    if (isTyping) return;
     const scene = story[node] || story['start'];
+    
     if (scene.action) scene.action();
-    textDisplay.innerText = scene.text;
+    
+    saveGame(node); // Salva o progresso no localStorage
+    updateHUD(scene.npc);
+    
+    isTyping = true;
+    textDisplay.innerHTML = "";
+    let i = 0;
+    const interval = setInterval(() => {
+        textDisplay.innerHTML += scene.text.charAt(i);
+        i++;
+        if (i >= scene.text.length) {
+            clearInterval(interval);
+            isTyping = false;
+        }
+    }, 25);
+
     choicesContainer.innerHTML = '';
     scene.choices.forEach(choice => {
         const btn = document.createElement('button');
@@ -72,4 +103,5 @@ function loadStory(node) {
     });
 }
 
-loadStory('start');
+// Inicia de onde parou
+loadStory(player.currentNode);
