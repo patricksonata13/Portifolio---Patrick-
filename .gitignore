@@ -1,17 +1,3 @@
-# OS
-.DS_Store
-Thumbs.db
-desktop.ini
-
-# Build
-dist/
-*.log
-
-# Backups
-*.tar.gz
-backup-*/
-BACKUP-*/
-
 # IDE
 .vscode/
 .idea/
@@ -22,22 +8,19 @@ BACKUP-*/
 # Dependências
 node_modules/
 package-lock.json
-<<<<<<< HEAD
-.env.local
-*.backup
-*.backup-*
-src/assets/js/airtable-config.js
-=======
+
 # Arquivos de configuração local
-assets/js/airtable-config.local.js
 .env
 .env.local
 *.local.js
-
-# Backups
-*.backup
-*.backup-*
-index.html.backup-*
->>>>>>> 7af88eb1b3e7043611666f7dac977e11de7c6e90
 assets/js/airtable-config.local.js
+src/assets/js/airtable-config.js
+
+# Backups (apenas arquivos com .backup no nome)
+*.backup
+*.old
+*backup-*
+index.html.backup-*
+
+# Formulário automático
 src/assets/js/formulario-automatico.js
