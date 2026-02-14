@@ -22,3 +22,13 @@ BACKUP-*/
 # Dependências
 node_modules/
 package-lock.json
+# Arquivos de configuração local
+assets/js/airtable-config.local.js
+.env
+.env.local
+*.local.js
+
+# Backups
+*.backup
+*.backup-*
+index.html.backup-*
