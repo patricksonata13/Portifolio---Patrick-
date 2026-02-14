@@ -6,15 +6,26 @@ let player = {
     hp: 100,
     creditos: 50,
     inventario: [],
-    integridadeMoto: 100
+    integridadeMoto: 100,
+    xp: 0,
+    level: 1
 };
 
 let isTyping = false;
 
+function ganharXP(qtd) {
+    player.xp += qtd;
+    if (player.xp >= 100) {
+        player.level++;
+        player.xp = 0;
+        alert(`LEVEL UP! Patrick agora é Nível ${player.level}`);
+    }
+}
+
 function updateHUD(npcKey = null) {
     let visualHTML = `
         <div class="stat-bar">
-            HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | CRED: ${player.creditos}
+            LVL: ${player.level} | XP: ${player.xp}/100 | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}%
         </div>
         <div id="inventory-display">
             <b>INVENTÁRIO:</b><br>
@@ -39,21 +50,20 @@ function updateHUD(npcKey = null) {
 
 const story = {
     start: {
-        text: "O ronco da sua moto ecoa pelo viaduto. O sistema detecta um drone de combate da milícia aproximando-se por trás!",
+        text: "O som do Synthwave vindo das colunas neurais da cidade mistura-se com o ronco da tua moto. M-THUZA envia coordenadas de um armazém.",
+        npc: "m-thuza",
         choices: [
-            { text: "Tentar Esquiva Brusca", next: "esquiva" },
-            { text: "Acelerar Tudo", next: "dano" }
+            { text: "Explorar armazém (+20 XP)", next: "armazem" },
+            { text: "Patrulhar as ruas", next: "start" }
         ]
     },
-    esquiva: {
-        text: "Você inclina a moto quase tocando o asfalto. O tiro de plasma passa por cima! Sucesso.",
-        action: () => { player.creditos += 5; },
-        choices: [{ text: "Continuar", next: "start" }]
-    },
-    dano: {
-        text: "O drone atinge a traseira da moto! A fuselagem solta faíscas.",
-        action: () => { player.integridadeMoto -= 25; },
-        choices: [{ text: "Reparar no próximo Deck", next: "start" }]
+    armazem: {
+        text: "Dentro do armazém, encontras peças de reposição e dados antigos. Estás a tornar-te um mestre da zona norte.",
+        action: () => { 
+            ganharXP(20);
+            player.integridadeMoto = Math.min(100, player.integridadeMoto + 10);
+        },
+        choices: [{ text: "Voltar à estrada", next: "start" }]
     }
 };
 
