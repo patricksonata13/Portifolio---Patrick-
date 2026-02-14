@@ -1,0 +1,39 @@
+/* ========================================
+   ÍCONES MINIMALISTAS - TERMINAL STYLE
+   ======================================== */
+
+.icon {
+    font-family: 'Courier New', monospace;
+    display: inline-block;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+}
+
+.icon-xs { font-size: 0.9rem; }
+.icon-sm { font-size: 1.2rem; }
+.icon-md { font-size: 1.5rem; }
+.icon-lg { font-size: 2rem; }
+.icon-xl { font-size: 2.5rem; }
+
+.icon-primary { color: #6c9a8f; }
+.icon-secondary { color: #e0e0e0; }
+.icon-muted { color: #888888; }
+.icon-light { color: #ffffff; }
+
+.icon-cmd:before { content: "⌘"; }
+.icon-esc:before { content: "⎋"; }
+.icon-opt:before { content: "⌥"; }
+.icon-shift:before { content: "⇧"; }
+.icon-enter:before { content: "⏎"; }
+.icon-back:before { content: "←"; }
+.icon-forward:before { content: "→"; }
+.icon-up:before { content: "↑"; }
+.icon-down:before { content: "↓"; }
+.icon-pencil:before { content: "✎"; }
+.icon-circle:before { content: "◉"; }
+.icon-sun:before { content: "☀"; }
+.icon-arrows:before { content: "⇄"; }
+.icon-diamond:before { content: "◈"; }
+.icon-hashtag:before { content: "⌗"; }
