@@ -1,14 +1,43 @@
-/* CSS EXCLUSIVO CDD 3001 - NÃO AFETA O PORTFÓLIO */
+/* CSS EXCLUSIVO CDD 3001 */
+:root {
+    --neon-green: #00ff41;
+    --neon-red: #ff003c;
+    --city-blue: #0a0a2a;
+}
+
 .moto-container {
     width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle, #111 0%, #000 100%);
+    /* Fundo da Cidade */
+    background: 
+        linear-gradient(transparent 70%, var(--city-blue) 100%),
+        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+        repeating-linear-gradient(90deg, rgba(0,255,65,0.05) 0px, rgba(0,255,65,0.05) 1px, transparent 1px, transparent 50px),
+        repeating-linear-gradient(0deg, rgba(0,255,65,0.05) 0px, rgba(0,255,65,0.05) 1px, transparent 1px, transparent 50px),
+        #050505;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Silhueta dos Prédios */
+.moto-container::before {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    width: 150%;
+    height: 100px;
+    background: 
+        linear-gradient(90deg, #111 10%, transparent 10.5%, #0a0a0a 20%, transparent 20.5%, #111 35%),
+        #050505;
+    box-shadow: 0 -5px 15px rgba(0, 255, 65, 0.1);
+    z-index: 0;
 }
 
 .moto-sprite {
+    z-index: 2;
     width: 250px;
     height: 120px;
     position: relative;
@@ -32,15 +61,19 @@
 .moto-sprite::before { left: 20px; }
 .moto-sprite::after { right: 20px; }
 
+/* HUD de Inventário Lateral */
+#inventory-display {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    width: 120px;
+    border-left: 1px solid var(--neon-green);
+    padding: 10px;
+    font-size: 10px;
+    background: rgba(0,0,0,0.5);
+}
+
 @keyframes idle {
     from { transform: translateY(0); }
     to { transform: translateY(-3px); }
-}
-
-.stat-bar {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 0.8rem;
-    color: var(--neon-red);
 }
