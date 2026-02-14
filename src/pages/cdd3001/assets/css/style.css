@@ -77,3 +77,18 @@
     from { transform: translateY(0); }
     to { transform: translateY(-3px); }
 }
+
+/* MODO ALERTA - ATIVADO DURANTE MISSÕES PERIGOSAS */
+body.alert-mode {
+    --neon-green: #ff003c; /* Muda tudo para Vermelho Alerta */
+    --city-blue: #2a0a0a;
+}
+
+body.alert-mode .moto-container {
+    filter: sepia(1) saturate(2) hue-rotate(-50deg);
+}
+
+body.alert-mode .scanline {
+    background: rgba(255, 0, 60, 0.2);
+    animation-duration: 1s; /* Scanline mais rápida e nervosa */
+}
