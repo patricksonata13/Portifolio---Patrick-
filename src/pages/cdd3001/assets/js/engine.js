@@ -4,120 +4,85 @@ const visualDisplay = document.getElementById('visual-display');
 
 let player = {
     hp: 100,
-    creditos: 100,
+    creditos: 150,
     inventario: [],
     integridadeMoto: 100,
-    xp: 0,
-    missaoAtiva: false
+    missõesConcluidas: parseInt(localStorage.getItem('cdd3001_score')) || 0,
+    corAtual: localStorage.getItem('cdd3001_color') || '#00ff41'
 };
 
-let isTyping = false;
+document.documentElement.style.setProperty('--moto-color', player.corAtual);
 
-function toggleAlert(status) {
-    if (status) document.body.classList.add('alert-mode');
-    else document.body.classList.remove('alert-mode');
+function salvarProgresso() {
+    localStorage.setItem('cdd3001_score', player.missõesConcluidas);
+    localStorage.setItem('cdd3001_color', player.corAtual);
 }
 
 function updateHUD(npcKey = null) {
     let visualHTML = `
-        <div class="stat-bar">
-            XP: ${player.xp} | HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | $: ${player.creditos}
-        </div>
-        <div id="inventory-display">
-            <b>${player.missaoAtiva ? '⚠️ EM MISSÃO' : 'DISPONÍVEL'}</b><br>
-            ${player.inventario.join('<br>')}
-        </div>
-        <div class="moto-container">
-            <div class="moto-sprite"></div>
-        </div>
+        <div class="stat-bar">HP: ${player.hp}% | MOTO: ${player.integridadeMoto}% | $: ${player.creditos}</div>
+        <div id="high-score">🏆 MISSÕES: ${player.missõesConcluidas}</div>
+        <div id="inventory-display"><b>DECK:</b> ${player.inventario.join(', ') || 'Vazio'}</div>
+        <div class="moto-container"><div class="moto-sprite"></div></div>
     `;
-
     if (npcKey && NPC_DB[npcKey]) {
         const npc = NPC_DB[npcKey];
-        visualHTML += `
-            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:11px; border-radius:5px; z-index:3;">
-                <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br>
-                <small>${npc.classe}</small>
-            </div>
-        `;
+        visualHTML += `<div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:11px; border-radius:5px;">
+            <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br><small>${npc.classe}</small>
+        </div>`;
     }
     visualDisplay.innerHTML = visualHTML;
 }
 
 const story = {
     start: {
-        text: "M-THUZA conecta-se ao teu rádio: 'Patrick, tenho um pacote de dados que precisa chegar ao Setor Norte. A milícia está à caça. Aceitas?'",
-        npc: "m-thuza",
+        text: "Bem-vindo à Garagem de Personalização. O que pretendes fazer com a tua máquina?",
         choices: [
-            { text: "Aceitar Contrato (50$)", next: "missao_iniciada", condition: () => !player.missaoAtiva },
-            { text: "Recusar e ir ao Café", next: "cafe" }
+            { text: "Pintar de Azul Cyan (50$)", action: () => mudarCor('#00ffff') },
+            { text: "Pintar de Rosa Neon (50$)", action: () => mudarCor('#ff00ff') },
+            { text: "Aceitar Missão de Entrega", next: "missao" },
+            { text: "Sair", next: "start" }
         ]
     },
-    missao_iniciada: {
-        text: "PACOTE RECEBIDO. As sirenes começam a tocar ao longe. A cidade ficou vermelha. ACELERA!",
-        action: () => {
-            player.missaoAtiva = true;
-            player.inventario.push("Dados Criptografados");
-            toggleAlert(true);
+    missao: {
+        text: "Entrega os dados no Setor Sul. Cuidado com os radares!",
+        choices: [{ text: "Completar Missão", next: "sucesso" }]
+    },
+    sucesso: {
+        text: "Missão cumprida! Mais um contrato para o portfólio.",
+        action: () => { 
+            player.missõesConcluidas++; 
+            player.creditos += 60;
+            salvarProgresso();
         },
-        choices: [{ text: "Cortar caminho pelos becos", next: "perigo" }]
-    },
-    perigo: {
-        text: "Um drone de patrulha aparece! Ele tenta bloquear a passagem.",
-        choices: [
-            { text: "Dar um drift arriscado", next: "entrega_final" },
-            { text: "Atravessar o drone (Dano)", next: "dano_missao" }
-        ]
-    },
-    dano_missao: {
-        text: "Bates no drone, mas continuas em frente. A moto está a fumegar!",
-        action: () => { player.integridadeMoto -= 40; },
-        choices: [{ text: "Seguir para o ponto de entrega", next: "entrega_final" }]
-    },
-    entrega_final: {
-        text: "Consegues entregar os dados no ponto cego do radar. O alerta termina. Recebeste a recompensa!",
-        action: () => {
-            player.missaoAtiva = false;
-            player.inventario = player.inventario.filter(i => i !== "Dados Criptografados");
-            player.creditos += 50;
-            player.xp += 30;
-            toggleAlert(false);
-        },
-        choices: [{ text: "Voltar para a base", next: "start" }]
-    },
-    cafe: {
-        text: "Decides que hoje não é dia de correr riscos.",
         choices: [{ text: "Voltar", next: "start" }]
     }
 };
 
+function mudarCor(cor) {
+    if (player.creditos >= 50) {
+        player.creditos -= 50;
+        player.corAtual = cor;
+        document.documentElement.style.setProperty('--moto-color', cor);
+        salvarProgresso();
+        alert("Pintura aplicada!");
+    } else {
+        alert("Créditos insuficientes!");
+    }
+}
+
 function loadStory(node) {
-    if (isTyping) return;
-    const scene = story[node];
+    const scene = story[node] || story['start'];
     if (scene.action) scene.action();
     updateHUD(scene.npc);
-    
-    isTyping = true;
-    textDisplay.innerHTML = "";
-    let i = 0;
-    const interval = setInterval(() => {
-        textDisplay.innerHTML += scene.text.charAt(i);
-        i++;
-        if (i >= scene.text.length) {
-            clearInterval(interval);
-            isTyping = false;
-        }
-    }, 25);
-
+    textDisplay.innerText = scene.text;
     choicesContainer.innerHTML = '';
     scene.choices.forEach(choice => {
-        if (!choice.condition || choice.condition()) {
-            const btn = document.createElement('button');
-            btn.innerText = `> ${choice.text}`;
-            btn.className = 'choice-btn';
-            btn.onclick = () => loadStory(choice.next);
-            choicesContainer.appendChild(btn);
-        }
+        const btn = document.createElement('button');
+        btn.innerText = `> ${choice.text}`;
+        btn.className = 'choice-btn';
+        btn.onclick = () => loadStory(choice.next);
+        choicesContainer.appendChild(btn);
     });
 }
 
