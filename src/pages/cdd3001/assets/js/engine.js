@@ -8,6 +8,26 @@ let player = {
     inventario: []
 };
 
+// Configurações do efeito de digitação
+let isTyping = false;
+const typingSpeed = 30; // milissegundos por letra
+
+function typeWriter(text, i = 0) {
+    if (i === 0) {
+        isTyping = true;
+        textDisplay.innerHTML = "";
+        choicesContainer.style.display = "none"; // Esconde opções enquanto digita
+    }
+
+    if (i < text.length) {
+        textDisplay.innerHTML += text.charAt(i);
+        setTimeout(() => typeWriter(text, i + 1), typingSpeed);
+    } else {
+        isTyping = false;
+        choicesContainer.style.display = "flex"; // Mostra opções ao terminar
+    }
+}
+
 function updateHUD(npcKey = null) {
     let visualHTML = `
         <div class="stat-bar">HP: ${player.hp}% | CRED: ${player.creditos}</div>
@@ -16,11 +36,10 @@ function updateHUD(npcKey = null) {
         </div>
     `;
 
-    // Se houver um NPC na cena, exibe o card dele
     if (npcKey && NPC_DB[npcKey]) {
         const npc = NPC_DB[npcKey];
         visualHTML += `
-            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:12px;">
+            <div style="position:absolute; bottom:10px; right:10px; background:rgba(0,0,0,0.8); border:1px solid ${npc.cor}; padding:10px; width:150px; font-size:12px; border-radius:5px;">
                 <b style="color:${npc.cor}">${npc.avatar} ${npc.nome}</b><br>
                 <small>${npc.classe}</small>
             </div>
@@ -31,40 +50,41 @@ function updateHUD(npcKey = null) {
 
 const story = {
     start: {
-        text: "O asfalto brilha com o reflexo dos neons. Você vê uma figura encapuzada na esquina.",
+        text: "ANO 3001. A fumaça neon sobe dos bueiros. Você sente a vibração do motor entre suas pernas. M-THUZA está esperando no beco.",
         npc: "m-thuza",
         choices: [
-            { text: "Falar com M-THUZA", next: "conversa_m" },
-            { text: "Ignorar e seguir", next: "bloqueio" }
+            { text: "Aproximar-se da sombra", next: "conversa_m" },
+            { text: "Seguir direto para as torres", next: "bloqueio" }
         ]
     },
     conversa_m: {
-        text: "'Patrick, os dados que você pegou no Patika... eles são a chave para derrubar o firewall da cidade.'",
+        text: "'Você demorou, Patrick. O arquivo que você gerou no Patika é pesado demais para um deck comum. Precisamos de mais RAM.'",
         npc: "m-thuza",
         choices: [
-            { text: "Entregar os dados", next: "start" },
-            { text: "Pedir créditos em troca", next: "suborno" }
+            { text: "Entregar unidade de dados", next: "setor7" },
+            { text: "Sair sem dizer nada", next: "start" }
         ]
     },
     bloqueio: {
-        text: "Um guarda bloqueia seu caminho. 'Documentos ou créditos, lixo eletrônico.'",
+        text: "Uma sirene ecoa. A milícia cibernética detectou sua assinatura de calor. 'Pare o veículo agora!'",
         npc: "guarda-milicia",
-        action: () => { player.hp -= 5; },
+        action: () => { player.hp -= 10; },
         choices: [
-            { text: "Pagar", next: "start" }
+            { text: "Tentar fuga em alta velocidade", next: "start" }
         ]
     }
 };
 
 function loadStory(node) {
+    if (isTyping) return; // Impede pular a animação clicando rápido
+    
     const scene = story[node];
     if (scene.action) scene.action();
     
     updateHUD(scene.npc);
+    typeWriter(scene.text);
     
-    textDisplay.innerText = scene.text;
     choicesContainer.innerHTML = '';
-    
     scene.choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.innerText = `> ${choice.text}`;
@@ -74,4 +94,5 @@ function loadStory(node) {
     });
 }
 
+// Inicializa o jogo
 loadStory('start');
