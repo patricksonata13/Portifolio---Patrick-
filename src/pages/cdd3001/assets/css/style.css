@@ -77,3 +77,18 @@ body {
     from { transform: translateX(500px); }
     to { transform: translateX(-1000px); }
 }
+
+#credits-roll {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100%;
+    font-family: 'Courier New', monospace;
+    color: #fff;
+    text-shadow: 0 0 10px var(--moto-color);
+}
+
+@keyframes roll {
+    0% { top: 100%; }
+    100% { top: -150%; }
+}
