@@ -101,3 +101,4 @@ Com 20 anos de trajetória dedicados ao humor e ao teatro, Patrick trabalhou com
 ---
 
 **Desenvolvido com paixão pela arte do humor** 🎭
+// Forçando deploy no Cloudflare

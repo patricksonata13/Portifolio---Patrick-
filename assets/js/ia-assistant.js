@@ -1,0 +1,224 @@
+class IAAssistant {
+    constructor() {
+        this.init();
+    }
+
+    init() {
+        this.criarBotao();
+        this.criarModal();
+        this.detectarPagina();
+    }
+
+    criarBotao() {
+        const botao = document.createElement('div');
+        botao.id = 'ia-assistant-btn';
+        botao.innerHTML = `<div class="ia-btn-container"><button 
+class="ia-btn-principal" onclick="iaAssistant.abrirModal()"><span 
+class="ia-icon">🤖</span></button><div class="ia-btn-label">Assistente 
+IA</div></div>`;
+        document.body.appendChild(botao);
+    }
+
+    criarModal() {
+        const modal = document.createElement('div');
+        modal.id = 'ia-assistant-modal';
+        modal.innerHTML = `<div class="ia-modal-overlay" 
+onclick="iaAssistant.fecharModal()"></div><div 
+class="ia-modal-content"><button class="ia-modal-close" 
+onclick="iaAssistant.fecharModal()">✕</button><h2 
+class="ia-modal-title">🤖 Assistente de IA</h2><p 
+class="ia-modal-subtitle" id="ia-contexto">Como posso ajudar?</p><div 
+class="ia-opcoes" id="ia-opcoes"></div><div class="ia-rodape"><p>💡 
+Ferramentas gratuitas de IA</p></div></div>`;
+        document.body.appendChild(modal);
+    }
+
+    detectarPagina() {
+        const path = window.location.pathname;
+        let contexto = '';
+        let opcoes = [];
+
+        // HOME - Página inicial
+        if (path === '/' || path.includes('index.html')) {
+            contexto = 'Bem-vindo! Escolha uma ferramenta:';
+            opcoes = [
+                { icon: '🎬', titulo: 'Desenvolver Roteiro', descricao: 
+'Criar sinopses, diálogos e personagens', url: 'https://claude.ai', 
+prompt: 'Sou um roteirista brasileiro. Me ajude a desenvolver roteiros de 
+humor e drama.' },
+                { icon: '💬', titulo: 'Brainstorming', descricao: 'Gerar 
+ideias rápidas', url: 'https://chat.openai.com', prompt: 'Preciso de 
+ideias criativas para projetos de comédia e roteiro.' },
+                { icon: '🎨', titulo: 'Criar Imagens', descricao: 'Gerar 
+arte e conceitos visuais', url: 'https://leonardo.ai', prompt: '' },
+                { icon: '🚀', titulo: 'GPT-4 Grátis', descricao: 
+'Microsoft Copilot', url: 'https://copilot.microsoft.com', prompt: '' },
+                { icon: '🧪', titulo: 'Arena AI', descricao: 'Teste vários 
+modelos num só lugar', url: 'https://arena.ai/pt', prompt: 'Como posso 
+testar diferentes IAs para roteiro aqui?' }
+            ];
+        }
+
+        // CDD 3001
+        else if (path.includes('cdd')) {
+            contexto = 'Assistente para o Game CDD 3001:';
+            opcoes = [
+                { icon: '🎮', titulo: 'Criar Missão', descricao: 'Gerar 
+nova missão do jogo', url: 'https://claude.ai', prompt: 'Sou roteirista do 
+game CDD 3001 sobre a Cidade de Deus.' },
+                { icon: '👤', titulo: 'Desenvolver Personagem', descricao: 
+'Criar perfil e backstory', url: 'https://claude.ai', prompt: 'Preciso 
+desenvolver um personagem para o game CDD 3001.' },
+                { icon: '💬', titulo: 'Escrever Diálogos', descricao: 
+'Criar conversas realistas', url: 'https://claude.ai', prompt: 'Escreva 
+diálogos realistas para personagens da Cidade de Deus.' },
+                { icon: '⚔️', titulo: 'Sugerir Conflitos', descricao: 
+'Propor desafios narrativos', url: 'https://chat.openai.com', prompt: 
+'Sugira conflitos dramáticos para o game CDD 3001.' }
+            ];
+        }
+
+        // PATIKA
+        else if (path.includes('patika')) {
+            contexto = 'Assistente para PATIKA:';
+            opcoes = [
+                { icon: '🎭', titulo: 'Desenvolver Show', descricao: 
+'Criar estrutura de stand-up', url: 'https://claude.ai', prompt: 'Me ajude 
+a desenvolver um show de stand-up.' },
+                { icon: '😂', titulo: 'Escrever Piadas', descricao: 'Gerar 
+material de comédia', url: 'https://chat.openai.com', prompt: 'Me ajude a 
+escrever piadas inteligentes.' },
+                { icon: '📝', titulo: 'Roteiro de Esquete', descricao: 
+'Criar esquetes curtas', url: 'https://claude.ai', prompt: 'Escreva um 
+roteiro de esquete de 3-5 minutos.' }
+            ];
+        }
+
+        // AULAS
+        else if (path.includes('aulas')) {
+            contexto = 'Assistente para Aulas e Cursos:';
+            opcoes = [
+                { icon: '📚', titulo: 'Planejar Aula', descricao: 'Criar 
+plano de aula', url: 'https://claude.ai', prompt: 'Me ajude a criar um 
+plano de aula sobre roteiro.' },
+                { icon: '✏️', titulo: 'Criar Exercícios', descricao: 
+'Gerar atividades práticas', url: 'https://claude.ai', prompt: 'Crie 
+exercícios práticos de roteiro.' },
+                { icon: '📊', titulo: 'Organizar Cronograma', descricao: 
+'Estruturar curso completo', url: 'https://chat.openai.com', prompt: 'Me 
+ajude a organizar um cronograma de curso.' },
+                { icon: '💡', titulo: 'Sugerir Temas', descricao: 'Ideias 
+para workshops', url: 'https://chat.openai.com', prompt: 'Sugira temas 
+para workshops de roteiro.' }
+            ];
+        }
+
+        // TRABALHO / PORTFÓLIO
+        else if (path.includes('trabalho')) {
+            contexto = 'Assistente para Portfólio:';
+            opcoes = [
+                { icon: '📝', titulo: 'Escrever Sinopse', descricao: 
+'Criar descrição profissional', url: 'https://claude.ai', prompt: 'Escreva 
+uma sinopse profissional para o projeto.' },
+                { icon: '🎯', titulo: 'Pitch de Venda', descricao: 'Texto 
+para apresentação', url: 'https://claude.ai', prompt: 'Crie um pitch 
+convincente para vender o projeto.' },
+                { icon: '🌐', titulo: 'Traduzir para Inglês', descricao: 
+'Versão internacional', url: 'https://chat.openai.com', prompt: 'Traduza 
+para inglês profissional.' },
+                { icon: '✨', titulo: 'Melhorar Descrição', descricao: 
+'Otimizar texto existente', url: 'https://claude.ai', prompt: 'Melhore 
+esta descrição de projeto.' }
+            ];
+        }
+
+        // CONTATO
+        else if (path.includes('contato')) {
+            contexto = 'Assistente para Contato:';
+            opcoes = [
+                { icon: '💼', titulo: 'Gerar Orçamento', descricao: 
+'Calcular valores de projeto', url: 'https://claude.ai', prompt: 'Me ajude 
+a criar um orçamento profissional.' },
+                { icon: '📧', titulo: 'Responder E-mail', descricao: 
+'Sugestões de resposta', url: 'https://claude.ai', prompt: 'Me ajude a 
+responder este e-mail profissionalmente.' },
+                { icon: '📅', titulo: 'Agendar Reunião', descricao: 
+'Propor datas e horários', url: 'https://chat.openai.com', prompt: 
+'Escreva um e-mail propondo reunião.' }
+            ];
+        }
+
+        // SOBRE / PERFIL
+        else if (path.includes('sobre') || path.includes('perfil')) {
+            contexto = 'Assistente para Bio e Perfil:';
+            opcoes = [
+                { icon: '📄', titulo: 'Otimizar Bio', descricao: 'Melhorar 
+texto de apresentação', url: 'https://claude.ai', prompt: 'Otimize minha 
+bio profissional.' },
+                { icon: '🎤', titulo: 'Pitch de Elevador', descricao: 
+'Apresentação em 30 segundos', url: 'https://claude.ai', prompt: 'Crie um 
+pitch de elevador para Patrick Sonata.' },
+                { icon: '🌍', titulo: 'Versão Internacional', descricao: 
+'Bio em inglês', url: 'https://chat.openai.com', prompt: 'Traduza minha 
+bio para inglês.' }
+            ];
+        }
+
+        this.renderizarOpcoes(contexto, opcoes);
+    }
+
+    renderizarOpcoes(contexto, opcoes) {
+        document.getElementById('ia-contexto').textContent = contexto;
+        const container = document.getElementById('ia-opcoes');
+        container.innerHTML = '';
+        opcoes.forEach(opcao => {
+            const div = document.createElement('div');
+            div.className = 'ia-opcao';
+            div.innerHTML = `<div 
+class="ia-opcao-icon">${opcao.icon}</div><div 
+class="ia-opcao-content"><div 
+class="ia-opcao-titulo">${opcao.titulo}</div><div 
+class="ia-opcao-desc">${opcao.descricao}</div></div>`;
+            div.onclick = () => this.abrirIA(opcao.url, opcao.prompt);
+            container.appendChild(div);
+        });
+    }
+
+    abrirIA(url, prompt) {
+        if (prompt) {
+            window.open(url, '_blank');
+            navigator.clipboard.writeText(prompt).then(() => {
+                this.mostrarNotificacao('📋 Prompt copiado! Cole na IA.');
+            });
+        } else {
+            window.open(url, '_blank');
+        }
+        this.fecharModal();
+    }
+
+    abrirModal() {
+        document.getElementById('ia-assistant-modal').style.display = 
+'flex';
+    }
+
+    fecharModal() {
+        document.getElementById('ia-assistant-modal').style.display = 
+'none';
+    }
+
+    mostrarNotificacao(mensagem) {
+        const notif = document.createElement('div');
+        notif.className = 'ia-notificacao';
+        notif.textContent = mensagem;
+        document.body.appendChild(notif);
+        setTimeout(() => {
+            notif.style.opacity = '0';
+            setTimeout(() => notif.remove(), 300);
+        }, 3000);
+    }
+}
+
+let iaAssistant;
+document.addEventListener('DOMContentLoaded', () => {
+    iaAssistant = new IAAssistant();
+});

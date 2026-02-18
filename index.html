@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patrick Sonata | Roteirista</title>
     
+          HEAD
     <!-- CSS PRIMEIRO -->
     <link rel="stylesheet" href="assets/css/style.css">
     
@@ -643,4 +644,120 @@ onclick="window.location.href='contato.html'">CONTATO</button>
             });
         }
     </script>    <script src="assets/js/airtable-loader.js"></script></body>
+=======
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="/src/assets/css/main.css">
+    
+    <!-- Meta tags de SEO -->
+    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
+    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
+    <meta name="author" content="Patrick Sonata">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Patrick Sonata | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta property="og:image" content="https://patricksonata.com.br/src/assets/images/global/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    <meta property="og:type" content="website">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/src/assets/images/global/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/ia-assistant.css">
+    <link rel="stylesheet" href="/assets/css/formulario-automatico.css">
+</head>
+<body>
+    <!-- Logo P - Home -->
+    <a href="/" class="logo-p" title="Voltar ao início">
+        <svg viewBox="0 0 100 100" width="25" height="25">
+            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
+                  stroke="white" stroke-width="6" stroke-linecap="round" 
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    
+    <!-- Página Principal -->
+    <div class="main-container" id="home">
+        <nav class="nav-top-right">
+            <button onclick="window.location.href='src/pages/cdd/index.html'">CDD 3001</button>
+            <button onclick="window.location.href='src/pages/patika/index.html'">PATIKA</button>
+            <button onclick="window.location.href='src/pages/aulas/index.html'">AULAS</button>
+            <button onclick="window.location.href='src/pages/contato/index.html'">CONTATO</button>
+            <a href="src/pages/admin/login.html" style="display:none;">admin</a>
+        </nav>
+
+        <img src="/src/assets/images/global/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
+        <h1>PATRICK SONATA</h1>
+        
+        <div class="nav-bottom-center">
+            <button onclick="window.location.href='src/pages/sobre/index.html'">Sobre</button>
+            <button onclick="window.location.href='src/pages/perfil/index.html'">Perfil</button>
+            <button onclick="window.location.href='src/pages/trabalho/index.html'">Trabalho</button>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/src/assets/js/main.js"></script>
+    <script src="/src/assets/js/airtable-loader.js"></script>
+    <script src="/assets/js/database.js"></script>
+    <script src="/assets/js/navigation/gestos.js"></script>
+    <script src="/assets/js/navigation/integrador.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", function() {
+                navigator.serviceWorker.register("/sw.js");
+            });
+        }
+    </script>
+    
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/699016e3e9fd731c39b99be2/1jhddiqj3';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    
+    <!-- Seção de Comentários Giscus -->
+    <div style="max-width: 800px; margin: 50px auto; padding: 0 20px;">
+        <h2 style="color: #6c9a8f; border-left: 4px solid #6c9a8f; 
+padding-left: 20px; margin-bottom: 30px;">💬 Comentários</h2>
+        
+        <!-- Giscus -->
+        <script src="https://giscus.app/client.js"
+                data-repo="patricksonata13/Portifolio---Patrick-"
+                data-repo-id="R_kgDOPmrGSw"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOPmrGS84CUSzP"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="dark"
+                data-lang="pt"
+                crossorigin="anonymous"
+                async>
+        </script>
+    </div>
+
+    <!-- Seus scripts existentes (já estão lá) -->
+</body>
+</html>
+</body>
+>>>>>>> 7a9546b0845d3e1566d21187c882b1227b0e40c3
 </html>

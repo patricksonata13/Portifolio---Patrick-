@@ -712,3 +712,126 @@ p {
         justify-content: center;
     }
 }
+/* ============================================================
+   PAINEL LATERAL & FORMATO DE ROTEIRO (VERSÃO B - APPLE/HBO)
+   ============================================================ */
+
+/* A Gaveta Lateral */
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Escondido */
+    width: 40%;   /* Largura elegante */
+    height: 100vh;
+    background-color: #000; /* Preto absoluto */
+    border-left: 1px solid #222;
+    z-index: 2000;
+    transition: right 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    padding: 80px 50px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    box-shadow: -20px 0 50px rgba(0,0,0,0.9);
+}
+
+.side-panel.active {
+    right: 0; /* Desliza para dentro */
+}
+
+/* Efeito de Vidro/Fundo quando o painel abre */
+.main-wrapper {
+    transition: filter 0.6s ease, opacity 0.6s ease;
+}
+
+.main-wrapper.blur {
+    filter: blur(8px) grayscale(50%);
+    opacity: 0.4;
+    pointer-events: none; /* Impede clicar no fundo enquanto lê */
+}
+
+/* FORMATO DE ROTEIRO (Final Draft Style) */
+.script-content {
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    line-height: 1.2;
+    font-size: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.script-scene {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 25px 0 15px 0;
+}
+
+.script-dialog {
+    width: 70%;
+    margin: 0 auto 15px auto;
+    text-align: left;
+}
+
+.script-char {
+    text-align: center;
+    width: 60%;
+    margin: 20px auto 0 auto;
+    text-transform: uppercase;
+}
+
+.script-transition {
+    text-align: right;
+    text-transform: uppercase;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+/* Botão de fechar discreto */
+.close-panel {
+    position: absolute;
+    top: 30px;
+    left: 40px;
+    color: #555;
+    cursor: pointer;
+    font-size: 12px;
+    letter-spacing: 2px;
+    transition: 0.3s;
+}
+
+.close-panel:hover {
+    color: #fff;
+}/* EFEITO FOLHA DE ROTEIRO - FINAL DRAFT STYLE */
+.script-content {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #ffffff; /* Cor de papel */
+    color: #222;               /* Tinta preta de máquina de escrever */
+    padding: 60px 50px;
+    min-height: 100%;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.05); /* Leve sombra de dobra de papel */
+    line-height: 1.1;          /* Espaçamento clássico de script */
+}
+
+.script-scene {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 25px 0 10px 0;
+    clear: both;
+}
+
+.script-char {
+    text-align: center;
+    width: 50%;
+    margin: 20px auto 0 auto;
+    text-transform: uppercase;
+}
+
+.script-dialog {
+    width: 75%;
+    margin: 0 auto 15px auto;
+    text-align: left;
+}
+
+.script-transition {
+    text-align: right;
+    text-transform: uppercase;
+    margin: 30px 0;
+    font-weight: bold;
+}
