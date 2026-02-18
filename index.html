@@ -1,541 +1,165 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Patrick Sonata">
-    <meta name="theme-color" content="#6c9a8f">    <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Roteirista</title>
+    <title>PATRICK SONATA | Roteirista</title>
     
-          HEAD
-    <!-- CSS PRIMEIRO -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
     
-    <!-- ESTILOS ADICIONAIS (SE TIVER) -->
-    <style>
-        /* seus estilos aqui */
-    </style>
+    <!-- SEO -->
+    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
+    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus, CDD 3001, Patika">
+    <meta name="author" content="Patrick Sonata">
     
-    <!-- ======================================== -->
-    <!-- SEO - COLE AQUI! ANTES DO </head>       -->
-    <!-- ======================================== -->
-    <meta name="description" content="...">
-    <meta name="keywords" content="...">
-    <!-- todo o resto do SEO -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="PATRICK SONATA | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta property="og:image" content="https://patricksonata.com.br/assets/images/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
     
-    <!-- UMAMI ANALYTICS - POR ÚLTIMO -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
-</head>
-<head>
-    <link rel="manifest" href="/manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Patrick Sonata">
-    <meta name="theme-color" content="#6c9a8f">    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Roteirista</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    
-    <!-- Umami Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
-    
-    <style>
-        /* ========================================
-           ESTILOS GLOBAIS
-           ======================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background: #000;
-            color: #fff;
-            font-family: 'Courier New', monospace;
-        }
-        
-        /* ========================================
-           PAINEL TRABALHO - PORTFÓLIO
-           ======================================== */
-        .side-panel {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: #0a0a0a;
-            z-index: 99999;
-            overflow-y: auto;
-            padding: 60px 40px;
-            display: none;
-            border: none;
-        }
-        
-        .side-panel.active {
-            display: block !important;
-        }
-        
-        .close-btn {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: transparent;
-            border: 2px solid #6c9a8f;
-            color: #6c9a8f;
-            padding: 12px 24px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            transition: all 0.3s;
-            z-index: 100000;
-        }
-        
-        .close-btn:hover {
-            background: #6c9a8f;
-            color: #000;
-        }
-        
-        .content-title {
-            color: #6c9a8f;
-            font-size: 2.2rem;
-            margin-bottom: 40px;
-            letter-spacing: 4px;
-            border-left: 4px solid #6c9a8f;
-            padding-left: 20px;
-        }
-        
-        .submenu-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        
-        .submenu-btn {
-            padding: 15px 30px;
-            background: transparent;
-            border: 2px solid #6c9a8f;
-            color: #6c9a8f;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-        
-        .submenu-btn:hover {
-            background: #6c9a8f;
-            color: #000;
-        }
-        
-        /* ========================================
-           PORTFÓLIO - GRADE 3X3
-           ======================================== */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .portfolio-card {
-            background: #111;
-            border: 1px solid #2a2a2a;
-            padding: 20px;
-            transition: all 0.3s;
-        }
-        
-        .portfolio-card:hover {
-            border-color: #6c9a8f;
-            transform: translateY(-5px);
-        }
-        
-        .portfolio-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        
-        .portfolio-info h3 {
-            color: #fff;
-            margin: 15px 0 5px;
-        }
-        
-        .portfolio-role {
-            color: #6c9a8f;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-        }
-        
-        .portfolio-info p {
-            color: #aaa;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-        
-        /* ========================================
-           RESPONSIVO - OTIMIZADO PARA CELULAR
-           ======================================== */
-        
-        /* TABLET (768px - 1024px) */
-        @media (max-width: 1024px) {
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 20px;
-            }
-            
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            .profile-img {
-                width: 180px;
-                height: 180px;
-            }
-        }
-        
-
-        /* MENU SUPERIOR - BASE */
-        .nav-top-right {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 9999;
-        }
-        /* CELULAR GRANDE (425px - 768px) */
-        @media (max-width: 768px) {
-            /* MENU SUPERIOR */
-            .nav-top-right-PLACEHOLDER {
-                position: static;
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                margin-bottom: 30px;
-                padding: 0 15px;
-            }
-            
-            .nav-top-right button {
-                padding: 12px 20px;
-                font-size: 0.9rem;
-                flex: 1 1 auto;
-                min-width: 120px;
-            }
-            
-            /* TÍTULO E FOTO */
-            h1 {
-                font-size: 1.8rem;
-                letter-spacing: 4px;
-                padding: 0 15px;
-                text-align: center;
-            }
-            
-            .profile-img {
-                width: 150px;
-                height: 150px;
-                margin-bottom: 20px;
-            }
-            
-            /* MENU INFERIOR */
-            .nav-bottom-center {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-                gap: 10px;
-                padding: 0 15px;
-            }
-            
-            .nav-bottom-center button {
-                padding: 12px 24px;
-                font-size: 0.9rem;
-                min-width: 100px;
-            }
-            
-            /* PAINEL DO TRABALHO */
-            .side-panel {
-                padding: 40px 20px !important;
-            }
-            
-            .side-panel.active {
-                padding: 40px 20px;
-            }
-            
-            .content-title {
-                font-size: 1.4rem !important;
-                margin-bottom: 30px;
-                padding-left: 15px;
-            }
-            
-            .submenu-buttons {
-                flex-direction: column;
-                gap: 15px;
-                margin: 30px 0;
-            }
-            
-            .submenu-btn {
-                width: 100%;
-                padding: 15px !important;
-                font-size: 0.95rem;
-            }
-            
-            /* PORTFÓLIO GRADE - 1 COLUNA NO CELULAR */
-            .portfolio-grid {
-                grid-template-columns: 1fr !important;
-                gap: 20px;
-            }
-            
-            .portfolio-card {
-                padding: 15px;
-            }
-            
-            .portfolio-card img {
-                height: 180px;
-            }
-            
-            .portfolio-info h3 {
-                font-size: 1.1rem;
-            }
-            
-            /* BOTÃO FECHAR */
-            .close-btn {
-                top: 15px !important;
-                right: 15px !important;
-                padding: 10px 20px !important;
-                font-size: 0.8rem;
-            }
-            
-            /* SEÇÕES FINAL DRAFT */
-            #secao-sobre > div,
-            #secao-perfil > div {
-                padding: 40px 25px !important;
-                margin: 0 15px;
-            }
-            
-            #secao-sobre p,
-            #secao-perfil p {
-                margin-left: 15px !important;
-                font-size: 0.9rem !important;
-                line-height: 1.7 !important;
-            }
-            
-            /* RODAPÉ */
-            .back-button-padrao {
-                bottom: 20px;
-                right: 20px;
-                padding: 10px 20px;
-                font-size: 0.75rem;
-            }
-        }
-        
-        /* CELULAR PEQUENO (até 425px) */
-        @media (max-width: 425px) {
-            .nav-top-right button {
-                min-width: 100%;
-                margin: 2px 0;
-            }
-            
-            h1 {
-                font-size: 1.5rem;
-                letter-spacing: 3px;
-            }
-            
-            .profile-img {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .nav-bottom-center button {
-                min-width: 100%;
-            }
-            
-            .content-title {
-                font-size: 1.2rem !important;
-            }
-            
-            #secao-sobre > div,
-            #secao-perfil > div {
-                padding: 30px 20px !important;
-            }
-            
-            .portfolio-card img {
-                height: 160px;
-            }
-        }
-        
-        /* MODO RETRATO x PAISAGEM */
-        @media (max-height: 500px) and (orientation: landscape) {
-            .side-panel {
-                padding: 30px 20px;
-            }
-            
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .portfolio-card img {
-                height: 140px;
-            }
-        }        }
-    </style>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 </head>
 <body>
-    <!-- ========================================= -->
-    <!-- GRUPO 1: SUPERIOR DIREITA               -->
-    <!-- 3 ABAS: CDD 3001 | PATIKA | AULAS      -->
-    <!-- ========================================= -->
+    <!-- Logo P - Home -->
+    <a href="/" class="logo-p" title="Voltar ao início">
+        <svg viewBox="0 0 100 100" width="25" height="25">
+            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
+                  stroke="white" stroke-width="6" stroke-linecap="round" 
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    
+    <!-- MENU SUPERIOR -->
     <nav class="nav-top-right">
-    <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
-    <button onclick="window.location.href='patika/index.html'" class="patika-btn">PATIKA</button>
-    <button onclick="window.location.href='aulas/index.html'">AULAS</button>
-    <button 
-onclick="window.location.href='contato.html'">CONTATO</button>
-</nav>
-    <div class="main-container" id="home">
+        <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
+        <button onclick="window.location.href='patika/index.html'">PATIKA</button>
+        <button onclick="window.location.href='aulas/index.html'">AULAS</button>
+        <button onclick="window.location.href='contato.html'">CONTATO</button>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-container">
         <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
         <h1>PATRICK SONATA</h1>
         
-        <!-- ========================================= -->
-        <!-- GRUPO 2: INFERIOR CENTRAL               -->
-        <!-- 3 ABAS: SOBRE | PERFIL | TRABALHO      -->
-        <!-- ========================================= -->
+        <!-- ABAS INFERIORES -->
         <div class="nav-bottom-center">
-            <button onclick="mostrarSobre()">Sobre</button>
-            <button onclick="mostrarPerfil()">Perfil</button>
-            <button onclick="mostrarTrabalho()">Trabalho</button>
+            <button onclick="mostrarSobre()">SOBRE</button>
+            <button onclick="mostrarPerfil()">PERFIL</button>
+            <button onclick="mostrarTrabalho()">TRABALHO</button>
         </div>
     </div>
-    
-    <!-- ========================================= -->
-    <!-- ABA 4: SOBRE - MINHA HISTÓRIA           -->
-    <!-- FORMATO FINAL DRAFT COMPLETO           -->
-    <!-- ========================================= -->
-    <section id="secao-sobre" style="display: none; padding: 60px 20px; background: #d0cbc0; font-family: 'Courier New', monospace; width: 100%;">
-    <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px; animation: slideDown 0.4s ease;">
-        <div style="text-align: right; color: #999; margin-bottom: 50px; font-size: 0.8rem;">1.</div>
-        <p style="font-weight: bold;">FADE IN:</p>
-        <div style="margin: 30px 0;">
-            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
-            <p style="margin-left: 40px; line-height: 2;">PATRICK SONATA, 37 anos, cria da Cidade de Deus. Sua jornada artística começa na escola municipal Compositor Luiz Gonzaga. Descobre no humor e no teatro sua forma de expressão.</p>
-        </div>
-        <div style="margin: 30px 0;">
-            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">EXT. PROJETOS SOCIAIS - CDD - DIA</div>
-            <p style="margin-left: 40px; line-height: 2;">Formado em projetos sociais na comunidade. Tem como mestre o saudoso CICO CASEIRA. Estuda palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
-        </div>
-        <div style="margin: 30px 0;">
-            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. COLETIVO BONOBANDO - NOITE</div>
-            <p style="margin-left: 40px; line-height: 2;">Integrante do COLETIVO BONOBANDO. Direção de Andriana Shineider e Lucas Oradovish.</p>
-            <p style="margin-left: 40px; line-height: 2;">"CIDADE CORRERIA" — Um bando de atores invade o teatro e abre debate com a plateia.</p>
-            <p style="margin-left: 40px; line-height: 2;">"JONGO MAMULENGO" — Teatro infantojuvenil com atores e bonecos de Mamulengo.</p>
-        </div>
-        <div style="margin: 30px 0;">
-            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">2018 - A VIRADA</div>
-            <p style="margin-left: 40px; line-height: 2;">Selecionado para a oficina "A LÓGICA POR TRÁS DO HUMOR", com Maurício Rizzo. Uma bolsa que muda os rumos de sua carreira — do palco para a tela.</p>
-        </div>
-        <p style="font-weight: bold; text-align: center; margin: 40px 0;">FADE OUT.</p>
-        <p style="margin-top: 30px; color: #666;">Patrick Sonata • Cria da Cidade de Deus • 20 anos de estrada</p>
-    </div>
-</section>
 
-    
-    <!-- ========================================= -->
-    <!-- ABA 5: PERFIL - MINHA CARREIRA          -->
-    <!-- FORMATO FINAL DRAFT COMPLETO           -->
-    <!-- ========================================= -->
-    <section id="secao-perfil" style="display: none; padding: 60px 20px; background: #d0cbc0; font-family: 'Courier New', monospace; width: 100%;">
-    <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px; animation: slideDown 0.4s ease;">
-        <div style="text-align: right; color: #999; margin-bottom: 50px; font-size: 0.8rem;">1.</div>
-        <div style="margin-bottom: 40px;">
-            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
-            <p style="margin-left: 40px; line-height: 2;">Luz focada em uma mesa de trabalho. Pilhas de escaletas, livros de dramaturgia. 20 anos de estrada condensados em páginas.</p>
+    <!-- SEÇÃO SOBRE -->
+    <section id="secao-sobre" style="display: none; padding: 60px 20px; background: #d0cbc0; width: 100%;">
+        <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px;">
+            <div style="text-align: right; color: #999; margin-bottom: 50px;">1.</div>
+            <p style="font-weight: bold;">FADE IN:</p>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
+                <p style="margin-left: 40px; line-height: 2;">PATRICK SONATA, 37 anos, cria da Cidade de Deus. Sua jornada artística começa na escola municipal Compositor Luiz Gonzaga. Descobre no humor e no teatro sua forma de expressão.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">EXT. PROJETOS SOCIAIS - CDD - DIA</div>
+                <p style="margin-left: 40px; line-height: 2;">Formado em projetos sociais na comunidade. Tem como mestre o saudoso CICO CASEIRA. Estuda palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. COLETIVO BONOBANDO - NOITE</div>
+                <p style="margin-left: 40px; line-height: 2;">Integrante do COLETIVO BONOBANDO. Direção de Andriana Shineider e Lucas Oradovish.</p>
+                <p style="margin-left: 40px;">"CIDADE CORRERIA" — Um bando de atores invade o teatro e abre debate com a plateia.</p>
+                <p style="margin-left: 40px;">"JONGO MAMULENGO" — Teatro infantojuvenil com atores e bonecos de Mamulengo.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">2018 - A VIRADA</div>
+                <p style="margin-left: 40px;">Selecionado para a oficina "A LÓGICA POR TRÁS DO HUMOR", com Maurício Rizzo. Uma bolsa que muda os rumos de sua carreira — do palco para a tela.</p>
+            </div>
+            <p style="font-weight: bold; text-align: center; margin: 40px 0;">FADE OUT.</p>
+            <p>Patrick Sonata • Cria da Cidade de Deus • 20 anos de estrada</p>
         </div>
-        <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px;">
-            <div style="font-weight: bold; font-size: 1.1rem;">PATRICK SONATA</div>
-            <div style="color: #555; margin-top: 5px;">Roteirista • Ator • Comediante</div>
-            <div style="color: #777; font-size: 0.9rem; margin-top: 5px;">37 anos • 20 anos de trajetória • Cria da Cidade de Deus</div>
-        </div>
-        <div style="margin-bottom: 35px;">
-            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">TV • STREAMING</div>
-            <p style="margin-left: 20px; line-height: 2;">PABLO & LUISÃO — Roteirista Globoplay 2025 • Globo 2026</p>
-            <p style="margin-left: 20px; line-height: 2;">ZORRA — Roteirista TV Globo • 2019–2021</p>
-            <p style="margin-left: 20px; line-height: 2;">HUMOR NEGRO — Roteirista Multishow/Globoplay • 2023–2024</p>
-        </div>
-        <div style="margin-bottom: 35px;">
-            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">TEATRO</div>
-            <p style="margin-left: 20px; line-height: 2;">PELADA – A HORA DA GAYMADA — Dramaturgo 2023</p>
-            <p style="margin-left: 20px; line-height: 2;">CIDADE CORRERIA — Autor/Ator Bonobando</p>
-            <p style="margin-left: 20px; line-height: 2;">JONGO MAMULENGO — Elenco Bonobando</p>
-        </div>
-        <div style="margin-bottom: 35px;">
-            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">FORMAÇÃO</div>
-            <p style="margin-left: 20px; line-height: 2;">Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo</p>
-            <p style="margin-left: 20px; line-height: 2;">Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)</p>
-            <p style="margin-left: 20px; line-height: 2;">Teatro de Mamulengo e Tradições Populares</p>
-        </div>
-        <div style="margin-bottom: 35px;">
-            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">VISÃO</div>
-            <p style="margin-left: 40px; line-height: 2; font-style: italic;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
-        </div>
-        <p style="font-weight: bold; text-align: center; margin: 40px 0;">CORTE PARA PRETO.</p>
-        <p style="color: #666;">Patrick Sonata • Roteirista • ABRACI/SBAT</p>
-    </div>
-</section>
+    </section>
 
-    
-    <!-- ========================================= -->
-    <!-- ABA 6: TRABALHO - PORTFÓLIO             -->
-    <!-- PAINEL ESCURO • GRADE 3X3              -->
-    <!-- ========================================= -->
+    <!-- SEÇÃO PERFIL -->
+    <section id="secao-perfil" style="display: none; padding: 60px 20px; background: #d0cbc0; width: 100%;">
+        <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px;">
+            <div style="text-align: right; color: #999; margin-bottom: 50px;">1.</div>
+            <div style="margin-bottom: 40px;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
+                <p style="margin-left: 40px;">Luz focada em uma mesa de trabalho. Pilhas de escaletas, livros de dramaturgia. 20 anos de estrada condensados em páginas.</p>
+            </div>
+            <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px;">
+                <div style="font-weight: bold; font-size: 1.1rem;">PATRICK SONATA</div>
+                <div style="color: #555;">Roteirista • Ator • Comediante</div>
+                <div style="color: #777;">37 anos • 20 anos de trajetória • Cria da Cidade de Deus</div>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">TV • STREAMING</div>
+                <p style="margin-left: 20px;">PABLO & LUISÃO — Roteirista Globoplay 2025 • Globo 2026</p>
+                <p style="margin-left: 20px;">ZORRA — Roteirista TV Globo • 2019–2021</p>
+                <p style="margin-left: 20px;">HUMOR NEGRO — Roteirista Multishow/Globoplay • 2023–2024</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">TEATRO</div>
+                <p style="margin-left: 20px;">PELADA – A HORA DA GAYMADA — Dramaturgo 2023</p>
+                <p style="margin-left: 20px;">CIDADE CORRERIA — Autor/Ator Bonobando</p>
+                <p style="margin-left: 20px;">JONGO MAMULENGO — Elenco Bonobando</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">FORMAÇÃO</div>
+                <p style="margin-left: 20px;">Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo</p>
+                <p style="margin-left: 20px;">Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)</p>
+                <p style="margin-left: 20px;">Teatro de Mamulengo e Tradições Populares</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">VISÃO</div>
+                <p style="margin-left: 40px; font-style: italic;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
+            </div>
+            <p style="font-weight: bold; text-align: center; margin: 40px 0;">CORTE PARA PRETO.</p>
+            <p>Patrick Sonata • Roteirista • ABRACI/SBAT</p>
+        </div>
+    </section>
+
+    <!-- PAINEL DE TRABALHO -->
     <div id="painel-trabalho" class="side-panel">
         <div class="close-btn" onclick="fecharTrabalho()">FECHAR [X]</div>
-        <h2 id="titulo-painel" class="content-title">TRABALHO</h2>
-        <div id="conteudo-painel" class="content-text">
+        <h2 id="titulo-painel">TRABALHO</h2>
+        <div id="conteudo-painel">
             <div class="submenu-buttons">
                 <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
             </div>
-            <p style="margin-top: 30px; text-align: center; color: #aaa;">Selecione PORTFÓLIO para ver os projetos realizados.</p>
+            <p style="margin-top: 30px; text-align: center; color: #aaa;">
+                Selecione PORTFÓLIO para ver os projetos realizados.
+            </p>
         </div>
     </div>
-    
+
+    <!-- JavaScript -->
     <script>
-        // ========================================
-        // FUNÇÕES DAS 3 ABAS INFERIORES
-        // SOBRE | PERFIL | TRABALHO
-        // ========================================
-        
-        // ========================================
-        // ABA 4: SOBRE - MINHA HISTÓRIA
-        // ========================================
         function mostrarSobre() {
-            document.getElementById('secao-sobre').style.display = 'block';
             document.getElementById('secao-perfil').style.display = 'none';
             document.getElementById('painel-trabalho').classList.remove('active');
-            document.getElementById('secao-sobre').scrollIntoView({ behavior: 'smooth' });
+            let sobre = document.getElementById('secao-sobre');
+            sobre.style.display = 'block';
+            sobre.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // ========================================
-        // ABA 5: PERFIL - MINHA CARREIRA
-        // ========================================
         function mostrarPerfil() {
-            document.getElementById('secao-perfil').style.display = 'block';
             document.getElementById('secao-sobre').style.display = 'none';
             document.getElementById('painel-trabalho').classList.remove('active');
-            document.getElementById('secao-perfil').scrollIntoView({ behavior: 'smooth' });
+            let perfil = document.getElementById('secao-perfil');
+            perfil.style.display = 'block';
+            perfil.scrollIntoView({ behavior: 'smooth' });
         }
         
-        // ========================================
-        // ABA 6: TRABALHO - PORTFÓLIO
-        // ========================================
         function mostrarTrabalho() {
-            document.getElementById('painel-trabalho').classList.add('active');
             document.getElementById('secao-sobre').style.display = 'none';
             document.getElementById('secao-perfil').style.display = 'none';
+            let painel = document.getElementById('painel-trabalho');
+            painel.classList.add('active');
             document.getElementById('titulo-painel').innerText = 'TRABALHO';
-            
-            const conteudo = document.getElementById('conteudo-painel');
-            conteudo.innerHTML = `
+            document.getElementById('conteudo-painel').innerHTML = `
                 <div class="submenu-buttons">
                     <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
                 </div>
@@ -545,14 +169,9 @@ onclick="window.location.href='contato.html'">CONTATO</button>
             `;
         }
         
-        // ========================================
-        // PORTFÓLIO - GRADE 3X3 DENTRO DO PAINEL
-        // ========================================
         function mostrarPortfolio() {
             document.getElementById('titulo-painel').innerText = 'PORTFÓLIO DE PROJETOS';
-            
-            const conteudo = document.getElementById('conteudo-painel');
-            conteudo.innerHTML = `
+            document.getElementById('conteudo-painel').innerHTML = `
                 <div class="portfolio-grid">
                     <div class="portfolio-card">
                         <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão" 
@@ -563,7 +182,6 @@ onclick="window.location.href='contato.html'">CONTATO</button>
                             <p>Série Original Globoplay. Globoplay 2025 • Globo 2026.</p>
                         </div>
                     </div>
-                    
                     <div class="portfolio-card">
                         <img src="assets/images/works/humornegro.webp" alt="Humor Negro" 
                              onerror="this.src='https://via.placeholder.com/400x400?text=Humor+Negro'">
@@ -573,7 +191,6 @@ onclick="window.location.href='contato.html'">CONTATO</button>
                             <p>Especial e Série - Multishow/Globoplay. 2023-2024.</p>
                         </div>
                     </div>
-                    
                     <div class="portfolio-card">
                         <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria" 
                              onerror="this.src='https://via.placeholder.com/400x400?text=Cidade+Correria'">
@@ -583,7 +200,6 @@ onclick="window.location.href='contato.html'">CONTATO</button>
                             <p>Teatro e Documentário. Coletivo Bonobando.</p>
                         </div>
                     </div>
-                    
                     <div class="portfolio-card">
                         <img src="assets/images/works/pelada.webp" alt="Pelada" 
                              onerror="this.src='https://via.placeholder.com/400x400?text=Pelada'">
@@ -593,7 +209,6 @@ onclick="window.location.href='contato.html'">CONTATO</button>
                             <p>Espetáculo teatral. 2023.</p>
                         </div>
                     </div>
-                    
                     <div class="portfolio-card">
                         <img src="assets/images/works/jongo.webp" alt="Jongo" 
                              onerror="this.src='https://via.placeholder.com/400x400?text=Jongo'">
@@ -603,7 +218,6 @@ onclick="window.location.href='contato.html'">CONTATO</button>
                             <p>Teatro infantojuvenil com bonecos de Mamulengo.</p>
                         </div>
                     </div>
-                    
                     <div class="portfolio-card">
                         <img src="assets/images/works/zorralogo.jpg" alt="Zorra" 
                              onerror="this.src='https://via.placeholder.com/400x400?text=Zorra'">
@@ -617,227 +231,9 @@ onclick="window.location.href='contato.html'">CONTATO</button>
             `;
         }
         
-        // ========================================
-        // FECHAR PAINEL TRABALHO
-        // ========================================
         function fecharTrabalho() {
             document.getElementById('painel-trabalho').classList.remove('active');
         }
-        
-        // ========================================
-        // INICIALIZAÇÃO
-        // ========================================
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('secao-sobre').style.display = 'none';
-            document.getElementById('secao-perfil').style.display = 'none';
-            document.getElementById('painel-trabalho').classList.remove('active');
-        });
     </script>
-    
-    <!-- Scripts externos -->
-    <script src="assets/js/database.js"></script>
-    <script src="assets/js/main.js"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function() {
-                navigator.serviceWorker.register("/sw.js");
-            });
-        }
-    </script>    <script src="assets/js/airtable-loader.js"></script></body>
-=======
-    <!-- CSS Principal -->
-    <link rel="stylesheet" href="/src/assets/css/main.css">
-    
-    <!-- Meta tags de SEO -->
-    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
-    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
-    <meta name="author" content="Patrick Sonata">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Patrick Sonata | Roteirista">
-    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
-    <meta property="og:image" content="https://patricksonata.com.br/src/assets/images/global/fotodeperfil.jpg">
-    <meta property="og:url" content="https://patricksonata.com.br">
-    <meta property="og:type" content="website">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#000000">
-    
-    <!-- Analytics -->
-    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/src/assets/images/global/favicon.ico">
-    <link rel="stylesheet" href="/assets/css/ia-assistant.css">
-    <link rel="stylesheet" href="/assets/css/formulario-automatico.css">
-</head>
-<body>
-    <!-- Logo P - Home -->
-    <a href="/" class="logo-p" title="Voltar ao início">
-        <svg viewBox="0 0 100 100" width="25" height="25">
-            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
-                  stroke="white" stroke-width="6" stroke-linecap="round" 
-                  stroke-linejoin="round" fill="none"/>
-        </svg>
-    </a>
-    
-    <!-- Página Principal -->
-    <div class="main-container" id="home">
-        <nav class="nav-top-right">
-            <button onclick="window.location.href='src/pages/cdd/index.html'">CDD 3001</button>
-            <button onclick="window.location.href='src/pages/patika/index.html'">PATIKA</button>
-            <button onclick="window.location.href='src/pages/aulas/index.html'">AULAS</button>
-            <button onclick="window.location.href='src/pages/contato/index.html'">CONTATO</button>
-            <a href="src/pages/admin/login.html" style="display:none;">admin</a>
-        </nav>
-
-        <img src="/src/assets/images/global/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
-        <h1>PATRICK SONATA</h1>
-        
-        <div class="nav-bottom-center">
-            <button onclick="window.location.href='src/pages/sobre/index.html'">Sobre</button>
-            <button onclick="window.location.href='src/pages/perfil/index.html'">Perfil</button>
-            <button onclick="window.location.href='src/pages/trabalho/index.html'">Trabalho</button>
-        </div>
-    </div>
-    
-    <!-- Scripts -->
-    <script src="/src/assets/js/main.js"></script>
-    <script src="/src/assets/js/airtable-loader.js"></script>
-    <script src="/assets/js/database.js"></script>
-    <script src="/assets/js/navigation/gestos.js"></script>
-    <script src="/assets/js/navigation/integrador.js"></script>
-    <script>
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function() {
-                navigator.serviceWorker.register("/sw.js");
-            });
-        }
-    </script>
-    
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/699016e3e9fd731c39b99be2/1jhddiqj3';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-    })();
-    </script>
-    <!--End of Tawk.to Script-->
-    
-    <!-- Seção de Comentários Giscus -->
-    <div style="max-width: 800px; margin: 50px auto; padding: 0 20px;">
-        <h2 style="color: #6c9a8f; border-left: 4px solid #6c9a8f; 
-padding-left: 20px; margin-bottom: 30px;">💬 Comentários</h2>
-        
-        <!-- Giscus -->
-        <script src="https://giscus.app/client.js"
-                data-repo="patricksonata13/Portifolio---Patrick-"
-                data-repo-id="R_kgDOPmrGSw"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOPmrGS84CUSzP"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="dark"
-                data-lang="pt"
-                crossorigin="anonymous"
-                async>
-        </script>
-    </div>
-
-    <!-- Seus scripts existentes (já estão lá) -->
 </body>
 </html>
-</body>
->>>>>>> 7a9546b0845d3e1566d21187c882b1227b0e40c3
-</html>
-
-<script>
-// ========================================
-// FUNÇÕES DAS ABAS INFERIORES
-// ========================================
-
-function mostrarSobre() {
-    // Esconder outras seções
-    document.getElementById('secao-perfil').style.display = 'none';
-    document.getElementById('painel-trabalho').classList.remove('active');
-    
-    // Mostrar seção SOBRE
-    let sobre = document.getElementById('secao-sobre');
-    sobre.style.display = 'block';
-    sobre.scrollIntoView({ behavior: 'smooth' });
-    
-    // Garantir que o conteúdo apareça
-    console.log('Aba SOBRE ativada');
-}
-
-function mostrarPerfil() {
-    // Esconder outras seções
-    document.getElementById('secao-sobre').style.display = 'none';
-    document.getElementById('painel-trabalho').classList.remove('active');
-    
-    // Mostrar seção PERFIL
-    let perfil = document.getElementById('secao-perfil');
-    perfil.style.display = 'block';
-    perfil.scrollIntoView({ behavior: 'smooth' });
-    
-    console.log('Aba PERFIL ativada');
-}
-
-function mostrarTrabalho() {
-    // Esconder seções de texto
-    document.getElementById('secao-sobre').style.display = 'none';
-    document.getElementById('secao-perfil').style.display = 'none';
-    
-    // Mostrar painel de trabalho
-    let painel = document.getElementById('painel-trabalho');
-    painel.classList.add('active');
-    
-    // Resetar conteúdo do painel
-    document.getElementById('titulo-painel').innerText = 'TRABALHO';
-    document.getElementById('conteudo-painel').innerHTML = `
-        <div class="submenu-buttons">
-            <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
-        </div>
-        <p style="margin-top: 30px; text-align: center; color: #aaa;">
-            Selecione PORTFÓLIO para ver os projetos realizados.
-        </p>
-    `;
-    
-    console.log('Aba TRABALHO ativada');
-}
-
-function mostrarPortfolio() {
-    document.getElementById('titulo-painel').innerText = 'PORTFÓLIO DE PROJETOS';
-    
-    const conteudo = document.getElementById('conteudo-painel');
-    conteudo.innerHTML = \`
-        <div class="portfolio-grid">
-            <div class="portfolio-card">
-                <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão" 
-                     onerror="this.src='https://via.placeholder.com/400x400?text=Pablo+e+Luisão'">
-                <div class="portfolio-info">
-                    <h3>PABLO E LUISÃO</h3>
-                    <div class="portfolio-role">Roteirista</div>
-                    <p>Série Original Globoplay. Globoplay 2025 • Globo 2026.</p>
-                </div>
-            </div>
-            <!-- outros cards... -->
-        </div>
-    \`;
-}
-
-function fecharTrabalho() {
-    document.getElementById('painel-trabalho').classList.remove('active');
-}
-</script>
