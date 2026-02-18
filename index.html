@@ -761,3 +761,83 @@ padding-left: 20px; margin-bottom: 30px;">💬 Comentários</h2>
 </body>
 >>>>>>> 7a9546b0845d3e1566d21187c882b1227b0e40c3
 </html>
+
+<script>
+// ========================================
+// FUNÇÕES DAS ABAS INFERIORES
+// ========================================
+
+function mostrarSobre() {
+    // Esconder outras seções
+    document.getElementById('secao-perfil').style.display = 'none';
+    document.getElementById('painel-trabalho').classList.remove('active');
+    
+    // Mostrar seção SOBRE
+    let sobre = document.getElementById('secao-sobre');
+    sobre.style.display = 'block';
+    sobre.scrollIntoView({ behavior: 'smooth' });
+    
+    // Garantir que o conteúdo apareça
+    console.log('Aba SOBRE ativada');
+}
+
+function mostrarPerfil() {
+    // Esconder outras seções
+    document.getElementById('secao-sobre').style.display = 'none';
+    document.getElementById('painel-trabalho').classList.remove('active');
+    
+    // Mostrar seção PERFIL
+    let perfil = document.getElementById('secao-perfil');
+    perfil.style.display = 'block';
+    perfil.scrollIntoView({ behavior: 'smooth' });
+    
+    console.log('Aba PERFIL ativada');
+}
+
+function mostrarTrabalho() {
+    // Esconder seções de texto
+    document.getElementById('secao-sobre').style.display = 'none';
+    document.getElementById('secao-perfil').style.display = 'none';
+    
+    // Mostrar painel de trabalho
+    let painel = document.getElementById('painel-trabalho');
+    painel.classList.add('active');
+    
+    // Resetar conteúdo do painel
+    document.getElementById('titulo-painel').innerText = 'TRABALHO';
+    document.getElementById('conteudo-painel').innerHTML = `
+        <div class="submenu-buttons">
+            <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
+        </div>
+        <p style="margin-top: 30px; text-align: center; color: #aaa;">
+            Selecione PORTFÓLIO para ver os projetos realizados.
+        </p>
+    `;
+    
+    console.log('Aba TRABALHO ativada');
+}
+
+function mostrarPortfolio() {
+    document.getElementById('titulo-painel').innerText = 'PORTFÓLIO DE PROJETOS';
+    
+    const conteudo = document.getElementById('conteudo-painel');
+    conteudo.innerHTML = \`
+        <div class="portfolio-grid">
+            <div class="portfolio-card">
+                <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão" 
+                     onerror="this.src='https://via.placeholder.com/400x400?text=Pablo+e+Luisão'">
+                <div class="portfolio-info">
+                    <h3>PABLO E LUISÃO</h3>
+                    <div class="portfolio-role">Roteirista</div>
+                    <p>Série Original Globoplay. Globoplay 2025 • Globo 2026.</p>
+                </div>
+            </div>
+            <!-- outros cards... -->
+        </div>
+    \`;
+}
+
+function fecharTrabalho() {
+    document.getElementById('painel-trabalho').classList.remove('active');
+}
+</script>
