@@ -512,7 +512,7 @@ onclick="window.location.href='contato.html'">CONTATO</button>
             document.getElementById('secao-perfil').style.display = 'none';
             document.getElementById('painel-trabalho').classList.remove('active');
             document.getElementById('secao-sobre').scrollIntoView({ behavior: 'smooth' });
-        }
+        }        }
         
         // ========================================
         // ABA 5: PERFIL - MINHA CARREIRA
@@ -644,3 +644,75 @@ onclick="window.location.href='contato.html'">CONTATO</button>
         }
     </script>    <script src="assets/js/airtable-loader.js"></script></body>
 </html>
+
+<!-- ======================================== -->
+<!-- SEÇÃO SOBRE (BIOGRAFIA EM ROTEIRO)      -->
+<!-- ======================================== -->
+<section id="secao-sobre" style="display: none; padding: 60px 20px; background: #d0cbc0; font-family: 'Courier New', monospace; width: 100%;">
+    <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px; animation: slideDown 0.4s ease;">
+        <div style="text-align: right; color: #999; margin-bottom: 50px; font-size: 0.8rem;">1.</div>
+        <p style="font-weight: bold;">FADE IN:</p>
+        <div style="margin: 30px 0;">
+            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
+            <p style="margin-left: 40px; line-height: 2;">PATRICK SONATA, 37 anos, cria da Cidade de Deus. Sua jornada artística começa na escola municipal Compositor Luiz Gonzaga. Descobre no humor e no teatro sua forma de expressão.</p>
+        </div>
+        <div style="margin: 30px 0;">
+            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">EXT. PROJETOS SOCIAIS - CDD - DIA</div>
+            <p style="margin-left: 40px; line-height: 2;">Formado em projetos sociais na comunidade. Tem como mestre o saudoso CICO CASEIRA. Estuda palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
+        </div>
+        <div style="margin: 30px 0;">
+            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. COLETIVO BONOBANDO - NOITE</div>
+            <p style="margin-left: 40px; line-height: 2;">Integrante do COLETIVO BONOBANDO. Direção de Andriana Shineider e Lucas Oradovish.</p>
+            <p style="margin-left: 40px; line-height: 2;">"CIDADE CORRERIA" — Um bando de atores invade o teatro e abre debate com a plateia.</p>
+            <p style="margin-left: 40px; line-height: 2;">"JONGO MAMULENGO" — Teatro infantojuvenil com atores e bonecos de Mamulengo.</p>
+        </div>
+        <div style="margin: 30px 0;">
+            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">2018 - A VIRADA</div>
+            <p style="margin-left: 40px; line-height: 2;">Selecionado para a oficina "A LÓGICA POR TRÁS DO HUMOR", com Maurício Rizzo. Uma bolsa que muda os rumos de sua carreira — do palco para a tela.</p>
+        </div>
+        <p style="font-weight: bold; text-align: center; margin: 40px 0;">FADE OUT.</p>
+        <p style="margin-top: 30px; color: #666;">Patrick Sonata • Cria da Cidade de Deus • 20 anos de estrada</p>
+    </div>
+</section>
+
+<!-- ======================================== -->
+<!-- SEÇÃO PERFIL (CARREIRA PROFISSIONAL)    -->
+<!-- ======================================== -->
+<section id="secao-perfil" style="display: none; padding: 60px 20px; background: #d0cbc0; font-family: 'Courier New', monospace; width: 100%;">
+    <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px; animation: slideDown 0.4s ease;">
+        <div style="text-align: right; color: #999; margin-bottom: 50px; font-size: 0.8rem;">1.</div>
+        <div style="margin-bottom: 40px;">
+            <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline; margin-bottom: 15px;">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
+            <p style="margin-left: 40px; line-height: 2;">Luz focada em uma mesa de trabalho. Pilhas de escaletas, livros de dramaturgia. 20 anos de estrada condensados em páginas.</p>
+        </div>
+        <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px;">
+            <div style="font-weight: bold; font-size: 1.1rem;">PATRICK SONATA</div>
+            <div style="color: #555; margin-top: 5px;">Roteirista • Ator • Comediante</div>
+            <div style="color: #777; font-size: 0.9rem; margin-top: 5px;">37 anos • 20 anos de trajetória • Cria da Cidade de Deus</div>
+        </div>
+        <div style="margin-bottom: 35px;">
+            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">TV • STREAMING</div>
+            <p style="margin-left: 20px; line-height: 2;">PABLO & LUISÃO — Roteirista Globoplay 2025 • Globo 2026</p>
+            <p style="margin-left: 20px; line-height: 2;">ZORRA — Roteirista TV Globo • 2019–2021</p>
+            <p style="margin-left: 20px; line-height: 2;">HUMOR NEGRO — Roteirista Multishow/Globoplay • 2023–2024</p>
+        </div>
+        <div style="margin-bottom: 35px;">
+            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">TEATRO</div>
+            <p style="margin-left: 20px; line-height: 2;">PELADA – A HORA DA GAYMADA — Dramaturgo 2023</p>
+            <p style="margin-left: 20px; line-height: 2;">CIDADE CORRERIA — Autor/Ator Bonobando</p>
+            <p style="margin-left: 20px; line-height: 2;">JONGO MAMULENGO — Elenco Bonobando</p>
+        </div>
+        <div style="margin-bottom: 35px;">
+            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">FORMAÇÃO</div>
+            <p style="margin-left: 20px; line-height: 2;">Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo</p>
+            <p style="margin-left: 20px; line-height: 2;">Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)</p>
+            <p style="margin-left: 20px; line-height: 2;">Teatro de Mamulengo e Tradições Populares</p>
+        </div>
+        <div style="margin-bottom: 35px;">
+            <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px; margin-bottom: 15px;">VISÃO</div>
+            <p style="margin-left: 40px; line-height: 2; font-style: italic;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
+        </div>
+        <p style="font-weight: bold; text-align: center; margin: 40px 0;">CORTE PARA PRETO.</p>
+        <p style="color: #666;">Patrick Sonata • Roteirista • ABRACI/SBAT</p>
+    </div>
+</section>

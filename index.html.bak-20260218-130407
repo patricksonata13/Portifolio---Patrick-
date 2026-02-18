@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata | Roteirista</title>
+    
+    <!-- CSS Principal -->
+<link rel="stylesheet" 
+href="/src/pages/patika/assets/css/style.css">    
+    <!-- Meta tags de SEO -->
+    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
+    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
+    <meta name="author" content="Patrick Sonata">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Patrick Sonata | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta property="og:image" content="https://patricksonata.com.br/src/assets/images/global/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    <meta property="og:type" content="website">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#000000">
+    
+    <!-- Analytics -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="2b5fdca4-c018-4b7d-941a-b09b6b8b8b43"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/src/assets/images/global/favicon.ico">
+</head>
+<body>
+    <!-- Logo P - Home -->
+    <a href="/" class="logo-p" title="Voltar ao início">
+        <svg viewBox="0 0 100 100" width="25" height="25">
+            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
+                  stroke="white" stroke-width="6" stroke-linecap="round" 
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    
+    <!-- Página Principal -->
+    <div class="main-container" id="home">
+        <nav class="nav-top-right">
+            <button onclick="window.location.href="src/pages/cdd/index.html"">CDD 3001</button>
+            <button onclick="window.location.href="src/pages/patika/index.html"">PATIKA</button>
+            <button onclick="window.location.href="src/pages/aulas/index.html"">AULAS</button>
+            <button onclick="window.location.href="src/pages/contato/index.html"">CONTATO</button>
+            <a href="src/pages/admin/login.html" style="display:none;">admin</a>
+        </nav>
+
+        <img src="src/assets/images/global/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
+        <h1>PATRICK SONATA</h1>
+        
+        <div class="nav-bottom-center">
+            <button onclick="window.location.href='src/pages/sobre/index.html'">Sobre</button>
+            <button onclick="window.location.href='src/pages/perfil/index.html'">Perfil</button>
+            <button onclick="window.location.href='src/pages/trabalho/index.html'">Trabalho</button>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="src/assets/js/main.js"></script>
+    <script src="src/assets/js/airtable-loader.js"></script>
+    <script src="assets/js/database.js"></script>
+    <!-- Sistema de navegação global -->
+    <script src="assets/js/navigation/gestos.js"></script>
+    <script src="assets/js/navigation/integrador.js"></script></body>
+</html>
