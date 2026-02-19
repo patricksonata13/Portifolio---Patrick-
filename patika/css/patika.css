@@ -408,3 +408,21 @@ body {
 
 }
 
+
+/* ============================================ */
+/* MODO FOCO                                   */
+/* ============================================ */
+
+body.modo-foco .sidebar,
+body.modo-foco .toolbar {
+
+    opacity: 0.1;
+
+}
+
+body.modo-foco textarea {
+
+    font-size: 18px;
+
+}
+

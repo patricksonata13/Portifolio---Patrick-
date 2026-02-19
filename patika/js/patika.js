@@ -543,3 +543,190 @@ document.addEventListener("input", function(){
 
 });
 
+
+/* ============================================ */
+/* DETECÇÃO DE ELEMENTOS DE ROTEIRO            */
+/* ============================================ */
+
+function detectarElementoLinha(linha) {
+
+    const texto = linha.trim();
+
+    if (/^(INT\.|EXT\.)/.test(texto)) {
+        return "scene";
+    }
+
+    if (/^[A-ZÁÉÍÓÚÇ\s]{3,}$/.test(texto) && texto === texto.toUpperCase()) {
+        return "character";
+    }
+
+    if (/^(FADE IN|FADE OUT|CORTE PARA)/.test(texto)) {
+        return "transition";
+    }
+
+    return "action";
+
+}
+
+window.detectarElementoLinha = detectarElementoLinha;
+
+
+/* ============================================ */
+/* AUTO FORMATAÇÃO ENTER                       */
+/* ============================================ */
+
+function configurarAutoFormatacao() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    editor.addEventListener("keydown", function(e){
+
+        if (e.key === "Enter") {
+
+            const linhas = editor.value.split("\n");
+
+            const ultima = linhas[linhas.length - 1];
+
+            const tipo = detectarElementoLinha(ultima);
+
+            console.log("Elemento:", tipo);
+
+        }
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", configurarAutoFormatacao);
+
+
+/* ============================================ */
+/* ATALHOS PROFISSIONAIS                       */
+/* ============================================ */
+
+function configurarAtalhosProfissionais() {
+
+    document.addEventListener("keydown", function(e){
+
+        if (e.metaKey || e.ctrlKey) {
+
+            switch(e.key.toLowerCase()) {
+
+                case "s":
+
+                    e.preventDefault();
+
+                    if (typeof salvarConteudo === "function") {
+                        salvarConteudo();
+                    }
+
+                    break;
+
+                case "e":
+
+                    e.preventDefault();
+
+                    exportarTXT();
+
+                    break;
+
+                case "b":
+
+                    e.preventDefault();
+
+                    salvarVersaoManual();
+
+                    break;
+
+            }
+
+        }
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", configurarAtalhosProfissionais);
+
+
+/* ============================================ */
+/* SISTEMA DE PROJETOS                         */
+/* ============================================ */
+
+function criarProjetoPatika(nome) {
+
+    const projetos = JSON.parse(
+        localStorage.getItem("patika_projetos") || "[]"
+    );
+
+    const novo = {
+
+        id: Date.now(),
+
+        nome: nome,
+
+        criado: new Date().toISOString(),
+
+        conteudo: ""
+
+    };
+
+    projetos.push(novo);
+
+    localStorage.setItem(
+        "patika_projetos",
+        JSON.stringify(projetos)
+    );
+
+}
+
+window.criarProjetoPatika = criarProjetoPatika;
+
+
+/* ============================================ */
+/* AUTOCOMPLETE CENA                           */
+/* ============================================ */
+
+function autoCompletarCena(editor) {
+
+    const valor = editor.value;
+
+    if (valor.endsWith("\nint")) {
+
+        editor.value += ". LOCAL - DIA";
+
+    }
+
+    if (valor.endsWith("\next")) {
+
+        editor.value += ". LOCAL - NOITE";
+
+    }
+
+}
+
+document.addEventListener("input", function(){
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    autoCompletarCena(editor);
+
+});
+
+
+/* ============================================ */
+/* MODO FOCO                                   */
+/* ============================================ */
+
+function ativarModoFoco() {
+
+    document.body.classList.toggle("modo-foco");
+
+}
+
+window.ativarModoFoco = ativarModoFoco;
+
