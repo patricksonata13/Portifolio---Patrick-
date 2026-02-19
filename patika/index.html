@@ -3,64 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA · Editor Profissional de Roteiro</title>
-    
-    <!-- Fontes -->
+    <title>PATIKA · Editor de Roteiro</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
     <link rel="stylesheet" href="css/patika.css">
 </head>
 <body>
-    <!-- Botão voltar (único link com o site principal) -->
-    <a href="../index.html" class="voltar">← VOLTAR</a>
-    
-    <!-- HEADER SUPERIOR (camada 2) -->
-    <div class="patika-container">
-        <div class="patika-header">
-            <h1>PATIKA</h1>
-            <div class="projeto-info">
-                <span id="projetoNome">📁 projeto_sem_título</span>
-                <span class="salvo-status" id="salvoStatus">salvo</span>
+    <!-- HEADER -->
+    <div class="patika-header">
+        <h1>PATIKA</h1>
+        <div class="projeto-info">
+            <span id="projetoNome">📁 projeto_sem_título</span>
+            <span class="salvo-status" id="salvoStatus">salvo</span>
+        </div>
+    </div>
+
+    <!-- GRID PRINCIPAL - 3 COLUNAS -->
+    <div class="patika-grid">
+        <!-- COLUNA ESQUERDA - ETAPAS -->
+        <div class="etapas-coluna">
+            <h3>ETAPAS</h3>
+            <div class="etapa-item ativa" onclick="mudarSecao('sinopse')">SINOPSE</div>
+            <div class="etapa-item" onclick="mudarSecao('argumento')">ARGUMENTO</div>
+            <div class="etapa-item" onclick="mudarSecao('escaleta')">ESCALETA</div>
+            <div class="etapa-item" onclick="mudarSecao('roteiro')">ROTEIRO</div>
+            <div class="etapa-item" onclick="mudarSecao('personagens')">PERSONAGENS</div>
+            
+            <div style="margin-top: 32px;">
+                <h3>PROJETOS</h3>
+                <div id="listaProjetos" style="max-height: 200px; overflow-y: auto;"></div>
+                <button class="ferramenta-btn" style="width: 100%; margin-top: 16px;" onclick="novoProjeto()">+ NOVO PROJETO</button>
             </div>
         </div>
-        
-        <!-- NAVEGAÇÃO PRINCIPAL (camada 2) -->
-        <div class="nav-tabs">
-            <div class="tab-item ativa" onclick="mudarSecao('sinopse')">SINOPSE</div>
-            <div class="tab-item" onclick="mudarSecao('argumento')">ARGUMENTO</div>
-            <div class="tab-item" onclick="mudarSecao('escaleta')">ESCALETA</div>
-            <div class="tab-item" onclick="mudarSecao('roteiro')">ROTEIRO</div>
-            <div class="tab-item" onclick="mudarSecao('personagens')">PERSONAGENS</div>
-        </div>
-        
-        <!-- SUBABAS (exemplo para ROTEIRO) -->
-        <div class="subtabs" id="subtabs-container">
-            <div class="subtab-item ativa" onclick="mudarSubaba('editor')">EDITOR</div>
-            <div class="subtab-item" onclick="mudarSubaba('cenas')">CENAS</div>
-            <div class="subtab-item" onclick="mudarSubaba('notas')">NOTAS</div>
-            <div class="subtab-item" onclick="mudarSubaba('versoes')">VERSÕES</div>
-            <div class="subtab-item" onclick="mudarSubaba('estatisticas')">ESTATÍSTICAS</div>
-        </div>
-        
-        <!-- ÁREA PRINCIPAL DE EDIÇÃO (camada 3) -->
-        <div class="editor-container">
+
+        <!-- COLUNA CENTRAL - EDITOR -->
+        <div class="editor-coluna">
             <div class="section-title">
                 <span>✎</span>
                 <h2 id="secaoTitulo">SINOPSE</h2>
             </div>
             <textarea id="conteudoTexto" placeholder="Escreva aqui a sinopse da sua história..."></textarea>
         </div>
+
+        <!-- COLUNA DIREITA - ATALHOS -->
+        <div class="atalhos-coluna">
+            <h3>ATALHOS</h3>
+            <div class="atalho-item" onclick="mudarSecao('sinopse')">
+                <span>▷</span>
+                <span>SINOPSE</span>
+            </div>
+            <div class="atalho-item" onclick="mudarSecao('argumento')">
+                <span>▷</span>
+                <span>ARGUMENTO</span>
+            </div>
+            <div class="atalho-item" onclick="mudarSecao('escaleta')">
+                <span>▷</span>
+                <span>ESCALETA</span>
+            </div>
+            <div class="atalho-item" onclick="mudarSecao('roteiro')">
+                <span>▷</span>
+                <span>ROTEIRO</span>
+            </div>
+            <div class="atalho-item" onclick="mudarSecao('personagens')">
+                <span>▷</span>
+                <span>PERSONAGENS</span>
+            </div>
+
+            <div class="ferramentas-box">
+                <h3>FERRAMENTAS</h3>
+                <div class="ferramenta-item">
+                    <span>Modelo</span>
+                    <button class="ferramenta-btn" onclick="carregarModelo()">Carregar</button>
+                </div>
+                <div class="ferramenta-item">
+                    <span>Backup</span>
+                    <button class="ferramenta-btn" onclick="fazerBackup()">Salvar</button>
+                </div>
+                <div class="ferramenta-item">
+                    <span>Restaurar</span>
+                    <button class="ferramenta-btn" onclick="restaurarBackup()">📂</button>
+                </div>
+            </div>
+
+            <div class="estatisticas-box">
+                <h3>ESTATÍSTICAS</h3>
+                <div class="estatistica-item">
+                    <span>Total palavras:</span>
+                    <span id="totalPalavras">0</span>
+                </div>
+                <div class="estatistica-item">
+                    <span>Progresso:</span>
+                    <span id="progresso">0%</span>
+                </div>
+                <div class="estatistica-item">
+                    <span>Salvo:</span>
+                    <span id="ultimoSalvo">agora</span>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <!-- BOTÕES FLUTUANTES (FAB) (camada 5) -->
-    <div class="fab-container">
-        <button class="fab-btn" onclick="salvarConteudo()" title="Salvar">💾</button>
-        <button class="fab-btn" onclick="configurarProjeto()" title="Configurações">⚙️</button>
-        <button class="fab-btn" onclick="exportarRoteiro()" title="Exportar">📄</button>
-    </div>
-    
-    <!-- FOOTER / STATUS BAR (camada 1) -->
+
+    <!-- FOOTER -->
     <div class="footer-bar">
         <div class="footer-left">
             <span id="projetoNomeFooter">projeto_sem_título</span>
@@ -69,31 +111,10 @@
             <span id="statusPalavras">0 palavras</span>
         </div>
         <div class="footer-right">
-            <span id="ultimoSalvo">agora</span>
+            <span id="salvoStatusFooter">salvo</span>
         </div>
     </div>
-    
-    <!-- FERRAMENTAS SIDEBAR (camada 3 secundária) -->
-    <div class="ferramentas-sidebar">
-        <h3>🔧 FERRAMENTAS</h3>
-        <div class="ferramenta-item">
-            <span>Modelo</span>
-            <button class="ferramenta-btn" onclick="carregarModelo()">Carregar</button>
-        </div>
-        <div class="ferramenta-item">
-            <span>Backup</span>
-            <button class="ferramenta-btn" onclick="fazerBackup()">Salvar</button>
-        </div>
-        <div class="ferramenta-item">
-            <span>Restaurar</span>
-            <button class="ferramenta-btn" onclick="restaurarBackup()">📂</button>
-        </div>
-        <div class="ferramenta-item">
-            <span>Detalhes</span>
-            <button class="ferramenta-btn" onclick="mostrarDetalhesPalavras()">📊</button>
-        </div>
-    </div>
-    
+
     <script src="js/patika.js"></script>
 </body>
 </html>
