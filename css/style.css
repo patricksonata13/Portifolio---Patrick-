@@ -407,3 +407,123 @@ body, html, .main-container {
 .action, .transition {
     color: #2d2d2f !important;
 }
+
+/* ============================================ */
+/* NOVAS CORES - AREIA CLARA E DETALHES VERDES */
+/* ============================================ */
+
+/* FUNDO GERAL - AREIA CLARINHO */
+body {
+    background: #faf7f2 !important;  /* Areia bem clarinha */
+}
+
+.main-container {
+    background: transparent !important;
+}
+
+/* DETALHES VERDES - BORDAS E ELEMENTOS */
+.nav-top-right button,
+.nav-bottom-center button {
+    border: 2px solid #a8c3a0 !important;  /* Verde suave */
+    background: #f5efe6 !important;         /* Areia para os botões */
+    color: #3a5e3a !important;              /* Verde escuro para texto */
+}
+
+.nav-top-right button:hover,
+.nav-bottom-center button:hover {
+    background: #e8dfd2 !important;
+    border-color: #5f8b5f !important;
+    color: #1d3b1d !important;
+}
+
+/* TÍTULO PRINCIPAL */
+h1 {
+    color: #3a5e3a !important;  /* Verde escuro elegante */
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+}
+
+/* FOTO DE PERFIL - BORDA VERDE */
+.profile-img {
+    border: 4px solid #a8c3a0 !important;
+    box-shadow: 0 10px 30px rgba(88, 129, 87, 0.2) !important;
+}
+
+/* CARDS DE CONTEÚDO - FUNDO AREIA */
+.script-card {
+    background: #faf5ec !important;  /* Areia mais clara */
+    border: 1px solid #d4c8b8 !important;
+}
+
+/* TÍTULOS DAS CENAS - VERDE */
+.scene-heading {
+    color: #3a5e3a !important;
+    border-bottom: 2px solid #a8c3a0 !important;
+    padding-bottom: 8px;
+}
+
+/* NÚMERO DE PÁGINA */
+.page-number {
+    color: #8b9a7a !important;  /* Verde acinzentado */
+}
+
+/* TRANSIÇÕES */
+.transition {
+    color: #5f8b5f !important;
+    font-style: italic;
+}
+
+/* PAINEL DE TRABALHO - FUNDO AREIA */
+#painel-trabalho.active {
+    background: #faf7f2 !important;
+}
+
+.close-btn {
+    border-color: #a8c3a0 !important;
+    color: #3a5e3a !important;
+}
+
+.close-btn:hover {
+    background: #a8c3a0 !important;
+    color: #1d3b1d !important;
+}
+
+/* CARDS DO PORTFÓLIO */
+.portfolio-card {
+    background: #ffffff !important;
+    border: 1px solid #d4c8b8 !important;
+    transition: all 0.3s ease;
+}
+
+.portfolio-card:hover {
+    border-color: #a8c3a0 !important;
+    box-shadow: 0 10px 25px rgba(88, 129, 87, 0.15) !important;
+}
+
+.portfolio-info h3 {
+    color: #3a5e3a !important;
+}
+
+.portfolio-role {
+    color: #8b9a7a !important;
+}
+
+/* RODAPÉ SOCIAL (se tiver) */
+.social-footer svg {
+    stroke: #3a5e3a !important;
+}
+
+.social-footer a:hover svg {
+    stroke: #5f8b5f !important;
+}
+
+/* BOTÃO VOLTAR AO TOPO (se tiver) */
+#backToTop {
+    background: #e8dfd2 !important;
+    color: #3a5e3a !important;
+    border: 1px solid #a8c3a0 !important;
+}
+
+#backToTop:hover {
+    background: #a8c3a0 !important;
+    color: #1d3b1d !important;
+}
