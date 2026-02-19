@@ -350,3 +350,60 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+/* ============================================ */
+/* CORREÇÕES COMPLEMENTARES - SÓ O QUE PEDIU    */
+/* ============================================ */
+
+/* REMOVER FUNDO PRETO (se houver) */
+body, html, .main-container {
+    background: #f5f5f7 !important;
+}
+
+/* BOTÕES DO MENU SUPERIOR - COR AREIA */
+.nav-top-right button {
+    background: #d0cbc0 !important;
+    color: #1d1d1f !important;
+    border: 1px solid #b5aea0 !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+}
+
+.nav-top-right button:hover {
+    background: #c0b8aa !important;
+    border-color: #8e897d !important;
+    transform: translateY(-2px) !important;
+}
+
+/* BOTÕES DAS ABAS INFERIORES - COR AREIA */
+.nav-bottom-center button {
+    background: #d0cbc0 !important;
+    color: #1d1d1f !important;
+    border: 1px solid #b5aea0 !important;
+    border-radius: 8px !important;
+}
+
+.nav-bottom-center button:hover {
+    background: #c0b8aa !important;
+    border-color: #8e897d !important;
+    transform: translateY(-2px) !important;
+}
+
+/* SEÇÕES DE CONTEÚDO - FUNDO AREIA */
+#secao-sobre, #secao-perfil, .script-card {
+    background: #f5f0e8 !important;
+}
+
+/* NÚMERO DE PÁGINA */
+.page-number {
+    color: #8e897d !important;
+}
+
+/* TÍTULOS DE CENA */
+.scene-heading {
+    color: #1d1d1f !important;
+}
+
+/* TEXTO */
+.action, .transition {
+    color: #2d2d2f !important;
+}
