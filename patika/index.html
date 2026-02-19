@@ -3,356 +3,1162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA - Editor de Roteiro</title>
-    <link rel="stylesheet" href="css/patika.css">
+    <title>PATIKA - Plataforma Definitiva de Roteiro</title>
     <style>
-        /* Estilos básicos */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        /* ===== RESET E VARIÁVEIS ===== */
+        * {
             margin: 0;
-            padding: 20px;
-            background: #f5f5f5;
+            padding: 0;
+            box-sizing: border-box;
         }
-        
-        .patika-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+
+        :root {
+            /* Cores - Design System */
+            --bg-app: #f3f4f3;
+            --bg-surface: #ffffff;
+            --bg-sidebar: #f8f9fa;
+            --border-color: #e0e0e0;
+            --border-light: #e6e6e6;
+            
+            --text-primary: #2f2f2f;
+            --text-secondary: #6b6b6b;
+            --text-muted: #9a9a9a;
+            
+            --accent-primary: #6f8f7b;
+            --accent-hover: #5f7d6b;
+            --accent-light: #8fa99a;
+            --accent-selection: #e8efe9;
+            
+            --input-border: #dcdcdc;
+            
+            /* Espaçamentos */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-xxl: 48px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-app);
+            color: var(--text-primary);
+            height: 100vh;
             overflow: hidden;
+            line-height: 1.6;
         }
-        
-        /* Header */
-        .patika-header {
-            background: #2c3e50;
+
+        /* ===== LAYOUT PRINCIPAL ===== */
+        .app {
+            display: grid;
+            grid-template-columns: 250px 1fr 300px;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+        }
+
+        /* ===== TOP BAR ===== */
+        .top-bar {
+            grid-column: 1 / -1;
+            background: var(--bg-surface);
+            border-bottom: 2px solid var(--accent-primary);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--space-xl);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-right: var(--space-xl);
+        }
+
+        .logo-icon {
+            font-size: 1.8rem;
+            color: var(--accent-primary);
+        }
+
+        .logo-text {
+            font-weight: 600;
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .tabs-container {
+            display: flex;
+            height: 100%;
+        }
+
+        .tab-item {
+            padding: 0 var(--space-lg);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: var(--text-secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab-item:hover {
+            color: var(--accent-primary);
+            background: var(--accent-selection);
+        }
+
+        .tab-item.active {
+            color: var(--accent-primary);
+            border-bottom-color: var(--accent-primary);
+        }
+
+        .project-status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            font-size: 0.85rem;
+        }
+
+        #project-name {
+            background: var(--bg-sidebar);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: 30px;
+            color: var(--text-primary);
+        }
+
+        .status-indicator {
+            color: var(--accent-primary);
+        }
+
+        /* ===== SIDEBAR ESQUERDA (MENU) ===== */
+        .sidebar-left {
+            background: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            padding: var(--space-lg) 0;
+            overflow-y: auto;
+        }
+
+        .menu-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .menu-title {
+            padding: 0 var(--space-lg);
+            margin-bottom: var(--space-md);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: var(--space-sm) var(--space-lg);
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: var(--accent-selection);
+            color: var(--accent-primary);
+        }
+
+        .menu-item.active {
+            background: var(--accent-primary);
             color: white;
-            padding: 15px 20px;
+            border-left-color: white;
+        }
+
+        /* ===== ÁREA CENTRAL ===== */
+        .main-content {
+            background: var(--bg-surface);
+            margin: var(--space-lg);
+            padding: var(--space-xl);
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            overflow-y: auto;
+        }
+
+        .content-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: var(--space-lg);
         }
-        
-        /* Abas principais */
-        .nav-tabs {
-            display: flex;
-            background: #34495e;
-            padding: 0 20px;
+
+        .content-header h2 {
+            color: var(--accent-primary);
+            font-weight: 400;
         }
-        
-        .tab-item {
-            padding: 12px 24px;
-            color: white;
-            cursor: pointer;
-            background: transparent;
-            border: none;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .tab-item.active {
-            background: #00A86B;
-            color: white;
-        }
-        
-        /* Conteúdo das abas */
-        .tab-content {
-            display: none;
-            padding: 20px;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        /* Layout da aba Roteiro */
-        .roteiro-layout {
-            display: flex;
-            gap: 20px;
-        }
-        
-        /* Painel esquerdo - Cenas */
-        .painel-cenas {
-            width: 250px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
-        }
-        
-        #lista-cenas {
-            max-height: 500px;
+
+        /* ===== SIDEBAR DIREITA (CONTEXTO) ===== */
+        .sidebar-right {
+            background: var(--bg-surface);
+            border-left: 1px solid var(--border-color);
+            padding: var(--space-lg);
             overflow-y: auto;
         }
-        
-        .cena-item {
-            padding: 10px;
-            margin: 5px 0;
-            background: white;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 13px;
-            border-left: 3px solid #00A86B;
-            transition: all 0.2s;
+
+        .context-section {
+            background: var(--bg-sidebar);
+            border-radius: 12px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-lg);
         }
-        
-        .cena-item:hover {
-            background: #00A86B;
-            color: white;
+
+        .context-section h3 {
+            color: var(--accent-primary);
+            font-size: 0.9rem;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-xs);
+            border-bottom: 2px solid var(--accent-primary);
         }
-        
-        /* Editor central */
-        .editor-central {
-            flex: 1;
-        }
-        
-        #roteiro-editor {
-            min-height: 600px;
-            padding: 30px;
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            line-height: 1.8;
-            font-size: 14px;
-            outline: none;
-            overflow-y: auto;
-        }
-        
-        /* Barra de ferramentas */
-        .toolbar {
-            margin-bottom: 15px;
+
+        /* ===== EDITOR DE ROTEIRO ===== */
+        .editor-toolbar {
             display: flex;
-            gap: 8px;
+            gap: var(--space-xs);
             flex-wrap: wrap;
+            margin-bottom: var(--space-lg);
+            padding: var(--space-sm);
+            background: var(--bg-sidebar);
+            border-radius: 10px;
         }
-        
-        .toolbar button {
-            padding: 8px 12px;
-            background: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+
+        .btn {
+            padding: var(--space-xs) var(--space-md);
+            border: 1px solid var(--border-light);
+            background: white;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 0.85rem;
+            transition: all 0.15s;
+            color: var(--text-primary);
         }
-        
-        .toolbar button:hover {
-            background: #00A86B;
+
+        .btn:hover {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
             color: white;
         }
-        
-        /* Painel direito - Estatísticas */
-        .painel-estatisticas {
-            width: 250px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            padding: 15px;
+
+        .btn-accent {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: white;
         }
-        
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #eee;
+
+        .btn-accent:hover {
+            background: var(--accent-hover);
         }
-        
-        /* Formatação do roteiro */
+
+        .roteiro-editor {
+            font-family: 'Courier New', 'IBM Plex Mono', monospace;
+            line-height: 1.8;
+            min-height: 500px;
+            padding: var(--space-xl);
+            background: var(--bg-sidebar);
+            border: 2px dashed var(--border-light);
+            border-radius: 12px;
+            outline: none;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .roteiro-editor:focus {
+            border-color: var(--accent-primary);
+            background: white;
+        }
+
+        /* Estilos de formatação do roteiro */
         .patika-cena {
             font-weight: bold;
             text-transform: uppercase;
-            margin-top: 24px;
-            color: #00A86B;
+            margin-top: var(--space-lg);
+            color: var(--accent-primary);
         }
-        
+
         .patika-personagem {
             margin-left: 200px;
             font-weight: bold;
             text-transform: uppercase;
         }
-        
+
         .patika-dialogo {
             margin-left: 140px;
             margin-right: 140px;
         }
-        
+
+        .patika-transicao {
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+            font-style: italic;
+        }
+
+        .patika-parentese {
+            margin-left: 200px;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
         .patika-acao {
             margin-left: 0;
         }
+
+        /* ===== LISTA DE CENAS ===== */
+        .cena-item {
+            padding: var(--space-sm);
+            background: white;
+            border-radius: 6px;
+            margin-bottom: var(--space-xs);
+            cursor: pointer;
+            font-size: 0.8rem;
+            border-left: 3px solid var(--accent-primary);
+            transition: all 0.15s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .cena-item:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        /* ===== ÁREA DE TEXTO SIMPLES (OUTRAS ABAS) ===== */
+        .simple-textarea {
+            width: 100%;
+            min-height: 500px;
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 1rem;
+            line-height: 1.7;
+            resize: vertical;
+            background: var(--bg-sidebar);
+        }
+
+        .simple-textarea:focus {
+            outline: 2px solid var(--accent-light);
+            border-color: transparent;
+        }
+
+        /* ===== FORMULÁRIO DINDO ===== */
+        .dindo-form {
+            background: linear-gradient(145deg, var(--bg-sidebar), white);
+            padding: var(--space-xl);
+            border-radius: 16px;
+            border: 1px solid var(--border-light);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: var(--space-sm) var(--space-md);
+            border: 1px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            transition: all 0.15s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px var(--accent-selection);
+        }
+
+        .contrato-preview {
+            background: var(--bg-sidebar);
+            padding: var(--space-lg);
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-primary);
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            margin-top: var(--space-lg);
+            font-size: 0.9rem;
+        }
+
+        /* ===== STATUS BAR (FOOTER) ===== */
+        .status-bar {
+            grid-column: 1 / -1;
+            background: var(--bg-surface);
+            border-top: 1px solid var(--border-color);
+            padding: var(--space-sm) var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .word-count {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        /* ===== SCROLLBAR PERSONALIZADA ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-app);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c0c0c0;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-primary);
+        }
+
+        /* ===== UTILITÁRIOS ===== */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: var(--space-md); }
+        .w-100 { width: 100%; }
     </style>
 </head>
 <body>
-    <div class="patika-container">
-        <!-- HEADER -->
-        <div class="patika-header">
-            <h1>PATIKA</h1>
-            <div>
-                <span id="projetoNome">projeto_sem_título</span>
-                <span style="margin-left: 15px; color: #00A86B;">●</span>
+    <div class="app" id="app">
+        <!-- TOP BAR -->
+        <header class="top-bar">
+            <div class="logo-area">
+                <span class="logo-icon">🎬</span>
+                <span class="logo-text">PATIKA</span>
             </div>
-        </div>
-        
-        <!-- ABAS PRINCIPAIS -->
-        <div class="nav-tabs">
-            <button class="tab-item active" onclick="mudarAba('roteiro')">📝 ROTEIRO</button>
-            <button class="tab-item" onclick="mudarAba('sinopse')">📋 SINOPSE</button>
-            <button class="tab-item" onclick="mudarAba('argumento')">📄 ARGUMENTO</button>
-            <button class="tab-item" onclick="mudarAba('escaleta')">📊 ESCALETA</button>
-            <button class="tab-item" onclick="mudarAba('personagens')">👥 PERSONAGENS</button>
-        </div>
-        
-        <!-- CONTEÚDO DAS ABAS -->
-        
-        <!-- ABA ROTEIRO (ATIVA POR PADRÃO) -->
-        <div id="roteiro-tab-content" class="tab-content active">
-            <h2 style="margin-top: 0;">Editor de Roteiro</h2>
-            
-            <div class="roteiro-layout">
-                <!-- PAINEL ESQUERDO - CENAS -->
-                <div class="painel-cenas">
-                    <h3 style="margin-top: 0; color: #00A86B;">📋 CENAS</h3>
-                    <div id="lista-cenas">
-                        <!-- Será preenchido pelo JavaScript -->
-                    </div>
-                    <button onclick="inserirCena()" style="width:100%; margin-top:15px; padding:10px; background:#00A86B; color:white; border:none; border-radius:5px; cursor:pointer;">
-                        + Nova Cena
-                    </button>
-                </div>
-                
-                <!-- EDITOR CENTRAL -->
-                <div class="editor-central">
-                    <!-- BARRA DE FERRAMENTAS -->
-                    <div class="toolbar">
-                        <button onclick="inserirElemento('cena')">🎬 Cena</button>
-                        <button onclick="inserirElemento('personagem')">👤 Personagem</button>
-                        <button onclick="inserirElemento('acao')">📝 Ação</button>
-                        <button onclick="inserirElemento('dialogo')">💬 Diálogo</button>
-                        <button onclick="inserirElemento('transicao')">⏩ Transição</button>
-                        <span style="flex:1;"></span>
-                        <button onclick="salvarVersao()">💾 Salvar</button>
-                        <button onclick="exportarRoteiro()">📤 Exportar</button>
-                        <button onclick="toggleModoFoco()">🎯 Foco</button>
-                        <button onclick="toggleModoEscuro()">🌙 Escuro</button>
-                    </div>
-                    
-                    <!-- EDITOR PRINCIPAL -->
-                    <div id="roteiro-editor" contenteditable="true">
-                        <div class="patika-cena">1. INT. SALA DE ESTAR - DIA</div>
-                        <div class="patika-acao">João está sentado no sofá, pensativo. A luz da manhã entra pela janela.</div>
-                        <div class="patika-personagem">JOÃO</div>
-                        <div class="patika-dialogo">Preciso terminar este roteiro hoje.</div>
-                        <div class="patika-acao">Maria entra na sala.</div>
-                        <div class="patika-personagem">MARIA</div>
-                        <div class="patika-dialogo">Como está o progresso?</div>
-                    </div>
-                    
-                    <!-- STATUS BAR -->
-                    <div style="display: flex; justify-content: space-between; margin-top: 10px; padding: 8px; background: #f0f0f0; border-radius: 4px; font-size: 12px;">
-                        <span>Linhas: <span id="total-linhas">0</span></span>
-                        <span>Palavras: <span id="total-palavras">0</span></span>
-                        <span>Páginas: <span id="total-paginas">0</span></span>
-                        <span>Tempo: <span id="tempo-estimado">0</span> min</span>
-                    </div>
-                </div>
-                
-                <!-- PAINEL DIREITO - ESTATÍSTICAS -->
-                <div class="painel-estatisticas">
-                    <h3 style="margin-top: 0; color: #00A86B;">📊 ESTATÍSTICAS</h3>
-                    
-                    <div class="stat-item">
-                        <span>Total Cenas:</span>
-                        <span id="stat-cenas">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span>Personagens:</span>
-                        <span id="stat-personagens">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span>Diálogos:</span>
-                        <span id="stat-dialogos">0</span>
-                    </div>
-                    <div class="stat-item">
-                        <span>Falas:</span>
-                        <span id="stat-falas">0</span>
-                    </div>
-                    
-                    <h3 style="color: #00A86B; margin-top: 20px;">🔄 VERSÕES</h3>
-                    <div id="lista-versoes" style="max-height: 200px; overflow-y: auto;">
-                        <!-- Será preenchido pelo JavaScript -->
-                    </div>
-                    
-                    <button onclick="fazerBackup()" style="width:100%; margin-top:15px; padding:8px; background:#333; color:white; border:none; border-radius:5px; cursor:pointer;">
-                        💾 Backup Completo
-                    </button>
-                </div>
+            <nav class="tabs-container" id="mainTabs">
+                <div class="tab-item active" data-tab="roteiro">📝 ROTEIRO</div>
+                <div class="tab-item" data-tab="dindo">📄 DINDO</div>
+                <div class="tab-item" data-tab="sinopse">📋 SINOPSE</div>
+                <div class="tab-item" data-tab="argumento">📄 ARGUMENTO</div>
+                <div class="tab-item" data-tab="escaleta">📊 ESCALETA</div>
+                <div class="tab-item" data-tab="personagens">👥 PERSONAGENS</div>
+            </nav>
+            <div class="project-status">
+                <span id="project-name">projeto_sem_título</span>
+                <span class="status-indicator" id="statusIndicator">● pronto</span>
             </div>
-        </div>
-        
-        <!-- ABA SINOPSE -->
-        <div id="sinopse-tab-content" class="tab-content">
-            <h2>Sinopse</h2>
-            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Escreva a sinopse da sua história aqui..."></textarea>
-        </div>
-        
-        <!-- ABA ARGUMENTO -->
-        <div id="argumento-tab-content" class="tab-content">
-            <h2>Argumento</h2>
-            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Desenvolva o argumento completo..."></textarea>
-        </div>
-        
-        <!-- ABA ESCALETA -->
-        <div id="escaleta-tab-content" class="tab-content">
-            <h2>Escaleta</h2>
-            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Liste as cenas em ordem..."></textarea>
-        </div>
-        
-        <!-- ABA PERSONAGENS -->
-        <div id="personagens-tab-content" class="tab-content">
-            <h2>Personagens</h2>
-            <div style="display: flex; gap: 20px;">
-                <div style="flex:1;">
-                    <input type="text" id="novo-personagem" placeholder="Nome do personagem" style="width:70%; padding:8px;">
-                    <button onclick="adicionarPersonagem()" style="padding:8px 15px; background:#00A86B; color:white; border:none; border-radius:5px;">Adicionar</button>
-                </div>
+        </header>
+
+        <!-- SIDEBAR ESQUERDA (MENU) -->
+        <aside class="sidebar-left" id="sidebarLeft">
+            <div class="menu-section">
+                <div class="menu-title">FERRAMENTAS</div>
+                <div class="menu-item active" data-tool="roteiro-editor">📝 Editor</div>
+                <div class="menu-item" data-tool="timeline">📊 Timeline</div>
+                <div class="menu-item" data-tool="versoes">🔄 Versões</div>
             </div>
-            <div id="lista-personagens" style="margin-top:20px;">
-                <!-- Lista de personagens -->
+            <div class="menu-section">
+                <div class="menu-title">MODOS</div>
+                <div class="menu-item" data-tool="foco">🎯 Modo Foco</div>
+                <div class="menu-item" data-tool="escuro">🌙 Tema Escuro</div>
+                <div class="menu-item" data-tool="typewriter">📠 Typewriter</div>
             </div>
-        </div>
+            <div class="menu-section">
+                <div class="menu-title">DADOS</div>
+                <div class="menu-item" data-tool="exportar">📤 Exportar</div>
+                <div class="menu-item" data-tool="importar">📥 Importar</div>
+                <div class="menu-item" data-tool="backup">💾 Backup</div>
+            </div>
+        </aside>
+
+        <!-- ÁREA CENTRAL PRINCIPAL -->
+        <main class="main-content" id="mainContent">
+            <!-- O conteúdo será injetado via JavaScript -->
+        </main>
+
+        <!-- SIDEBAR DIREITA (CONTEXTO) -->
+        <aside class="sidebar-right" id="sidebarRight">
+            <!-- O conteúdo será injetado via JavaScript -->
+        </aside>
+
+        <!-- STATUS BAR (FOOTER) -->
+        <footer class="status-bar">
+            <span>© PATIKA - Plataforma Definitiva</span>
+            <span class="word-count" id="globalWordCount">0 palavras</span>
+            <span id="autoSaveIndicator">Auto-save ativo</span>
+        </footer>
     </div>
-    
-    <script src="js/patika.js"></script>
+
     <script>
-        // Função para mudar de aba
-        function mudarAba(aba) {
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelectorAll('.tab-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            document.getElementById(aba + '-tab-content').classList.add('active');
-            event.target.classList.add('active');
-        }
-        
-        // Funções básicas
-        function adicionarPersonagem() {
-            const nome = document.getElementById('novo-personagem').value;
-            if (nome) {
-                const lista = document.getElementById('lista-personagens');
-                const div = document.createElement('div');
-                div.style.padding = '10px';
-                div.style.background = '#f0f0f0';
-                div.style.margin = '5px 0';
-                div.style.borderRadius = '5px';
-                div.innerText = nome;
-                lista.appendChild(div);
-                document.getElementById('novo-personagem').value = '';
+        (function() {
+            "use strict";
+
+            // ============================================
+            // ESTADO GLOBAL E CONFIGURAÇÕES
+            // ============================================
+            const State = {
+                currentTab: 'roteiro',
+                currentTool: 'roteiro-editor',
+                versoes: JSON.parse(localStorage.getItem('patika_versoes') || '[]'),
+                personagens: JSON.parse(localStorage.getItem('patika_personagens') || '[]'),
+                notas: JSON.parse(localStorage.getItem('patika_notas') || '{}'),
+                ultimoContrato: localStorage.getItem('patika_ultimo_contrato') || '',
+                config: {
+                    darkMode: localStorage.getItem('patika_dark_mode') === 'true',
+                    typewriterMode: false,
+                }
+            };
+
+            // ============================================
+            // FUNÇÕES AUXILIARES
+            // ============================================
+            function updateWordCount(element) {
+                if (!element) return 0;
+                const text = element.innerText || element.value || '';
+                return text.trim().split(/\s+/).filter(Boolean).length;
             }
-        }
-        
-        function fazerBackup() {
-            alert('Backup realizado com sucesso!');
-        }
+
+            function saveToStorage(key, value) {
+                localStorage.setItem(`patika_${key}`, JSON.stringify(value));
+            }
+
+            function loadFromStorage(key, defaultValue = null) {
+                const item = localStorage.getItem(`patika_${key}`);
+                return item ? JSON.parse(item) : defaultValue;
+            }
+
+            // ============================================
+            // MÓDULO ROTEIRO (Núcleo Final Draft)
+            // ============================================
+            const RoteiroModule = {
+                editorElement: null,
+
+                init() {
+                    this.render();
+                    this.attachEvents();
+                    this.loadContent();
+                },
+
+                render() {
+                    const main = document.getElementById('mainContent');
+                    main.innerHTML = `
+                        <div class="content-header">
+                            <h2>🎬 Editor de Roteiro Profissional</h2>
+                            <div>
+                                <button class="btn" id="btnSalvarVersao">💾 Salvar Versão</button>
+                                <button class="btn" id="btnExportarRoteiro">📤 Exportar TXT</button>
+                            </div>
+                        </div>
+                        <div class="editor-toolbar">
+                            <button class="btn" data-inserir="cena">🎬 Cena</button>
+                            <button class="btn" data-inserir="personagem">👤 Personagem</button>
+                            <button class="btn" data-inserir="dialogo">💬 Diálogo</button>
+                            <button class="btn" data-inserir="acao">📝 Ação</button>
+                            <button class="btn" data-inserir="transicao">⏩ Transição</button>
+                            <button class="btn" data-inserir="parentese">📝 Parêntese</button>
+                        </div>
+                        <div id="roteiro-editor" class="roteiro-editor" contenteditable="true">
+                            <div class="patika-cena">1. INT. PATIKA DEFINITIVO - DIA</div>
+                            <div class="patika-acao">Todas as 44 versões unificadas em um código robusto.</div>
+                            <div class="patika-personagem">PATIKA</div>
+                            <div class="patika-dialogo">Finalmente! Todas as funcionalidades integradas.</div>
+                            <div class="patika-personagem">USUÁRIO</div>
+                            <div class="patika-dialogo">Como faço para navegar pelas cenas?</div>
+                            <div class="patika-transicao">CORTE PARA:</div>
+                            <div class="patika-cena">2. EXT. PARQUE - DIA</div>
+                            <div class="patika-acao">Clique nas cenas à direita para navegar.</div>
+                        </div>
+                    `;
+                    this.editorElement = document.getElementById('roteiro-editor');
+                    this.updateSidebar();
+                },
+
+                attachEvents() {
+                    if (!this.editorElement) return;
+
+                    // Inserir elementos via botões
+                    document.querySelectorAll('[data-inserir]').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            const tipo = e.target.dataset.inserir;
+                            this.inserirElemento(tipo);
+                        });
+                    });
+
+                    // Teclado: Enter com auto-formatação
+                    this.editorElement.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            document.execCommand('insertLineBreak');
+                            
+                            setTimeout(() => {
+                                const selection = window.getSelection();
+                                const node = selection.anchorNode;
+                                if (!node) return;
+                                
+                                const linha = node.parentElement;
+                                if (!linha || linha === this.editorElement) return;
+                                
+                                const texto = linha.innerText.trim();
+                                this.aplicarFormatacao(linha, texto);
+                                
+                                if (this.detectarTipo(texto) === 'personagem') {
+                                    setTimeout(() => {
+                                        const dialogo = document.createElement('div');
+                                        dialogo.className = 'patika-dialogo';
+                                        dialogo.innerHTML = '<br>';
+                                        linha.parentNode.insertBefore(dialogo, linha.nextSibling);
+                                        this.colocarCursor(dialogo);
+                                    }, 10);
+                                }
+                                
+                                this.updateSidebar();
+                                this.atualizarContadorGlobal();
+                            }, 10);
+                        }
+                    });
+
+                    // Input: atualizar estatísticas
+                    this.editorElement.addEventListener('input', () => {
+                        this.updateSidebar();
+                        this.atualizarContadorGlobal();
+                    });
+
+                    // Botões de ação
+                    document.getElementById('btnSalvarVersao')?.addEventListener('click', () => this.salvarVersao());
+                    document.getElementById('btnExportarRoteiro')?.addEventListener('click', () => this.exportarTXT());
+                },
+
+                detectarTipo(texto) {
+                    texto = texto.trim();
+                    if (/^(INT\.|EXT\.|INT\/EXT\.)/i.test(texto)) return 'cena';
+                    if (texto.length > 0 && texto === texto.toUpperCase() && texto.length < 30) return 'personagem';
+                    if (/^(FADE IN|FADE OUT|CORTE PARA|DISSOLVE)/i.test(texto)) return 'transicao';
+                    if (texto.startsWith('(') && texto.endsWith(')')) return 'parentese';
+                    return 'acao';
+                },
+
+                aplicarFormatacao(linha, texto) {
+                    const tipo = this.detectarTipo(texto);
+                    linha.classList.remove('patika-cena', 'patika-personagem', 'patika-dialogo', 'patika-transicao', 'patika-parentese', 'patika-acao');
+                    
+                    switch(tipo) {
+                        case 'cena': linha.classList.add('patika-cena'); break;
+                        case 'personagem': linha.classList.add('patika-personagem'); break;
+                        case 'dialogo': linha.classList.add('patika-dialogo'); break;
+                        case 'transicao': linha.classList.add('patika-transicao'); break;
+                        case 'parentese': linha.classList.add('patika-parentese'); break;
+                        default: linha.classList.add('patika-acao');
+                    }
+                },
+
+                inserirElemento(tipo) {
+                    if (!this.editorElement) return;
+                    
+                    const linha = document.createElement('div');
+                    const textos = {
+                        cena: { class: 'patika-cena', text: 'INT. LOCAL - DIA' },
+                        personagem: { class: 'patika-personagem', text: 'PERSONAGEM' },
+                        dialogo: { class: 'patika-dialogo', text: 'Digite o diálogo...' },
+                        transicao: { class: 'patika-transicao', text: 'CORTE PARA:' },
+                        parentese: { class: 'patika-parentese', text: '(expressão)' },
+                        acao: { class: 'patika-acao', text: 'Ação...' }
+                    };
+                    
+                    const el = textos[tipo] || textos.acao;
+                    linha.className = el.class;
+                    linha.innerText = el.text;
+                    this.editorElement.appendChild(linha);
+                    this.colocarCursor(linha);
+                    this.updateSidebar();
+                },
+
+                colocarCursor(elemento) {
+                    const range = document.createRange();
+                    const sel = window.getSelection();
+                    range.selectNodeContents(elemento);
+                    range.collapse(false);
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                    elemento.focus();
+                },
+
+                updateSidebar() {
+                    if (!this.editorElement) return;
+                    
+                    const sidebar = document.getElementById('sidebarRight');
+                    const texto = this.editorElement.innerText;
+                    const palavras = updateWordCount(this.editorElement);
+                    
+                    let cenas = [], numCena = 1;
+                    for (let linha of this.editorElement.children) {
+                        if (linha.classList.contains('patika-cena')) {
+                            cenas.push({ index: numCena, texto: linha.innerText, element: linha });
+                            numCena++;
+                        }
+                    }
+
+                    let personagensSet = new Set();
+                    for (let linha of this.editorElement.children) {
+                        if (linha.classList.contains('patika-personagem')) {
+                            personagensSet.add(linha.innerText.trim());
+                        }
+                    }
+
+                    sidebar.innerHTML = `
+                        <div class="context-section">
+                            <h3>📋 CENAS (${cenas.length})</h3>
+                            <div id="listaCenasSidebar">
+                                ${cenas.map(c => `<div class="cena-item" data-index="${c.index - 1}">${c.index}. ${c.texto.substring(0, 40)}...</div>`).join('') || '<p style="color: var(--text-muted);">Nenhuma cena</p>'}
+                            </div>
+                        </div>
+                        <div class="context-section">
+                            <h3>📊 ESTATÍSTICAS</h3>
+                            <p><strong>Palavras:</strong> ${palavras}</p>
+                            <p><strong>Páginas (estimado):</strong> ${Math.ceil(palavras / 250)}</p>
+                            <p><strong>Personagens únicos:</strong> ${personagensSet.size}</p>
+                            <p><strong>Versões salvas:</strong> ${State.versoes.length}</p>
+                        </div>
+                        <div class="context-section">
+                            <h3>📝 NOTAS RÁPIDAS</h3>
+                            <textarea id="quickNotes" class="form-control" rows="4" placeholder="Suas anotações...">${State.notas[State.currentTab] || ''}</textarea>
+                        </div>
+                    `;
+
+                    // Adicionar evento de clique nas cenas
+                    document.querySelectorAll('#listaCenasSidebar .cena-item').forEach((item, idx) => {
+                        item.addEventListener('click', () => {
+                            const cenasArray = Array.from(this.editorElement.children).filter(c => c.classList.contains('patika-cena'));
+                            if (cenasArray[idx]) {
+                                cenasArray[idx].scrollIntoView({ behavior: 'smooth' });
+                            }
+                        });
+                    });
+
+                    // Evento para salvar notas
+                    document.getElementById('quickNotes')?.addEventListener('input', (e) => {
+                        State.notas[State.currentTab] = e.target.value;
+                        saveToStorage('notas', State.notas);
+                    });
+                },
+
+                salvarVersao() {
+                    const conteudo = this.editorElement?.innerHTML;
+                    if (!conteudo) return;
+                    
+                    State.versoes.unshift({
+                        data: new Date().toLocaleString(),
+                        conteudo: conteudo,
+                        palavras: updateWordCount(this.editorElement)
+                    });
+                    
+                    if (State.versoes.length > 15) State.versoes.pop();
+                    saveToStorage('versoes', State.versoes);
+                    
+                    document.getElementById('statusIndicator').innerText = '✓ salvo';
+                    setTimeout(() => document.getElementById('statusIndicator').innerText = '● pronto', 1500);
+                    this.updateSidebar();
+                },
+
+                exportarTXT() {
+                    if (!this.editorElement) return;
+                    const texto = this.editorElement.innerText;
+                    const blob = new Blob([texto], { type: 'text/plain' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `roteiro_${new Date().toISOString().slice(0,10)}.txt`;
+                    a.click();
+                },
+
+                loadContent() {
+                    const autosave = localStorage.getItem('patika_autosave');
+                    if (autosave && confirm('Restaurar última sessão automática?')) {
+                        this.editorElement.innerHTML = autosave;
+                        this.updateSidebar();
+                    }
+                }
+            };
+
+            // ============================================
+            // MÓDULO DINDO (Contratos)
+            // ============================================
+            const DindoModule = {
+                init() {
+                    this.render();
+                },
+
+                render() {
+                    const main = document.getElementById('mainContent');
+                    main.innerHTML = `
+                        <div class="content-header">
+                            <h2>📄 DINDO - Sistema de Contratos</h2>
+                        </div>
+                        <div class="dindo-form">
+                            <div class="form-group">
+                                <label for="dindoNome">👤 Nome do Talento:</label>
+                                <input type="text" class="form-control" id="dindoNome" placeholder="Ex: Patrick Sonata">
+                            </div>
+                            <div class="form-group">
+                                <label for="dindoBairro">📍 Bairro:</label>
+                                <input type="text" class="form-control" id="dindoBairro" placeholder="Ex: Cidade de Deus">
+                            </div>
+                            <div class="form-group">
+                                <label for="dindoFuncao">🎭 Função:</label>
+                                <select class="form-control" id="dindoFuncao">
+                                    <option value="Ator">Ator/Atriz</option>
+                                    <option value="Diretor">Diretor</option>
+                                    <option value="Roteirista">Roteirista</option>
+                                    <option value="Produtor">Produtor</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dindoProjeto">🎬 Projeto:</label>
+                                <input type="text" class="form-control" id="dindoProjeto" placeholder="Ex: Estelionato Carioca">
+                            </div>
+                            <button class="btn btn-accent w-100" id="btnGerarContrato">📄 GERAR CONTRATO</button>
+                            
+                            <div id="dindoPreview" class="contrato-preview ${State.ultimoContrato ? '' : 'hidden'}">
+                                <pre id="contratoTexto">${State.ultimoContrato || ''}</pre>
+                                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                    <button class="btn" id="btnBaixarContrato">💾 Baixar</button>
+                                    <button class="btn" id="btnCopiarContrato">📋 Copiar</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                    document.getElementById('btnGerarContrato')?.addEventListener('click', () => this.gerarContrato());
+                    document.getElementById('btnBaixarContrato')?.addEventListener('click', () => this.baixarContrato());
+                    document.getElementById('btnCopiarContrato')?.addEventListener('click', () => this.copiarContrato());
+
+                    this.updateSidebar();
+                },
+
+                gerarContrato() {
+                    const nome = document.getElementById('dindoNome')?.value || 'NÃO INFORMADO';
+                    const bairro = document.getElementById('dindoBairro')?.value || 'NÃO INFORMADO';
+                    const funcao = document.getElementById('dindoFuncao')?.value || 'Ator';
+                    const projeto = document.getElementById('dindoProjeto')?.value || 'NÃO INFORMADO';
+                    const data = new Date().toLocaleDateString('pt-BR');
+
+                    const contrato = `
+╔══════════════════════════════════════════════════════╗
+║         CONTRATO DE PRESTAÇÃO DE SERVIÇOS            ║
+║                     TVC STUDIOS                      ║
+╠══════════════════════════════════════════════════════╣
+║                                                      ║
+║  CONTRATADO(A): ${nome.padEnd(40)}  ║
+║  FUNÇÃO: ${funcao.padEnd(46)}  ║
+║  BAIRRO: ${bairro.padEnd(45)}  ║
+║  PROJETO: ${projeto.padEnd(43)}  ║
+║                                                      ║
+║  DATA DE EMISSÃO: ${data.padEnd(37)}  ║
+║                                                      ║
+║  Assinatura Direção TVC: __________________________ ║
+║  Assinatura Contratado: ___________________________ ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════╗
+║         CONTRATO DE CESSÃO DE IMAGEM E VOZ           ║
+╠══════════════════════════════════════════════════════╣
+║                                                      ║
+║  CEDENTE: ${nome.padEnd(45)}  ║
+║  PROJETO: ${projeto.padEnd(43)}  ║
+║                                                      ║
+║  DATA: ${data.padEnd(43)}  ║
+║                                                      ║
+╚══════════════════════════════════════════════════════╝
+`;
+
+                    State.ultimoContrato = contrato;
+                    localStorage.setItem('patika_ultimo_contrato', contrato);
+
+                    const preview = document.getElementById('dindoPreview');
+                    const textoEl = document.getElementById('contratoTexto');
+                    if (preview && textoEl) {
+                        preview.classList.remove('hidden');
+                        textoEl.innerText = contrato;
+                    }
+                },
+
+                baixarContrato() {
+                    if (!State.ultimoContrato) { alert('Gere um contrato primeiro!'); return; }
+                    const blob = new Blob([State.ultimoContrato], { type: 'text/plain' });
+                    const a = document.createElement('a');
+                    a.href = URL.createObjectURL(blob);
+                    a.download = `contrato_${Date.now()}.txt`;
+                    a.click();
+                },
+
+                copiarContrato() {
+                    if (!State.ultimoContrato) { alert('Gere um contrato primeiro!'); return; }
+                    navigator.clipboard.writeText(State.ultimoContrato).then(() => alert('✅ Contrato copiado!'));
+                },
+
+                updateSidebar() {
+                    const sidebar = document.getElementById('sidebarRight');
+                    sidebar.innerHTML = `
+                        <div class="context-section">
+                            <h3>📋 SOBRE O DINDO</h3>
+                            <p style="font-size: 0.9rem;">Sistema de geração de contratos baseado nos scripts originais encontrados no sistema (TVC_SOFTWARE).</p>
+                        </div>
+                        <div class="context-section">
+                            <h3>⚡ AÇÕES RÁPIDAS</h3>
+                            <button class="btn w-100" id="sidebarBaixar">💾 Baixar Último</button>
+                            <button class="btn w-100 mt-2" id="sidebarCopiar">📋 Copiar</button>
+                        </div>
+                    `;
+                    document.getElementById('sidebarBaixar')?.addEventListener('click', () => this.baixarContrato());
+                    document.getElementById('sidebarCopiar')?.addEventListener('click', () => this.copiarContrato());
+                }
+            };
+
+            // ============================================
+            // MÓDULO DE TEXTO SIMPLES (Sinopse, Argumento, etc)
+            // ============================================
+            const SimpleTextModule = {
+                currentTab: '',
+                content: {},
+
+                init(tabName) {
+                    this.currentTab = tabName;
+                    this.content = State.notas[tabName] || '';
+                    this.render();
+                },
+
+                render() {
+                    const main = document.getElementById('mainContent');
+                    const titulo = this.currentTab.toUpperCase();
+                    main.innerHTML = `
+                        <div class="content-header">
+                            <h2>${titulo}</h2>
+                            <button class="btn" id="btnSalvarTexto">💾 Salvar</button>
+                        </div>
+                        <textarea id="simpleTextArea" class="simple-textarea" placeholder="Escreva seu ${this.currentTab} aqui...">${this.content}</textarea>
+                    `;
+
+                    document.getElementById('btnSalvarTexto')?.addEventListener('click', () => this.salvar());
+
+                    const sidebar = document.getElementById('sidebarRight');
+                    sidebar.innerHTML = `
+                        <div class="context-section">
+                            <h3>📋 ${titulo}</h3>
+                            <p>Use este espaço para anotações e desenvolvimento do seu ${this.currentTab}.</p>
+                            <p style="color: var(--text-muted);">As alterações são salvas automaticamente.</p>
+                        </div>
+                    `;
+
+                    document.getElementById('simpleTextArea')?.addEventListener('input', (e) => {
+                        this.content = e.target.value;
+                        State.notas[this.currentTab] = this.content;
+                        saveToStorage('notas', State.notas);
+                    });
+                },
+
+                salvar() {
+                    alert(`✅ ${this.currentTab} salvo localmente!`);
+                }
+            };
+
+            // ============================================
+            // GERENCIADOR DE ABAS E MENU
+            // ============================================
+            function switchTab(tabId) {
+                State.currentTab = tabId;
+
+                // Atualizar abas do topo
+                document.querySelectorAll('.tab-item').forEach(tab => {
+                    tab.classList.toggle('active', tab.dataset.tab === tabId);
+                });
+
+                // Carregar módulo correspondente
+                switch(tabId) {
+                    case 'roteiro':
+                        RoteiroModule.init();
+                        break;
+                    case 'dindo':
+                        DindoModule.init();
+                        break;
+                    case 'sinopse':
+                    case 'argumento':
+                    case 'escaleta':
+                    case 'personagens':
+                        SimpleTextModule.init(tabId);
+                        break;
+                    default:
+                        console.warn('Aba desconhecida:', tabId);
+                }
+            }
+
+            // ============================================
+            // GERENCIADOR DE FERRAMENTAS DO MENU LATERAL
+            // ============================================
+            function setupMenuEvents() {
+                document.querySelectorAll('.menu-item[data-tool]').forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const tool = item.dataset.tool;
+
+                        // Remover active de todos e marcar o atual
+                        document.querySelectorAll('.menu-item').forEach(mi => mi.classList.remove('active'));
+                        item.classList.add('active');
+
+                        // Executar ação baseada na ferramenta
+                        switch(tool) {
+                            case 'roteiro-editor':
+                                switchTab('roteiro');
+                                break;
+                            case 'timeline':
+                                if (State.currentTab === 'roteiro') {
+                                    const cenas = Array.from(RoteiroModule.editorElement?.children || []).filter(c => c.classList.contains('patika-cena'));
+                                    let msg = '📊 TIMELINE DE CENAS:\n\n';
+                                    cenas.forEach((c, i) => msg += `${i+1}. ${c.innerText}\n`);
+                                    alert(msg || 'Nenhuma cena encontrada.');
+                                } else {
+                                    alert('A timeline só está disponível na aba Roteiro.');
+                                }
+                                break;
+                            case 'versoes':
+                                if (State.versoes.length === 0) {
+                                    alert('Nenhuma versão salva.');
+                                } else {
+                                    let msg = '📚 VERSÕES SALVAS:\n\n';
+                                    State.versoes.slice(0, 10).forEach((v, i) => msg += `${i+1}. ${v.data} (${v.palavras || '?'} palavras)\n`);
+                                    alert(msg);
+                                }
+                                break;
+                            case 'foco':
+                                document.querySelector('.sidebar-left').style.display = 'none';
+                                document.querySelector('.sidebar-right').style.display = 'none';
+                                setTimeout(() => {
+                                    document.querySelector('.sidebar-left').style.display = 'block';
+                                    document.querySelector('.sidebar-right').style.display = 'block';
+                                }, 5000);
+                                break;
+                            case 'escuro':
+                                document.body.classList.toggle('dark-mode');
+                                // Implementar tema escuro simples
+                                break;
+                            case 'typewriter':
+                                const editor = document.getElementById('roteiro-editor');
+                                if (editor) {
+                                    editor.style.background = editor.style.background === 'rgb(0, 0, 0)' ? '' : '#000';
+                                    editor.style.color = editor.style.color === 'rgb(0, 255, 0)' ? '' : '#0f0';
+                                }
+                                break;
+                            case 'exportar':
+                                if (State.currentTab === 'roteiro') {
+                                    RoteiroModule.exportarTXT();
+                                } else {
+                                    const area = document.getElementById('simpleTextArea');
+                                    if (area) {
+                                        const blob = new Blob([area.value], { type: 'text/plain' });
+                                        const a = document.createElement('a');
+                                        a.href = URL.createObjectURL(blob);
+                                        a.download = `${State.currentTab}_${Date.now()}.txt`;
+                                        a.click();
+                                    }
+                                }
+                                break;
+                            case 'importar':
+                                alert('Funcionalidade de importação em desenvolvimento.');
+                                break;
+                            case 'backup':
+                                const backup = {
+                                    versoes: State.versoes,
+                                    notas: State.notas,
+                                    ultimoContrato: State.ultimoContrato,
+                                    data: new Date().toISOString()
+                                };
+                                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                                const a = document.createElement('a');
+                                a.href = URL.createObjectURL(blob);
+                                a.download = `patika_backup_${Date.now()}.json`;
+                                a.click();
+                                break;
+                        }
+                    });
+                });
+            }
+
+            // ============================================
+            // AUTO-SAVE GLOBAL
+            // ============================================
+            function setupAutoSave() {
+                setInterval(() => {
+                    const editor = document.getElementById('roteiro-editor');
+                    if (editor) {
+                        localStorage.setItem('patika_autosave', editor.innerHTML);
+                    }
+                    
+                    const simpleArea = document.getElementById('simpleTextArea');
+                    if (simpleArea && State.currentTab !== 'roteiro' && State.currentTab !== 'dindo') {
+                        State.notas[State.currentTab] = simpleArea.value;
+                        saveToStorage('notas', State.notas);
+                    }
+                    
+                    document.getElementById('autoSaveIndicator').innerText = '💾 salvando...';
+                    setTimeout(() => document.getElementById('autoSaveIndicator').innerText = 'Auto-save ativo', 1000);
+                }, 30000);
+            }
+
+            // ============================================
+            // ATUALIZAR CONTADOR GLOBAL
+            // ============================================
+            function updateGlobalCounter() {
+                const editor = document.getElementById('roteiro-editor');
+                if (editor) {
+                    const palavras = updateWordCount(editor);
+                    document.getElementById('globalWordCount').innerText = `${palavras} palavras`;
+                }
+            }
+            window.atualizarContadorGlobal = updateGlobalCounter;
+
+            // ============================================
+            // INICIALIZAÇÃO
+            // ============================================
+            document.addEventListener('DOMContentLoaded', () => {
+                // Configurar troca de abas no topo
+                document.querySelectorAll('.tab-item').forEach(tab => {
+                    tab.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        switchTab(tab.dataset.tab);
+                    });
+                });
+
+                // Configurar menu lateral
+                setupMenuEvents();
+
+                // Iniciar com a aba Roteiro
+                switchTab('roteiro');
+
+                // Auto-save
+                setupAutoSave();
+
+                // Aplicar tema escuro se estava ativo
+                if (State.config.darkMode) {
+                    document.body.classList.add('dark-mode');
+                }
+
+                console.log('🚀 PATIKA Definitivo iniciado com sucesso!');
+            });
+
+        })();
     </script>
 </body>
 </html>
