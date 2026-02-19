@@ -902,3 +902,93 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+
+/* ============================================ */
+/* MODO CARTÕES (INDEX CARDS)                  */
+/* ============================================ */
+
+function gerarCartoes() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    const texto = editor.value;
+
+    const cenas = extrairCenas(texto);
+
+    const container = document.getElementById("modoCartoesContainer");
+
+    if (!container) return;
+
+    container.innerHTML = "";
+
+    cenas.forEach((cena, index) => {
+
+        const card = document.createElement("div");
+
+        card.className = "patika-card";
+
+        card.draggable = true;
+
+        card.innerHTML = `
+
+            <div class="card-titulo">${cena.titulo}</div>
+
+            <div class="card-numero">Cena ${index + 1}</div>
+
+        `;
+
+        card.onclick = () => irParaLinha(cena.linha);
+
+        container.appendChild(card);
+
+    });
+
+}
+
+window.gerarCartoes = gerarCartoes;
+
+
+function ativarModoCartoes() {
+
+    const container = document.getElementById("modoCartoesContainer");
+
+    if (!container) return;
+
+    container.style.display = "grid";
+
+    gerarCartoes();
+
+}
+
+window.ativarModoCartoes = ativarModoCartoes;
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const fab = document.querySelector(".fab-container");
+
+    if (!fab) return;
+
+    const btn = document.createElement("button");
+
+    btn.className = "fab-btn";
+
+    btn.innerHTML = "🗂";
+
+    btn.title = "Modo cartões";
+
+    btn.onclick = ativarModoCartoes;
+
+    fab.appendChild(btn);
+
+});
+
+
+document.addEventListener("input", function(){
+
+    gerarCartoes();
+
+});
+
