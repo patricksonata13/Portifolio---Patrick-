@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PATIKA · Plataforma de Roteiro</title>
+    <title>PATIKA · Plataforma de Roteiro (Celtx + Final Draft)</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/patika.css">
     <style>
-        /* Garantir que o estilo da PATIKA não vaze para o resto do site */
         body {
             background: #f5f0e8 !important;
         }
     </style>
 </head>
 <body class="patika-page">
-    <!-- Único link com o resto do site - VOLTAR AO PORTFÓLIO -->
     <a href="../index.html" class="voltar">← VOLTAR AO PORTFÓLIO</a>
     
     <div class="patika-container">
@@ -22,7 +20,7 @@
         <div class="patika-header">
             <div>
                 <h1>PATIKA</h1>
-                <p class="patika-subtitle">Plataforma de Desenvolvimento de Roteiro</p>
+                <p class="patika-subtitle">Inspirado em Celtx & Final Draft</p>
             </div>
             <div class="projeto-info" id="projetoInfo">
                 <span id="projetoNome">📁 projeto_sem_título</span>
@@ -66,18 +64,21 @@
                 </div>
             </div>
             
-            <!-- COLUNA CENTRAL - EDITOR -->
+            <!-- COLUNA CENTRAL - EDITOR COM BARRA DE FERRAMENTAS -->
             <div class="patika-coluna editor">
                 <div class="editor-header">
-                    <h2 id="secaoTitulo">SINOPSE</h2>
+                    <h2 id="secaoTitulo">ROTEIRO</h2>
                     <div class="editor-acoes">
                         <button class="patika-btn icone" onclick="salvarConteudo()" title="Salvar (Ctrl+S)">💾</button>
                         <button class="patika-btn icone" onclick="configurarProjeto()" title="Configurações">⚙️</button>
                     </div>
                 </div>
                 
+                <!-- BARRA DE FERRAMENTAS CELTX -->
+                <!-- Será inserida via JavaScript -->
+                
                 <div class="editor-conteudo">
-                    <textarea id="conteudoTexto" placeholder="Escreva aqui a sinopse da sua história..."></textarea>
+                    <textarea id="conteudoTexto" placeholder="Escreva aqui seu roteiro..."></textarea>
                 </div>
                 
                 <div class="editor-footer">
@@ -112,19 +113,39 @@
                     </div>
                 </div>
                 
-                <!-- FERRAMENTAS ADICIONAIS -->
+                <!-- FERRAMENTAS -->
                 <div class="ferramentas-box">
                     <h3>🔧 FERRAMENTAS</h3>
-                    <div id="ferramentasContainer"></div>
-                    <button class="patika-btn secundario" onclick="restaurarBackup()" style="margin-top: 10px;">
-                        📂 Restaurar Backup
-                    </button>
+                    <div class="ferramenta-item">
+                        <span>🎬 Inserir Cena</span>
+                        <button class="ferramenta-btn" onclick="aplicarFormatacaoCena()">INT/EXT</button>
+                    </div>
+                    <div class="ferramenta-item">
+                        <span>👤 Personagem</span>
+                        <button class="ferramenta-btn" onclick="aplicarFormatacaoPersonagem()">Inserir</button>
+                    </div>
+                    <div class="ferramenta-item">
+                        <span>💬 Diálogo</span>
+                        <button class="ferramenta-btn" onclick="aplicarFormatacaoDialogo()">Inserir</button>
+                    </div>
+                    <div class="ferramenta-item">
+                        <span>📊 Relatório</span>
+                        <button class="ferramenta-btn" onclick="gerarRelatorioCenas()">Cenas</button>
+                    </div>
+                    <div class="ferramenta-item">
+                        <span>📈 Stats</span>
+                        <button class="ferramenta-btn" onclick="mostrarEstatisticasAvancadas()">Análise</button>
+                    </div>
+                    <div class="ferramenta-item">
+                        <span>📤 Exportar</span>
+                        <button class="ferramenta-btn" onclick="mostrarOpcoesExportacao()">Formatos</button>
+                    </div>
                 </div>
                 
                 <!-- DICAS -->
                 <div class="dicas-box">
-                    <h3>💡 DICA DO DIA</h3>
-                    <p id="dicaDoDia">Comece com uma sinopse de 1 parágrafo resumindo toda a história.</p>
+                    <h3>💡 DICA FINAL DRAFT</h3>
+                    <p id="dicaDoDia">Use Tab para avançar o cursor rapidamente (atalho estilo Final Draft)</p>
                 </div>
                 
                 <!-- ESTATÍSTICAS -->
@@ -137,6 +158,10 @@
                     <div class="estatistica-item">
                         <span>Progresso:</span>
                         <span id="progresso">0%</span>
+                    </div>
+                    <div class="estatistica-item">
+                        <span>Cenas:</span>
+                        <span id="totalCenas">0</span>
                     </div>
                 </div>
             </div>

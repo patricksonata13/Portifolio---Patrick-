@@ -414,3 +414,214 @@ body.patika-page {
         margin-bottom: 20px;
     }
 }
+
+/* ============================================ */
+/* FUNCIONALIDADES INSPIRADAS NO CELTX E FINAL DRAFT */
+/* ============================================ */
+
+/* Estilo de formatação de roteiro */
+.roteiro-formatado {
+    font-family: 'Courier New', monospace;
+    font-size: 12pt;
+    line-height: 1.5;
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 40px;
+}
+
+/* Cabeçalho de cena */
+.scene-header {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 20px 0 10px;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--verde-claro);
+}
+
+/* Nome do personagem (centralizado) */
+.character-name {
+    text-align: center;
+    font-weight: bold;
+    margin: 15px 0 5px;
+    text-transform: uppercase;
+}
+
+/* Diálogo */
+.dialog {
+    margin-left: 100px;
+    margin-right: 50px;
+    margin-bottom: 10px;
+}
+
+/* Direção de cena/parenteses */
+.parenthetical {
+    margin-left: 150px;
+    font-style: italic;
+    color: #666;
+}
+
+/* Transição */
+.transition {
+    text-align: right;
+    font-weight: bold;
+    margin: 20px 0;
+    text-transform: uppercase;
+}
+
+/* Número de página estilo Final Draft */
+.page-number {
+    text-align: right;
+    color: #999;
+    font-size: 10pt;
+    margin: 10px 0;
+}
+
+/* Barra de ferramentas estilo Celtx */
+.celtx-toolbar {
+    background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);
+    border-bottom: 2px solid var(--verde-claro);
+    padding: 10px;
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.celtx-toolbar button {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.celtx-toolbar button:hover {
+    background: var(--verde-claro);
+    color: white;
+    border-color: var(--verde-principal);
+}
+
+/* Relatório de cenas */
+.cenas-relatorio {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.cena-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border-bottom: 1px dashed #eee;
+}
+
+.cena-numero {
+    font-weight: bold;
+    color: var(--verde-principal);
+    width: 50px;
+}
+
+.cena-descricao {
+    flex: 1;
+}
+
+.cena-personagens {
+    color: #666;
+    font-size: 0.9rem;
+    width: 150px;
+}
+
+/* Estatísticas de personagens */
+.personagem-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.personagem-card {
+    background: var(--areia);
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    padding: 10px;
+}
+
+.personagem-nome {
+    font-weight: bold;
+    color: var(--verde-principal);
+}
+
+.personagem-falas {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Notas de rodapé estilo Final Draft */
+.fd-footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--verde-claro);
+    font-size: 0.8rem;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Modal de exportação */
+.export-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    z-index: 10000;
+    justify-content: center;
+    align-items: center;
+}
+
+.export-modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.export-modal h3 {
+    color: var(--verde-principal);
+    margin-bottom: 20px;
+}
+
+.export-opcao {
+    padding: 15px;
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.export-opcao:hover {
+    background: var(--areia);
+    border-color: var(--verde-claro);
+}
+
+.export-opcao h4 {
+    margin: 0 0 5px;
+    color: var(--verde-principal);
+}
+
+.export-opcao p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
