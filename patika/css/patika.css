@@ -1,24 +1,27 @@
 /* ============================================ */
-/* PATIKA · EDITOR PROFISSIONAL DE ROTEIRO     */
-/* Design isolado - Não afeta outras abas      */
+/* PATIKA - EDITOR PROFISSIONAL DE ROTEIRO     */
+/* DESIGN CONFORME ESPECIFICAÇÃO UI/UX         */
+/* Fundo branco · Linhas verdes · Minimalista  */
 /* ============================================ */
 
 :root {
-    --verde-principal: #3a5e3a;
-    --verde-claro: #a8c3a0;
-    --verde-hover: #8aad80;
-    --areia: #f5f0e8;
-    --areia-escura: #e8dfd2;
+    --verde-principal: #6c8f7d;
+    --verde-claro: #8aad80;
+    --verde-hover: #5a7a68;
+    --branco: #ffffff;
+    --cinza-claro: #f5f5f5;
+    --cinza-medio: #cccccc;
+    --cinza-escuro: #333333;
     --texto-principal: #1d1d1f;
-    --texto-secundario: #5a5a5a;
-    --borda: #d4c8b8;
+    --texto-secundario: #666666;
 }
 
 body {
-    background: var(--areia);
+    background: var(--cinza-claro);
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--texto-principal);
 }
 
 /* Botão voltar - único link com o site principal */
@@ -26,391 +29,304 @@ body {
     position: fixed;
     top: 20px;
     left: 20px;
-    background: var(--texto-principal);
+    background: var(--cinza-escuro);
     color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 8px 16px;
+    border-radius: 4px;
     text-decoration: none;
-    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    font-family: 'Inter', sans-serif;
     z-index: 1000;
-    transition: background 0.3s;
+    transition: background 0.2s;
 }
 
 .voltar:hover {
-    background: #333;
+    background: #000;
 }
 
 /* Container principal */
 .patika-container {
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 40px 20px;
 }
 
-/* Header */
+/* ============================================ */
+/* HEADER SUPERIOR                              */
+/* ============================================ */
 .patika-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
-    padding-bottom: 20px;
-    border-bottom: 2px solid var(--verde-claro);
+    padding: 0 0 16px 0;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--verde-principal);
+    background: var(--branco);
 }
 
 .patika-header h1 {
-    font-size: 3rem;
-    color: var(--verde-principal);
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--texto-principal);
     margin: 0;
     letter-spacing: -0.5px;
-}
-
-.patika-subtitle {
-    color: var(--texto-secundario);
-    font-size: 1rem;
-    margin-top: 5px;
+    font-family: 'Inter', sans-serif;
 }
 
 .projeto-info {
-    background: white;
-    padding: 15px 25px;
-    border-radius: 12px;
-    border: 1px solid var(--borda);
     display: flex;
     align-items: center;
-    gap: 15px;
-}
-
-#projetoNome {
-    font-weight: 600;
-    color: var(--verde-principal);
-}
-
-.salvo-status {
-    color: #8aad80;
-    font-size: 0.9rem;
-}
-
-/* Grid principal - 3 colunas */
-.patika-grid {
-    display: grid;
-    grid-template-columns: 280px 1fr 280px;
-    gap: 30px;
-    min-height: 700px;
-}
-
-/* Colunas */
-.patika-coluna {
-    background: white;
-    border: 1px solid var(--borda);
-    border-radius: 16px;
-    padding: 25px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-    display: flex;
-    flex-direction: column;
-}
-
-.patika-coluna h2 {
-    color: var(--verde-principal);
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--verde-claro);
-    letter-spacing: 0.5px;
-}
-
-.patika-coluna h3 {
-    color: var(--texto-principal);
-    font-size: 1rem;
-    margin: 20px 0 10px;
-}
-
-/* ========== COLUNA ESQUERDA - ETAPAS ========== */
-.etapas-lista {
-    flex: 1;
-    margin-bottom: 30px;
-}
-
-.etapa-item {
-    display: flex;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    border: 1px solid transparent;
-}
-
-.etapa-item:hover {
-    background: var(--areia);
-    border-color: var(--verde-claro);
-}
-
-.etapa-item.ativa {
-    background: var(--verde-claro);
-    color: white;
-}
-
-.etapa-numero {
-    font-family: 'Courier New', monospace;
-    font-size: 0.9rem;
-    width: 40px;
-    color: var(--texto-secundario);
-}
-
-.etapa-item.ativa .etapa-numero {
-    color: white;
-}
-
-.etapa-nome {
-    font-weight: 600;
+    gap: 16px;
     font-size: 0.95rem;
 }
 
-/* Lista de projetos */
-.projetos-sidebar {
-    border-top: 1px solid var(--borda);
-    padding-top: 20px;
+#projetoNome {
+    font-weight: 500;
+    color: var(--texto-principal);
 }
 
-.projetos-lista {
-    max-height: 200px;
-    overflow-y: auto;
-    margin-top: 15px;
-}
-
-.projeto-item {
-    padding: 10px;
-    border-bottom: 1px solid var(--areia);
-    cursor: pointer;
-    transition: background 0.2s;
+.salvo-status {
+    color: var(--verde-principal);
     font-size: 0.9rem;
 }
 
-.projeto-item:hover {
-    background: var(--areia);
-}
-
-.projeto-item.ativo {
-    border-left: 3px solid var(--verde-claro);
-    background: var(--areia);
-}
-
-/* ========== COLUNA CENTRAL - EDITOR ========== */
-.editor {
+/* ============================================ */
+/* BARRA DE NAVEGAÇÃO (ABAS)                   */
+/* ============================================ */
+.nav-tabs {
     display: flex;
-    flex-direction: column;
-    padding: 0;
-    overflow: hidden;
+    gap: 32px;
+    padding: 0 0 16px 0;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--verde-principal);
+    background: var(--branco);
 }
 
-.editor-header {
-    padding: 20px 25px;
-    border-bottom: 1px solid var(--borda);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-}
-
-.editor-header h2 {
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-
-.editor-acoes {
-    display: flex;
-    gap: 10px;
-}
-
-.patika-btn.icone {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--texto-secundario);
-    font-size: 1.2rem;
-    border: 1px solid transparent;
+.tab-item {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--cinza-medio);
     cursor: pointer;
+    padding: 4px 0;
     transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-.patika-btn.icone:hover {
-    background: var(--areia);
+.tab-item:hover {
     color: var(--verde-principal);
-    border-color: var(--verde-claro);
 }
 
-/* Área de edição */
-.editor-conteudo {
-    flex: 1;
-    padding: 25px;
-    background: var(--areia);
+.tab-item.ativa {
+    color: var(--verde-principal);
+    border-bottom: 2px solid var(--verde-principal);
+}
+
+/* ============================================ */
+/* ÁREA PRINCIPAL DE EDIÇÃO                     */
+/* ============================================ */
+.editor-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: var(--branco);
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.section-title span {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--verde-principal);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-title h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--texto-principal);
+    margin: 0;
 }
 
 #conteudoTexto {
     width: 100%;
-    height: 100%;
     min-height: 500px;
-    padding: 20px;
+    padding: 0;
     border: none;
-    background: white;
-    font-family: 'Courier New', monospace;
+    background: var(--branco);
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
     font-size: 16px;
     line-height: 1.8;
     color: var(--texto-principal);
-    resize: none;
-    border-radius: 8px;
-    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+    resize: vertical;
+    outline: none;
 }
 
-#conteudoTexto:focus {
-    outline: 2px solid var(--verde-claro);
+#conteudoTexto::placeholder {
+    color: var(--cinza-medio);
+    font-style: italic;
 }
 
-.editor-footer {
-    padding: 15px 25px;
-    border-top: 1px solid var(--borda);
+/* ============================================ */
+/* BOTÕES FLUTUANTES (FAB)                      */
+/* ============================================ */
+.fab-container {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
     display: flex;
-    justify-content: space-between;
-    color: var(--texto-secundario);
-    font-size: 0.9rem;
-    background: white;
+    flex-direction: column;
+    gap: 12px;
 }
 
-/* ========== COLUNA DIREITA - FERRAMENTAS ========== */
-.atalhos-lista {
-    margin-bottom: 30px;
-}
-
-.atalho-item {
+.fab-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--verde-principal);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(108,143,125,0.3);
     display: flex;
     align-items: center;
-    padding: 12px;
-    margin-bottom: 5px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.2s;
+    justify-content: center;
 }
 
-.atalho-item:hover {
-    background: var(--areia);
+.fab-btn:hover {
+    background: var(--verde-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(108,143,125,0.4);
 }
 
-.atalho-tecla {
-    font-family: 'Courier New', monospace;
-    color: var(--verde-claro);
-    width: 30px;
-    font-size: 1.1rem;
+/* ============================================ */
+/* FOOTER / STATUS BAR                          */
+/* ============================================ */
+.footer-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: var(--branco);
+    border-top: 1px solid var(--verde-principal);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+    font-size: 0.85rem;
+    color: var(--texto-secundario);
+    font-family: 'IBM Plex Mono', monospace;
+    z-index: 100;
 }
 
-.atalho-desc {
-    font-size: 0.95rem;
-}
-
-/* Ferramentas */
-.ferramentas-box, .dicas-box, .estatisticas-box {
-    background: var(--areia);
-    padding: 20px;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-.ferramentas-box h3, .dicas-box h3, .estatisticas-box h3 {
+.footer-left span {
     color: var(--verde-principal);
-    margin: 0 0 15px;
-    font-size: 1rem;
+    font-weight: 500;
+}
+
+.footer-center {
+    color: var(--cinza-medio);
+}
+
+.footer-right {
+    color: var(--verde-principal);
+}
+
+/* ============================================ */
+/* FERRAMENTAS (COLUNA DIREITA)                */
+/* ============================================ */
+.ferramentas-sidebar {
+    position: fixed;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 240px;
+    background: var(--branco);
+    border: 1px solid var(--cinza-claro);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.ferramentas-sidebar h3 {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--verde-principal);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .ferramenta-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background: white;
-    border-radius: 6px;
-    margin-bottom: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--cinza-claro);
+    font-size: 0.9rem;
 }
 
-.ferramenta-item span {
-    font-size: 0.9rem;
+.ferramenta-item:last-child {
+    border-bottom: none;
 }
 
 .ferramenta-btn {
-    background: var(--verde-claro);
-    color: white;
-    border: none;
-    padding: 5px 12px;
+    background: transparent;
+    border: 1px solid var(--verde-principal);
+    color: var(--verde-principal);
+    padding: 4px 12px;
     border-radius: 4px;
-    cursor: pointer;
     font-size: 0.8rem;
-    transition: background 0.2s;
+    cursor: pointer;
+    transition: all 0.2s;
 }
 
 .ferramenta-btn:hover {
-    background: var(--verde-hover);
-}
-
-.dicas-box p {
-    color: var(--texto-secundario);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0;
-}
-
-.estatistica-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 0.9rem;
-}
-
-/* Botões principais */
-.patika-btn {
-    background: var(--verde-claro);
+    background: var(--verde-principal);
     color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-family: 'Courier New', monospace;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s;
-    width: 100%;
-    font-size: 0.95rem;
 }
 
-.patika-btn:hover {
-    background: var(--verde-hover);
-    transform: translateY(-1px);
-}
-
-.patika-btn.secundario {
-    background: white;
-    color: var(--verde-principal);
-    border: 1px solid var(--verde-claro);
-}
-
-.patika-btn.secundario:hover {
-    background: var(--areia);
-}
-
-/* Responsividade */
-@media (max-width: 1200px) {
-    .patika-grid {
-        grid-template-columns: 250px 1fr 250px;
-        gap: 20px;
+/* ============================================ */
+/* RESPONSIVIDADE                               */
+/* ============================================ */
+@media (max-width: 1024px) {
+    .ferramentas-sidebar {
+        display: none;
     }
 }
 
-@media (max-width: 992px) {
-    .patika-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 768px) {
+    .patika-container {
+        padding: 20px 16px;
     }
     
-    .patika-coluna {
-        margin-bottom: 20px;
+    .nav-tabs {
+        gap: 16px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+    }
+    
+    .tab-item {
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    
+    .editor-container {
+        padding: 24px;
+    }
+    
+    .footer-bar {
+        font-size: 0.75rem;
+        padding: 0 12px;
     }
 }

@@ -6,140 +6,81 @@
     <title>PATIKA · Editor Profissional de Roteiro</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="css/patika.css">
-    <style>
-        body {
-            background: #f5f0e8 !important;
-        }
-    </style>
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=IBM+Plex+Mono&display=swap" rel="stylesheet">
 </head>
-<body class="patika-page">
-    <!-- Único link com o site principal -->
-    <a href="../index.html" class="voltar">← VOLTAR AO PORTFÓLIO</a>
+<body>
+    <!-- Botão voltar -->
+    <a href="../index.html" class="voltar">← VOLTAR</a>
     
+    <!-- HEADER SUPERIOR -->
     <div class="patika-container">
-        <!-- HEADER -->
         <div class="patika-header">
-            <div>
-                <h1>PATIKA</h1>
-                <p class="patika-subtitle">Editor Profissional de Roteiro</p>
-            </div>
-            <div class="projeto-info" id="projetoInfo">
+            <h1>PATIKA</h1>
+            <div class="projeto-info">
                 <span id="projetoNome">📁 projeto_sem_título</span>
-                <span class="salvo-status" id="salvoStatus">✓ salvo</span>
+                <span class="salvo-status" id="salvoStatus">salvo</span>
             </div>
         </div>
         
-        <!-- GRID PRINCIPAL - 3 COLUNAS -->
-        <div class="patika-grid">
-            
-            <!-- COLUNA ESQUERDA - ETAPAS E PROJETOS -->
-            <div class="patika-coluna etapas">
-                <h2>ETAPAS</h2>
-                <div class="etapas-lista">
-                    <div class="etapa-item ativa" onclick="mudarSecao('sinopse')">
-                        <span class="etapa-numero">01</span>
-                        <span class="etapa-nome">SINOPSE</span>
-                    </div>
-                    <div class="etapa-item" onclick="mudarSecao('argumento')">
-                        <span class="etapa-numero">02</span>
-                        <span class="etapa-nome">ARGUMENTO</span>
-                    </div>
-                    <div class="etapa-item" onclick="mudarSecao('escaleta')">
-                        <span class="etapa-numero">03</span>
-                        <span class="etapa-nome">ESCALETA</span>
-                    </div>
-                    <div class="etapa-item" onclick="mudarSecao('roteiro')">
-                        <span class="etapa-numero">04</span>
-                        <span class="etapa-nome">ROTEIRO</span>
-                    </div>
-                    <div class="etapa-item" onclick="mudarSecao('personagens')">
-                        <span class="etapa-numero">05</span>
-                        <span class="etapa-nome">PERSONAGENS</span>
-                    </div>
-                </div>
-                
-                <!-- PROJETOS -->
-                <div class="projetos-sidebar">
-                    <h3>MEUS PROJETOS</h3>
-                    <button class="patika-btn secundario" onclick="novoProjeto()" style="margin-bottom: 15px;">+ NOVO PROJETO</button>
-                    <div id="listaProjetos" class="projetos-lista"></div>
-                </div>
+        <!-- BARRA DE NAVEGAÇÃO (ABAS) -->
+        <div class="nav-tabs">
+            <div class="tab-item ativa" onclick="mudarSecao('sinopse')">SINOPSE</div>
+            <div class="tab-item" onclick="mudarSecao('argumento')">ARGUMENTO</div>
+            <div class="tab-item" onclick="mudarSecao('escaleta')">ESCALETA</div>
+            <div class="tab-item" onclick="mudarSecao('roteiro')">ROTEIRO</div>
+            <div class="tab-item" onclick="mudarSecao('personagens')">PERSONAGENS</div>
+            <div class="tab-item" onclick="mudarSecao('atalhos')">ATALHOS</div>
+        </div>
+        
+        <!-- ÁREA PRINCIPAL DE EDIÇÃO -->
+        <div class="editor-container">
+            <div class="section-title">
+                <span>✎</span>
+                <h2 id="secaoTitulo">SINOPSE</h2>
             </div>
-            
-            <!-- COLUNA CENTRAL - EDITOR PRINCIPAL -->
-            <div class="patika-coluna editor">
-                <div class="editor-header">
-                    <h2 id="secaoTitulo">SINOPSE</h2>
-                    <div class="editor-acoes">
-                        <button class="patika-btn icone" onclick="salvarConteudo()" title="Salvar (Ctrl+S)">💾</button>
-                        <button class="patika-btn icone" onclick="configurarProjeto()" title="Configurações">⚙️</button>
-                    </div>
-                </div>
-                
-                <div class="editor-conteudo">
-                    <textarea id="conteudoTexto" placeholder="Escreva aqui a sinopse da sua história..."></textarea>
-                </div>
-                
-                <div class="editor-footer">
-                    <span id="statusPalavras">0 palavras</span>
-                    <span id="ultimoSalvo">último salvamento: agora</span>
-                </div>
-            </div>
-            
-            <!-- COLUNA DIREITA - FERRAMENTAS E ATALHOS -->
-            <div class="patika-coluna atalhos">
-                <h2>ATALHOS</h2>
-                <div class="atalhos-lista">
-                    <div class="atalho-item" onclick="mudarSecao('sinopse')">
-                        <span class="atalho-tecla">▷</span>
-                        <span class="atalho-desc">SINOPSE</span>
-                    </div>
-                    <div class="atalho-item" onclick="mudarSecao('argumento')">
-                        <span class="atalho-tecla">▷</span>
-                        <span class="atalho-desc">ARGUMENTO</span>
-                    </div>
-                    <div class="atalho-item" onclick="mudarSecao('escaleta')">
-                        <span class="atalho-tecla">▷</span>
-                        <span class="atalho-desc">ESCALETA</span>
-                    </div>
-                    <div class="atalho-item" onclick="mudarSecao('roteiro')">
-                        <span class="atalho-tecla">▷</span>
-                        <span class="atalho-desc">ROTEIRO</span>
-                    </div>
-                    <div class="atalho-item" onclick="mudarSecao('personagens')">
-                        <span class="atalho-tecla">▷</span>
-                        <span class="atalho-desc">PERSONAGENS</span>
-                    </div>
-                </div>
-                
-                <!-- FERRAMENTAS -->
-                <div class="ferramentas-box">
-                    <h3>🔧 FERRAMENTAS</h3>
-                    <div id="ferramentasContainer"></div>
-                    <button class="patika-btn secundario" onclick="restaurarBackup()" style="margin-top: 10px;">
-                        📂 Restaurar Backup
-                    </button>
-                </div>
-                
-                <!-- DICAS -->
-                <div class="dicas-box">
-                    <h3>💡 DICA DO DIA</h3>
-                    <p id="dicaDoDia">Comece com uma sinopse de 1 parágrafo resumindo toda a história.</p>
-                </div>
-                
-                <!-- ESTATÍSTICAS -->
-                <div class="estatisticas-box">
-                    <h3>📊 ESTATÍSTICAS</h3>
-                    <div class="estatistica-item">
-                        <span>Total de palavras:</span>
-                        <span id="totalPalavras">0</span>
-                    </div>
-                    <div class="estatistica-item">
-                        <span>Progresso:</span>
-                        <span id="progresso">0%</span>
-                    </div>
-                </div>
-            </div>
+            <textarea id="conteudoTexto" placeholder="Escreva aqui a sinopse da sua história..."></textarea>
+        </div>
+    </div>
+    
+    <!-- BOTÕES FLUTUANTES (FAB) -->
+    <div class="fab-container">
+        <button class="fab-btn" onclick="salvarConteudo()" title="Salvar">💾</button>
+        <button class="fab-btn" onclick="configurarProjeto()" title="Configurações">⚙️</button>
+        <button class="fab-btn" onclick="exportarRoteiro()" title="Exportar">📄</button>
+    </div>
+    
+    <!-- FOOTER STATUS BAR -->
+    <div class="footer-bar">
+        <div class="footer-left">
+            <span id="projetoNomeFooter">projeto_sem_título</span>
+        </div>
+        <div class="footer-center">
+            <span id="statusPalavras">0 palavras</span>
+        </div>
+        <div class="footer-right">
+            <span id="ultimoSalvo">agora</span>
+        </div>
+    </div>
+    
+    <!-- FERRAMENTAS SIDEBAR (OPCIONAL - PODE SER ATIVADA) -->
+    <div class="ferramentas-sidebar">
+        <h3>🔧 FERRAMENTAS</h3>
+        <div class="ferramenta-item">
+            <span>Modelo</span>
+            <button class="ferramenta-btn" onclick="carregarModelo()">Carregar</button>
+        </div>
+        <div class="ferramenta-item">
+            <span>Backup</span>
+            <button class="ferramenta-btn" onclick="fazerBackup()">Salvar</button>
+        </div>
+        <div class="ferramenta-item">
+            <span>Restaurar</span>
+            <button class="ferramenta-btn" onclick="restaurarBackup()">📂</button>
+        </div>
+        <div class="ferramenta-item">
+            <span>Detalhes</span>
+            <button class="ferramenta-btn" onclick="mostrarDetalhesPalavras()">📊</button>
         </div>
     </div>
     
