@@ -527,3 +527,8 @@ h1 {
     background: #a8c3a0 !important;
     color: #1d3b1d !important;
 }
+
+/* Ajuste após remover a foto */
+.main-container {
+    padding-top: 40px;
+}
