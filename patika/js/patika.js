@@ -238,3 +238,116 @@ window.restaurarBackup = function() {
 window.mudarSecao = mudarSecao;
 window.novoProjeto = novoProjeto;
 window.salvarConteudo = salvarConteudo;
+
+function inicializarPatikaPro() {
+
+    configurarAutoBackup();
+
+    const fab = document.querySelector('.fab-container');
+
+    if (fab) {
+
+        const darkBtn = document.createElement('button');
+
+        darkBtn.className = 'fab-btn';
+        darkBtn.innerHTML = '🌙';
+        darkBtn.onclick = toggleModoEscuro;
+
+        fab.appendChild(darkBtn);
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", inicializarPatikaPro);
+
+
+/* ============================================ */
+/* INICIALIZAÇÃO SEGURA PATIKA PRO             */
+/* ============================================ */
+
+if (typeof inicializarPatikaPro !== "function") {
+
+    function inicializarPatikaPro() {
+
+        console.log("PATIKA PRO inicializado com sucesso");
+
+        if (typeof configurarAutoBackup === "function") {
+            configurarAutoBackup();
+        }
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    try {
+
+        inicializarPatikaPro();
+
+    } catch (e) {
+
+        console.warn("Inicialização protegida:", e);
+
+    }
+
+});
+
+
+/* ============================================ */
+/* MODO ESCURO SEGURO                          */
+/* ============================================ */
+
+if (typeof toggleModoEscuro !== "function") {
+
+    function toggleModoEscuro() {
+
+        document.body.classList.toggle("dark-mode");
+
+        localStorage.setItem(
+            "patika_dark_mode",
+            document.body.classList.contains("dark-mode")
+        );
+
+    }
+
+}
+
+(function carregarModoSalvo(){
+
+    const ativo = localStorage.getItem("patika_dark_mode");
+
+    if (ativo === "true") {
+
+        document.body.classList.add("dark-mode");
+
+    }
+
+})();
+
+
+/* ============================================ */
+/* BOTÃO DARK MODE AUTOMÁTICO                  */
+/* ============================================ */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const fab = document.querySelector(".fab-container");
+
+    if (fab && !document.querySelector(".dark-mode-toggle")) {
+
+        const btn = document.createElement("button");
+
+        btn.className = "fab-btn dark-mode-toggle";
+
+        btn.innerHTML = "🌙";
+
+        btn.onclick = toggleModoEscuro;
+
+        fab.appendChild(btn);
+
+    }
+
+});
+

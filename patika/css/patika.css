@@ -327,3 +327,84 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* ============================================ */
+/* MODAL ANIMAÇÃO */
+/* ============================================ */
+
+.modal-content {
+    animation: slideIn 0.3s ease;
+}
+
+/* Botão modo escuro */
+.dark-mode-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 32px;
+    z-index: 1000;
+}
+
+/* Modal versões */
+.versoes-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--background-editor);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 32px;
+    max-width: 500px;
+}
+
+/* animação */
+@keyframes slideIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ============================================ */
+/* GARANTIA SISTEMA DE CORES PATIKA            */
+/* ============================================ */
+
+body {
+
+    background: var(--background-app, #f3f4f3);
+    color: var(--text-primary, #2f2f2f);
+
+}
+
+.patika-editor {
+
+    background: var(--background-editor, #ffffff);
+
+}
+
+.tab-item.active {
+
+    color: var(--accent-primary, #6f8f7b);
+
+}
+
+.fab-btn {
+
+    background: var(--accent-primary, #6f8f7b);
+
+}
+
+.fab-btn:hover {
+
+    background: var(--accent-hover, #5f7d6b);
+
+}
+
