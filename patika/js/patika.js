@@ -730,3 +730,175 @@ function ativarModoFoco() {
 
 window.ativarModoFoco = ativarModoFoco;
 
+
+/* ============================================ */
+/* SISTEMA DE PERSONAGENS                      */
+/* ============================================ */
+
+function extrairPersonagens(texto) {
+
+    const linhas = texto.split("\n");
+
+    const personagens = new Set();
+
+    linhas.forEach(linha => {
+
+        const limpa = linha.trim();
+
+        if (
+            limpa === limpa.toUpperCase() &&
+            limpa.length > 2 &&
+            limpa.length < 30 &&
+            /^[A-ZÁÉÍÓÚÇ\s]+$/.test(limpa)
+        ) {
+            personagens.add(limpa);
+        }
+
+    });
+
+    localStorage.setItem(
+        "patika_personagens",
+        JSON.stringify([...personagens])
+    );
+
+}
+
+function obterPersonagens() {
+
+    return JSON.parse(
+        localStorage.getItem("patika_personagens") || "[]"
+    );
+
+}
+
+document.addEventListener("input", function(){
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    extrairPersonagens(editor.value);
+
+});
+
+window.obterPersonagens = obterPersonagens;
+
+
+/* ============================================ */
+/* DETECTOR DE CENAS                           */
+/* ============================================ */
+
+function extrairCenas(texto) {
+
+    const linhas = texto.split("\n");
+
+    const cenas = [];
+
+    linhas.forEach((linha, index) => {
+
+        if (/^(INT\.|EXT\.)/.test(linha.trim())) {
+
+            cenas.push({
+
+                titulo: linha.trim(),
+
+                linha: index
+
+            });
+
+        }
+
+    });
+
+    localStorage.setItem(
+        "patika_cenas",
+        JSON.stringify(cenas)
+    );
+
+    return cenas;
+
+}
+
+window.extrairCenas = extrairCenas;
+
+
+/* ============================================ */
+/* PAINEL DE CENAS                             */
+/* ============================================ */
+
+function atualizarPainelCenas() {
+
+    const editor = document.querySelector("textarea");
+
+    const painel = document.getElementById("painelCenas");
+
+    if (!editor || !painel) return;
+
+    const cenas = extrairCenas(editor.value);
+
+    painel.innerHTML = "";
+
+    cenas.forEach(cena => {
+
+        const div = document.createElement("div");
+
+        div.className = "cena-item";
+
+        div.innerText = cena.titulo;
+
+        div.onclick = function(){
+
+            irParaLinha(cena.linha);
+
+        };
+
+        painel.appendChild(div);
+
+    });
+
+}
+
+window.atualizarPainelCenas = atualizarPainelCenas;
+
+
+/* ============================================ */
+/* NAVEGAR PARA LINHA                          */
+/* ============================================ */
+
+function irParaLinha(numeroLinha) {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    const linhas = editor.value.split("\n");
+
+    let pos = 0;
+
+    for (let i = 0; i < numeroLinha; i++) {
+
+        pos += linhas[i].length + 1;
+
+    }
+
+    editor.focus();
+
+    editor.setSelectionRange(pos, pos);
+
+}
+
+window.irParaLinha = irParaLinha;
+
+
+document.addEventListener("input", function(){
+
+    atualizarPainelCenas();
+
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    atualizarPainelCenas();
+
+});
+

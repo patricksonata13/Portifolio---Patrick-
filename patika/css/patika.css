@@ -426,3 +426,42 @@ body.modo-foco textarea {
 
 }
 
+
+/* ============================================ */
+/* PAINEL DE CENAS                             */
+/* ============================================ */
+
+#painelCenas {
+
+    width: 250px;
+
+    background: var(--bg-surface);
+
+    border-right: 1px solid var(--border-color);
+
+    padding: 10px;
+
+    overflow-y: auto;
+
+}
+
+.cena-item {
+
+    padding: 8px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+    border-left: 3px solid transparent;
+
+}
+
+.cena-item:hover {
+
+    background: rgba(111,143,123,0.1);
+
+    border-left: 3px solid var(--accent-green);
+
+}
+
