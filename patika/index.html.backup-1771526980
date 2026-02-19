@@ -1,0 +1,42 @@
+<!-- Sub-Aba "Roteiro" -->
+<div id="roteiro-tab-content" class="tab-content">
+    <h2>Roteiro</h2>
+    
+    <!-- Painel lateral do índice de cenas -->
+    <div id="index-cenas" class="index-cenas">
+        <h3>Cenas</h3>
+        <div id="lista-cenas"></div>
+    </div>
+
+    <!-- Editor do Roteiro -->
+    <div id="roteiro-editor" contenteditable="true"></div>
+
+    <!-- Barra de navegação e configurações -->
+    <div class="roteiro-controls">
+        <button onclick="toggleBeatBoard()">Beat Board</button>
+        <button onclick="toggleModoFoco()">Modo Foco</button>
+        <button onclick="salvarVersao()">Salvar Versão</button>
+        <button onclick="exportarRoteiro()">Exportar Roteiro</button>
+        <button onclick="toggleModoEscuro()">Modo Escuro</button>
+    </div>
+
+    <!-- Extra: Banco de Personagens -->
+    <div id="banco-personagens">
+        <h3>Personagens</h3>
+        <div id="lista-personagens"></div>
+    </div>
+</div>
+
+<!-- MENU DE ABAS -->
+<div style="margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <span class="tab-item active" onclick="ativarAbaRoteiro()" style="cursor:pointer; padding:10px 20px; background:#00A86B; color:white; border-radius:5px 5px 0 0;">📝 Roteiro</span>
+    <span class="tab-item" onclick="alert('Em breve!')" style="cursor:pointer; padding:10px 20px; background:#f0f0f0; border-radius:5px 5px 0 0;">📋 Sinopse</span>
+    <span class="tab-item" onclick="alert('Em breve!')" style="cursor:pointer; padding:10px 20px; background:#f0f0f0; border-radius:5px 5px 0 0;">👥 Personagens</span>
+</div>
+
+<!-- MENU DE ABAS -->
+<div style="margin-bottom: 20px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <span class="tab-item active" onclick="ativarAbaRoteiro()" style="cursor:pointer; padding:10px 20px; background:#00A86B; color:white; border-radius:5px 5px 0 0;">📝 Roteiro</span>
+    <span class="tab-item" onclick="alert('Em breve!')" style="cursor:pointer; padding:10px 20px; background:#f0f0f0; border-radius:5px 5px 0 0;">📋 Sinopse</span>
+    <span class="tab-item" onclick="alert('Em breve!')" style="cursor:pointer; padding:10px 20px; background:#f0f0f0; border-radius:5px 5px 0 0;">👥 Personagens</span>
+</div>

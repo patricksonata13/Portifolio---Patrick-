@@ -1,0 +1,114 @@
+// Função para ativar o modo escuro
+function toggleModoEscuro() {
+    document.body.classList.toggle("modo-escuro");
+}
+
+// Função de Modo de Foco (escrever sem distrações)
+function toggleModoFoco() {
+    const editor = document.getElementById('roteiro-editor');
+    editor.classList.toggle('modo-foco');
+    console.log("Modo Foco Ativado");
+}
+
+// Função para salvar versão do roteiro
+function salvarVersao() {
+    const editor = document.getElementById('roteiro-editor');
+    const conteudo = editor.innerHTML;
+    localStorage.setItem('roteiro_versao', conteudo);
+    alert("Versão salva com sucesso!");
+}
+
+// Função para exportar o roteiro
+function exportarRoteiro() {
+    const editor = document.getElementById('roteiro-editor');
+    const conteudo = editor.innerText;
+    const blob = new Blob([conteudo], {type: 'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'roteiro.txt';
+    a.click();
+    console.log("Roteiro exportado");
+}
+
+// Função de numeração automática de cenas
+let numeroCena = 1;
+
+function numerarCena(linhaEl) {
+    const texto = linhaEl.innerText;
+    if (/^(INT\.|EXT\.)/.test(texto)) {
+        const cenaNumerada = `${numeroCena}. ${texto.trim()}`;
+        linhaEl.innerHTML = cenaNumerada;
+        numeroCena++;
+    }
+}
+
+function atualizarIndiceCenas(editor) {
+    const texto = editor.innerText;
+    const cenas = texto.match(/(INT\.|EXT\.).*/g) || [];
+    const listaCenas = document.getElementById("lista-cenas");
+    listaCenas.innerHTML = "";
+
+    cenas.forEach((cena, i) => {
+        const item = document.createElement("div");
+        item.className = "cena-item";
+        item.innerText = `${i + 1}. ${cena}`;
+        item.onclick = () => irParaCena(i);
+        listaCenas.appendChild(item);
+    });
+}
+
+function irParaCena(cenaIndex) {
+    const editor = document.getElementById("roteiro-editor");
+    const cenas = editor.innerText.split("\n");
+    let totalLetras = 0;
+    for (let i = 0; i < cenaIndex; i++) {
+        totalLetras += cenas[i].length;
+    }
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(editor.firstChild, totalLetras);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
+    editor.focus();
+}
+
+// Função de formatação automática
+function aplicarFormatacaoLinha(linhaEl, tipo) {
+    linhaEl.classList.remove("patika-cena", "patika-personagem", "patika-dialogo", "patika-acao");
+    switch (tipo) {
+        case "cena":
+            linhaEl.classList.add("patika-cena");
+            break;
+        case "personagem":
+            linhaEl.classList.add("patika-personagem");
+            break;
+        case "dialogo":
+            linhaEl.classList.add("patika-dialogo");
+            break;
+        default:
+            linhaEl.classList.add("patika-acao");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const editorRoteiro = document.getElementById("roteiro-editor");
+    editorRoteiro.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") {
+            const sel = window.getSelection();
+            const linha = sel.anchorNode.parentElement;
+            const texto = linha.innerText;
+            const tipo = detectarTipoLinha(texto);
+            aplicarFormatacaoLinha(linha, tipo);
+            if (tipo === "personagem") {
+                setTimeout(() => {
+                    const novaLinha = document.createElement("div");
+                    novaLinha.className = "patika-dialogo";
+                    novaLinha.innerHTML = "<br>";
+                    linha.parentNode.insertBefore(novaLinha, linha.nextSibling);
+                    colocarCursor(novaLinha);
+                }, 10);
+            }
+        }
+    });
+});
