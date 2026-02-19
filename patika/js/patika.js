@@ -1,21 +1,13 @@
 // ============================================
 // PATIKA - Editor Profissional de Roteiro
-// Design conforme especificação
+// Funcionalidades completas com novo design
 // ============================================
 
-// Estado da aplicação
 let estado = {
     projetoAtual: null,
     secaoAtual: 'sinopse',
     projetos: [],
-    autosaveTimer: null,
-    dicas: [
-        'Comece com uma sinopse de 1 parágrafo',
-        'No argumento, desenvolva cada ato',
-        'Use a escaleta para listar cenas',
-        'Personagens fortes têm desejos e medos',
-        'Mostre, não conte'
-    ]
+    autosaveTimer: null
 };
 
 // ============================================
@@ -24,7 +16,6 @@ let estado = {
 document.addEventListener('DOMContentLoaded', function() {
     carregarProjetos();
     configurarAutoSave();
-    carregarDicaDoDia();
     atualizarContadorPalavras();
     
     document.getElementById('conteudoTexto').addEventListener('input', function() {
@@ -36,9 +27,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================
-// GERENCIAMENTO DE PROJETOS
+// PROJETOS (localStorage)
 // ============================================
-
 function carregarProjetos() {
     const projetosSalvos = localStorage.getItem('patika_projetos');
     if (projetosSalvos) {
@@ -84,12 +74,6 @@ function novoProjeto() {
     atualizarNomesProjeto();
 }
 
-function mudarProjeto(id) {
-    estado.projetoAtual = id;
-    carregarConteudoSecao();
-    atualizarNomesProjeto();
-}
-
 function getProjetoAtual() {
     return estado.projetos.find(p => p.id === estado.projetoAtual);
 }
@@ -105,7 +89,6 @@ function atualizarNomesProjeto() {
 // ============================================
 // NAVEGAÇÃO ENTRE SEÇÕES
 // ============================================
-
 function mudarSecao(secao) {
     salvarConteudo();
     estado.secaoAtual = secao;
@@ -136,7 +119,6 @@ function salvarConteudo() {
 // ============================================
 // AUTO-SAVE
 // ============================================
-
 function configurarAutoSave() {
     if (estado.autosaveTimer) clearInterval(estado.autosaveTimer);
     estado.autosaveTimer = setInterval(salvarConteudo, 30000);
@@ -147,9 +129,8 @@ function atualizarStatusSalvo(status) {
 }
 
 // ============================================
-// ATALHOS DE TECLADO
+// ATALHOS
 // ============================================
-
 function configurarAtalhos() {
     document.addEventListener('keydown', function(e) {
         const textarea = document.getElementById('conteudoTexto');
@@ -163,7 +144,8 @@ function configurarAtalhos() {
         if (e.key === 'Tab') {
             e.preventDefault();
             const start = textarea.selectionStart;
-            textarea.value = textarea.value.substring(0, start) + '\t' + textarea.value.substring(textarea.selectionEnd);
+            textarea.value = textarea.value.substring(0, start) + '\t' + 
+                              textarea.value.substring(textarea.selectionEnd);
             textarea.selectionStart = textarea.selectionEnd = start + 1;
         }
     });
@@ -172,7 +154,6 @@ function configurarAtalhos() {
 // ============================================
 // CONTADOR DE PALAVRAS
 // ============================================
-
 function atualizarContadorPalavras() {
     const texto = document.getElementById('conteudoTexto').value;
     const palavras = texto.trim() ? texto.trim().split(/\s+/).length : 0;
@@ -201,7 +182,6 @@ function mostrarDetalhesPalavras() {
 // ============================================
 // EXPORTAÇÃO E BACKUP
 // ============================================
-
 function exportarRoteiro() {
     const projeto = getProjetoAtual();
     if (!projeto) return;
@@ -223,9 +203,11 @@ function carregarModelo() {
     const projeto = getProjetoAtual();
     if (!projeto) return;
     
+    if (!confirm('Carregar modelo substituirá seu conteúdo. Continuar?')) return;
+    
     projeto.conteudos = {
         sinopse: 'Sinopse: [história resumida]',
-        argumento: 'Argumento: [desenvolvimento]',
+        argumento: 'Argumento: [desenvolvimento dos atos]',
         escaleta: 'CENA 1 - Local - Dia\n- Ação\n\nCENA 2 - Local - Noite',
         roteiro: 'INT. LOCAL - DIA\n\nPERSONAGEM\nFala.',
         personagens: 'Nome:\nIdade:\nPersonalidade:'
@@ -268,18 +250,8 @@ function restaurarBackup() {
 }
 
 // ============================================
-// DICAS DO DIA
-// ============================================
-
-function carregarDicaDoDia() {
-    const dica = estado.dicas[new Date().getDay() % estado.dicas.length];
-    // Poderia exibir em algum lugar se quisesse
-}
-
-// ============================================
 // CONFIGURAÇÕES DO PROJETO
 // ============================================
-
 function configurarProjeto() {
     const projeto = getProjetoAtual();
     if (!projeto) return;
@@ -297,7 +269,6 @@ function configurarProjeto() {
 // ============================================
 window.mudarSecao = mudarSecao;
 window.novoProjeto = novoProjeto;
-window.mudarProjeto = mudarProjeto;
 window.salvarConteudo = salvarConteudo;
 window.configurarProjeto = configurarProjeto;
 window.exportarRoteiro = exportarRoteiro;
