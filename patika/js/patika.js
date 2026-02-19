@@ -351,3 +351,195 @@ document.addEventListener("DOMContentLoaded", function(){
 
 });
 
+
+/* ============================================ */
+/* AUTOSAVE INTELIGENTE                        */
+/* ============================================ */
+
+let patikaAutosaveTimer = null;
+
+function configurarAutosaveEditor() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    editor.addEventListener("input", function() {
+
+        clearTimeout(patikaAutosaveTimer);
+
+        patikaAutosaveTimer = setTimeout(function(){
+
+            if (typeof salvarConteudo === "function") {
+
+                salvarConteudo();
+
+                console.log("Autosave executado");
+
+            }
+
+        }, 1500);
+
+    });
+
+}
+
+document.addEventListener("DOMContentLoaded", configurarAutosaveEditor);
+
+
+/* ============================================ */
+/* HISTÓRICO DE VERSÕES                        */
+/* ============================================ */
+
+function salvarVersaoManual() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    let versoes = JSON.parse(
+        localStorage.getItem("patika_versoes") || "[]"
+    );
+
+    versoes.push({
+
+        data: new Date().toISOString(),
+
+        conteudo: editor.value
+
+    });
+
+    localStorage.setItem(
+        "patika_versoes",
+        JSON.stringify(versoes)
+    );
+
+    console.log("Versão salva");
+
+}
+
+window.salvarVersaoManual = salvarVersaoManual;
+
+
+function restaurarUltimaVersao() {
+
+    const versoes = JSON.parse(
+        localStorage.getItem("patika_versoes") || "[]"
+    );
+
+    if (versoes.length === 0) {
+
+        alert("Nenhuma versão encontrada");
+
+        return;
+
+    }
+
+    const ultima = versoes[versoes.length - 1];
+
+    const editor = document.querySelector("textarea");
+
+    if (editor) {
+
+        editor.value = ultima.conteudo;
+
+    }
+
+}
+
+window.restaurarUltimaVersao = restaurarUltimaVersao;
+
+
+/* ============================================ */
+/* CONTADOR PROFISSIONAL                       */
+/* ============================================ */
+
+function atualizarContadorPatika() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    const texto = editor.value;
+
+    const palavras = texto.trim().split(/\s+/).filter(Boolean).length;
+
+    const caracteres = texto.length;
+
+    const paginas = Math.ceil(palavras / 250);
+
+    console.log(
+        "Palavras:", palavras,
+        "Caracteres:", caracteres,
+        "Páginas:", paginas
+    );
+
+}
+
+document.addEventListener("input", atualizarContadorPatika);
+
+
+/* ============================================ */
+/* EXPORTAR TXT                                */
+/* ============================================ */
+
+function exportarTXT() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    const blob = new Blob(
+        [editor.value],
+        { type: "text/plain" }
+    );
+
+    const a = document.createElement("a");
+
+    a.href = URL.createObjectURL(blob);
+
+    a.download = "roteiro.txt";
+
+    a.click();
+
+}
+
+window.exportarTXT = exportarTXT;
+
+
+/* ============================================ */
+/* RESTAURAR SESSÃO                            */
+/* ============================================ */
+
+function restaurarSessaoPatika() {
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    const salvo = localStorage.getItem("patika_autosave");
+
+    if (salvo) {
+
+        editor.value = salvo;
+
+    }
+
+}
+
+document.addEventListener("DOMContentLoaded", restaurarSessaoPatika);
+
+
+document.addEventListener("input", function(){
+
+    const editor = document.querySelector("textarea");
+
+    if (!editor) return;
+
+    localStorage.setItem(
+        "patika_autosave",
+        editor.value
+    );
+
+});
+
