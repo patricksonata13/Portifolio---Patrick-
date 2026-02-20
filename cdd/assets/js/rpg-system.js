@@ -980,3 +980,45 @@ document.addEventListener('keydown', function(e) {
         alert(`🐞 Debug Mode\nVersão: ${rpg.versao}\nNível: ${rpg.jogador.nivel}\nXP: ${rpg.jogador.xp}\nMemórias: ${rpg.jogador.recursos.memorias}`);
     }
 });
+
+// ========================================
+// ATUALIZAÇÃO: BRANQUELOS
+// ========================================
+
+// Adicionar Branquelos ao sistema de combate
+this.branquelos = {
+    nome: "Branquelo",
+    nivel: 1,
+    xp: 15,
+    stats: {
+        forca: 6,
+        agilidade: 4,
+        percepcao: 3
+    },
+    fraquezas: ["fogo", "luz"],
+    descricao: "Recém-transformado, ainda conserva traços humanos"
+};
+
+// Atualizar método de combate para incluir Branquelos
+this.combaterBranquelo = function() {
+    const dano = Math.floor(Math.random() * 10) + this.jogador.atributos.forca;
+    const acertou = dano > 3; // Mais fácil de acertar
+    
+    if (acertou) {
+        this.jogador.estatisticas.acertos++;
+        this.ganharXP(15, 'derrotou Branquelo');
+        this.log('✅ Branquelo derrotado! +15 XP', 'sucesso');
+        return true;
+    } else {
+        this.jogador.estatisticas.erros++;
+        this.log('❌ Errou o Branquelo!', 'erro');
+        return false;
+    }
+};
+
+// Atualizar conquistas para incluir Branquelos
+this.conquistas.push(
+    { id: "c29", nome: "Caçador de Branquelos", desc: "Derrote 10 Branquelos", icon: "👻", xp: 100, categoria: "combate" },
+    { id: "c30", nome: "Exterminador de Branquelos", desc: "Derrote 50 Branquelos", icon: "👻", xp: 300, categoria: "combate" }
+);
+
