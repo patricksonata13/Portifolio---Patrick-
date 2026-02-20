@@ -242,3 +242,439 @@
     <script src="assets/js/airtable-loader.js"></script>
 </body>
 </html>
+
+<!-- ===== PACOTE MOBILE COMPLETO ===== -->
+<style>
+/* ===== RESET MOBILE ===== */
+* {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+/* ===== VARIÁVEIS MOBILE ===== */
+:root {
+    --mobile-header: 50px;
+    --mobile-bottom-nav: 60px;
+}
+
+/* ===== LAYOUT MOBILE PRINCIPAL ===== */
+@media (max-width: 768px) {
+    /* Reset do grid */
+    .app, .patika-grid, .container {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* Header fixo */
+    .top-bar, .patika-header, .site-header {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: var(--mobile-header) !important;
+        background: var(--bg-surface) !important;
+        z-index: 1000 !important;
+        padding: 0 15px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Espaço para o header fixo */
+    .main-content, .central, .patika-main {
+        margin-top: var(--mobile-header) !important;
+        padding: 15px !important;
+        min-height: calc(100vh - var(--mobile-header) - var(--mobile-bottom-nav)) !important;
+    }
+    
+    /* Navegação por abas (horizontal) */
+    .tabs-container, .nav-tabs, .patika-nav {
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        height: var(--mobile-bottom-nav) !important;
+        background: var(--bg-surface) !important;
+        display: flex !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+        z-index: 1000 !important;
+        box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
+        padding: 0 !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    
+    .tab-item, .aba, .nav-item {
+        flex: 1 !important;
+        min-width: 80px !important;
+        height: 100% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        font-size: 12px !important;
+        padding: 0 5px !important;
+        border-bottom: none !important;
+        border-top: 3px solid transparent !important;
+        transition: all 0.2s !important;
+    }
+    
+    .tab-item.active, .aba.ativa, .nav-item.active {
+        border-top-color: var(--accent-primary) !important;
+        color: var(--accent-primary) !important;
+        background: var(--accent-selection) !important;
+    }
+    
+    /* Esconder sidebars */
+    .sidebar-left, .sidebar-right, .menu-lateral, .painel-direito, .sidebar {
+        display: none !important;
+    }
+    
+    /* Conteúdo em tela cheia */
+    .main-content, .central, .patika-main {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        padding-bottom: calc(var(--mobile-bottom-nav) + 15px) !important;
+    }
+    
+    /* Cards em grid responsivo */
+    .works-grid, .projetos-grid, .cards-container {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 15px !important;
+        padding: 10px !important;
+    }
+    
+    .work-card, .projeto-card, .card {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px !important;
+    }
+    
+    /* Botões maiores para toque */
+    button, .btn, .menu-item, .cena-item {
+        min-height: 44px !important;
+        min-width: 44px !important;
+        padding: 12px 15px !important;
+        font-size: 16px !important;
+    }
+    
+    /* Formulários adaptados */
+    input, select, textarea {
+        font-size: 16px !important;
+        padding: 12px !important;
+        width: 100% !important;
+    }
+    
+    /* Editor de roteiro adaptado */
+    .roteiro-editor, .editor {
+        font-size: 16px !important;
+        line-height: 1.6 !important;
+        padding: 15px !important;
+        min-height: 400px !important;
+    }
+    
+    .patika-personagem {
+        margin-left: 60px !important;
+    }
+    
+    .patika-dialogo {
+        margin-left: 30px !important;
+        margin-right: 15px !important;
+    }
+    
+    /* Lista de cenas adaptada */
+    #lista-cenas, #listaCenasSidebar {
+        max-height: 200px !important;
+        overflow-y: auto !important;
+        margin: 15px 0 !important;
+        display: block !important;
+    }
+    
+    .cena-item {
+        padding: 12px 15px !important;
+        font-size: 14px !important;
+        margin: 5px 0 !important;
+    }
+    
+    /* Botão voltar ao topo */
+    .back-to-top {
+        bottom: calc(var(--mobile-bottom-nav) + 10px) !important;
+        right: 10px !important;
+        width: 44px !important;
+        height: 44px !important;
+    }
+    
+    /* Menu hamburguer */
+    .hamburger-menu {
+        display: block !important;
+        position: fixed !important;
+        top: 10px !important;
+        left: 10px !important;
+        z-index: 1100 !important;
+        width: 44px !important;
+        height: 44px !important;
+        background: var(--accent-primary) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        font-size: 24px !important;
+        cursor: pointer !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
+    }
+    
+    /* Overlay do menu */
+    .menu-overlay {
+        display: none !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        background: rgba(0,0,0,0.5) !important;
+        z-index: 1050 !important;
+    }
+    
+    .menu-overlay.active {
+        display: block !important;
+    }
+    
+    /* Menu lateral mobile */
+    .mobile-sidebar {
+        position: fixed !important;
+        top: 0 !important;
+        left: -280px !important;
+        width: 280px !important;
+        height: 100% !important;
+        background: var(--bg-surface) !important;
+        z-index: 1060 !important;
+        transition: left 0.3s ease !important;
+        overflow-y: auto !important;
+        padding: 60px 20px 20px !important;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1) !important;
+    }
+    
+    .mobile-sidebar.open {
+        left: 0 !important;
+    }
+    
+    .mobile-sidebar .menu-section {
+        margin-bottom: 20px !important;
+    }
+    
+    .mobile-sidebar .menu-title {
+        color: var(--accent-primary) !important;
+        font-size: 14px !important;
+        font-weight: bold !important;
+        margin-bottom: 10px !important;
+    }
+    
+    .mobile-sidebar .menu-item {
+        padding: 12px !important;
+        margin: 5px 0 !important;
+        border-radius: 8px !important;
+        background: var(--bg-sidebar) !important;
+    }
+    
+    /* Ajustes de tipografia */
+    h1 { font-size: 1.8rem !important; }
+    h2 { font-size: 1.4rem !important; }
+    h3 { font-size: 1.2rem !important; }
+    p { font-size: 1rem !important; line-height: 1.5 !important; }
+    
+    /* Ajustes de imagens */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* Rodapé adaptado */
+    .footer, .rodape {
+        margin-bottom: var(--mobile-bottom-nav) !important;
+        padding: 20px 15px !important;
+        text-align: center !important;
+    }
+    
+    .footer-content {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .social-links {
+        display: flex !important;
+        gap: 20px !important;
+        justify-content: center !important;
+    }
+}
+</style>
+
+<!-- ===== ELEMENTOS MOBILE ===== -->
+<button class="hamburger-menu" id="hamburgerMenu">☰</button>
+<div class="menu-overlay" id="menuOverlay"></div>
+<div class="mobile-sidebar" id="mobileSidebar">
+    <!-- Será preenchido via JavaScript -->
+</div>
+
+<script>
+(function() {
+    'use strict';
+
+    // ===== DETECTAR MOBILE =====
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    
+    // ===== MENU HAMBURGER =====
+    const hamburger = document.getElementById('hamburgerMenu');
+    const overlay = document.getElementById('menuOverlay');
+    const sidebar = document.getElementById('mobileSidebar');
+    
+    if (hamburger && overlay && sidebar) {
+        // Clonar menu principal para o sidebar
+        const mainMenu = document.querySelector('.menu, .sidebar-left, .patika-sidebar-left');
+        if (mainMenu) {
+            sidebar.innerHTML = mainMenu.innerHTML;
+        } else {
+            // Criar menu padrão se não existir
+            sidebar.innerHTML = `
+                <div class="menu-section">
+                    <div class="menu-title">FERRAMENTAS</div>
+                    <div class="menu-item" onclick="mudarAba('roteiro')">📝 Roteiro</div>
+                    <div class="menu-item" onclick="mudarAba('dindo')">📄 Dindo</div>
+                    <div class="menu-item" onclick="mudarAba('sinopse')">📋 Sinopse</div>
+                    <div class="menu-item" onclick="mudarAba('argumento')">📄 Argumento</div>
+                    <div class="menu-item" onclick="mudarAba('escaleta')">📊 Escaleta</div>
+                    <div class="menu-item" onclick="mudarAba('personagens')">👥 Personagens</div>
+                </div>
+            `;
+        }
+        
+        // Abrir menu
+        hamburger.addEventListener('click', () => {
+            sidebar.classList.add('open');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        // Fechar menu
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Fechar ao clicar em item
+        sidebar.addEventListener('click', (e) => {
+            if (e.target.classList.contains('menu-item')) {
+                setTimeout(() => {
+                    sidebar.classList.remove('open');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }, 300);
+            }
+        });
+    }
+    
+    // ===== NAVEGAÇÃO POR SWIPE =====
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    document.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    document.addEventListener('touchend', (e) => {
+        if (!isMobile) return;
+        
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchEndX - touchStartX;
+        const threshold = 100;
+        
+        if (Math.abs(diff) > threshold) {
+            const tabs = document.querySelectorAll('.tab-item, .aba, .nav-item');
+            let activeIndex = 0;
+            
+            tabs.forEach((tab, index) => {
+                if (tab.classList.contains('active')) {
+                    activeIndex = index;
+                }
+            });
+            
+            if (diff > 0 && activeIndex > 0) {
+                // Swipe direita → anterior
+                tabs[activeIndex - 1].click();
+            } else if (diff < 0 && activeIndex < tabs.length - 1) {
+                // Swipe esquerda → próximo
+                tabs[activeIndex + 1].click();
+            }
+        }
+    }, { passive: true });
+    
+    // ===== SCROLL INFINITO PARA ABAS =====
+    function ensureActiveTabVisible() {
+        const tabsContainer = document.querySelector('.tabs-container, .nav-tabs, .patika-nav');
+        const activeTab = document.querySelector('.tab-item.active, .aba.ativa, .nav-item.active');
+        
+        if (tabsContainer && activeTab) {
+            const containerRect = tabsContainer.getBoundingClientRect();
+            const tabRect = activeTab.getBoundingClientRect();
+            
+            if (tabRect.left < containerRect.left || tabRect.right > containerRect.right) {
+                activeTab.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }
+    }
+    
+    // Observar mudanças de aba
+    const observer = new MutationObserver(ensureActiveTabVisible);
+    const tabsContainer = document.querySelector('.tabs-container, .nav-tabs, .patika-nav');
+    if (tabsContainer) {
+        observer.observe(tabsContainer, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class']
+        });
+    }
+    
+    // ===== VIEWPORT OTIMIZADO =====
+    function adjustViewport() {
+        let viewport = document.querySelector('meta[name="viewport"]');
+        if (!viewport) {
+            viewport = document.createElement('meta');
+            viewport.name = 'viewport';
+            document.head.appendChild(viewport);
+        }
+        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes';
+    }
+    adjustViewport();
+    
+    // ===== DETECTAR ORIENTAÇÃO =====
+    function handleOrientation() {
+        document.body.setAttribute('data-orientation', 
+            window.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape'
+        );
+    }
+    
+    window.addEventListener('orientationchange', handleOrientation);
+    handleOrientation();
+    
+    // ===== FORÇAR REAVALIAÇÃO DE ESTILOS =====
+    function forceReflow() {
+        window.dispatchEvent(new Event('resize'));
+    }
+    
+    window.addEventListener('orientationchange', forceReflow);
+    window.addEventListener('resize', forceReflow);
+    
+    console.log('📱 Site totalmente otimizado para mobile!');
+})();
+</script>
+<!-- ===== FIM DO PACOTE MOBILE COMPLETO ===== -->
+
