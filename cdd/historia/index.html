@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • História</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        body { background: #0a0c0e; color: #e2e8f0; font-family: 'Courier New', monospace; padding: 20px; }
+        .terminal { max-width: 900px; margin: 0 auto; background: #0f1215; border: 2px solid #ffd966; padding: 20px; }
+        h1 { color: #ffd966; border-left: 4px solid #b3a0ff; padding-left: 20px; }
+        .nav-bar { margin: 20px 0; padding: 10px 0; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
+        .nav-bar a { color: #64748b; text-decoration: none; margin-right: 20px; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #ffd966; }
+        .evento { margin: 30px 0; padding-left: 50px; position: relative; }
+        .evento::before { content: '●'; position: absolute; left: 12px; color: #ffd966; font-size: 20px; }
+        .ano { color: #b3a0ff; font-size: 1.2rem; font-weight: bold; }
+        .titulo { color: #ffd966; font-size: 1.1rem; margin: 5px 0; }
+        .desc { color: #94a3b8; line-height: 1.6; }
+        .personagem { background: #14181c; border: 1px solid #1e293b; padding: 15px; margin: 15px 0; display: flex; gap: 15px; }
+        .personagem-icon { font-size: 40px; }
+        .memoria { display: inline-block; background: #1e293b; color: #ffd966; padding: 2px 8px; margin: 2px; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header" style="background: #0f1215; padding: 8px; border-bottom: 1px solid #1e293b;">
+            <span class="terminal-path" style="color: #ffd966;">~/cdd-3001/historia</span>
+            <span class="terminal-status" style="color: #64748b;">+150 XP</span>
+        </div>
+
+        <h1>📜 HISTÓRIA • LINHA DO TEMPO</h1>
+        
+        <div class="nav-bar">
+            <a href="/cdd/">← TERMINAL</a>
+            <a href="/cdd/perfil.html">PERFIL</a>
+            <a href="#" class="active">HISTÓRIA</a>
+            <span style="color: #ffd966;">⏳ 3/10 memórias</span>
+        </div>
+
+        <div class="timeline">
+            <div class="evento">
+                <div class="ano">2047 • ANO ZERO</div>
+                <div class="titulo">O Início do CDD 3001</div>
+                <div class="desc">O projeto CDD 3001 é concebido como um experimento transmídia, combinando narrativa, jogos e arte em um universo único. Os primeiros esboços são desenhados em um caderno Moleskine preto.</div>
+                <span class="memoria">🧠 MEMÓRIA 1/10</span>
+            </div>
+
+            <div class="evento">
+                <div class="ano">2052 • PRIMEIRO PROTÓTIPO</div>
+                <div class="titulo">O Teaser Original</div>
+                <div class="desc">Primeiro teaser animado é criado usando técnicas de rotoscopia. A trilha sonora experimental é composta em um estúdio caseiro. O visual cyberpunk começa a tomar forma.</div>
+                <span class="memoria">🧠 MEMÓRIA 2/10</span>
+            </div>
+
+            <div class="evento">
+                <div class="ano">2068 • EXPANSÃO</div>
+                <div class="titulo">O Universo se Expande</div>
+                <div class="desc">Mais de 20 personagens são criados, cada um com sua própria história de fundo. O roteiro atinge 200 páginas. A arte conceitual define o estilo visual único do CDD 3001.</div>
+                <span class="memoria">🧠 MEMÓRIA 3/10</span>
+            </div>
+        </div>
+
+        <h2 style="color: #ffd966; margin-top: 40px;">👥 PERSONAGENS PRINCIPAIS</h2>
+        
+        <div class="personagem">
+            <div class="personagem-icon">🔫</div>
+            <div>
+                <div style="color: #ffd966; font-weight: bold;">CAÇADOR</div>
+                <div style="color: #94a3b8;">Nível 3 • Força 14 • Agilidade 16</div>
+                <div style="color: #64748b; margin-top: 5px;">Especialista em combate à distância e sobrevivência. Carrega um rifle de assalto modificado e um diário com anotações sobre as criaturas da Zona.</div>
+            </div>
+        </div>
+
+        <div class="personagem">
+            <div class="personagem-icon">🧙</div>
+            <div>
+                <div style="color: #ffd966; font-weight: bold;">CORREDOR</div>
+                <div style="color: #94a3b8;">Nível 2 • Agilidade 18 • Tecnologia 15</div>
+                <div style="color: #64748b; margin-top: 5px;">Rápido, furtivo e conhecedor de tecnologia. Rouba dados das corporações e vende no mercado negro. Possui um implante cibernético no braço esquerdo.</div>
+            </div>
+        </div>
+
+        <div class="personagem">
+            <div class="personagem-icon">💪</div>
+            <div>
+                <div style="color: #ffd966; font-weight: bold;">GUARDA</div>
+                <div style="color: #94a3b8;">Nível 4 • Força 18 • Constituição 16</div>
+                <div style="color: #64748b; margin-top: 5px;">Ex-militar, especializado em combate corpo a corpo. Protege os refugiados na Zona Franca. Carrega uma katana de liga de titânio.</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding: 20px; background: #14181c; border: 1px solid #1e293b;">
+            <h3 style="color: #b3a0ff;">🔍 CONSTRUÇÃO DO UNIVERSO</h3>
+            <p style="color: #94a3b8;">O CDD 3001 se passa em um futuro distópico onde as memórias são a moeda mais valiosa. A Zona é um território neutralizado entre megacorporações, onde os Arquivistas exploram ruínas digitais em busca de fragmentos do passado.</p>
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <span class="memoria">🌍 Zona Franca</span>
+                <span class="memoria">🏢 Megacorp</span>
+                <span class="memoria">💿 Fragmentos</span>
+            </div>
+        </div>
+
+        <div style="margin-top: 20px; color: #64748b; font-size: 12px; text-align: right;">
+            +150 XP • 3/10 memórias desbloqueadas
+        </div>
+    </div>
+
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script>
+        rpg.ganharXP(150, 'historia');
+        if (!rpg.jogador.modulosCompletos.includes('historia')) {
+            rpg.jogador.modulosCompletos.push('historia');
+            rpg.coletarMemoria();
+        }
+    </script>
+</body>
+</html>
