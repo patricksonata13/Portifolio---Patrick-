@@ -2,681 +2,1615 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Patrick Sonata | Roteirista</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>PATIKA - Plataforma de Roteiro</title>
     
     <!-- Anti-cache -->
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     
-    <!-- CSS Principal -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- Meta tags -->
-    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
-    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
-    <meta name="author" content="Patrick Sonata">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Patrick Sonata | Roteirista">
-    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
-    <meta property="og:image" content="assets/images/fotodeperfil.jpg">
-    <meta property="og:url" content="https://patricksonata.com.br">
-    
-    <!-- PWA -->
-    <link rel="manifest" href="/manifest.json">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#d0cbc0">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <style>
+        /* ===== RESET E VARIÁVEIS GLOBAIS ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Cores principais - PRESERVADAS */
+            --verde: #00A86B;
+            --verde-escuro: #00875A;
+            --verde-claro: #e8f5e9;
+            --areia: #f8f9fa;
+            --areia-escura: #e9ecef;
+            --cinza: #6c757d;
+            --cinza-claro: #dee2e6;
+            --branco: #ffffff;
+            --texto: #2f2f2f;
+            
+            /* Cores da aba Copy */
+            --copy-verde: #00A86B;
+            --copy-verde-claro: #e8f5e9;
+            --copy-areia: #d4b68a;
+            --copy-fundo: #00A86B;
+            
+            /* Espaçamentos ajustados */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 12px;
+            --spacing-lg: 16px;
+            --spacing-xl: 20px;
+            
+            /* Sombras mantidas */
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+            
+            /* Bordas mantidas */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: var(--areia);
+            color: var(--texto);
+            height: 100vh;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===== LAYOUT PRINCIPAL (WEB) ===== */
+        .patika-web {
+            display: grid;
+            grid-template-columns: 180px 1fr 240px;
+            grid-template-rows: auto 1fr auto;
+            height: 100vh;
+        }
+
+        /* ===== TOPO ===== */
+        .topo {
+            grid-column: 1 / -1;
+            background: var(--branco);
+            border-bottom: 2px solid var(--verde);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            min-height: 48px;
+        }
+
+        .logo-patika {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--verde);
+            letter-spacing: 1px;
+            margin-right: var(--spacing-lg);
+        }
+
+        .tabs-container {
+            display: flex;
+            height: 100%;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .tabs-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .aba {
+            padding: 0 var(--spacing-md);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            color: var(--cinza);
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            font-size: 0.9rem;
+            font-weight: 500;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .aba:hover {
+            color: var(--verde);
+            background: var(--verde-claro);
+        }
+
+        .aba.ativa {
+            color: var(--verde);
+            border-bottom-color: var(--verde);
+        }
+
+        /* Aba Copy com filtro de barro */
+        .aba-copy {
+            position: relative;
+            overflow: hidden;
+            background: var(--copy-fundo);
+            color: white;
+        }
+
+        .aba-copy.ativa {
+            background: var(--copy-fundo);
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .aba-copy .filtro-barro {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 45%, var(--copy-areia) 45%, var(--copy-areia) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, var(--copy-areia) 45%, var(--copy-areia) 55%, transparent 55%);
+            background-size: 20px 20px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        .aba-copy span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .projeto-status {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            font-size: 0.85rem;
+        }
+
+        #projeto-nome {
+            background: var(--areia);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 30px;
+            color: var(--texto);
+        }
+
+        .status-indicator {
+            color: var(--verde);
+        }
+
+        /* ===== MENU LATERAL ===== */
+        .menu {
+            background: var(--branco);
+            border-right: 1px solid var(--areia-escura);
+            padding: var(--spacing-md) 0;
+            overflow-y: auto;
+        }
+
+        .menu-section {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .menu-title {
+            padding: 0 var(--spacing-md);
+            margin-bottom: var(--spacing-xs);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--cinza);
+            font-weight: 600;
+        }
+
+        .menu-item {
+            padding: var(--spacing-xs) var(--spacing-md);
+            cursor: pointer;
+            color: var(--texto);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: var(--verde-claro);
+            color: var(--verde);
+        }
+
+        .menu-item.ativo {
+            background: var(--verde);
+            color: white;
+            border-left-color: white;
+        }
+
+        /* ===== ÁREA CENTRAL ===== */
+        .central {
+            background: var(--branco);
+            margin: var(--spacing-sm);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-md);
+            overflow-y: auto;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .content-header h2 {
+            color: var(--verde);
+            font-weight: 400;
+            font-size: 1.4rem;
+        }
+
+        /* ===== PAINEL DIREITO ===== */
+        .painel {
+            background: var(--branco);
+            border-left: 1px solid var(--areia-escura);
+            padding: var(--spacing-md);
+            overflow-y: auto;
+        }
+
+        .painel h3 {
+            color: var(--verde);
+            font-size: 0.85rem;
+            margin: var(--spacing-md) 0 var(--spacing-xs);
+            padding-bottom: var(--spacing-xs);
+            border-bottom: 2px solid var(--verde);
+        }
+
+        .painel h3:first-child {
+            margin-top: 0;
+        }
+
+        /* ===== RODAPÉ ===== */
+        .rodape {
+            grid-column: 1 / -1;
+            background: var(--branco);
+            border-top: 1px solid var(--areia-escura);
+            padding: var(--spacing-xs) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--cinza);
+            min-height: 36px;
+        }
+
+        .contador-rodape {
+            color: var(--verde);
+            font-weight: 600;
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid var(--areia-escura);
+            border-radius: var(--radius-sm);
+            background: var(--branco);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+            color: var(--texto);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn:hover {
+            background: var(--verde);
+            color: white;
+            border-color: var(--verde);
+        }
+
+        .btn-verde {
+            background: var(--verde);
+            color: white;
+            border: none;
+        }
+
+        .btn-pequeno {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.8rem;
+        }
+
+        /* ===== TOOLBAR ===== */
+        .toolbar {
+            display: flex;
+            gap: var(--spacing-xs);
+            flex-wrap: wrap;
+            padding: var(--spacing-xs);
+            background: var(--areia);
+            border-radius: var(--radius-sm);
+            margin: var(--spacing-sm) 0;
+        }
+
+        /* ===== EDITOR DE ROTEIRO ===== */
+        .roteiro-editor {
+            min-height: 400px;
+            padding: 20px;
+            border: 2px dashed var(--areia-escura);
+            border-radius: var(--radius-md);
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            font-size: 14px;
+            outline: none;
+            background: var(--areia);
+            margin-top: 20px;
+        }
+
+        .roteiro-editor:focus {
+            border-color: var(--verde);
+            background: white;
+        }
+
+        .patika-cena {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 24px;
+            color: var(--verde);
+        }
+
+        .patika-personagem {
+            margin-left: 200px;
+            font-weight: bold;
+        }
+
+        .patika-dialogo {
+            margin-left: 140px;
+            margin-right: 140px;
+        }
+
+        .patika-acao {
+            margin-left: 0;
+        }
+
+        /* ===== LISTA DE CENAS ===== */
+        .cena-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: var(--areia);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            border-left: 3px solid var(--verde);
+            transition: all 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .cena-item:hover {
+            background: var(--verde-claro);
+            transform: translateX(3px);
+        }
+
+        /* ===== ABA COPY ESTILOS (NOVOS - ISOLADOS) ===== */
+        .copy-container {
+            background: var(--copy-fundo);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-filtro-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 45%, rgba(212,182,138,0.1) 45%, rgba(212,182,138,0.1) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(212,182,138,0.1) 45%, rgba(212,182,138,0.1) 55%, transparent 55%);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .copy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-tabs {
+            display: flex;
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .copy-tab {
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .copy-tab:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .copy-tab.active {
+            background: white;
+            color: var(--copy-fundo);
+            font-weight: 500;
+        }
+
+        .copy-pastas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-pasta-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-pasta-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .copy-pasta-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .copy-pasta-nome {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .copy-pasta-count {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .copy-docs-list {
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-doc-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-doc-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .copy-doc-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .copy-doc-info {
+            flex: 1;
+        }
+
+        .copy-doc-titulo {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .copy-doc-meta {
+            font-size: 12px;
+            opacity: 0.7;
+            display: flex;
+            gap: 8px;
+        }
+
+        .copy-search {
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-search input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .copy-search input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .copy-search span {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .copy-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .copy-tag {
+            padding: 6px 14px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-tag:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .copy-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+        }
+
+        .copy-stat {
+            text-align: center;
+        }
+
+        .copy-stat-value {
+            font-size: 24px;
+            font-weight: 500;
+            color: white;
+            display: block;
+        }
+
+        .copy-stat-label {
+            font-size: 11px;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        .copy-timeline {
+            margin: 20px 0;
+        }
+
+        .copy-timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .copy-timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 19px;
+            top: 35px;
+            bottom: -15px;
+            width: 2px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .copy-timeline-item:last-child::before {
+            display: none;
+        }
+
+        .copy-timeline-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            z-index: 2;
+        }
+
+        .copy-timeline-content {
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .copy-timeline-data {
+            font-size: 11px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .copy-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            margin: 5px 0;
+        }
+
+        .copy-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: white;
+        }
+
+        /* ===== NOTIFICAÇÃO ===== */
+        .notificacao {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--verde);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 10000;
+            animation: slideIn 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h3 {
+            color: var(--verde);
+        }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--areia);
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* ===== RESPONSIVIDADE MOBILE ===== */
+        @media (max-width: 768px) {
+            .patika-web {
+                display: block;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .topo {
+                position: sticky;
+                top: 0;
+                z-index: 100;
+                padding: 0 var(--spacing-md);
+                min-height: 44px;
+            }
+            
+            .menu, .painel {
+                display: none;
+            }
+            
+            .central {
+                margin: var(--spacing-sm);
+                padding: var(--spacing-md);
+                border-radius: var(--radius-md);
+            }
+            
+            .rodape {
+                position: sticky;
+                bottom: 0;
+                z-index: 100;
+            }
+            
+            .tabs-container {
+                overflow-x: auto;
+            }
+            
+            .aba {
+                padding: 0 var(--spacing-md);
+                font-size: 0.85rem;
+            }
+            
+            .content-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .copy-pastas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .patika-personagem {
+                margin-left: 100px !important;
+            }
+            
+            .patika-dialogo {
+                margin-left: 60px !important;
+                margin-right: 30px !important;
+            }
+        }
+
+        /* ===== UTILITÁRIOS ===== */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .w-100 { width: 100%; }
+        .mt-2 { margin-top: var(--spacing-md); }
+        .mb-2 { margin-bottom: var(--spacing-md); }
+        .flex { display: flex; }
+        .gap-2 { gap: var(--spacing-md); }
+        .justify-between { justify-content: space-between; }
+        .items-center { align-items: center; }
+    </style>
 </head>
 <body>
-    <!-- Logo P - Home -->
-    <a href="/" class="logo-p" title="Voltar ao início">
-        <svg viewBox="0 0 100 100" width="25" height="25">
-            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
-                  stroke="white" stroke-width="6" stroke-linecap="round" 
-                  stroke-linejoin="round" fill="none"/>
-        </svg>
-    </a>
-    
-    <!-- MENU SUPERIOR -->
-    <nav class="nav-top-right">
-        <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
-        <button onclick="window.location.href='patika/index.html'">PATIKA</button>
-        <button onclick="window.location.href='aulas/index.html'">AULAS</button>
-        <button onclick="window.location.href='contato.html'">CONTATO</button>
-    </nav>
-    
-    <!-- CONTEÚDO PRINCIPAL -->
-    <div class="main-container">
-        <h1>PATRICK SONATA</h1>
-        
-        <!-- ABAS INFERIORES -->
-        <div class="nav-bottom-center">
-            <button onclick="mostrarSobre()">SOBRE</button>
-            <button onclick="mostrarPerfil()">PERFIL</button>
-            <button onclick="mostrarTrabalho()">PORTFÓLIO</button>
-        </div>
-    </div>
-    
-    <!-- SEÇÃO SOBRE -->
-    <section id="secao-sobre">
-        <div class="script-card">
-            <div class="page-number">1.</div>
-            <p class="transition">FADE IN:</p>
-            
-            <div class="scene-heading">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
-            <p class="action">PATRICK SONATA, 37 anos, cria da Cidade de Deus. Sua jornada artística começa na escola municipal Compositor Luiz Gonzaga. Descobre no humor e no teatro sua forma de expressão.</p>
-            
-            <div class="scene-heading">EXT. PROJETOS SOCIAIS - CDD - DIA</div>
-            <p class="action">Formado em projetos sociais na comunidade. Tem como mestre o saudoso CICO CASEIRA. Estuda palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
-            
-            <div class="scene-heading">INT. COLETIVO BONOBANDO - NOITE</div>
-            <p class="action">Integrante do COLETIVO BONOBANDO. Direção de Andriana Shineider e Lucas Oradovish.</p>
-            <p class="action">"CIDADE CORRERIA" — Um bando de atores invade o teatro e abre debate com a plateia.</p>
-            <p class="action">"JONGO MAMULENGO" — Teatro infantojuvenil com atores e bonecos de Mamulengo.</p>
-            
-            <div class="scene-heading">2018 - A VIRADA</div>
-            <p class="action">Selecionado para a oficina "A LÓGICA POR TRÁS DO HUMOR", com Maurício Rizzo. Uma bolsa que muda os rumos de sua carreira — do palco para a tela.</p>
-            
-            <p class="transition">FADE OUT.</p>
-            <p class="credits">Patrick Sonata • Cria da Cidade de Deus • 20 anos de estrada</p>
-        </div>
-    </section>
-    
-    <!-- SEÇÃO PERFIL -->
-    <section id="secao-perfil">
-        <div class="script-card">
-            <div class="page-number">1.</div>
-            
-            <div class="scene-heading">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
-            <p class="action">Luz focada em uma mesa de trabalho. Pilhas de escaletas, livros de dramaturgia. 20 anos de estrada condensados em páginas.</p>
-            
-            <div style="border-bottom: 2px solid #d0cbc0; padding-bottom: 20px; margin-bottom: 30px;">
-                <div style="font-size: 1.5rem; font-weight: bold; margin-bottom: 10px;">PATRICK SONATA</div>
-                <div style="color: #5a5a5a;">Roteirista • Ator • Comediante</div>
-                <div style="color: #777; font-size: 0.9rem; margin-top: 5px;">37 anos • 20 anos de trajetória • Cria da Cidade de Deus</div>
-            </div>
-            
-            <div class="scene-heading">TV • STREAMING</div>
-            <p class="action">PABLO & LUISÃO — Roteirista Globoplay 2025 • Globo 2026</p>
-            <p class="action">ZORRA — Roteirista TV Globo • 2019–2021</p>
-            <p class="action">HUMOR NEGRO — Roteirista Multishow/Globoplay • 2023–2024</p>
-            
-            <div class="scene-heading">TEATRO</div>
-            <p class="action">PELADA – A HORA DA GAYMADA — Dramaturgo 2023</p>
-            <p class="action">CIDADE CORRERIA — Autor/Ator Bonobando</p>
-            <p class="action">JONGO MAMULENGO — Elenco Bonobando</p>
-            
-            <div class="scene-heading">FORMAÇÃO</div>
-            <p class="action">Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo</p>
-            <p class="action">Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)</p>
-            <p class="action">Teatro de Mamulengo e Tradições Populares</p>
-            
-            <div class="scene-heading">VISÃO</div>
-            <p class="action" style="font-style: italic;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
-            
-            <p class="transition">CORTE PARA PRETO.</p>
-            <p class="credits">Patrick Sonata • Roteirista • ABRACI/SBAT</p>
-        </div>
-    </section>
-    
-    <!-- PAINEL DE TRABALHO (PORTFÓLIO) -->
-    <div id="painel-trabalho">
-        <div class="close-btn" onclick="fecharTrabalho()">FECHAR [X]</div>
-        <h2 id="titulo-painel" class="content-title">PORTFÓLIO</h2>
-        <div id="conteudo-painel" class="content-text"></div>
-    </div>
-    
-    <!-- SCRIPTS -->
-    <script>
-        // ========================================
-        // FUNÇÕES DAS ABAS
-        // ========================================
-        
-        function mostrarSobre() {
-            document.getElementById('secao-sobre').style.display = 'block';
-            document.getElementById('secao-perfil').style.display = 'none';
-            document.getElementById('painel-trabalho').classList.remove('active');
-            document.getElementById('secao-sobre').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function mostrarPerfil() {
-            document.getElementById('secao-perfil').style.display = 'block';
-            document.getElementById('secao-sobre').style.display = 'none';
-            document.getElementById('painel-trabalho').classList.remove('active');
-            document.getElementById('secao-perfil').scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function mostrarTrabalho() {
-            document.getElementById('painel-trabalho').classList.add('active');
-            document.getElementById('secao-sobre').style.display = 'none';
-            document.getElementById('secao-perfil').style.display = 'none';
-            document.getElementById('titulo-painel').innerText = 'PORTFÓLIO';
-            
-            const conteudo = document.getElementById('conteudo-painel');
-            conteudo.innerHTML = `
-                <div class="portfolio-grid">
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Pablo+e+Luisão'">
-                        <div class="portfolio-info">
-                            <h3>PABLO E LUISÃO</h3>
-                            <div class="portfolio-role">Roteirista</div>
-                            <p>Série Original Globoplay. Globoplay 2025 • Globo 2026.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/humornegro.webp" alt="Humor Negro" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Humor+Negro'">
-                        <div class="portfolio-info">
-                            <h3>HUMOR NEGRO</h3>
-                            <div class="portfolio-role">Roteirista</div>
-                            <p>Especial e Série - Multishow/Globoplay. 2023-2024.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Cidade+Correria'">
-                        <div class="portfolio-info">
-                            <h3>CIDADE CORRERIA</h3>
-                            <div class="portfolio-role">Autor e Ator</div>
-                            <p>Teatro e Documentário. Coletivo Bonobando.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/pelada.webp" alt="Pelada" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Pelada'">
-                        <div class="portfolio-info">
-                            <h3>PELADA</h3>
-                            <div class="portfolio-role">Dramaturgo</div>
-                            <p>Espetáculo teatral. 2023.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/jongo.webp" alt="Jongo" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Jongo'">
-                        <div class="portfolio-info">
-                            <h3>JONGO MAMULENGO</h3>
-                            <div class="portfolio-role">Elenco</div>
-                            <p>Teatro infantojuvenil com bonecos de Mamulengo.</p>
-                        </div>
-                    </div>
-                    
-                    <div class="portfolio-card">
-                        <img src="assets/images/works/zorralogo.jpg" alt="Zorra" 
-                             onerror="this.src='https://via.placeholder.com/400x400?text=Zorra'">
-                        <div class="portfolio-info">
-                            <h3>ZORRA</h3>
-                            <div class="portfolio-role">Roteirista</div>
-                            <p>Programa de Humor - TV Globo. 2019-2021.</p>
-                        </div>
-                    </div>
+    <div class="patika-web" id="patika-app">
+        <!-- TOPO -->
+        <header class="topo">
+            <div class="logo-patika">PATIKA</div>
+            <nav class="tabs-container" id="tabs-principais">
+                <!-- Abas preservadas -->
+                <div class="aba ativa" data-tab="roteiro">ROTEIRO</div>
+                <div class="aba" data-tab="sinopse">SINOPSE</div>
+                <div class="aba" data-tab="argumento">ARGUMENTO</div>
+                <div class="aba" data-tab="escaleta">ESCALETA</div>
+                <div class="aba" data-tab="personagens">PERSONAGENS</div>
+                <!-- NOVA aba Copy -->
+                <div class="aba aba-copy" data-tab="copy">
+                    <div class="filtro-barro"></div>
+                    <span>COPY</span>
                 </div>
-            `;
-        }
-        
-        function fecharTrabalho() {
-            document.getElementById('painel-trabalho').classList.remove('active');
-        }
-        
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('secao-sobre').style.display = 'none';
-            document.getElementById('secao-perfil').style.display = 'none';
-            document.getElementById('painel-trabalho').classList.remove('active');
-        });
-    </script>
-    
-    <!-- Scripts externos -->
-    <script src="assets/js/database.js"></script>
-    <script src="assets/js/gestos.js"></script>
-    <script src="assets/js/airtable-loader.js"></script>
-</body>
-</html>
+                <!-- DINDO no final -->
+                <div class="aba" data-tab="dindo">DINDO</div>
+            </nav>
+            <div class="projeto-status">
+                <span id="projeto-nome">projeto_sem_título</span>
+                <span class="status-indicator" id="status-indicator">● pronto</span>
+            </div>
+        </header>
 
-<!-- ===== PACOTE MOBILE COMPLETO ===== -->
-<style>
-/* ===== RESET MOBILE ===== */
-* {
-    -webkit-tap-highlight-color: transparent;
-    -webkit-touch-callout: none;
-}
-
-/* ===== VARIÁVEIS MOBILE ===== */
-:root {
-    --mobile-header: 50px;
-    --mobile-bottom-nav: 60px;
-}
-
-/* ===== LAYOUT MOBILE PRINCIPAL ===== */
-@media (max-width: 768px) {
-    /* Reset do grid */
-    .app, .patika-grid, .container {
-        display: block !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        grid-template-columns: 1fr !important;
-    }
-    
-    /* Header fixo */
-    .top-bar, .patika-header, .site-header {
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: var(--mobile-header) !important;
-        background: var(--bg-surface) !important;
-        z-index: 1000 !important;
-        padding: 0 15px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    /* Espaço para o header fixo */
-    .main-content, .central, .patika-main {
-        margin-top: var(--mobile-header) !important;
-        padding: 15px !important;
-        min-height: calc(100vh - var(--mobile-header) - var(--mobile-bottom-nav)) !important;
-    }
-    
-    /* Navegação por abas (horizontal) */
-    .tabs-container, .nav-tabs, .patika-nav {
-        position: fixed !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        height: var(--mobile-bottom-nav) !important;
-        background: var(--bg-surface) !important;
-        display: flex !important;
-        overflow-x: auto !important;
-        white-space: nowrap !important;
-        z-index: 1000 !important;
-        box-shadow: 0 -2px 10px rgba(0,0,0,0.1) !important;
-        padding: 0 !important;
-        -webkit-overflow-scrolling: touch !important;
-    }
-    
-    .tab-item, .aba, .nav-item {
-        flex: 1 !important;
-        min-width: 80px !important;
-        height: 100% !important;
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 12px !important;
-        padding: 0 5px !important;
-        border-bottom: none !important;
-        border-top: 3px solid transparent !important;
-        transition: all 0.2s !important;
-    }
-    
-    .tab-item.active, .aba.ativa, .nav-item.active {
-        border-top-color: var(--accent-primary) !important;
-        color: var(--accent-primary) !important;
-        background: var(--accent-selection) !important;
-    }
-    
-    /* Esconder sidebars */
-    .sidebar-left, .sidebar-right, .menu-lateral, .painel-direito, .sidebar {
-        display: none !important;
-    }
-    
-    /* Conteúdo em tela cheia */
-    .main-content, .central, .patika-main {
-        width: 100% !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        padding-bottom: calc(var(--mobile-bottom-nav) + 15px) !important;
-    }
-    
-    /* Cards em grid responsivo */
-    .works-grid, .projetos-grid, .cards-container {
-        display: grid !important;
-        grid-template-columns: 1fr !important;
-        gap: 15px !important;
-        padding: 10px !important;
-    }
-    
-    .work-card, .projeto-card, .card {
-        width: 100% !important;
-        margin: 0 !important;
-        padding: 15px !important;
-    }
-    
-    /* Botões maiores para toque */
-    button, .btn, .menu-item, .cena-item {
-        min-height: 44px !important;
-        min-width: 44px !important;
-        padding: 12px 15px !important;
-        font-size: 16px !important;
-    }
-    
-    /* Formulários adaptados */
-    input, select, textarea {
-        font-size: 16px !important;
-        padding: 12px !important;
-        width: 100% !important;
-    }
-    
-    /* Editor de roteiro adaptado */
-    .roteiro-editor, .editor {
-        font-size: 16px !important;
-        line-height: 1.6 !important;
-        padding: 15px !important;
-        min-height: 400px !important;
-    }
-    
-    .patika-personagem {
-        margin-left: 60px !important;
-    }
-    
-    .patika-dialogo {
-        margin-left: 30px !important;
-        margin-right: 15px !important;
-    }
-    
-    /* Lista de cenas adaptada */
-    #lista-cenas, #listaCenasSidebar {
-        max-height: 200px !important;
-        overflow-y: auto !important;
-        margin: 15px 0 !important;
-        display: block !important;
-    }
-    
-    .cena-item {
-        padding: 12px 15px !important;
-        font-size: 14px !important;
-        margin: 5px 0 !important;
-    }
-    
-    /* Botão voltar ao topo */
-    .back-to-top {
-        bottom: calc(var(--mobile-bottom-nav) + 10px) !important;
-        right: 10px !important;
-        width: 44px !important;
-        height: 44px !important;
-    }
-    
-    /* Menu hamburguer */
-    .hamburger-menu {
-        display: block !important;
-        position: fixed !important;
-        top: 10px !important;
-        left: 10px !important;
-        z-index: 1100 !important;
-        width: 44px !important;
-        height: 44px !important;
-        background: var(--accent-primary) !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 8px !important;
-        font-size: 24px !important;
-        cursor: pointer !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
-    }
-    
-    /* Overlay do menu */
-    .menu-overlay {
-        display: none !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        background: rgba(0,0,0,0.5) !important;
-        z-index: 1050 !important;
-    }
-    
-    .menu-overlay.active {
-        display: block !important;
-    }
-    
-    /* Menu lateral mobile */
-    .mobile-sidebar {
-        position: fixed !important;
-        top: 0 !important;
-        left: -280px !important;
-        width: 280px !important;
-        height: 100% !important;
-        background: var(--bg-surface) !important;
-        z-index: 1060 !important;
-        transition: left 0.3s ease !important;
-        overflow-y: auto !important;
-        padding: 60px 20px 20px !important;
-        box-shadow: 2px 0 10px rgba(0,0,0,0.1) !important;
-    }
-    
-    .mobile-sidebar.open {
-        left: 0 !important;
-    }
-    
-    .mobile-sidebar .menu-section {
-        margin-bottom: 20px !important;
-    }
-    
-    .mobile-sidebar .menu-title {
-        color: var(--accent-primary) !important;
-        font-size: 14px !important;
-        font-weight: bold !important;
-        margin-bottom: 10px !important;
-    }
-    
-    .mobile-sidebar .menu-item {
-        padding: 12px !important;
-        margin: 5px 0 !important;
-        border-radius: 8px !important;
-        background: var(--bg-sidebar) !important;
-    }
-    
-    /* Ajustes de tipografia */
-    h1 { font-size: 1.8rem !important; }
-    h2 { font-size: 1.4rem !important; }
-    h3 { font-size: 1.2rem !important; }
-    p { font-size: 1rem !important; line-height: 1.5 !important; }
-    
-    /* Ajustes de imagens */
-    img {
-        max-width: 100% !important;
-        height: auto !important;
-    }
-    
-    /* Rodapé adaptado */
-    .footer, .rodape {
-        margin-bottom: var(--mobile-bottom-nav) !important;
-        padding: 20px 15px !important;
-        text-align: center !important;
-    }
-    
-    .footer-content {
-        flex-direction: column !important;
-        gap: 15px !important;
-    }
-    
-    .social-links {
-        display: flex !important;
-        gap: 20px !important;
-        justify-content: center !important;
-    }
-}
-</style>
-
-<!-- ===== ELEMENTOS MOBILE ===== -->
-<button class="hamburger-menu" id="hamburgerMenu">☰</button>
-<div class="menu-overlay" id="menuOverlay"></div>
-<div class="mobile-sidebar" id="mobileSidebar">
-    <!-- Será preenchido via JavaScript -->
-</div>
-
-<script>
-(function() {
-    'use strict';
-
-    // ===== DETECTAR MOBILE =====
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    
-    // ===== MENU HAMBURGER =====
-    const hamburger = document.getElementById('hamburgerMenu');
-    const overlay = document.getElementById('menuOverlay');
-    const sidebar = document.getElementById('mobileSidebar');
-    
-    if (hamburger && overlay && sidebar) {
-        // Clonar menu principal para o sidebar
-        const mainMenu = document.querySelector('.menu, .sidebar-left, .patika-sidebar-left');
-        if (mainMenu) {
-            sidebar.innerHTML = mainMenu.innerHTML;
-        } else {
-    // Criar menu mobile - apenas itens principais
-    const mainMenu = document.querySelector(".nav-bottom-center");
-    if (mainMenu) {
-        mobileMenu.innerHTML = `
+        <!-- MENU LATERAL -->
+        <aside class="menu" id="menu-lateral">
             <div class="menu-section">
-                <div class="menu-item" onclick="mostrarSobre()">📋 SOBRE</div>
-                <div class="menu-item" onclick="mostrarPerfil()">👤 PERFIL</div>
-                <div class="menu-item" onclick="mostrarTrabalho()">🎬 PORTFÓLIO</div>
+                <div class="menu-title">FERRAMENTAS</div>
+                <div class="menu-item ativo" data-tool="roteiro">Editor Roteiro</div>
+                <div class="menu-item" data-tool="sinopse">Sinopse</div>
+                <div class="menu-item" data-tool="argumento">Argumento</div>
+                <div class="menu-item" data-tool="escaleta">Escaleta</div>
+                <div class="menu-item" data-tool="personagens">Personagens</div>
+                <div class="menu-item" data-tool="copy">Copy</div>
+                <div class="menu-item" data-tool="dindo">Dindo</div>
             </div>
             <div class="menu-section">
-                <div class="menu-item" onclick="window.location.href=x27/patika/x27">📝 PATIKA</div>
+                <div class="menu-title">MODOS</div>
+                <div class="menu-item" onclick="ativarModoFoco()">Modo Foco</div>
+                <div class="menu-item" onclick="alternarTema()">Tema</div>
             </div>
-        `;
-    }
-        });
-}        
-        // Abrir menu
-        hamburger.addEventListener('click', () => {
-            sidebar.classList.add('open');
-            overlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        });
+            <div class="menu-section">
+                <div class="menu-title">DADOS</div>
+                <div class="menu-item" onclick="fazerBackup()">Backup</div>
+                <div class="menu-item" onclick="restaurarBackup()">Restaurar</div>
+            </div>
+        </aside>
+
+        <!-- ÁREA CENTRAL -->
+        <main class="central" id="area-central">
+            <div class="content-header">
+                <h2 id="titulo-central">Editor de Roteiro</h2>
+                <div id="acoes-central"></div>
+            </div>
+            <div id="conteudo-central">
+                <!-- Carregado via JS -->
+            </div>
+        </main>
+
+        <!-- PAINEL DIREITO -->
+        <aside class="painel" id="painel-direito">
+            <h3>INFORMAÇÕES</h3>
+            <div id="conteudo-painel">
+                <!-- Carregado via JS -->
+            </div>
+        </aside>
+
+        <!-- RODAPÉ -->
+        <footer class="rodape">
+            <span>© PATIKA - Plataforma de Roteiro</span>
+            <span class="contador-rodape" id="contador-rodape">0 palavras</span>
+            <span id="status-auto-save">Auto-save ativo</span>
+        </footer>
+    </div>
+
+    <script>
+        // ===== VARIÁVEIS GLOBAIS =====
+        let abaAtual = 'roteiro';
+        let versoes = JSON.parse(localStorage.getItem('patika_versoes') || '[]');
         
-        // Fechar menu
-        overlay.addEventListener('click', () => {
-            sidebar.classList.remove('open');
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        });
-        
-        // Fechar ao clicar em item
-        sidebar.addEventListener('click', (e) => {
-            if (e.target.classList.contains('menu-item')) {
-                setTimeout(() => {
-                    sidebar.classList.remove('open');
-                    overlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-        });
-    }
-    
-    // ===== NAVEGAÇÃO POR SWIPE =====
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    document.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-    
-    document.addEventListener('touchend', (e) => {
-        if (!isMobile) return;
-        
-        touchEndX = e.changedTouches[0].screenX;
-        const diff = touchEndX - touchStartX;
-        const threshold = 100;
-        
-        if (Math.abs(diff) > threshold) {
-            const tabs = document.querySelectorAll('.tab-item, .aba, .nav-item');
-            let activeIndex = 0;
+        // Dados da Copy
+        let copyDocs = JSON.parse(localStorage.getItem('patika_copy_docs') || '[]');
+        let copyPastas = JSON.parse(localStorage.getItem('patika_copy_pastas') || '[]');
+        let copyTags = JSON.parse(localStorage.getItem('patika_copy_tags') || '[]');
+        let copyVersoes = JSON.parse(localStorage.getItem('patika_copy_versoes') || '[]');
+        let copyDocAtual = null;
+        let copyPastaAtual = null;
+
+        // Pastas padrão da Copy
+        if (copyPastas.length === 0) {
+            copyPastas = [
+                { id: 1, nome: 'Briefings', icon: '📋', count: 0 },
+                { id: 2, nome: 'Roteiros', icon: '📄', count: 0 },
+                { id: 3, nome: 'Clipes', icon: '🎬', count: 0 },
+                { id: 4, nome: 'Pitches', icon: '📎', count: 0 }
+            ];
+            localStorage.setItem('patika_copy_pastas', JSON.stringify(copyPastas));
+        }
+
+        // Documentos exemplo da Copy
+        if (copyDocs.length === 0) {
+            copyDocs = [
+                { id: 1, titulo: 'Briefing Cliente XYZ', cliente: 'Empresa A', tipo: 'briefing', pasta: 1, data: new Date().toISOString(), icon: '📋', conteudo: 'Briefing completo do cliente XYZ...' },
+                { id: 2, titulo: 'Roteiro Comercial 30s', cliente: 'Produto B', tipo: 'roteiro', pasta: 2, data: new Date().toISOString(), icon: '📄', conteudo: 'Roteiro comercial para TV...' },
+                { id: 3, titulo: 'Tratamento Clipe', cliente: 'Artista C', tipo: 'clipe', pasta: 3, data: new Date().toISOString(), icon: '🎬', conteudo: 'Tratamento para videoclipe...' }
+            ];
+            localStorage.setItem('patika_copy_docs', JSON.stringify(copyDocs));
+        }
+
+        // ===== SISTEMA DE ABAS =====
+        function mudarAba(aba) {
+            abaAtual = aba;
             
-            tabs.forEach((tab, index) => {
-                if (tab.classList.contains('active')) {
-                    activeIndex = index;
+            // Atualizar abas no topo
+            document.querySelectorAll('.aba').forEach(tab => {
+                tab.classList.remove('ativa');
+                if (tab.dataset.tab === aba) {
+                    tab.classList.add('ativa');
                 }
             });
             
-            if (diff > 0 && activeIndex > 0) {
-                // Swipe direita → anterior
-                tabs[activeIndex - 1].click();
-            } else if (diff < 0 && activeIndex < tabs.length - 1) {
-                // Swipe esquerda → próximo
-                tabs[activeIndex + 1].click();
-            }
-        }
-    }, { passive: true });
-    
-    // ===== SCROLL INFINITO PARA ABAS =====
-    function ensureActiveTabVisible() {
-        const tabsContainer = document.querySelector('.tabs-container, .nav-tabs, .patika-nav');
-        const activeTab = document.querySelector('.tab-item.active, .aba.ativa, .nav-item.active');
-        
-        if (tabsContainer && activeTab) {
-            const containerRect = tabsContainer.getBoundingClientRect();
-            const tabRect = activeTab.getBoundingClientRect();
+            // Atualizar menu lateral
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('ativo');
+                if (item.dataset.tool === aba || item.textContent.toLowerCase().includes(aba)) {
+                    item.classList.add('ativo');
+                }
+            });
             
-            if (tabRect.left < containerRect.left || tabRect.right > containerRect.right) {
-                activeTab.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'nearest',
-                    inline: 'center'
-                });
+            // Carregar conteúdo da aba
+            carregarAba(aba);
+        }
+
+        function carregarAba(aba) {
+            const titulo = document.getElementById('titulo-central');
+            const conteudo = document.getElementById('conteudo-central');
+            const acoes = document.getElementById('acoes-central');
+            const painel = document.getElementById('conteudo-painel');
+            
+            switch(aba) {
+                case 'roteiro':
+                    titulo.textContent = 'Editor de Roteiro';
+                    acoes.innerHTML = `<button class="btn btn-pequeno" onclick="salvarVersao()">Salvar</button>`;
+                    conteudo.innerHTML = `
+                        <div class="toolbar">
+                            <button class="btn" onclick="inserirElemento('cena')">Cena</button>
+                            <button class="btn" onclick="inserirElemento('personagem')">Personagem</button>
+                            <button class="btn" onclick="inserirElemento('dialogo')">Diálogo</button>
+                            <button class="btn" onclick="inserirElemento('acao')">Ação</button>
+                        </div>
+                        <div id="roteiro-editor" class="roteiro-editor" contenteditable="true">
+                            <div class="patika-cena">1. INT. PATIKA - DIA</div>
+                            <div class="patika-acao">Editor de roteiro principal com todas as funcionalidades.</div>
+                            <div class="patika-personagem">PATIKA</div>
+                            <div class="patika-dialogo">Bem-vindo à plataforma definitiva de roteiro!</div>
+                        </div>
+                    `;
+                    painel.innerHTML = `
+                        <h3>CENAS</h3>
+                        <div class="cena-item" onclick="irParaCena(0)">1. INT. PATIKA - DIA</div>
+                        <h3>ESTATÍSTICAS</h3>
+                        <p>Palavras: <span id="stat-palavras">12</span></p>
+                        <p>Personagens: <span id="stat-personagens">1</span></p>
+                        <p>Cenas: <span id="stat-cenas">1</span></p>
+                        <p>Versões: <span id="stat-versoes">${versoes.length}</span></p>
+                        <h3>NOTAS</h3>
+                        <textarea id="notas-rapidas" style="width:100%; height:100px; padding:10px; border:1px solid #ddd; border-radius:8px;" placeholder="Suas anotações..."></textarea>
+                    `;
+                    
+                    document.getElementById('roteiro-editor').addEventListener('input', atualizarContador);
+                    atualizarContador();
+                    break;
+                    
+                case 'copy':
+                    titulo.textContent = 'Copy';
+                    acoes.innerHTML = `
+                        <button class="btn btn-pequeno" onclick="criarDocumentoCopy()">Novo</button>
+                        <button class="btn btn-pequeno" onclick="criarPastaCopy()">Pasta</button>
+                    `;
+                    conteudo.innerHTML = `
+                        <div class="copy-container">
+                            <div class="copy-header">
+                                <div class="copy-tabs">
+                                    <div class="copy-tab active" onclick="copyMudarTab('pastas', this)">Pastas</div>
+                                    <div class="copy-tab" onclick="copyMudarTab('documentos', this)">Documentos</div>
+                                    <div class="copy-tab" onclick="copyMudarTab('templates', this)">Templates</div>
+                                </div>
+                                <div class="copy-search">
+                                    <span>🔍</span>
+                                    <input type="text" id="copy-search" placeholder="Buscar..." oninput="buscarCopy()">
+                                </div>
+                            </div>
+                            
+                            <div id="copy-conteudo">
+                                ${gerarPastasCopy()}
+                            </div>
+                            
+                            <div class="copy-filtro-bg"></div>
+                        </div>
+                    `;
+                    painel.innerHTML = `
+                        <h3>ESTATÍSTICAS</h3>
+                        <div class="copy-stats">
+                            <div class="copy-stat">
+                                <span class="copy-stat-value">${copyDocs.length}</span>
+                                <span class="copy-stat-label">docs</span>
+                            </div>
+                            <div class="copy-stat">
+                                <span class="copy-stat-value">${copyPastas.length}</span>
+                                <span class="copy-stat-label">pastas</span>
+                            </div>
+                            <div class="copy-stat">
+                                <span class="copy-stat-value">${copyTags.length}</span>
+                                <span class="copy-stat-label">tags</span>
+                            </div>
+                        </div>
+                        <h3>TAGS</h3>
+                        <div class="copy-tags" id="copy-tags-painel">
+                            ${gerarTagsCopy()}
+                        </div>
+                        <h3>AÇÕES</h3>
+                        <button class="btn w-100 mb-2" onclick="exportarCopyTXT()">Exportar TXT</button>
+                        <button class="btn w-100 mb-2" onclick="exportarCopyPDF()">Exportar PDF</button>
+                        <button class="btn w-100" onclick="fazerBackupCopy()">Backup Copy</button>
+                    `;
+                    break;
+                    
+                case 'sinopse':
+                    titulo.textContent = 'Sinopse';
+                    conteudo.innerHTML = `<textarea class="w-100" style="min-height:500px; padding:20px;" placeholder="Escreva sua sinopse aqui..."></textarea>`;
+                    painel.innerHTML = `<p>Escreva a sinopse da sua história.</p>`;
+                    break;
+                    
+                case 'argumento':
+                    titulo.textContent = 'Argumento';
+                    conteudo.innerHTML = `<textarea class="w-100" style="min-height:500px; padding:20px;" placeholder="Desenvolva seu argumento..."></textarea>`;
+                    painel.innerHTML = `<p>Estruture seu argumento em atos.</p>`;
+                    break;
+                    
+                case 'escaleta':
+                    titulo.textContent = 'Escaleta';
+                    conteudo.innerHTML = `<textarea class="w-100" style="min-height:500px; padding:20px;" placeholder="Liste suas cenas em ordem..."></textarea>`;
+                    painel.innerHTML = `<p>Organize as cenas da sua história.</p>`;
+                    break;
+                    
+                case 'personagens':
+                    titulo.textContent = 'Personagens';
+                    conteudo.innerHTML = `<textarea class="w-100" style="min-height:500px; padding:20px;" placeholder="Descreva seus personagens..."></textarea>`;
+                    painel.innerHTML = `<p>Crie e desenvolva seus personagens.</p>`;
+                    break;
+                    
+                case 'dindo':
+                    titulo.textContent = 'Dindo';
+                    conteudo.innerHTML = `
+                        <h3 style="color:var(--verde); margin-bottom:20px;">Sistema de Contratos</h3>
+                        <div style="background:var(--areia); padding:30px; border-radius:12px;">
+                            <p>Funcionalidade do Dindo será carregada aqui.</p>
+                        </div>
+                    `;
+                    painel.innerHTML = `<p>Gere contratos profissionais para seus projetos.</p>`;
+                    break;
             }
         }
-    }
-    
-    // Observar mudanças de aba
-    const observer = new MutationObserver(ensureActiveTabVisible);
-    const tabsContainer = document.querySelector('.tabs-container, .nav-tabs, .patika-nav');
-    if (tabsContainer) {
-        observer.observe(tabsContainer, {
-            attributes: true,
-            subtree: true,
-            attributeFilter: ['class']
-        });
-    }
-    
-    // ===== VIEWPORT OTIMIZADO =====
-    function adjustViewport() {
-        let viewport = document.querySelector('meta[name="viewport"]');
-        if (!viewport) {
-            viewport = document.createElement('meta');
-            viewport.name = 'viewport';
-            document.head.appendChild(viewport);
-        }
-        viewport.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes';
-    }
-    adjustViewport();
-    
-    // ===== DETECTAR ORIENTAÇÃO =====
-    function handleOrientation() {
-        document.body.setAttribute('data-orientation', 
-            window.matchMedia('(orientation: portrait)').matches ? 'portrait' : 'landscape'
-        );
-    }
-    
-    window.addEventListener('orientationchange', handleOrientation);
-    handleOrientation();
-    
-    // ===== FORÇAR REAVALIAÇÃO DE ESTILOS =====
-    function forceReflow() {
-        window.dispatchEvent(new Event('resize'));
-    }
-    
-    window.addEventListener('orientationchange', forceReflow);
-    window.addEventListener('resize', forceReflow);
-    
-    console.log('📱 Site totalmente otimizado para mobile!');
-})();
-</script>
-<!-- ===== FIM DO PACOTE MOBILE COMPLETO ===== -->
 
+        // ===== FUNÇÕES DO ROTEIRO =====
+        function inserirElemento(tipo) {
+            const editor = document.getElementById('roteiro-editor');
+            if (!editor) return;
+            
+            const novaLinha = document.createElement('div');
+            
+            switch(tipo) {
+                case 'cena':
+                    novaLinha.className = 'patika-cena';
+                    novaLinha.innerText = 'INT. LOCAL - DIA';
+                    break;
+                case 'personagem':
+                    novaLinha.className = 'patika-personagem';
+                    novaLinha.innerText = 'PERSONAGEM';
+                    break;
+                case 'dialogo':
+                    novaLinha.className = 'patika-dialogo';
+                    novaLinha.innerText = 'Digite o diálogo...';
+                    break;
+                default:
+                    novaLinha.className = 'patika-acao';
+                    novaLinha.innerText = 'Ação...';
+            }
+            
+            editor.appendChild(novaLinha);
+            atualizarContador();
+        }
+
+        function irParaCena(index) {
+            const editor = document.getElementById('roteiro-editor');
+            const linhas = editor.children;
+            let count = 0;
+            
+            for (let i = 0; i < linhas.length; i++) {
+                if (linhas[i].classList.contains('patika-cena')) {
+                    if (count === index) {
+                        linhas[i].scrollIntoView({ behavior: 'smooth' });
+                        break;
+                    }
+                    count++;
+                }
+            }
+        }
+
+        function atualizarContador() {
+            const editor = document.getElementById('roteiro-editor');
+            if (!editor) return;
+            
+            const texto = editor.innerText;
+            const palavras = texto.trim().split(/\s+/).filter(Boolean).length;
+            
+            document.getElementById('contador-rodape').textContent = palavras + ' palavras';
+            
+            const statPalavras = document.getElementById('stat-palavras');
+            if (statPalavras) statPalavras.textContent = palavras;
+        }
+
+        function salvarVersao() {
+            const editor = document.getElementById('roteiro-editor');
+            if (!editor) return;
+            
+            const notas = document.getElementById('notas-rapidas')?.value || '';
+            
+            versoes.unshift({
+                data: new Date().toLocaleString(),
+                conteudo: editor.innerHTML,
+                notas: notas,
+                palavras: editor.innerText.trim().split(/\s+/).filter(Boolean).length
+            });
+            
+            if (versoes.length > 20) versoes.pop();
+            localStorage.setItem('patika_versoes', JSON.stringify(versoes));
+            
+            const statVersoes = document.getElementById('stat-versoes');
+            if (statVersoes) statVersoes.textContent = versoes.length;
+            
+            mostrarNotificacao('Versão salva!');
+        }
+
+        // ===== FUNÇÕES DA COPY =====
+        function gerarPastasCopy() {
+            let html = '<div class="copy-pastas-grid">';
+            
+            copyPastas.forEach(pasta => {
+                const count = copyDocs.filter(d => d.pasta === pasta.id).length;
+                html += `
+                    <div class="copy-pasta-card" onclick="selecionarPastaCopy(${pasta.id})">
+                        <div class="copy-pasta-icon">${pasta.icon}</div>
+                        <div class="copy-pasta-nome">${pasta.nome}</div>
+                        <div class="copy-pasta-count">${count} docs</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div class="copy-pasta-card" onclick="criarPastaCopy()">
+                    <div class="copy-pasta-icon">➕</div>
+                    <div class="copy-pasta-nome">Nova Pasta</div>
+                </div>
+            </div>`;
+            
+            return html;
+        }
+
+        function gerarDocumentosCopy() {
+            let docsFiltrados = copyPastaAtual ? 
+                copyDocs.filter(d => d.pasta === copyPastaAtual) : copyDocs;
+            
+            if (docsFiltrados.length === 0) {
+                return '<p style="text-align:center; padding:40px;">Nenhum documento</p>';
+            }
+            
+            let html = '<div class="copy-docs-list">';
+            
+            docsFiltrados.slice(0, 5).forEach(doc => {
+                html += `
+                    <div class="copy-doc-item" onclick="selecionarDocumentoCopy(${doc.id})">
+                        <div class="copy-doc-icon">${doc.icon || '📄'}</div>
+                        <div class="copy-doc-info">
+                            <div class="copy-doc-titulo">${doc.titulo}</div>
+                            <div class="copy-doc-meta">
+                                <span>${doc.cliente || '—'}</span>
+                                <span>•</span>
+                                <span>${new Date(doc.data).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function gerarTemplatesCopy() {
+            const templates = [
+                { nome: 'Briefing', icon: '📋', desc: 'Briefing completo de produção' },
+                { nome: 'Roteiro Comercial', icon: '📺', desc: 'Roteiro para propaganda' },
+                { nome: 'Tratamento Clipe', icon: '🎵', desc: 'Roteiro para videoclipe' },
+                { nome: 'Pitch', icon: '🎯', desc: 'Apresentação para cliente' }
+            ];
+            
+            let html = '<div class="copy-pastas-grid">';
+            
+            templates.forEach(t => {
+                html += `
+                    <div class="copy-pasta-card" onclick="usarTemplate('${t.nome}')">
+                        <div class="copy-pasta-icon">${t.icon}</div>
+                        <div class="copy-pasta-nome">${t.nome}</div>
+                        <div class="copy-pasta-count">${t.desc}</div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            return html;
+        }
+
+        function gerarTagsCopy() {
+            if (copyTags.length === 0) {
+                return '<span>Nenhuma tag</span>';
+            }
+            
+            return copyTags.map(tag => 
+                `<span class="copy-tag" onclick="filtrarPorTag('${tag}')">#${tag}</span>`
+            ).join('');
+        }
+
+        function copyMudarTab(tab, element) {
+            document.querySelectorAll('.copy-tab').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+            
+            const conteudo = document.getElementById('copy-conteudo');
+            
+            switch(tab) {
+                case 'pastas':
+                    conteudo.innerHTML = gerarPastasCopy();
+                    break;
+                case 'documentos':
+                    conteudo.innerHTML = gerarDocumentosCopy();
+                    break;
+                case 'templates':
+                    conteudo.innerHTML = gerarTemplatesCopy();
+                    break;
+            }
+        }
+
+        function criarPastaCopy() {
+            const nome = prompt('Nome da pasta:');
+            if (!nome) return;
+            
+            const icon = prompt('Ícone (emojis):', '📁');
+            
+            copyPastas.push({
+                id: Date.now(),
+                nome: nome,
+                icon: icon || '📁'
+            });
+            
+            localStorage.setItem('patika_copy_pastas', JSON.stringify(copyPastas));
+            copyMudarTab('pastas', document.querySelector('.copy-tab.active'));
+            mostrarNotificacao('Pasta criada!');
+        }
+
+        function selecionarPastaCopy(pastaId) {
+            copyPastaAtual = pastaId;
+            const pasta = copyPastas.find(p => p.id === pastaId);
+            mostrarNotificacao(`Pasta: ${pasta.nome}`);
+        }
+
+        function criarDocumentoCopy() {
+            const titulo = prompt('Título do documento:');
+            if (!titulo) return;
+            
+            const novoDoc = {
+                id: Date.now(),
+                titulo: titulo,
+                cliente: '',
+                tipo: 'outro',
+                pasta: copyPastaAtual,
+                data: new Date().toISOString(),
+                icon: '📄',
+                conteudo: ''
+            };
+            
+            copyDocs.unshift(novoDoc);
+            localStorage.setItem('patika_copy_docs', JSON.stringify(copyDocs));
+            copyDocAtual = novoDoc.id;
+            
+            mostrarNotificacao('Documento criado!');
+            copyMudarTab('documentos', document.querySelectorAll('.copy-tab')[1]);
+        }
+
+        function selecionarDocumentoCopy(docId) {
+            copyDocAtual = docId;
+            const doc = copyDocs.find(d => d.id === docId);
+            
+            if (doc) {
+                abrirEditorCopy(doc);
+            }
+        }
+
+        function abrirEditorCopy(doc) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>✏️ ${doc.titulo}</h3>
+                        <button class="modal-close" onclick="this.parentElement.parentElement.parentElement.remove()">✕</button>
+                    </div>
+                    <div style="margin-bottom:15px;">
+                        <input type="text" id="modal-titulo" value="${doc.titulo}" style="width:100%; padding:10px; margin-bottom:10px; border:1px solid #ddd; border-radius:8px;">
+                        <input type="text" id="modal-cliente" value="${doc.cliente || ''}" placeholder="Cliente" style="width:100%; padding:10px; border:1px solid #ddd; border-radius:8px;">
+                    </div>
+                    <textarea id="modal-conteudo" style="width:100%; min-height:300px; padding:15px; border:1px solid #ddd; border-radius:8px; font-family:'Courier New';">${doc.conteudo || ''}</textarea>
+                    <div style="display:flex; gap:10px; margin-top:20px;">
+                        <button class="btn btn-verde" onclick="salvarDocumentoCopy(${doc.id})">Salvar</button>
+                        <button class="btn" onclick="exportarDocCopy(${doc.id})">Exportar</button>
+                        <button class="btn" onclick="this.parentElement.parentElement.parentElement.remove()">Cancelar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        function salvarDocumentoCopy(docId) {
+            const doc = copyDocs.find(d => d.id === docId);
+            if (!doc) return;
+            
+            doc.titulo = document.getElementById('modal-titulo').value;
+            doc.cliente = document.getElementById('modal-cliente').value;
+            doc.conteudo = document.getElementById('modal-conteudo').value;
+            doc.data = new Date().toISOString();
+            
+            localStorage.setItem('patika_copy_docs', JSON.stringify(copyDocs));
+            document.querySelector('.modal-overlay').remove();
+            mostrarNotificacao('Documento salvo!');
+        }
+
+        function exportarDocCopy(docId) {
+            const doc = copyDocs.find(d => d.id === docId);
+            if (!doc) return;
+            
+            const blob = new Blob([doc.conteudo], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `${doc.titulo.replace(/\s+/g, '_')}.txt`;
+            a.click();
+        }
+
+        function exportarCopyTXT() {
+            if (copyDocs.length === 0) {
+                mostrarNotificacao('Nenhum documento para exportar');
+                return;
+            }
+            
+            const conteudo = copyDocs.map(d => 
+                `${d.titulo}\nCliente: ${d.cliente}\n---\n${d.conteudo}\n\n`
+            ).join('==========\n\n');
+            
+            const blob = new Blob([conteudo], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `copy-backup-${new Date().toISOString().slice(0,10)}.txt`;
+            a.click();
+        }
+
+        function exportarCopyPDF() {
+            const win = window.open('', '_blank');
+            win.document.write(`
+                <html>
+                <head><title>Copy - Documentos</title>
+                <style>
+                    body { font-family: 'Courier New'; padding: 40px; max-width: 800px; margin: 0 auto; }
+                    h1 { color: #00A86B; }
+                    .doc { margin-bottom: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px; }
+                </style>
+                </head>
+                <body>
+                    <h1>Copy - Documentos</h1>
+                    ${copyDocs.map(d => `
+                        <div class="doc">
+                            <h2>${d.titulo}</h2>
+                            <p><strong>Cliente:</strong> ${d.cliente || '—'}</p>
+                            <p><strong>Data:</strong> ${new Date(d.data).toLocaleDateString()}</p>
+                            <hr>
+                            <pre>${d.conteudo || ''}</pre>
+                        </div>
+                    `).join('')}
+                </body>
+                </html>
+            `);
+            win.document.close();
+            win.print();
+        }
+
+        function buscarCopy() {
+            const termo = document.getElementById('copy-search').value.toLowerCase();
+            if (!termo) {
+                copyMudarTab('pastas', document.querySelector('.copy-tab.active'));
+                return;
+            }
+            
+            const docsFiltrados = copyDocs.filter(d => 
+                d.titulo?.toLowerCase().includes(termo) ||
+                d.cliente?.toLowerCase().includes(termo)
+            );
+            
+            const conteudo = document.getElementById('copy-conteudo');
+            
+            if (docsFiltrados.length === 0) {
+                conteudo.innerHTML = '<p style="text-align:center; padding:40px;">Nenhum resultado</p>';
+                return;
+            }
+            
+            let html = '<div class="copy-docs-list">';
+            docsFiltrados.forEach(doc => {
+                html += `
+                    <div class="copy-doc-item" onclick="selecionarDocumentoCopy(${doc.id})">
+                        <div class="copy-doc-icon">${doc.icon || '📄'}</div>
+                        <div class="copy-doc-info">
+                            <div class="copy-doc-titulo">${doc.titulo}</div>
+                            <div class="copy-doc-meta">
+                                <span>${doc.cliente || '—'}</span>
+                                <span>•</span>
+                                <span>${new Date(doc.data).toLocaleDateString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            conteudo.innerHTML = html;
+        }
+
+        function usarTemplate(nome) {
+            const template = {
+                'Briefing': 'CLIENTE: \nPROJETO: \nDATA: \n\n1. SOBRE O CLIENTE\n2. OBJETIVO\n3. PÚBLICO-ALVO\n4. PRAZO\n5. ORÇAMENTO',
+                'Roteiro Comercial': 'CLIENTE:\nPRODUTO:\nDURAÇÃO:\n\nABERTURA (0-5s)\nDESENVOLVIMENTO (5-20s)\nCTA (20-30s)',
+                'Tratamento Clipe': 'ARTISTA:\nMÚSICA:\n\nCONCEITO:\n[INTRO]\n[VERSO]\n[REFRÃO]\n[PONTE]\n[FINAL]',
+                'Pitch': 'CLIENTE:\nPROJETO:\n\n1. QUEM SOMOS\n2. ENTENDIMENTO\n3. CONCEITO\n4. PROPOSTA\n5. INVESTIMENTO'
+            }[nome] || '';
+            
+            const titulo = prompt('Título do documento:', nome);
+            if (!titulo) return;
+            
+            const novoDoc = {
+                id: Date.now(),
+                titulo: titulo,
+                cliente: '',
+                tipo: 'template',
+                pasta: copyPastaAtual,
+                data: new Date().toISOString(),
+                icon: '📄',
+                conteudo: template
+            };
+            
+            copyDocs.unshift(novoDoc);
+            localStorage.setItem('patika_copy_docs', JSON.stringify(copyDocs));
+            copyDocAtual = novoDoc.id;
+            
+            abrirEditorCopy(novoDoc);
+        }
+
+        function filtrarPorTag(tag) {
+            mostrarNotificacao(`Filtrando por #${tag}`);
+        }
+
+        function fazerBackupCopy() {
+            const backup = {
+                pastas: copyPastas,
+                documentos: copyDocs,
+                tags: copyTags,
+                versoes: copyVersoes,
+                data: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `copy-backup-${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            mostrarNotificacao('Backup realizado!');
+        }
+
+        // ===== FUNÇÕES AUXILIARES =====
+        function ativarModoFoco() {
+            document.querySelector('.menu').style.display = 'none';
+            document.querySelector('.painel').style.display = 'none';
+            setTimeout(() => {
+                document.querySelector('.menu').style.display = 'block';
+                document.querySelector('.painel').style.display = 'block';
+            }, 5000);
+        }
+
+        function alternarTema() {
+            document.body.classList.toggle('dark-mode');
+        }
+
+        function fazerBackup() {
+            const backup = {
+                versoes: versoes,
+                data: new Date().toISOString()
+            };
+            
+            const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `patika-backup-${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+        }
+
+        function restaurarBackup() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const dados = JSON.parse(e.target.result);
+                        if (dados.versoes) {
+                            versoes = dados.versoes;
+                            localStorage.setItem('patika_versoes', JSON.stringify(versoes));
+                            mostrarNotificacao('Backup restaurado!');
+                        }
+                    } catch {
+                        mostrarNotificacao('Arquivo inválido');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+
+        function mostrarNotificacao(msg) {
+            const notif = document.createElement('div');
+            notif.className = 'notificacao';
+            notif.textContent = msg;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3000);
+        }
+
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', () => {
+            // Configurar abas
+            document.querySelectorAll('.aba').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    mudarAba(tab.dataset.tab);
+                });
+            });
+            
+            document.querySelectorAll('.menu-item[data-tool]').forEach(item => {
+                item.addEventListener('click', () => {
+                    mudarAba(item.dataset.tool);
+                });
+            });
+            
+            // Iniciar com aba roteiro
+            mudarAba('roteiro');
+            
+            // Auto-save a cada 30s
+            setInterval(() => {
+                const editor = document.getElementById('roteiro-editor');
+                if (editor) {
+                    localStorage.setItem('patika_autosave', editor.innerHTML);
+                    document.getElementById('status-auto-save').textContent = 'Auto-save';
+                }
+            }, 30000);
+            
+            console.log('🚀 PATIKA carregado com sucesso!');
+        });
+    </script>
+</body>
+</html>
