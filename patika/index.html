@@ -11,7 +11,7 @@
     <meta http-equiv="Expires" content="0">
     
     <style>
-        /* ===== VARIÁVEIS (MANTIDAS) ===== */
+        /* ===== VARIÁVEIS ===== */
         :root {
             --verde: #00A86B;
             --verde-escuro: #00875A;
@@ -36,12 +36,12 @@
             --spacing-lg: 16px;
             --spacing-xl: 20px;
             
-            /* Sombras mantidas */
+            /* Sombras */
             --shadow-sm: 0 2px 4px rgba(0,0,0,0.02);
             --shadow-md: 0 4px 12px rgba(0,0,0,0.05);
             --shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
             
-            /* Bordas mantidas */
+            /* Bordas */
             --radius-sm: 8px;
             --radius-md: 12px;
             --radius-lg: 16px;
@@ -70,7 +70,7 @@
             height: 100vh;
         }
 
-        /* ===== TOPO MAIS COMPACTO ===== */
+        /* ===== TOPO ===== */
         .topo {
             grid-column: 1 / -1;
             background: var(--branco);
@@ -113,7 +113,6 @@
             font-size: 0.9rem;
             font-weight: 500;
             white-space: nowrap;
-            gap: 4px;
         }
 
         .aba:hover {
@@ -178,7 +177,7 @@
             color: var(--verde);
         }
 
-        /* ===== MENU LATERAL MAIS ESTREITO ===== */
+        /* ===== MENU LATERAL ===== */
         .menu {
             background: var(--branco);
             border-right: 1px solid var(--areia-escura);
@@ -247,7 +246,7 @@
             font-size: 1.4rem;
         }
 
-        /* ===== PAINEL DIREITO MENOR ===== */
+        /* ===== PAINEL DIREITO ===== */
         .painel {
             background: var(--branco);
             border-left: 1px solid var(--areia-escura);
@@ -431,6 +430,159 @@
             overflow-y: auto;
         }
 
+        /* ===== ABA COPY ESTILOS ===== */
+        .copy-container {
+            background: var(--copy-fundo);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .copy-filtro-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                linear-gradient(45deg, transparent 45%, rgba(212,182,138,0.1) 45%, rgba(212,182,138,0.1) 55%, transparent 55%),
+                linear-gradient(-45deg, transparent 45%, rgba(212,182,138,0.1) 45%, rgba(212,182,138,0.1) 55%, transparent 55%);
+            background-size: 30px 30px;
+            pointer-events: none;
+        }
+
+        .copy-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-tabs {
+            display: flex;
+            gap: 2px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 4px;
+        }
+
+        .copy-tab {
+            padding: 10px 20px;
+            color: white;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s;
+            font-size: 14px;
+        }
+
+        .copy-tab:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .copy-tab.active {
+            background: white;
+            color: var(--copy-fundo);
+            font-weight: 500;
+        }
+
+        .copy-pastas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-pasta-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-pasta-card:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .copy-pasta-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+        }
+
+        .copy-pasta-nome {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .copy-pasta-count {
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        .copy-docs-list {
+            margin: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .copy-doc-item {
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .copy-doc-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateX(5px);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .copy-doc-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .copy-doc-info {
+            flex: 1;
+        }
+
+        .copy-doc-titulo {
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .copy-doc-meta {
+            font-size: 12px;
+            opacity: 0.7;
+            display: flex;
+            gap: 8px;
+        }
+
         /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 768px) {
             .patika-web {
@@ -481,17 +633,17 @@
         <header class="topo">
             <div class="logo-patika">PATIKA</div>
             <nav class="tabs-container" id="tabs-principais">
-                <!-- Abas com emojis minimalistas -->
-                <div class="aba ativa" data-tab="roteiro">⌨️ ROTEIRO</div>
-                <div class="aba" data-tab="sinopse">📑 SINOPSE</div>
-                <div class="aba" data-tab="argumento">📌 ARGUMENTO</div>
-                <div class="aba" data-tab="escaleta">🔢 ESCALETA</div>
-                <div class="aba" data-tab="personagens">👤 PERSONAGENS</div>
+                <!-- Abas sem emojis -->
+                <div class="aba ativa" data-tab="roteiro">ROTEIRO</div>
+                <div class="aba" data-tab="sinopse">SINOPSE</div>
+                <div class="aba" data-tab="argumento">ARGUMENTO</div>
+                <div class="aba" data-tab="escaleta">ESCALETA</div>
+                <div class="aba" data-tab="personagens">PERSONAGENS</div>
                 <div class="aba aba-copy" data-tab="copy">
                     <div class="filtro-barro"></div>
-                    <span>✏️ COPY</span>
+                    <span>COPY</span>
                 </div>
-                <div class="aba" data-tab="dindo">📎 DINDO</div>
+                <div class="aba" data-tab="dindo">DINDO</div>
             </nav>
             <div class="projeto-status">
                 <span id="projeto-nome">projeto_sem_título</span>
@@ -503,33 +655,35 @@
         <aside class="menu" id="menu-lateral">
             <div class="menu-section">
                 <div class="menu-title">FERRAMENTAS</div>
-                <div class="menu-item ativo" data-tool="roteiro">⌨️ Editor</div>
-                <div class="menu-item" data-tool="sinopse">📑 Sinopse</div>
-                <div class="menu-item" data-tool="argumento">📌 Argumento</div>
-                <div class="menu-item" data-tool="escaleta">🔢 Escaleta</div>
-                <div class="menu-item" data-tool="personagens">👤 Personagens</div>
-                <div class="menu-item" data-tool="copy">✏️ Copy</div>
-                <div class="menu-item" data-tool="dindo">📎 Dindo</div>
+                <div class="menu-item ativo" data-tool="roteiro">Editor</div>
+                <div class="menu-item" data-tool="sinopse">Sinopse</div>
+                <div class="menu-item" data-tool="argumento">Argumento</div>
+                <div class="menu-item" data-tool="escaleta">Escaleta</div>
+                <div class="menu-item" data-tool="personagens">Personagens</div>
+                <div class="menu-item" data-tool="copy">Copy</div>
+                <div class="menu-item" data-tool="dindo">Dindo</div>
             </div>
             <div class="menu-section">
                 <div class="menu-title">MODOS</div>
-                <div class="menu-item" onclick="ativarModoFoco()">🎯 Foco</div>
-                <div class="menu-item" onclick="alternarTema()">🌓 Tema</div>
+                <div class="menu-item" onclick="ativarModoFoco()">Foco</div>
+                <div class="menu-item" onclick="alternarTema()">Tema</div>
             </div>
         </aside>
 
         <!-- ÁREA CENTRAL -->
         <main class="central" id="area-central">
             <div class="content-header">
-                <h2 id="titulo-central">⌨️ Editor de Roteiro</h2>
+                <h2 id="titulo-central">Editor de Roteiro</h2>
                 <div id="acoes-central"></div>
             </div>
-            <div id="conteudo-central"></div>
+            <div id="conteudo-central">
+                <!-- Carregado via JS -->
+            </div>
         </main>
 
         <!-- PAINEL DIREITO -->
         <aside class="painel" id="painel-direito">
-            <h3>📋 INFO</h3>
+            <h3>INFO</h3>
             <div id="conteudo-painel"></div>
         </aside>
 
@@ -537,7 +691,7 @@
         <footer class="rodape">
             <span>© PATIKA</span>
             <span class="contador-rodape" id="contador-rodape">0 palavras</span>
-            <span id="status-auto-save">› Auto-save</span>
+            <span id="status-auto-save">Auto-save</span>
         </footer>
     </div>
 
@@ -599,14 +753,14 @@
             
             switch(aba) {
                 case 'roteiro':
-                    titulo.innerHTML = '⌨️ Editor de Roteiro';
-                    acoes.innerHTML = `<button class="btn" onclick="salvarVersao()">✓ Salvar</button>`;
+                    titulo.innerHTML = 'Editor de Roteiro';
+                    acoes.innerHTML = `<button class="btn" onclick="salvarVersao()">Salvar</button>`;
                     conteudo.innerHTML = `
                         <div class="toolbar">
-                            <button class="btn" onclick="inserirElemento('cena')">⌨️ Cena</button>
-                            <button class="btn" onclick="inserirElemento('personagem')">👤 Personagem</button>
-                            <button class="btn" onclick="inserirElemento('dialogo')">💬 Diálogo</button>
-                            <button class="btn" onclick="inserirElemento('acao')">📄 Ação</button>
+                            <button class="btn" onclick="inserirElemento('cena')">Cena</button>
+                            <button class="btn" onclick="inserirElemento('personagem')">Personagem</button>
+                            <button class="btn" onclick="inserirElemento('dialogo')">Diálogo</button>
+                            <button class="btn" onclick="inserirElemento('acao')">Ação</button>
                         </div>
                         <div id="roteiro-editor" class="roteiro-editor" contenteditable="true">
                             <div class="patika-cena">1. INT. PATIKA - DIA</div>
@@ -616,9 +770,9 @@
                         </div>
                     `;
                     painel.innerHTML = `
-                        <h3>📋 CENAS</h3>
+                        <h3>CENAS</h3>
                         <div class="cena-item">1. INT. PATIKA - DIA</div>
-                        <h3>📊 STATS</h3>
+                        <h3>STATS</h3>
                         <p>Palavras: <span id="stat-palavras">8</span></p>
                     `;
                     
@@ -626,10 +780,104 @@
                     atualizarContador();
                     break;
                     
+                case 'copy':
+                    titulo.innerHTML = 'Copy';
+                    acoes.innerHTML = `
+                        <button class="btn" onclick="criarDocumentoCopy()">Novo</button>
+                        <button class="btn" onclick="criarPastaCopy()">Pasta</button>
+                    `;
+                    conteudo.innerHTML = `
+                        <div class="copy-container">
+                            <div class="copy-header">
+                                <div class="copy-tabs">
+                                    <div class="copy-tab active" onclick="copyMudarTab('pastas', this)">Pastas</div>
+                                    <div class="copy-tab" onclick="copyMudarTab('documentos', this)">Documentos</div>
+                                    <div class="copy-tab" onclick="copyMudarTab('templates', this)">Templates</div>
+                                </div>
+                            </div>
+                            <div id="copy-conteudo">
+                                ${gerarPastasCopy()}
+                            </div>
+                            <div class="copy-filtro-bg"></div>
+                        </div>
+                    `;
+                    painel.innerHTML = `
+                        <h3>ESTATÍSTICAS</h3>
+                        <p>Documentos: ${copyDocs.length}</p>
+                        <p>Pastas: ${copyPastas.length}</p>
+                        <p>Tags: ${copyTags.length}</p>
+                    `;
+                    break;
+                    
                 default:
-                    titulo.innerHTML = aba.toUpperCase();
-                    conteudo.innerHTML = `<textarea style="width:100%; min-height:400px; padding:10px;"></textarea>`;
+                    titulo.innerHTML = aba;
+                    conteudo.innerHTML = `<textarea style="width:100%; min-height:400px; padding:10px; border:1px solid #ddd;"></textarea>`;
             }
+        }
+
+        function gerarPastasCopy() {
+            let html = '<div class="copy-pastas-grid">';
+            
+            copyPastas.forEach(pasta => {
+                const count = copyDocs.filter(d => d.pasta === pasta.id).length;
+                html += `
+                    <div class="copy-pasta-card" onclick="selecionarPastaCopy(${pasta.id})">
+                        <div class="copy-pasta-icon">${pasta.icon}</div>
+                        <div class="copy-pasta-nome">${pasta.nome}</div>
+                        <div class="copy-pasta-count">${count} docs</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <div class="copy-pasta-card" onclick="criarPastaCopy()">
+                    <div class="copy-pasta-icon">➕</div>
+                    <div class="copy-pasta-nome">Nova Pasta</div>
+                </div>
+            </div>`;
+            
+            return html;
+        }
+
+        function criarPastaCopy() {
+            const nome = prompt('Nome da pasta:');
+            if (!nome) return;
+            
+            copyPastas.push({
+                id: Date.now(),
+                nome: nome,
+                icon: '📁'
+            });
+            
+            localStorage.setItem('patika_copy_pastas', JSON.stringify(copyPastas));
+            copyMudarTab('pastas', document.querySelector('.copy-tab.active'));
+        }
+
+        function selecionarPastaCopy(pastaId) {
+            copyPastaAtual = pastaId;
+            const pasta = copyPastas.find(p => p.id === pastaId);
+            alert(`Pasta: ${pasta.nome}`);
+        }
+
+        function criarDocumentoCopy() {
+            const titulo = prompt('Título do documento:');
+            if (!titulo) return;
+            
+            copyDocs.push({
+                id: Date.now(),
+                titulo: titulo,
+                cliente: '',
+                data: new Date().toISOString(),
+                icon: '📄'
+            });
+            
+            localStorage.setItem('patika_copy_docs', JSON.stringify(copyDocs));
+            alert('Documento criado!');
+        }
+
+        function copyMudarTab(tab, element) {
+            document.querySelectorAll('.copy-tab').forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
         }
 
         function inserirElemento(tipo) {
@@ -682,7 +930,7 @@
             
             if (versoes.length > 20) versoes.pop();
             localStorage.setItem('patika_versoes', JSON.stringify(versoes));
-            mostrarNotificacao('✓ Versão salva!');
+            mostrarNotificacao('Versão salva!');
         }
 
         function ativarModoFoco() {
@@ -724,6 +972,8 @@
                     localStorage.setItem('patika_autosave', editor.innerHTML);
                 }
             }, 30000);
+            
+            console.log('🚀 PATIKA carregado com sucesso!');
         });
     </script>
 </body>
