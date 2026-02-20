@@ -326,34 +326,70 @@
         }
 
         /* ===== TOOLBAR ===== */
+        /* ===== TOOLBAR ESTILO PROFISSIONAL ===== */
         .toolbar {
             display: flex;
-            gap: var(--spacing-xs);
+            gap: 3px;
             flex-wrap: wrap;
-            padding: var(--spacing-xs);
-            background: var(--areia);
-            border-radius: var(--radius-sm);
-            margin: var(--spacing-sm) 0;
+            padding: 6px 12px;
+            background: #1e1e1e;
+            border-bottom: 2px solid #00A86B;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        .toolbar-grupo {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            padding-right: 10px;
+            border-right: 1px solid #333;
+            margin-right: 6px;
+        }
+        .toolbar-grupo:last-child { border-right: none; }
+        .toolbar .btn {
+            background: #2a2a2a;
+            color: #bbb;
+            border: 1px solid #3a3a3a;
+            padding: 5px 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 3px;
+            white-space: nowrap;
+            transition: all 0.15s;
+        }
+        .toolbar .btn:hover { background: #00A86B; color: white; border-color: #00A86B; }
+        .toolbar-atalho {
+            color: #555;
+            font-size: 9px;
+            margin-left: 4px;
         }
 
-        /* ===== EDITOR DE ROTEIRO ===== */
+        /* ===== ÁREA DO EDITOR - FOLHA A4 ===== */
+        .editor-wrapper {
+            background: #3a3a3a;
+            padding: 30px 20px;
+            min-height: 600px;
+        }
         .roteiro-editor {
-            min-height: 400px;
-            padding: 20px;
-            border: 2px dashed var(--areia-escura);
-            border-radius: var(--radius-md);
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            min-height: 900px;
+            padding: 80px 80px 80px 120px;
+            border: none;
             font-family: 'Courier New', monospace;
             line-height: 1.8;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
-            background: var(--areia);
-            margin-top: 20px;
-        }
-
-        .roteiro-editor:focus {
-            border-color: var(--verde);
             background: white;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.5);
+            color: #000;
+            display: block;
         }
+        .roteiro-editor:focus { background: white; }
 
         .patika-cena {
             font-weight: bold;
@@ -977,16 +1013,33 @@
                     acoes.innerHTML = `<button class="btn btn-pequeno" onclick="salvarVersao()">Salvar</button>`;
                     conteudo.innerHTML = `
                         <div class="toolbar">
-                            <button class="btn" onclick="inserirElemento('cena')">Cena</button>
-                            <button class="btn" onclick="inserirElemento('personagem')">Personagem</button>
-                            <button class="btn" onclick="inserirElemento('dialogo')">Diálogo</button>
-                            <button class="btn" onclick="inserirElemento('acao')">Ação</button>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="inserirElemento('cena')">INT/EXT <span class="toolbar-atalho">Alt+1</span></button>
+                            </div>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="inserirElemento('acao')">Ação <span class="toolbar-atalho">Alt+2</span></button>
+                            </div>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="inserirElemento('personagem')">Personagem <span class="toolbar-atalho">Alt+3</span></button>
+                            </div>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="inserirElemento('dialogo')">Diálogo <span class="toolbar-atalho">Alt+4</span></button>
+                            </div>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="inserirElemento('transicao')">CORTE PARA <span class="toolbar-atalho">Alt+5</span></button>
+                            </div>
+                            <div class="toolbar-grupo">
+                                <button class="btn" onclick="numerarCenas()">Numerar Cenas</button>
+                                <button class="btn" onclick="exportarPDFMelhorado()">⬇ PDF</button>
+                            </div>
                         </div>
+                        <div class="editor-wrapper">
                         <div id="roteiro-editor" class="roteiro-editor" contenteditable="true">
                             <div class="patika-cena">1. INT. PATIKA - DIA</div>
                             <div class="patika-acao">Editor de roteiro principal com todas as funcionalidades.</div>
                             <div class="patika-personagem">PATIKA</div>
                             <div class="patika-dialogo">Bem-vindo à plataforma definitiva de roteiro!</div>
+                        </div>
                         </div>
                     `;
                     painel.innerHTML = `
@@ -1114,6 +1167,11 @@
                     break;
                 case 'dialogo':
                     novaLinha.className = 'patika-dialogo';
+                case 'transicao':
+                    novaLinha.className = 'patika-transicao';
+                    novaLinha.textContent = 'CORTE PARA:';
+                    novaLinha.style.cssText = 'text-align:right;font-weight:bold;text-transform:uppercase;margin:15px 0;font-family:Courier New,monospace;';
+                    break;
                     novaLinha.innerText = 'Digite o diálogo...';
                     break;
                 default:
@@ -1609,7 +1667,20 @@
                 }
             }, 30000);
             
-            console.log('🚀 PATIKA carregado com sucesso!');
+            // ATALHOS DE TECLADO
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('roteiro-editor')) return;
+            if (e.altKey) {
+                switch(e.key) {
+                    case '1': e.preventDefault(); inserirElemento('cena'); break;
+                    case '2': e.preventDefault(); inserirElemento('acao'); break;
+                    case '3': e.preventDefault(); inserirElemento('personagem'); break;
+                    case '4': e.preventDefault(); inserirElemento('dialogo'); break;
+                    case '5': e.preventDefault(); inserirElemento('transicao'); break;
+                }
+            }
+        });
+        console.log('🚀 PATIKA carregado com sucesso!');
         });
     </script>
 </body>
