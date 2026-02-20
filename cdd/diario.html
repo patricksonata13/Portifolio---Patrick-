@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • Diário da Resistência</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+        }
+        .terminal {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(15, 18, 21, 0.98);
+            border: 2px solid #ffd966;
+            padding: 20px;
+        }
+        .terminal-header {
+            background: #0f1215;
+            padding: 10px;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            color: #ffd966;
+        }
+        h1 { color: #ffd966; margin: 20px 0; }
+        .nav-bar {
+            margin: 20px 0;
+            padding: 10px 0;
+            border-top: 1px solid #1e293b;
+            border-bottom: 1px solid #1e293b;
+        }
+        
+        .diario {
+            background: #14181c;
+            border: 1px solid #1e293b;
+            padding: 30px;
+            margin: 30px 0;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .entrada {
+            margin: 40px 0;
+            padding: 20px;
+            background: #0f1215;
+            border-left: 4px solid #ffd966;
+        }
+        
+        .data {
+            color: #b3a0ff;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .autor {
+            color: #ffd966;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .texto {
+            color: #94a3b8;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+        
+        .assinatura {
+            margin-top: 15px;
+            color: #64748b;
+            text-align: right;
+            font-style: italic;
+        }
+        
+        .pagina {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span>~/cdd-3001/diario</span>
+            <span>MEMÓRIAS DA RESISTÊNCIA</span>
+        </div>
+
+        <h1>📖 DIÁRIO DA RESISTÊNCIA</h1>
+        
+        <div class="nav-bar">
+            <a href="/cdd/">← TERMINAL</a>
+            <a href="#" class="active">DIÁRIO</a>
+        </div>
+
+        <div class="diario">
+            <div style="text-align: center; margin-bottom: 40px;">
+                <span style="color: #ffd966; font-size: 1.2rem;">O LIVRO DA RESISTÊNCIA</span>
+                <p style="color: #64748b;">Registros de D. Jurema • 2057-3001</p>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 15 DE MARÇO DE 2057</div>
+                <div class="autor">D. Jurema (24 anos)</div>
+                <div class="texto">"Hoje vi a primeira pessoa ficar branca. Era seu Antônio, do mercado. Começou com uma manchinha no braço. Em três dias, estava completamente branco. Os olhos ficaram vermelhos. Ele não reconhecia mais ninguém. Tivemos que trancar ele no quarto. Não sei o que fazer."</div>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 23 DE AGOSTO DE 2078</div>
+                <div class="autor">D. Jurema (45 anos)</div>
+                <div class="texto">"O governo construiu o muro hoje. Isolaram a Cidade de Deus do resto do Rio. Dizem que é para conter os Brancos. Mas é um muro para nos prender aqui. Os que tentaram pular viraram comida dos monstros. Agora somos por nossa conta."</div>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 7 DE JANEIRO DE 2095</div>
+                <div class="autor">D. Jurema (62 anos)</div>
+                <div class="texto">"Os Brancos evoluíram. Agora eles imitam vozes. O Jorge perdeu o irmão mais novo assim. Chamaram ele pelo nome, ele saiu correndo. Era uma armadilha. Enterramos o corpo hoje. Só restaram 200 de nós."</div>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 31 DE DEZEMBRO DE 2099</div>
+                <div class="autor">D. Jurema (66 anos)</div>
+                <div class="texto">"Ano novo na resistência. Não tem fogos, não tem festa. O silêncio é nossa proteção. Mas eu me lembro dos fogos, do barulho, das cores no céu. Escrevo para que alguém, um dia, saiba como era. Não podemos esquecer quem fomos."</div>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 20 DE FEVEREIRO DE 3001</div>
+                <div class="autor">D. Jurema (968 anos? Não sei mais)</div>
+                <div class="texto">"Perdi a conta dos anos. Mas não perdi a memória. Ainda lembro do cheiro do pão do seu Antônio, do som do rádio, das crianças jogando bola. Hoje um jovem me perguntou o que era uma bola. Ensinei ele. No campo abandonado, rolei uma bola de meia. Ele sorriu. Enquanto houver quem ensine, há esperança."</div>
+            </div>
+
+            <div class="entrada">
+                <div class="data">📅 HOJE</div>
+                <div class="autor">Marcos • Caçador</div>
+                <div class="texto">"D. Jurema me deu este diário hoje. Disse que é minha vez de escrever. Vou registrar cada caçada, cada Branco abatido, cada morte. Para que não esqueçam. Para que saibam que resistimos. Meu nome é Marcos, tenho 23 anos, sou da Cidade de Deus, e enquanto eu viver, ela viverá."</div>
+            </div>
+
+            <div class="pagina">
+                <span>📖 Página 1 de 47</span>
+                <span>+150 XP • Memória preservada</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script>
+        if (window.rpg) {
+            window.rpg.ganharXP(150, 'diário');
+            window.rpg.coletarMemoria();
+        }
+    </script>
+</body>
+</html>
