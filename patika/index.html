@@ -1685,3 +1685,106 @@
     </script>
 </body>
 </html>
+
+<!-- ===== CORREÇÕES - ABA COPY E BOTÕES RESPONSIVOS ===== -->
+<style>
+/* ===== CORREÇÃO: ABA COPY (ESTADO ATIVO/INATIVO) ===== */
+.aba-copy:not(.ativa) {
+    background: var(--areia);
+    color: var(--texto);
+}
+
+.aba-copy:not(.ativa) .filtro-barro {
+    opacity: 0.05;
+}
+
+.aba-copy .filtro-barro {
+    transition: opacity 0.2s;
+}
+
+/* ===== CORREÇÃO: BOTÕES RESPONSIVOS ===== */
+.toolbar .btn {
+    min-width: 70px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .toolbar {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: var(--spacing-xs);
+        gap: var(--spacing-xs);
+        scrollbar-width: thin;
+    }
+    
+    .toolbar::-webkit-scrollbar {
+        height: 3px;
+    }
+    
+    .toolbar::-webkit-scrollbar-thumb {
+        background: var(--verde);
+        border-radius: 10px;
+    }
+    
+    .toolbar .btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        min-width: 60px;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.8rem;
+    }
+    
+    .btn-pequeno {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.75rem;
+        width: 100%;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-xs);
+    }
+    
+    .content-header .btn-pequeno {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .toolbar .btn {
+        min-width: 55px;
+        padding: var(--spacing-xs) var(--spacing-xs);
+        font-size: 0.75rem;
+    }
+}
+</style>
+
+<script>
+// ===== CORREÇÃO: LOG PARA DEBUG DA ABA COPY =====
+// Substituir a função mudarAba existente (sobrescrever)
+const mudarAbaOriginal = window.mudarAba;
+window.mudarAba = function(aba) {
+    // Chamar função original
+    if (mudarAbaOriginal) mudarAbaOriginal(aba);
+    
+    // Log de debug
+    console.log('✅ Aba ativada:', aba);
+    
+    // Garantir que a aba Copy tenha o estado correto
+    document.querySelectorAll('.aba').forEach(tab => {
+        if (tab.dataset.tab === 'copy') {
+            if (aba === 'copy') {
+                tab.classList.add('ativa');
+            } else {
+                tab.classList.remove('ativa');
+            }
+        }
+    });
+};
+</script>
+<!-- ===== FIM DAS CORREÇÕES ===== -->
+
