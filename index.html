@@ -538,20 +538,22 @@
         if (mainMenu) {
             sidebar.innerHTML = mainMenu.innerHTML;
         } else {
-            // Criar menu padrão se não existir
-            sidebar.innerHTML = `
-                <div class="menu-section">
-                    <div class="menu-title">FERRAMENTAS</div>
-                    <div class="menu-item" onclick="mudarAba('roteiro')">📝 Roteiro</div>
-                    <div class="menu-item" onclick="mudarAba('dindo')">📄 Dindo</div>
-                    <div class="menu-item" onclick="mudarAba('sinopse')">📋 Sinopse</div>
-                    <div class="menu-item" onclick="mudarAba('argumento')">📄 Argumento</div>
-                    <div class="menu-item" onclick="mudarAba('escaleta')">📊 Escaleta</div>
-                    <div class="menu-item" onclick="mudarAba('personagens')">👥 Personagens</div>
-                </div>
-            `;
-        }
-        
+    // Criar menu mobile - apenas itens principais
+    const mainMenu = document.querySelector(".nav-bottom-center");
+    if (mainMenu) {
+        mobileMenu.innerHTML = `
+            <div class="menu-section">
+                <div class="menu-item" onclick="mostrarSobre()">📋 SOBRE</div>
+                <div class="menu-item" onclick="mostrarPerfil()">👤 PERFIL</div>
+                <div class="menu-item" onclick="mostrarTrabalho()">🎬 PORTFÓLIO</div>
+            </div>
+            <div class="menu-section">
+                <div class="menu-item" onclick="window.location.href=x27/patika/x27">📝 PATIKA</div>
+            </div>
+        `;
+    }
+        });
+}        
         // Abrir menu
         hamburger.addEventListener('click', () => {
             sidebar.classList.add('open');
