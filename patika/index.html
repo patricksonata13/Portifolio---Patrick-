@@ -1788,3 +1788,378 @@ window.mudarAba = function(aba) {
 </script>
 <!-- ===== FIM DAS CORREÇÕES ===== -->
 
+
+<!-- ===== NOVO SISTEMA DINDO ===== -->
+<script>
+// ===== VARIÁVEIS DO DINDO =====
+let dindoDados = JSON.parse(localStorage.getItem('dindo_dados') || '{}');
+
+// ===== FUNÇÕES DE NAVEGAÇÃO DO DINDO =====
+function dinDoAba(aba) {
+    // Esconder todas as abas
+    document.getElementById('dindo-cadastro').style.display = 'none';
+    document.getElementById('dindo-contrato').style.display = 'none';
+    document.getElementById('dindo-nota').style.display = 'none';
+    document.getElementById('dindo-valor').style.display = 'none';
+    
+    // Remover estilo ativo de todos os botões
+    document.getElementById('dindo-btn-cadastro').style.background = '#2a2a2a';
+    document.getElementById('dindo-btn-cadastro').style.color = '#aaa';
+    document.getElementById('dindo-btn-contrato').style.background = '#2a2a2a';
+    document.getElementById('dindo-btn-contrato').style.color = '#aaa';
+    document.getElementById('dindo-btn-nota').style.background = '#2a2a2a';
+    document.getElementById('dindo-btn-nota').style.color = '#aaa';
+    document.getElementById('dindo-btn-valor').style.background = '#2a2a2a';
+    document.getElementById('dindo-btn-valor').style.color = '#aaa';
+    
+    // Mostrar aba selecionada
+    document.getElementById(`dindo-${aba}`).style.display = 'block';
+    
+    // Ativar botão correspondente
+    document.getElementById(`dindo-btn-${aba}`).style.background = '#00A86B';
+    document.getElementById(`dindo-btn-${aba}`).style.color = 'white';
+}
+
+// ===== GERAR CONTRATO =====
+function gerarContratoTexto() {
+    const roteirista = document.getElementById('d-roteirista')?.value || 'NOME NÃO INFORMADO';
+    const cpf = document.getElementById('d-cpf')?.value || '000.000.000-00';
+    const cliente = document.getElementById('d-cliente')?.value || 'CLIENTE NÃO INFORMADO';
+    const cnpjCliente = document.getElementById('d-cnpj-cliente')?.value || '00.000.000/0000-00';
+    const projeto = document.getElementById('d-projeto')?.value || 'PROJETO NÃO INFORMADO';
+    const tipo = document.getElementById('d-tipo')?.value || 'Roteirista';
+    const inicio = document.getElementById('d-inicio')?.value || '___/___/_____';
+    const entrega = document.getElementById('d-entrega')?.value || '___/___/_____';
+    
+    const data = new Date().toLocaleDateString('pt-BR');
+    
+    const contrato = `
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS
+
+CONTRATANTE: ${cliente}
+CNPJ: ${cnpjCliente}
+
+CONTRATADO: ${roteirista}
+CPF: ${cpf}
+
+OBJETO: Serviços de roteiro para o projeto "${projeto}" na função de ${tipo}.
+
+PRAZO: Início em ${inicio}, entrega até ${entrega}.
+
+VALOR: A ser definido em comum acordo (consulte a aba VALOR para referências).
+
+FORO: Comarca do Rio de Janeiro.
+
+${data}
+__________________________
+Assinatura do Contratado
+
+__________________________
+Assinatura do Contratante
+`;
+    
+    document.getElementById('preview-contrato').innerText = contrato;
+    dindoDados.ultimoContrato = contrato;
+    localStorage.setItem('dindo_dados', JSON.stringify(dindoDados));
+}
+
+function imprimirContrato() {
+    const conteudo = document.getElementById('preview-contrato').innerText;
+    if (!conteudo) {
+        alert('Gere um contrato primeiro!');
+        return;
+    }
+    
+    const win = window.open('', '_blank');
+    win.document.write(`
+        <html>
+        <head>
+            <title>Contrato</title>
+            <style>
+                body { font-family: 'Courier New', monospace; padding: 40px; max-width: 800px; margin: 0 auto; }
+                h1 { color: #00A86B; font-size: 20px; text-align: center; }
+                pre { white-space: pre-wrap; }
+            </style>
+        </head>
+        <body>
+            <h1>CONTRATO</h1>
+            <hr>
+            <pre>${conteudo}</pre>
+        </body>
+        </html>
+    `);
+    win.document.close();
+    win.print();
+}
+
+// ===== GERAR NOTA =====
+function gerarNota() {
+    const roteirista = document.getElementById('d-roteirista')?.value || 'NOME NÃO INFORMADO';
+    const cpf = document.getElementById('d-cpf')?.value || '000.000.000-00';
+    const cliente = document.getElementById('d-cliente')?.value || 'CLIENTE NÃO INFORMADO';
+    const numNota = document.getElementById('d-num-nota')?.value || '001';
+    const dataNota = document.getElementById('d-data-nota')?.value || new Date().toISOString().split('T')[0];
+    const descricao = document.getElementById('d-desc-nota')?.value || 'Serviços de roteiro';
+    const valor = document.getElementById('d-valor-nota')?.value || '0,00';
+    
+    const dataFormatada = dataNota.split('-').reverse().join('/');
+    
+    const nota = `
+RECIBO DE PAGAMENTO
+
+Nº ${numNota} - ${dataFormatada}
+
+Recebi(emos) de ${cliente} a quantia de R$ ${valor}, referente a:
+${descricao}
+
+Prestador: ${roteirista} - CPF: ${cpf}
+
+__________________________
+Assinatura
+`;
+    
+    document.getElementById('preview-nota').style.display = 'block';
+    document.getElementById('preview-nota').innerText = nota;
+    dindoDados.ultimaNota = nota;
+    localStorage.setItem('dindo_dados', JSON.stringify(dindoDados));
+}
+
+function imprimirNota() {
+    const preview = document.getElementById('preview-nota');
+    if (!preview.innerText) {
+        alert('Gere uma nota primeiro!');
+        return;
+    }
+    
+    const win = window.open('', '_blank');
+    win.document.write(`
+        <html>
+        <head>
+            <title>Recibo</title>
+            <style>
+                body { font-family: 'Courier New', monospace; padding: 40px; max-width: 600px; margin: 0 auto; }
+                h1 { color: #00A86B; font-size: 18px; text-align: center; }
+            </style>
+        </head>
+        <body>
+            <h1>RECIBO</h1>
+            <hr>
+            <pre>${preview.innerText}</pre>
+        </body>
+        </html>
+    `);
+    win.document.close();
+    win.print();
+}
+
+// ===== CALCULADORA DE VALOR =====
+function calcularValor() {
+    const tipo = document.getElementById('d-tipo-calc')?.value || 'episodio';
+    const qtd = parseInt(document.getElementById('d-qtd')?.value) || 1;
+    const nivel = parseFloat(document.getElementById('d-nivel')?.value) || 2;
+    const direitos = parseFloat(document.getElementById('d-direitos')?.value) || 1;
+    
+    // Tabela de valores base (ABRACI/SBAT)
+    const tabela = {
+        'episodio': 5000,
+        'episodio60': 8000,
+        'longa': 30000,
+        'curta': 5000,
+        'comercial': 3000,
+        'argumento': 2000
+    };
+    
+    const base = tabela[tipo] || 5000;
+    let valor = base * qtd * nivel * direitos;
+    
+    // Arredondar
+    valor = Math.round(valor / 100) * 100;
+    
+    // Formatação
+    document.getElementById('d-resultado').innerText = `R$ ${valor.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+    
+    // Faixa recomendada
+    const faixaMin = Math.round(valor * 0.8 / 100) * 100;
+    const faixaMax = Math.round(valor * 1.2 / 100) * 100;
+    document.getElementById('d-faixa').innerText = `Faixa: R$ ${faixaMin.toLocaleString('pt-BR')} — R$ ${faixaMax.toLocaleString('pt-BR')}`;
+    
+    dindoDados.ultimoValor = valor;
+    localStorage.setItem('dindo_dados', JSON.stringify(dindoDados));
+}
+
+function usarValorNoContrato() {
+    const valor = document.getElementById('d-resultado').innerText;
+    if (confirm(`Usar ${valor} no contrato?`)) {
+        // Ir para aba de contrato
+        dinDoAba('contrato');
+        alert('Valor copiado! Cole manualmente por enquanto.');
+    }
+}
+
+// ===== CARREGAR ABA DINDO =====
+function carregarDindoCompleto() {
+    // Esta função substitui o case 'dindo' no carregarAba
+    const titulo = document.getElementById('titulo-central');
+    const conteudo = document.getElementById('conteudo-central');
+    const acoes = document.getElementById('acoes-central');
+    const painel = document.getElementById('conteudo-painel');
+    
+    titulo.textContent = 'Dindo — Gestão de Contratos';
+    acoes.innerHTML = '';
+    
+    conteudo.innerHTML = `
+        <div style="font-family:'Courier New',monospace; padding:10px;">
+
+        <!-- ABAS INTERNAS -->
+        <div style="display:flex;gap:5px;margin-bottom:20px;border-bottom:2px solid #00A86B;padding-bottom:10px;">
+            <button onclick="dinDoAba('cadastro')" id="dindo-btn-cadastro" style="background:#00A86B;color:white;border:none;padding:8px 16px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;">CADASTRO</button>
+            <button onclick="dinDoAba('contrato')" id="dindo-btn-contrato" style="background:#2a2a2a;color:#aaa;border:1px solid #444;padding:8px 16px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;">CONTRATO</button>
+            <button onclick="dinDoAba('nota')" id="dindo-btn-nota" style="background:#2a2a2a;color:#aaa;border:1px solid #444;padding:8px 16px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;">NOTA FISCAL</button>
+            <button onclick="dinDoAba('valor')" id="dindo-btn-valor" style="background:#2a2a2a;color:#aaa;border:1px solid #444;padding:8px 16px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;">VALOR</button>
+        </div>
+
+        <!-- CADASTRO -->
+        <div id="dindo-cadastro">
+            <h3 style="color:#00A86B;margin-bottom:15px;font-size:13px;">DADOS DO PROJETO</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px;">
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">ROTEIRISTA</label>
+                    <input id="d-roteirista" type="text" placeholder="Seu nome completo" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">CPF/CNPJ</label>
+                    <input id="d-cpf" type="text" placeholder="000.000.000-00" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">CLIENTE / PRODUTORA</label>
+                    <input id="d-cliente" type="text" placeholder="Nome do cliente" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">CNPJ DO CLIENTE</label>
+                    <input id="d-cnpj-cliente" type="text" placeholder="00.000.000/0000-00" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">PROJETO / SÉRIE</label>
+                    <input id="d-projeto" type="text" placeholder="Nome do projeto" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">TIPO DE SERVIÇO</label>
+                    <select id="d-tipo" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                        <option>Roteirista</option>
+                        <option>Roteirista Chefe</option>
+                        <option>Argumentista</option>
+                        <option>Dramaturgo</option>
+                        <option>Consultor Criativo</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">DATA INÍCIO</label>
+                    <input id="d-inicio" type="date" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">DATA ENTREGA</label>
+                    <input id="d-entrega" type="date" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+            </div>
+            <button onclick="dinDoAba('contrato')" style="background:#00A86B;color:white;border:none;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;">PRÓXIMO: GERAR CONTRATO →</button>
+        </div>
+
+        <!-- CONTRATO -->
+        <div id="dindo-contrato" style="display:none;">
+            <h3 style="color:#00A86B;margin-bottom:15px;font-size:13px;">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</h3>
+            <div id="preview-contrato" style="background:white;color:#000;padding:40px;font-family:'Courier New',monospace;font-size:12px;line-height:1.8;max-height:400px;overflow-y:auto;border:1px solid #444;"></div>
+            <button onclick="gerarContratoTexto()" style="background:#00A86B;color:white;border:none;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;margin-top:10px;">VISUALIZAR CONTRATO</button>
+            <button onclick="imprimirContrato()" style="background:#1e1e1e;color:#00A86B;border:1px solid #00A86B;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;margin-top:10px;margin-left:8px;">⬇ BAIXAR PDF</button>
+        </div>
+
+        <!-- NOTA FISCAL -->
+        <div id="dindo-nota" style="display:none;">
+            <h3 style="color:#00A86B;margin-bottom:15px;font-size:13px;">RECIBO / NOTA DE SERVIÇO</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px;">
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">NÚMERO DA NOTA</label>
+                    <input id="d-num-nota" type="text" placeholder="001" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">DATA DE EMISSÃO</label>
+                    <input id="d-data-nota" type="date" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">DESCRIÇÃO DO SERVIÇO</label>
+                    <input id="d-desc-nota" type="text" placeholder="Roteiro de série — 3 episódios" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">VALOR TOTAL (R$)</label>
+                    <input id="d-valor-nota" type="text" placeholder="0,00" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+            </div>
+            <div id="preview-nota" style="background:white;color:#000;padding:30px;font-family:'Courier New',monospace;font-size:12px;line-height:1.8;border:1px solid #444;display:none;"></div>
+            <button onclick="gerarNota()" style="background:#00A86B;color:white;border:none;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;margin-top:10px;">GERAR RECIBO</button>
+            <button onclick="imprimirNota()" style="background:#1e1e1e;color:#00A86B;border:1px solid #00A86B;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;margin-top:10px;margin-left:8px;">⬇ BAIXAR PDF</button>
+        </div>
+
+        <!-- CALCULADORA DE VALOR -->
+        <div id="dindo-valor" style="display:none;">
+            <h3 style="color:#00A86B;margin-bottom:15px;font-size:13px;">CALCULADORA DE CACHÊ</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:15px;">
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">TIPO DE PROJETO</label>
+                    <select id="d-tipo-calc" onchange="calcularValor()" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                        <option value="episodio">Episódio de Série (30min)</option>
+                        <option value="episodio60">Episódio de Série (60min)</option>
+                        <option value="longa">Longa-Metragem</option>
+                        <option value="curta">Curta-Metragem</option>
+                        <option value="comercial">Roteiro Comercial</option>
+                        <option value="argumento">Argumento/Sinopse</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">QUANTIDADE</label>
+                    <input id="d-qtd" type="number" value="1" min="1" onchange="calcularValor()" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">NÍVEL DE EXPERIÊNCIA</label>
+                    <select id="d-nivel" onchange="calcularValor()" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                        <option value="1">Iniciante</option>
+                        <option value="1.5">Intermediário</option>
+                        <option value="2" selected>Experiente (20+ anos)</option>
+                        <option value="3">Referência de Mercado</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="font-size:11px;color:#888;display:block;margin-bottom:4px;">DIREITOS AUTORAIS</label>
+                    <select id="d-direitos" onchange="calcularValor()" style="width:100%;padding:8px;background:#1e1e1e;border:1px solid #444;color:white;font-family:'Courier New',monospace;font-size:12px;">
+                        <option value="1">Não inclusos</option>
+                        <option value="1.3">Cessão parcial (+30%)</option>
+                        <option value="1.6">Cessão total (+60%)</option>
+                    </select>
+                </div>
+            </div>
+            <div style="background:#1e1e1e;border:1px solid #00A86B;padding:20px;margin-top:10px;">
+                <div style="font-size:11px;color:#888;margin-bottom:8px;">VALOR SUGERIDO (ABRACI/SBAT)</div>
+                <div id="d-resultado" style="font-size:24px;color:#00A86B;font-weight:bold;">R$ 0,00</div>
+                <div id="d-faixa" style="font-size:11px;color:#555;margin-top:5px;">Faixa: R$ 0,00 — R$ 0,00</div>
+                <div style="font-size:10px;color:#444;margin-top:10px;">* Valores de referência. Negocie sempre por escrito.</div>
+            </div>
+            <button onclick="usarValorNoContrato()" style="background:#00A86B;color:white;border:none;padding:10px 24px;font-family:'Courier New',monospace;cursor:pointer;font-size:12px;margin-top:10px;">USAR ESTE VALOR NO CONTRATO</button>
+        </div>
+
+        </div>
+    `;
+    
+    painel.innerHTML = `
+        <h3>INFO</h3>
+        <p>Contratos e documentos profissionais para roteiristas.</p>
+        <p><small>Baseado nas referências ABRACI/SBAT</small></p>
+    `;
+    
+    // Iniciar na aba cadastro
+    setTimeout(() => {
+        document.getElementById('dindo-cadastro').style.display = 'block';
+    }, 100);
+}
+
+// Substituir o case 'dindo' original (será feito via Python depois)
+</script>
+<!-- ===== FIM DO NOVO SISTEMA DINDO ===== -->
+
