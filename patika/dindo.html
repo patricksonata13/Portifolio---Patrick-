@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dindo - Sistema de Contratos</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #764ba2;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        .contrato-preview {
+            margin-top: 30px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 5px solid #764ba2;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            display: none;
+        }
+        .contrato-preview.show {
+            display: block;
+        }
+        .acoes {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn-secundario {
+            background: #f0f0f0;
+            color: #333;
+            flex: 1;
+        }
+        .btn-secundario:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📄 Dindo - Sistema de Contratos</h1>
+        <div class="subtitle">
+            Gerador de Contratos para Talentos TVC
+            <br>
+            <small>Baseado nos scripts originais encontrados</small>
+        </div>
+
+        <div class="form-group">
+            <label>👤 Nome do Talento:</label>
+            <input type="text" id="nome" placeholder="Ex: Patrick Sonata">
+        </div>
+
+        <div class="form-group">
+            <label>📍 Bairro:</label>
+            <input type="text" id="bairro" placeholder="Ex: Cidade de Deus">
+        </div>
+
+        <div class="form-group">
+            <label>🎭 Função:</label>
+            <select id="funcao">
+                <option value="Ator">Ator/Atriz</option>
+                <option value="Diretor">Diretor</option>
+                <option value="Roteirista">Roteirista</option>
+                <option value="Produtor">Produtor</option>
+                <option value="Figurante">Figurante</option>
+                <option value="Técnico">Técnico</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>🎬 Projeto:</label>
+            <input type="text" id="projeto" placeholder="Ex: Estelionato Carioca">
+        </div>
+
+        <div class="form-group">
+            <label>📝 Tipo de Contrato:</label>
+            <select id="tipo-contrato">
+                <option value="prestacao">Prestação de Serviços</option>
+                <option value="imagem">Cessão de Imagem e Voz</option>
+                <option value="ambos">Ambos (combinado)</option>
+            </select>
+        </div>
+
+        <button onclick="gerarContrato()">📄 GERAR CONTRATO</button>
+
+        <div class="contrato-preview" id="preview">
+            <h3 style="color: #764ba2; margin-bottom: 15px;">📋 Prévia do Contrato</h3>
+            <div id="contrato-texto"></div>
+            
+            <div class="acoes">
+                <button class="btn-secundario" onclick="baixarTXT()">💾 Baixar TXT</button>
+                <button class="btn-secundario" onclick="copiarTexto()">📋 Copiar</button>
+                <button class="btn-secundario" onclick="enviarWhatsApp()">📱 WhatsApp</button>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 2px solid #f0f0f0; font-size: 12px; color: #999; text-align: center;">
+            Baseado nos scripts originais: tvc_gerador_contrato.py e gerador_contratos.py
+        </div>
+    </div>
+
+    <script>
+        let ultimoContrato = '';
+
+        function gerarContrato() {
+            const nome = document.getElementById('nome').value || 'NOME NÃO INFORMADO';
+            const bairro = document.getElementById('bairro').value || 'BAIRRO NÃO INFORMADO';
+            const funcao = document.getElementById('funcao').value;
+            const projeto = document.getElementById('projeto').value || 'PROJETO NÃO INFORMADO';
+            const tipo = document.getElementById('tipo-contrato').value;
+            
+            const data = new Date().toLocaleDateString('pt-BR');
+            
+            let contrato = '';
+            
+            if (tipo === 'prestacao' || tipo === 'ambos') {
+                contrato += `
+====================================================
+CONTRATO DE PRESTAÇÃO DE SERVIÇOS - TVC STUDIOS
+====================================================
+CONTRATADO(A): ${nome}
+FUNÇÃO: ${funcao}
+BAIRRO DE ATUAÇÃO: ${bairro}
+PROJETO: ${projeto}
+
+Pelo presente instrumento, a TVC (Mini Projac Integrado) 
+autoriza a prestação de serviços para produções do 
+catálogo original sob as normas de segurança e 
+identidade cultural da emissora.
+
+DATA DE EMISSÃO: ${data}
+----------------------------------------------------
+Assinatura Direção TVC: ____________________________
+Assinatura Contratado: _____________________________
+====================================================
+`;
+            }
+            
+            if (tipo === 'imagem' || tipo === 'ambos') {
+                if (tipo === 'ambos') contrato += '\n\n';
+                contrato += `
+====================================================
+CONTRATO DE CESSÃO DE IMAGEM E VOZ - TVC STUDIOS
+====================================================
+CEDENTE: ${nome}
+CESSIONÁRIA: TVC STUDIOS & HOLDING
+PROJETO: ${projeto}
+FUNÇÃO: ${funcao}
+
+Pelo presente instrumento, o CEDENTE autoriza o uso de sua 
+imagem e voz para fins de exibição na plataforma TVC PLAY 
+e redes sociais afiliadas por tempo indeterminado.
+
+FORO: Comarca do Rio de Janeiro, RJ.
+DATA: ${data}
+====================================================
+`;
+            }
+            
+            ultimoContrato = contrato;
+            document.getElementById('contrato-texto').innerText = contrato;
+            document.getElementById('preview').classList.add('show');
+        }
+
+        function baixarTXT() {
+            if (!ultimoContrato) {
+                alert('Gere um contrato primeiro!');
+                return;
+            }
+            
+            const nome = document.getElementById('nome').value || 'contrato';
+            const blob = new Blob([ultimoContrato], { type: 'text/plain' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = `Contrato_${nome.replace(/\s+/g, '_')}.txt`;
+            a.click();
+        }
+
+        function copiarTexto() {
+            if (!ultimoContrato) {
+                alert('Gere um contrato primeiro!');
+                return;
+            }
+            navigator.clipboard.writeText(ultimoContrato);
+            alert('✅ Contrato copiado!');
+        }
+
+        function enviarWhatsApp() {
+            if (!ultimoContrato) {
+                alert('Gere um contrato primeiro!');
+                return;
+            }
+            const texto = encodeURIComponent(ultimoContrato);
+            window.open(`https://wa.me/?text=${texto}`, '_blank');
+        }
+    </script>
+</body>
+</html>
