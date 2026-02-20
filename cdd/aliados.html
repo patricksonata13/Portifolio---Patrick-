@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • ALIADOS</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        body { padding: 20px; }
+        .aliados-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .aliado-card {
+            background: #14181c;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .aliado-card.ativo {
+            border-color: #4ade80;
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.2);
+        }
+        .aliado-card:hover {
+            transform: translateY(-5px);
+        }
+        .barra-fidelidade {
+            height: 4px;
+            background: #1e293b;
+            margin: 10px 0;
+            border-radius: 2px;
+        }
+        .fidelidade-preenchida {
+            height: 100%;
+            background: #ffd966;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        .btn-recrutar {
+            width: 100%;
+            padding: 10px;
+            background: #ffd966;
+            color: #0a0c0e;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn-recrutar:hover {
+            background: #b3a0ff;
+        }
+        .btn-recrutar:disabled {
+            background: #1e293b;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+        .grupo-ativo {
+            background: #0f1215;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-path">CDD-3001/ALIADOS</span>
+            <span class="terminal-status">🤝 GRUPO DE SOBREVIVÊNCIA</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+            <h1>🤝 ALIADOS</h1>
+            <a href="/cdd/" class="btn">← VOLTAR</a>
+        </div>
+
+        <!-- Grupo Ativo -->
+        <div class="grupo-ativo">
+            <h3 style="color: #ffd966; margin-bottom: 15px;">🎯 GRUPO ATIVO</h3>
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;" id="grupo-ativo">
+                <!-- Será preenchido via JS -->
+            </div>
+            <div style="margin-top: 15px; color: #64748b;">
+                <span>⚔️ Bônus de dano: <span id="bonus-dano">0</span></span>
+                <span style="margin-left: 20px;">🛡️ Bônus de defesa: <span id="bonus-defesa">0</span></span>
+            </div>
+        </div>
+
+        <!-- Todos os Aliados -->
+        <h3 style="color: #ffd966; margin: 20px 0 15px;">👥 SOBREVIVENTES</h3>
+        <div class="aliados-grid" id="aliados-lista">
+            <!-- Será preenchido via JS -->
+        </div>
+
+        <!-- Eventos -->
+        <div style="margin-top: 30px; padding: 20px; background: #0f1215; border: 1px solid #1e293b;">
+            <h3 style="color: #b3a0ff;">🌟 EVENTO ESPECIAL</h3>
+            <p style="color: #94a3b8;" id="evento-desc">Interaja com seus aliados para desbloquear eventos especiais!</p>
+            <button class="btn" onclick="verificarEventos()" style="margin-top: 10px;">
+                🔄 VERIFICAR EVENTOS
+            </button>
+        </div>
+    </div>
+
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script src="/cdd/assets/js/aliados.js"></script>
+    <script src="/cdd/assets/js/dialogo.js"></script>
+    <script>
+        function renderizarAliados() {
+            const aliados = sistemaAliados.listarAliados();
+            const container = document.getElementById('aliados-lista');
+            
+            container.innerHTML = aliados.map(aliado => {
+                const fidelidadePercent = aliado.fidelidade || 50;
+                
+                return `
+                    <div class="aliado-card ${aliado.ativo ? 'ativo' : ''}" 
+                         onclick="mostrarDialogo('${aliado.id}')">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <span style="font-size: 40px;">${aliado.icon}</span>
+                            <div>
+                                <strong style="color: #ffd966;">${aliado.nome}</strong>
+                                <div style="color: #64748b;">Nível ${aliado.nivel}</div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: #94a3b8; font-size: 12px; margin-bottom: 10px;">
+                            ⚔️ Dano: ${aliado.dano} | 💚 HP: ${aliado.hp}
+                        </div>
+                        
+                        <div style="margin-bottom: 10px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <span style="color: #ffd966;">Fidelidade</span>
+                                <span>${fidelidadePercent}%</span>
+                            </div>
+                            <div class="barra-fidelidade">
+                                <div class="fidelidade-preenchida" style="width: ${fidelidadePercent}%;"></div>
+                            </div>
+                        </div>
+                        
+                        <div style="color: #b3a0ff; font-size: 11px; margin-bottom: 15px;">
+                            ✨ ${aliado.habilidade}
+                        </div>
+                        
+                        ${!aliado.ativo ? `
+                            <button class="btn-recrutar" onclick="event.stopPropagation(); recrutar('${aliado.id}')">
+                                🤝 RECRUTAR
+                            </button>
+                        ` : `
+                            <div style="color: #4ade80; text-align: center;">
+                                ✓ NO GRUPO
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+
+            // Renderizar grupo ativo
+            const grupoAtivo = aliados.filter(a => a.ativo);
+            const grupoContainer = document.getElementById('grupo-ativo');
+            
+            if (grupoAtivo.length > 0) {
+                grupoContainer.innerHTML = grupoAtivo.map(aliado => `
+                    <div style="text-align: center; min-width: 80px;">
+                        <div style="font-size: 40px;">${aliado.icon}</div>
+                        <div style="color: #ffd966; font-size: 12px;">${aliado.nome}</div>
+                        <div style="color: #64748b; font-size: 10px;">HP ${aliado.hp}</div>
+                    </div>
+                `).join('');
+            } else {
+                grupoContainer.innerHTML = '<div style="color: #64748b;">Nenhum aliado no grupo</div>';
+            }
+
+            // Atualizar bônus
+            const bonus = sistemaAliados.calcularBonusCombate();
+            document.getElementById('bonus-dano').textContent = bonus.bonusDano;
+            document.getElementById('bonus-defesa').textContent = bonus.bonusDefesa;
+        }
+
+        function recrutar(aliadoId) {
+            if (sistemaAliados.recrutar(aliadoId)) {
+                renderizarAliados();
+            }
+        }
+
+        function mostrarDialogo(aliadoId) {
+            sistemaDialogo.iniciarDialogo(aliadoId);
+        }
+
+        function verificarEventos() {
+            sistemaAliados.aliadosAtivos.forEach(aliadoId => {
+                sistemaAliados.eventoEspecial(aliadoId);
+            });
+            
+            // Atualizar fidelidade
+            sistemaAliados.aliadosAtivos.forEach(aliadoId => {
+                sistemaAliados.melhorarFidelidade(aliadoId, 1);
+            });
+            
+            renderizarAliados();
+        }
+
+        // Verificar eventos a cada 30 segundos
+        setInterval(verificarEventos, 30000);
+
+        // Renderizar inicial
+        renderizarAliados();
+    </script>
+</body>
+</html>

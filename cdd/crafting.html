@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • CRAFTING</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        body { padding: 20px; }
+        .crafting-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .receita-card {
+            background: #14181c;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+        .receita-card.disponivel {
+            border-color: #4ade80;
+        }
+        .receita-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .materiais-lista {
+            margin: 15px 0;
+            padding: 10px;
+            background: #0f1215;
+        }
+        .material-item {
+            display: flex;
+            justify-content: space-between;
+            color: #64748b;
+            margin: 5px 0;
+        }
+        .material-item.tem {
+            color: #4ade80;
+        }
+        .btn-craft {
+            width: 100%;
+            padding: 10px;
+            background: #ffd966;
+            color: #0a0c0e;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .btn-craft:hover {
+            background: #b3a0ff;
+        }
+        .btn-craft:disabled {
+            background: #1e293b;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+        .inventario-mini {
+            position: sticky;
+            top: 20px;
+            background: #0f1215;
+            border: 1px solid #1e293b;
+            padding: 20px;
+        }
+        .nivel-requerido {
+            font-size: 12px;
+            color: #ffd966;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-path">CDD-3001/CRAFTING</span>
+            <span class="terminal-status">🔨 BANCADA DE TRABALHO</span>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin: 20px;">
+            <h1>🔨 BANCADA DE CRAFTING</h1>
+            <a href="/cdd/" class="btn">← VOLTAR</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 300px; gap: 20px;">
+            <!-- Receitas -->
+            <div>
+                <h3 style="color: #ffd966; margin-bottom: 15px;">📜 RECEITAS DISPONÍVEIS</h3>
+                <div class="crafting-grid" id="receitas-lista">
+                    <!-- Será preenchido via JS -->
+                </div>
+            </div>
+
+            <!-- Inventário Rápido -->
+            <div>
+                <div class="inventario-mini">
+                    <h3 style="color: #ffd966; margin-bottom: 15px;">🎒 MATERIAIS</h3>
+                    <div id="materiais-disponiveis">
+                        Carregando...
+                    </div>
+                    
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #1e293b;">
+                        <h4 style="color: #b3a0ff;">📊 ESTATÍSTICAS</h4>
+                        <div style="color: #64748b;">
+                            <div>🔨 Itens craftados: <span id="crafts-count">0</span></div>
+                            <div>📦 Espaço: <span id="inventario-space">10/20</span></div>
+                            <div>⚡ Nível necessário: <span id="nivel-atual">1</span></div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <button class="btn" style="width: 100%;" onclick="window.location.href='/cdd/inventario/'">
+                            VER INVENTÁRIO COMPLETO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script src="/cdd/assets/js/crafting.js"></script>
+    <script>
+        function renderizarReceitas() {
+            const receitas = sistemaCrafting.listarReceitasDisponiveis();
+            const container = document.getElementById('receitas-lista');
+            
+            container.innerHTML = receitas.map(rec => {
+                const materiaisHtml = Object.entries(rec.materiais).map(([mat, qtd]) => {
+                    const tem = (rpg.jogador.inventario[mat] || 0) >= qtd;
+                    return `
+                        <div class="material-item ${tem ? 'tem' : ''}">
+                            <span>• ${mat}</span>
+                            <span>${rpg.jogador.inventario[mat] || 0}/${qtd}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                return `
+                    <div class="receita-card ${rec.disponivel ? 'disponivel' : ''}">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <span style="font-size: 40px;">${rec.icon}</span>
+                            <div>
+                                <strong style="color: #ffd966;">${rec.nome}</strong>
+                                <div class="nivel-requerido">Nível ${rec.nivel}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="materiais-lista">
+                            <h4 style="color: #94a3b8; margin-bottom: 10px;">MATERIAIS:</h4>
+                            ${materiaisHtml}
+                        </div>
+                        
+                        <div style="margin-bottom: 15px; color: #94a3b8; font-size: 12px;">
+                            ⚔️ Dano: ${rec.resultado.dano || 0} | 🛡️ Defesa: ${rec.resultado.defesa || 0}
+                        </div>
+                        
+                        <button class="btn-craft" 
+                                onclick="craftar('${rec.id}')"
+                                ${rec.disponivel ? '' : 'disabled'}>
+                            🔨 CRAFTAR (+${rec.xp} XP)
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function craftar(receitaId) {
+            if (sistemaCrafting.craftar(receitaId)) {
+                renderizarReceitas();
+                atualizarMateriais();
+            }
+        }
+
+        function atualizarMateriais() {
+            const materiais = rpg.jogador.inventario || {};
+            const materiaisHtml = Object.entries(materiais)
+                .filter(([_, qtd]) => qtd > 0)
+                .map(([mat, qtd]) => `
+                    <div style="display: flex; justify-content: space-between; margin: 5px 0;">
+                        <span>• ${mat}</span>
+                        <span style="color: #4ade80;">${qtd}</span>
+                    </div>
+                `).join('');
+
+            document.getElementById('materiais-disponiveis').innerHTML = 
+                materiaisHtml || '<div style="color: #64748b;">Nenhum material</div>';
+
+            document.getElementById('crafts-count').textContent = 
+                rpg.jogador.estatisticas.crafts || 0;
+            document.getElementById('nivel-atual').textContent = rpg.jogador.nivel;
+        }
+
+        // Atualizar a cada 5 segundos
+        setInterval(() => {
+            renderizarReceitas();
+            atualizarMateriais();
+        }, 5000);
+
+        // Inicializar
+        renderizarReceitas();
+        atualizarMateriais();
+    </script>
+</body>
+</html>

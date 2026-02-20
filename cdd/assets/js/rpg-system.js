@@ -68,3 +68,39 @@ function carregarProgresso() {
         console.log("Nenhum progresso encontrado.");
     }
 }
+
+// Adicionar suporte a crafting e aliados no jogador padrão
+if (!rpg.jogador.inventario) rpg.jogador.inventario = {};
+if (!rpg.jogador.itens) rpg.jogador.itens = [];
+if (!rpg.jogador.estatisticas) rpg.jogador.estatisticas = {};
+if (!rpg.jogador.estatisticas.crafts) rpg.jogador.estatisticas.crafts = 0;
+
+// Função para coletar materiais
+rpg.coletarMaterial = function(material, quantidade = 1) {
+    if (!this.jogador.inventario[material]) {
+        this.jogador.inventario[material] = 0;
+    }
+    this.jogador.inventario[material] += quantidade;
+    this.log(`📦 Coletou: ${material} x${quantidade}`, 'sucesso');
+    this.salvarJogo();
+};
+
+// Função para coletar item craftado
+rpg.coletarItem = function(itemId, quantidade = 1) {
+    // Verificar se é um item especial
+    const item = {
+        id: itemId,
+        nome: itemId.replace(/_/g, ' ').toUpperCase(),
+        quantidade: quantidade
+    };
+    this.jogador.itens.push(item);
+    this.log(`✨ Ganhou: ${item.nome}`, 'sucesso');
+    this.salvarJogo();
+};
+
+// Salvar jogo automaticamente a cada minuto
+setInterval(() => {
+    if (window.rpg) {
+        window.rpg.salvarJogo();
+    }
+}, 60000);
