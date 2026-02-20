@@ -3,495 +3,463 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDD 3001 • RPG TRANSMÍDIA</title>
+    <title>CDD 3001 • Terminal da Resistência</title>
     <link rel="stylesheet" href="/cdd/assets/css/global.css">
     <style>
-        /* ESTILO RPG - SOBREESCREVENDO O ATUAL */
-        :root {
-            --bg-primary: #0a0c0e;
-            --bg-secondary: #0f1215;
-            --bg-tertiary: #14181c;
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --text-tertiary: #64748b;
-            --accent-primary: #ffd966;
-            --accent-secondary: #b3a0ff;
-            --border-color: #1e293b;
-            --success: #4ade80;
-            --error: #f87171;
-        }
-
-        body {
-            background: var(--bg-primary);
-            color: var(--text-primary);
-            font-family: 'Courier New', monospace;
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            background-image: 
-                linear-gradient(rgba(255, 217, 102, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255, 217, 102, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        .terminal {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(10, 12, 14, 0.95);
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-primary));
             border: 2px solid var(--accent-primary);
-            box-shadow: 0 0 30px rgba(255, 217, 102, 0.2);
+            padding: 40px;
+            margin: 30px 20px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
-
-        .terminal::before {
-            content: "CDD-3001";
+        
+        .hero-section::before {
+            content: "🏙️";
             position: absolute;
-            top: 10px;
+            left: -30px;
+            top: -30px;
+            font-size: 200px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .hero-section::after {
+            content: "3001";
+            position: absolute;
             right: 20px;
-            color: var(--accent-primary);
-            font-size: 10px;
-            opacity: 0.3;
-            letter-spacing: 2px;
-        }
-
-        .terminal-header {
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            padding: 10px 20px;
-            display: flex;
-            justify-content: space-between;
-            color: var(--bg-primary);
+            bottom: 10px;
+            font-size: 80px;
+            opacity: 0.05;
             font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 2px;
         }
-
-        .terminal-path {
-            background: var(--bg-primary);
+        
+        .hero-title {
+            font-size: 4rem;
             color: var(--accent-primary);
-            padding: 2px 8px;
-            border-radius: 0;
-            font-size: 12px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 217, 102, 0.5);
         }
-
-        .terminal-status {
-            background: var(--bg-primary);
+        
+        .hero-subtitle {
             color: var(--accent-secondary);
-            padding: 2px 8px;
-            font-size: 12px;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
         }
-
-        h1 {
-            color: var(--accent-primary);
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 2.5rem;
-            margin: 30px 20px 10px;
-            text-shadow: 0 0 10px rgba(255, 217, 102, 0.5);
-            border-left: 4px solid var(--accent-secondary);
-            padding-left: 20px;
-        }
-
-        .sistema-status {
-            display: flex;
-            gap: 20px;
-            margin: 20px;
-            padding: 15px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-label {
-            color: var(--text-tertiary);
-        }
-
-        .status-value {
-            color: var(--accent-primary);
-            font-weight: bold;
-        }
-
-        .grid {
+        
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             margin: 20px;
         }
-
-        .card {
+        
+        .stat-card {
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            padding: 25px 20px;
-            transition: all 0.3s;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            padding: 25px 15px;
+            text-align: center;
+            transition: all var(--transition-normal);
         }
-
-        .card::after {
-            content: "▶";
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            color: var(--accent-primary);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .card:hover {
+        
+        .stat-card:hover {
             border-color: var(--accent-primary);
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
-
-        .card:hover::after {
-            opacity: 1;
-        }
-
-        .card h3 {
+        
+        .stat-value {
+            font-size: 2.5rem;
             color: var(--accent-primary);
-            margin: 0 0 10px 0;
-            font-size: 1.3rem;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .warning-banner {
+            background: rgba(255, 102, 102, 0.1);
+            border: 1px solid var(--error);
+            padding: 15px 20px;
+            margin: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 20px;
+            animation: pulse 2s infinite;
         }
-
-        .card p {
-            color: var(--text-secondary);
-            margin: 0 0 15px 0;
-            font-size: 0.9rem;
-            line-height: 1.5;
+        
+        .warning-icon {
+            font-size: 30px;
         }
-
-        .status {
-            display: inline-block;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
+        
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            margin: 20px;
+            flex-wrap: wrap;
         }
-
-        .status.online { background: rgba(74, 222, 128, 0.2); color: var(--success); border-left: 2px solid var(--success); }
-        .status.dev { background: rgba(255, 217, 102, 0.2); color: var(--accent-primary); border-left: 2px solid var(--accent-primary); }
-        .status.offline { background: rgba(248, 113, 113, 0.2); color: var(--error); border-left: 2px solid var(--error); }
-
-        .menu-lateral {
-            position: fixed;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+        
+        .quick-action {
+            flex: 1;
+            min-width: 150px;
             background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            padding: 10px;
-            z-index: 100;
-        }
-
-        .menu-lateral a {
-            display: block;
-            padding: 10px;
-            color: var(--text-tertiary);
-            text-decoration: none;
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-
-        .menu-lateral a:hover {
-            color: var(--accent-primary);
-            transform: scale(1.2);
-        }
-
-        @media (max-width: 768px) {
-            .menu-lateral {
-                display: none;
-            }
-        }
-
-        .console-log {
-            margin: 20px;
             padding: 15px;
-            background: var(--bg-secondary);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .quick-action:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.02);
+        }
+        
+        .progress-section {
+            margin: 30px 20px;
+            padding: 20px;
+            background: var(--bg-tertiary);
             border: 1px solid var(--border-color);
-            font-family: 'Courier New', monospace;
+        }
+        
+        .progress-item {
+            margin: 15px 0;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
             font-size: 12px;
-            color: var(--text-tertiary);
         }
-
-        .console-log span {
-            color: var(--accent-secondary);
-        }
-
-        .barra-experiencia {
-            height: 4px;
+        
+        .progress-bar {
+            height: 6px;
             background: var(--bg-primary);
-            margin: 20px;
-            position: relative;
+            border: 1px solid var(--border-color);
         }
-
-        .exp-preenchida {
+        
+        .progress-fill {
             height: 100%;
-            width: 33%;
             background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            position: relative;
+            width: 0%;
         }
-
-        .exp-preenchida::after {
-            content: "NÍVEL 2 • 33%";
-            position: absolute;
-            right: 0;
-            top: -20px;
-            font-size: 10px;
-            color: var(--accent-primary);
+        
+        .version-footer {
+            margin: 40px 20px 20px;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-tertiary);
+            font-size: 11px;
         }
     </style>
 </head>
 <body>
-    <!-- MENU LATERAL RPG -->
+    <!-- Menu Lateral -->
     <div class="menu-lateral">
-        <a href="#" title="Inventário">🎒</a>
-        <a href="#" title="Missões">⚔️</a>
-        <a href="#" title="Mapa">🗺️</a>
-        <a href="#" title="Personagem">👤</a>
-        <a href="#" title="Diário">📖</a>
-        <a href="#" title="Combate">⚡</a>
+        <a href="/cdd/" title="Terminal">🏠</a>
+        <a href="/cdd/perfil.html" title="Perfil">👤</a>
+        <a href="/cdd/mapa/" title="Mapa">🗺️</a>
+        <a href="/cdd/missoes/" title="Missões">⚔️</a>
+        <a href="/cdd/inventario/" title="Inventário">🎒</a>
+        <a href="/cdd/diario.html" title="Diário">📖</a>
+        <a href="/cdd/estatisticas.html" title="Estatísticas">📊</a>
     </div>
 
+    <!-- Terminal Principal -->
     <div class="terminal">
         <div class="terminal-header">
-            <span class="terminal-path">CDD-3001/RPG/TERMINAL</span>
-            <span class="terminal-status">SISTEMA TRANSMÍDIA ATIVO</span>
+            <span class="terminal-path">~/cdd-3001/terminal</span>
+            <span class="terminal-status">SISTEMA ATIVO • 3001</span>
         </div>
 
-        <!-- STATUS DO RPG -->
-        <div class="sistema-status">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-title">CDD 3001</div>
+            <div class="hero-subtitle">CIDADE DE DEUS • A ÚLTIMA RESISTÊNCIA</div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
             <div class="status-item">
-                <span class="status-label">PERSONAGEM:</span>
-                <span class="status-value">ARQUIVISTA</span>
+                <span class="status-label">ARQUIVISTA</span>
+                <span class="status-value" id="jogador-nome">Resistente</span>
             </div>
             <div class="status-item">
-                <span class="status-label">NÍVEL:</span>
-                <span class="status-value">2</span>
+                <span class="status-label">NÍVEL</span>
+                <span class="status-value nivel-atual">1</span>
             </div>
             <div class="status-item">
-                <span class="status-label">MEMÓRIA:</span>
-                <span class="status-value">47%</span>
+                <span class="status-label">MEMÓRIAS</span>
+                <span class="status-value"><span class="memorias-atual">0</span>/<span class="memorias-max">100</span></span>
             </div>
             <div class="status-item">
-                <span class="status-label">MÓDULOS:</span>
-                <span class="status-value">6/7</span>
+                <span class="status-label">MOEDAS</span>
+                <span class="status-value moedas-atual">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">MÓDULOS</span>
+                <span class="status-value visitas-atual">0</span>
             </div>
         </div>
 
-        <!-- BARRA DE EXPERIÊNCIA -->
-        <div class="barra-experiencia">
-            <div class="exp-preenchida"></div>
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <div class="warning-icon">⚠️</div>
+            <div class="flex-col">
+                <strong style="color: var(--error);">ZONA DE RISCO</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">Os Brancos estão se movimentando perto da Fábrica. Reforcem as barricadas.</span>
+            </div>
         </div>
 
-        <h1>CDD 3001 • RPG TRANSMÍDIA</h1>
-
-        <!-- CONSOLE LOG - HISTÓRIA DINÂMICA -->
-        <div class="console-log" id="consoleLog">
-            > Sistema iniciado...<br>
-            > Carregando módulos narrativos...<br>
-            > <span>Bem-vindo ao CDD 3001. Você é um arquivista explorando memórias fragmentadas.</span><br>
-            > 6 módulos disponíveis. 1 em manutenção.
+        <!-- XP Bar -->
+        <div class="xp-container">
+            <div class="xp-info">
+                <span class="xp-label">PROGRESSO PARA NÍVEL <span class="nivel-atual">1</span></span>
+                <span class="xp-values"><span class="xp-atual">0</span>/<span class="xp-max">1000</span> XP</span>
+            </div>
+            <div class="xp-bar">
+                <div class="xp-fill xp-barra" style="width: 0%;"></div>
+            </div>
         </div>
 
-        <!-- GRID PRINCIPAL - CADA MÓDULO É UMA "MISSÃO" -->
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="quick-action" onclick="window.location.href='/cdd/mapa/'">
+                <div style="font-size: 30px;">🗺️</div>
+                <div>Ver Mapa</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/missoes/'">
+                <div style="font-size: 30px;">⚔️</div>
+                <div>Missões</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/diario.html'">
+                <div style="font-size: 30px;">📖</div>
+                <div>Diário</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/brancos.html'">
+                <div style="font-size: 30px;">👻</div>
+                <div>Os Brancos</div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">MÓDULOS</div>
+                <div class="stat-value visitas-atual">0</div>
+                <div style="color: var(--text-tertiary);">/15 explorados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">CONQUISTAS</div>
+                <div class="stat-value" id="conquistas-count">0</div>
+                <div style="color: var(--text-tertiary);">/28 disponíveis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">INIMIGOS</div>
+                <div class="stat-value" id="inimigos-count">0</div>
+                <div style="color: var(--text-tertiary);">derrotados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">TEMPO</div>
+                <div class="stat-value" id="tempo-count">0</div>
+                <div style="color: var(--text-tertiary);">horas</div>
+            </div>
+        </div>
+
+        <!-- Módulos Grid -->
+        <h2>📋 MÓDULOS DISPONÍVEIS</h2>
         <div class="grid">
-            <div class="card" onclick="abrirModulo('historia')">
+            <!-- História -->
+            <div class="card" onclick="rpg.abrirModulo('historia')">
                 <h3>📜 HISTÓRIA</h3>
-                <p>Linha do tempo, personagens e construção do universo.</p>
-                <div class="status online">EM ANDAMENTO • +150XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    ⏳ 3 memórias desbloqueadas
-                </div>
+                <p>A pandemia dos Brancos no Rio de Janeiro 3001. Linha do tempo 2057-3001.</p>
+                <div class="status online">+150 XP • 4/10</div>
             </div>
 
-            <div class="card" onclick="abrirModulo('videos')">
-                <h3>🎬 VÍDEOS</h3>
-                <p>Teaser, making of e conteúdo audiovisual.</p>
-                <div class="status online">DISPONÍVEL • +100XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    🎥 2 fragmentos visuais
-                </div>
+            <!-- Mapa -->
+            <div class="card" onclick="rpg.abrirModulo('mapa')">
+                <h3>🗺️ MAPA</h3>
+                <p>Cidade de Deus interativa. Zonas seguras e de risco.</p>
+                <div class="status online">+100 XP • 12 locais</div>
             </div>
 
-            <div class="card" onclick="abrirModulo('game')">
-                <h3>🎮 GAME</h3>
-                <p>Versão interativa do universo CDD 3001.</p>
-                <div class="status dev">EM DESENVOLVIMENTO • MISSÃO PRINCIPAL</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    ⚙️ 45% concluído
-                </div>
+            <!-- Personagens -->
+            <div class="card" onclick="window.location.href='/cdd/personagens.html'">
+                <h3>👥 PERSONAGENS</h3>
+                <p>Marcos, D. Jurema, Luan, Seu Jorge. A resistência.</p>
+                <div class="status online">+75 XP • 4 heróis</div>
             </div>
 
-            <div class="card" onclick="abrirModulo('roteiro')">
-                <h3>📝 ROTEIRO</h3>
-                <p>Roteiro completo, escaleta e versões.</p>
-                <div class="status dev">EM ESCRITA • +75XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    📄 12 páginas decifradas
-                </div>
+            <!-- Brancos -->
+            <div class="card" onclick="window.location.href='/cdd/brancos.html'">
+                <h3>👻 OS BRANCOS</h3>
+                <p>Sentinela, Eco, Alfa. A Síndrome da Neve.</p>
+                <div class="status risco">+200 XP • 3 ameaças</div>
             </div>
 
-            <div class="card" onclick="abrirModulo('arte')">
-                <h3>🎨 ARTE</h3>
-                <p>Concept art, storyboards e ilustrações.</p>
-                <div class="status dev">EM PRODUÇÃO • +50XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    🖼️ 8 imagens reveladas
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModulo('curiosidades')">
-                <h3>🔍 CURIOSIDADES</h3>
-                <p>Fatos, easter eggs e referências.</p>
-                <div class="status online">DISPONÍVEL • +200XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    🥚 5 segredos encontrados
-                </div>
-            </div>
-
-            <div class="card" onclick="abrirModulo('musica')">
+            <!-- Música -->
+            <div class="card" onclick="rpg.abrirModulo('musica')">
                 <h3>🎵 MÚSICA</h3>
-                <p>Trilha sonora e sound design.</p>
-                <div class="status dev">EM PRODUÇÃO • +25XP</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    🎵 3 faixas decodificadas
-                </div>
+                <p>Trilha da resistência. Rádio Vigia 24h.</p>
+                <div class="status online">+25 XP • 6 faixas</div>
             </div>
 
-            <!-- NOVO MÓDULO - INVENTÁRIO -->
-            <div class="card" onclick="abrirModulo('inventario')">
+            <!-- Arte -->
+            <div class="card" onclick="rpg.abrirModulo('arte')">
+                <h3>🎨 ARTE</h3>
+                <p>Murais e grafites da comunidade.</p>
+                <div class="status online">+50 XP • 8 obras</div>
+            </div>
+
+            <!-- Diário -->
+            <div class="card" onclick="window.location.href='/cdd/diario.html'">
+                <h3>📖 DIÁRIO</h3>
+                <p>Memórias de D. Jurema. 2057-3001, 47 anos de registros.</p>
+                <div class="status online">+150 XP • 47 entradas</div>
+            </div>
+
+            <!-- Inventário -->
+            <div class="card" onclick="rpg.abrirModulo('inventario')">
                 <h3>🎒 INVENTÁRIO</h3>
-                <p>Itens coletados durante a jornada.</p>
-                <div class="status online">7 ITENS</div>
-                <div style="margin-top: 10px; font-size: 11px; color: var(--text-tertiary);">
-                    🔑 Fragmentos de memória
+                <p>Itens coletados na resistência. Armas, memórias, especiais.</p>
+                <div class="status online">7/30 itens</div>
+            </div>
+
+            <!-- Missões -->
+            <div class="card" onclick="rpg.abrirModulo('missoes')">
+                <h3>⚔️ MISSÕES</h3>
+                <p>Missões principais e secundárias da resistência.</p>
+                <div class="status online">+200 XP • 6 missões</div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="card" onclick="window.location.href='/cdd/estatisticas.html'">
+                <h3>📊 ESTATÍSTICAS</h3>
+                <p>Dados completos do jogador. Progresso detalhado.</p>
+                <div class="status online">Nível <span class="nivel-atual">1</span></div>
+            </div>
+
+            <!-- Game -->
+            <div class="card" onclick="rpg.abrirModulo('game')">
+                <h3>🎮 GAME</h3>
+                <p>Versão jogável em desenvolvimento. 45% concluído.</p>
+                <div class="status dev">EM DESENVOLVIMENTO</div>
+            </div>
+
+            <!-- Vídeos -->
+            <div class="card" onclick="rpg.abrirModulo('videos')">
+                <h3>🎬 VÍDEOS</h3>
+                <p>Teasers e making of da resistência.</p>
+                <div class="status online">+100 XP • 2/8</div>
+            </div>
+
+            <!-- Roteiro -->
+            <div class="card" onclick="rpg.abrirModulo('roteiro')">
+                <h3>📝 ROTEIRO</h3>
+                <p>Páginas decifradas do roteiro original.</p>
+                <div class="status online">+75 XP • 12/15</div>
+            </div>
+
+            <!-- Curiosidades -->
+            <div class="card" onclick="rpg.abrirModulo('curiosidades')">
+                <h3>🔍 CURIOSIDADES</h3>
+                <p>Easter eggs e segredos escondidos.</p>
+                <div class="status online">+200 XP • 5/25</div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="card" onclick="window.location.href='/cdd/perfil.html'">
+                <h3>👤 PERFIL</h3>
+                <p>Atributos, conquistas e progresso do jogador.</p>
+                <div class="status online">Nível <span class="nivel-atual">1</span></div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h3>📈 PROGRESSO DA RESISTÊNCIA</h3>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Módulos Explorados</span>
+                    <span class="visitas-atual">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-modulos"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Memórias Coletadas</span>
+                    <span class="memorias-atual">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-memorias"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Conquistas</span>
+                    <span id="conquistas-progress">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-conquistas"></div>
                 </div>
             </div>
         </div>
 
-        <!-- RODAPÉ COM ESTATÍSTICAS DO JOGADOR -->
-        <div style="display: flex; justify-content: space-between; margin: 20px; padding: 15px; border-top: 1px solid var(--border-color);">
-            <div>
-                <span style="color: var(--text-tertiary);">XP TOTAL:</span>
-                <span style="color: var(--accent-primary); margin-left: 10px;">600/1800</span>
-            </div>
-            <div>
-                <span style="color: var(--text-tertiary);">MEMÓRIAS:</span>
-                <span style="color: var(--accent-secondary); margin-left: 10px;">23/50</span>
-            </div>
-            <div>
-                <span style="color: var(--text-tertiary);">MISSÕES:</span>
-                <span style="color: var(--success); margin-left: 10px;">4 ativas</span>
-            </div>
-            <div>
-                <span style="color: var(--text-tertiary);">ÚLTIMO SAVE:</span>
-                <span style="color: var(--text-secondary); margin-left: 10px;">2026-02-20</span>
-            </div>
+        <!-- Console Log -->
+        <div class="console-log" id="consoleLog">
+            <div>[SISTEMA] 🚀 CDD 3001 v3.0 iniciado</div>
+            <div>[SISTEMA] 📍 Cidade de Deus • Rio de Janeiro • 3001</div>
+            <div>[SISTEMA] 👻 Os Brancos estão ativos</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="version-footer">
+            <span>📍 CIDADE DE DEUS • RIO DE JANEIRO • 3001</span>
+            <span>⚙️ v3.0 • SISTEMA DA RESISTÊNCIA</span>
+            <span>💾 Auto-save ativo</span>
         </div>
     </div>
 
-    <script>
-        // SISTEMA DE RPG - SALVANDO PROGRESSO
-        let jogador = {
-            nivel: 2,
-            xp: 600,
-            memorias: 23,
-            modulosCompletos: ['curiosidades', 'videos']
-        };
-
-        function abrirModulo(modulo) {
-            // ANIMAÇÃO DE CARREGAMENTO
-            const consoleEl = document.getElementById('consoleLog');
-            consoleEl.innerHTML = `> Acessando módulo: ${modulo}...<br>`;
-            
-            setTimeout(() => {
-                // REDIRECIONA PARA O MÓDULO
-                switch(modulo) {
-                    case 'historia':
-                        window.location.href = '/cdd/historia/';
-                        break;
-                    case 'videos':
-                        window.location.href = '/cdd/videos/';
-                        break;
-                    case 'game':
-                        window.location.href = '/cdd/game/';
-                        break;
-                    case 'roteiro':
-                        window.location.href = '/cdd/roteiro/';
-                        break;
-                    case 'arte':
-                        window.location.href = '/cdd/arte/';
-                        break;
-                    case 'curiosidades':
-                        window.location.href = '/cdd/curiosidades/';
-                        // GANHA XP POR ACESSAR
-                        jogador.xp += 10;
-                        break;
-                    case 'musica':
-                        window.location.href = '/cdd/musica/';
-                        break;
-                    case 'inventario':
-                        window.location.href = '/cdd/inventario/';
-                        break;
-                    default:
-                        console.log('Módulo não encontrado');
-                }
-            }, 500);
-
-            // ADICIONA EFEITO SONORO (SE QUISER)
-            // new Audio('/sfx/terminal.mp3').play();
-        }
-
-        // SISTEMA DE AUTO-SAVE
-        setInterval(() => {
-            localStorage.setItem('cdd3001_save', JSON.stringify(jogador));
-            console.log('Progresso salvo...');
-        }, 30000);
-
-        // CARREGAR SAVE EXISTENTE
-        window.onload = function() {
-            const save = localStorage.getItem('cdd3001_save');
-            if (save) {
-                jogador = JSON.parse(save);
-                // ATUALIZA INTERFACE
-                console.log('Save carregado!');
-            }
-        };
-    </script>
-</body>
-</html>
-
-    <!-- SISTEMA RPG -->
     <script src="/cdd/assets/js/rpg-system.js"></script>
     <script>
-        // Adaptar a função abrirModulo existente
-        function abrirModulo(modulo) {
-            rpg.abrirModulo(modulo);
-        }
+        // Atualizar interface periodicamente
+        setInterval(() => {
+            if (rpg) {
+                rpg.atualizarInterface();
+                
+                // Atualizar contadores específicos
+                document.getElementById('conquistas-count').textContent = rpg.jogador.progresso.conquistas.length;
+                document.getElementById('inimigos-count').textContent = rpg.jogador.progresso.inimigosDerrotados;
+                document.getElementById('tempo-count').textContent = Math.floor(rpg.jogador.progresso.tempoJogado / 60);
+                
+                // Progress bars
+                const modulosPercent = (rpg.jogador.progresso.visitas.length / 15) * 100;
+                document.getElementById('progress-modulos').style.width = modulosPercent + '%';
+                
+                const memoriasPercent = (rpg.jogador.recursos.memorias / rpg.jogador.recursos.memoriasMax) * 100;
+                document.getElementById('progress-memorias').style.width = memoriasPercent + '%';
+                
+                const conquistasPercent = (rpg.jogador.progresso.conquistas.length / rpg.conquistas.length) * 100;
+                document.getElementById('progress-conquistas').style.width = conquistasPercent + '%';
+                document.getElementById('conquistas-progress').textContent = `${rpg.jogador.progresso.conquistas.length}/${rpg.conquistas.length}`;
+            }
+        }, 100);
         
-        // Adicionar atalho do perfil
-        document.addEventListener('keydown', function(e) {
-            // Pressione 'P' para abrir perfil
-            if (e.key === 'p' || e.key === 'P') {
-                window.location.href = '/cdd/perfil.html';
-            }
-            // Pressione 'I' para inventário
-            if (e.key === 'i' || e.key === 'I') {
-                window.location.href = '/cdd/inventario/';
-            }
+        // Mensagem de boas-vindas
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                rpg.log('👋 Bem-vindo à Resistência, Arquivista!', 'sucesso');
+            }, 1000);
         });
     </script>
 </body>
