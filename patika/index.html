@@ -1162,3 +1162,257 @@
     </script>
 </body>
 </html>
+
+<!-- ===== NOVAS FUNCIONALIDADES PATIKA (SEGURO) ===== -->
+<style>
+/* ===== NOVOS ESTILOS (APENAS ADICIONAIS) ===== */
+
+/* Feedback visual para botões (sem quebrar existente) */
+.btn:active {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+}
+
+/* Dica flutuante */
+.patika-tooltip {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--accent-primary);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    z-index: 9999;
+    animation: slideIn 0.3s ease-out;
+    max-width: 300px;
+    pointer-events: none;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Indicador de salvamento (sem modificar existente) */
+.saving-indicator {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+/* Scrollbar personalizada (apenas melhoria visual) */
+.roteiro-editor::-webkit-scrollbar {
+    width: 8px;
+}
+
+.roteiro-editor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.roteiro-editor::-webkit-scrollbar-thumb {
+    background: var(--accent-light, #8fa99a);
+    border-radius: 4px;
+}
+
+.roteiro-editor::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-primary, #6f8f7b);
+}
+
+/* Modo foco aprimorado (usa classe existente) */
+.modo-foco .sidebar-left,
+.modo-foco .sidebar-right {
+    display: none;
+}
+
+.modo-foco .main-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+</style>
+
+<!-- ===== NOVAS FUNCIONALIDADES JAVASCRIPT (SEGURO) ===== -->
+<script>
+(function() {
+    'use strict';
+
+    // ===== 1. ATALHO CTRL+S PARA SALVAR =====
+    document.addEventListener('keydown', function(e) {
+        if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+            e.preventDefault();
+            
+            // Tentar chamar função de salvar existente
+            if (typeof window.salvarVersao === 'function') {
+                window.salvarVersao();
+                mostrarNotificacao('✅ Versão salva!');
+            } else if (typeof window.patikaSalvarVersao === 'function') {
+                window.patikaSalvarVersao();
+                mostrarNotificacao('✅ Versão salva!');
+            }
+        }
+    });
+
+    // ===== 2. FUNÇÃO DE NOTIFICAÇÃO (NOVA) =====
+    function mostrarNotificacao(mensagem) {
+        const notificacao = document.createElement('div');
+        notificacao.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-primary, #00A86B);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            z-index: 10000;
+            font-size: 14px;
+            animation: slideIn 0.3s ease-out;
+        `;
+        notificacao.textContent = mensagem;
+        document.body.appendChild(notificacao);
+        
+        setTimeout(() => {
+            notificacao.style.opacity = '0';
+            setTimeout(() => notificacao.remove(), 300);
+        }, 2000);
+    }
+
+    // ===== 3. DICAS RÁPIDAS A CADA 2 MINUTOS =====
+    const dicas = [
+        '💡 Use INT. para cenas internas',
+        '💡 Use EXT. para cenas externas',
+        '💡 Digite nomes em CAIXA ALTA para criar personagens',
+        '💡 Pressione Ctrl+S para salvar',
+        '💡 Clique nas cenas à direita para navegar',
+        '💡 Use o modo foco para escrever sem distrações'
+    ];
+    
+    let dicaIndex = 0;
+    setInterval(() => {
+        const dica = document.createElement('div');
+        dica.className = 'patika-tooltip';
+        dica.textContent = dicas[dicaIndex % dicas.length];
+        document.body.appendChild(dica);
+        
+        setTimeout(() => dica.remove(), 4000);
+        dicaIndex++;
+    }, 120000); // 2 minutos
+
+    // ===== 4. EXPORTAR PDF (NOVA FUNÇÃO) =====
+    window.exportarPDF = function() {
+        const editor = document.getElementById('roteiro-editor');
+        if (!editor) return;
+        
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+            <head>
+                <title>Roteiro - ${new Date().toLocaleDateString()}</title>
+                <style>
+                    body { font-family: 'Courier New', monospace; line-height: 1.6; padding: 40px; max-width: 800px; margin: 0 auto; }
+                    .patika-cena { font-weight: bold; text-transform: uppercase; margin-top: 24px; color: #00A86B; }
+                    .patika-personagem { margin-left: 200px; font-weight: bold; }
+                    .patika-dialogo { margin-left: 140px; margin-right: 140px; }
+                    @media print { body { padding: 0; } }
+                </style>
+            </head>
+            <body>
+                <h1 style="text-align:center;">ROTEIRO</h1>
+                ${editor.innerHTML}
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.focus();
+        printWindow.print();
+        mostrarNotificacao('📄 PDF gerado!');
+    };
+
+    // ===== 5. ESTATÍSTICAS AVANÇADAS (NOVA FUNÇÃO) =====
+    window.estatisticasAvancadas = function() {
+        const editor = document.getElementById('roteiro-editor');
+        if (!editor) return;
+        
+        const texto = editor.innerText;
+        const palavras = texto.trim().split(/\s+/).filter(Boolean).length;
+        const caracteres = texto.length;
+        
+        let cenas = 0, personagens = 0, dialogos = 0;
+        for (let linha of editor.children) {
+            if (linha.classList.contains('patika-cena')) cenas++;
+            if (linha.classList.contains('patika-personagem')) personagens++;
+            if (linha.classList.contains('patika-dialogo')) dialogos++;
+        }
+        
+        alert(`📊 ESTATÍSTICAS:
+        
+Palavras: ${palavras}
+Caracteres: ${caracteres}
+Páginas: ${Math.ceil(palavras/250)}
+Cenas: ${cenas}
+Personagens: ${personagens}
+Diálogos: ${dialogos}
+Tempo: ${Math.ceil(palavras/150)} min`);
+    };
+
+    // ===== 6. ADICIONAR BOTÕES NOVOS (SEM REMOVER EXISTENTES) =====
+    setTimeout(() => {
+        const toolbar = document.querySelector('.editor-toolbar');
+        if (toolbar && !document.getElementById('btn-pdf')) {
+            // Botão PDF
+            const btnPDF = document.createElement('button');
+            btnPDF.id = 'btn-pdf';
+            btnPDF.className = 'btn';
+            btnPDF.innerHTML = '📄 PDF';
+            btnPDF.onclick = window.exportarPDF;
+            toolbar.appendChild(btnPDF);
+            
+            // Botão Estatísticas
+            const btnStats = document.createElement('button');
+            btnStats.id = 'btn-stats';
+            btnStats.className = 'btn';
+            btnStats.innerHTML = '📊 Stats';
+            btnStats.onclick = window.estatisticasAvancadas;
+            toolbar.appendChild(btnStats);
+            
+            console.log('✅ Botões adicionados com segurança');
+        }
+    }, 1000);
+
+    // ===== 7. PREVENIR PERDA DE DADOS =====
+    window.addEventListener('beforeunload', function(e) {
+        const editor = document.getElementById('roteiro-editor');
+        const lastSave = localStorage.getItem('patika_autosave');
+        
+        if (editor && lastSave && editor.innerHTML !== lastSave) {
+            e.preventDefault();
+            e.returnValue = 'Há alterações não salvas. Deseja realmente sair?';
+        }
+    });
+
+    // ===== 8. CLIQUE DUPLO NAS CENAS =====
+    document.addEventListener('dblclick', function(e) {
+        if (e.target.classList.contains('cena-item')) {
+            e.target.style.backgroundColor = 'var(--accent-selection, #e8efe9)';
+            setTimeout(() => {
+                e.target.style.backgroundColor = '';
+            }, 300);
+        }
+    });
+
+    console.log('🚀 Melhorias seguras do Patika carregadas!');
+})();
+</script>
+<!-- ===== FIM DAS NOVAS FUNCIONALIDADES ===== -->
+
