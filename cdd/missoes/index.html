@@ -6,184 +6,26 @@
     <title>CDD 3001 • Missões</title>
     <link rel="stylesheet" href="/cdd/assets/css/global.css">
     <style>
-        .missoes-container {
-            max-width: 900px;
-            margin: 40px auto;
-        }
+        body { background: var(--bg-primary); color: var(--text-primary); font-family: 'Courier New', monospace; padding: 20px; }
+        .terminal { max-width: 900px; margin: 0 auto; background: rgba(10,12,14,0.98); border: 2px solid var(--accent-primary); }
+        .terminal-header { background: var(--bg-secondary); padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; }
+        h1 { color: var(--accent-primary); margin: 20px; }
+        .nav-bar { margin: 20px; padding: 10px 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+        .nav-bar a { color: var(--text-tertiary); text-decoration: none; margin-right: 20px; }
+        .nav-bar a:hover { color: var(--accent-primary); }
         
-        .jornada-header {
-            background: var(--bg-tertiary);
-            border: 2px solid var(--accent-primary);
-            padding: 20px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .jornada-titulo {
-            color: var(--accent-primary);
-            font-size: 1.2rem;
-            text-transform: uppercase;
-        }
-        
-        .jornada-progresso {
-            text-align: right;
-        }
-        
-        .missao-card {
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            margin: 20px 0;
-            padding: 25px;
-            position: relative;
-            transition: all 0.3s;
-        }
-        
-        .missao-card:hover {
-            border-color: var(--accent-primary);
-            transform: translateX(10px);
-        }
-        
-        .missao-card.completa {
-            opacity: 0.7;
-            border-color: var(--success);
-        }
-        
-        .missao-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .missao-nome {
-            color: var(--accent-primary);
-            font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .missao-tipo {
-            font-size: 10px;
-            padding: 3px 8px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-        }
-        
-        .missao-recompensa {
-            color: var(--accent-secondary);
-            font-size: 14px;
-        }
-        
-        .missao-desc {
-            color: var(--text-secondary);
-            margin: 15px 0;
-            line-height: 1.6;
-        }
-        
-        .missao-objetivos {
-            margin: 20px 0;
-        }
-        
-        .objetivo-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .objetivo-check {
-            width: 20px;
-            height: 20px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-        
-        .objetivo-check.concluido {
-            background: var(--success);
-            border-color: var(--success);
-        }
-        
-        .objetivo-texto {
-            flex: 1;
-            font-size: 14px;
-        }
-        
-        .objetivo-xp {
-            color: var(--accent-primary);
-            font-size: 12px;
-        }
-        
-        .progresso {
-            height: 6px;
-            background: var(--bg-primary);
-            margin: 15px 0;
-            border-radius: 0;
-        }
-        
-        .progresso-preenchido {
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            width: 0%;
-        }
-        
-        .missao-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .missao-status {
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-        
-        .status-disponivel { color: var(--accent-primary); }
-        .status-andamento { color: var(--accent-secondary); }
-        .status-completa { color: var(--success); }
-        
-        .btn-missao {
-            padding: 8px 20px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            cursor: pointer;
-            font-size: 12px;
-            transition: all 0.3s;
-        }
-        
-        .btn-missao:hover {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
-        
-        .filtros-missao {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-        
-        .filtro {
-            padding: 8px 15px;
-            background: var(--bg-tertiary);
-            border: 1px solid var(--border-color);
-            cursor: pointer;
-            font-size: 12px;
-        }
-        
-        .filtro.ativo {
-            border-color: var(--accent-primary);
-            color: var(--accent-primary);
-        }
+        .missoes-container { max-width: 800px; margin: 40px auto; }
+        .missao-card { background: var(--bg-tertiary); border: 1px solid var(--border-color); margin: 20px 0; padding: 20px; }
+        .missao-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .missao-nome { color: var(--accent-primary); font-size: 1.2rem; }
+        .missao-tipo { font-size: 11px; padding: 3px 8px; background: var(--bg-secondary); }
+        .objetivo-item { display: flex; align-items: center; gap: 10px; padding: 8px; border-bottom: 1px solid var(--border-color); }
+        .objetivo-check { width: 20px; height: 20px; border: 1px solid var(--border-color); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+        .objetivo-check.concluido { background: var(--success); border-color: var(--success); }
+        .progresso { height: 4px; background: var(--bg-primary); margin: 15px 0; }
+        .progresso-preenchido { height: 100%; background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)); width: 0%; }
+        .btn-missao { padding: 8px 20px; background: transparent; border: 1px solid var(--border-color); color: var(--text-primary); cursor: pointer; }
+        .btn-missao:hover { border-color: var(--accent-primary); }
     </style>
 </head>
 <body>
@@ -193,287 +35,110 @@
             <span class="terminal-status">CENTRAL DE MISSÕES</span>
         </div>
 
-        <h1 class="text-glow">MISSÕES</h1>
+        <h1 class="text-glow">⚔️ MISSÕES</h1>
         
         <div class="nav-bar">
             <a href="/cdd/">← TERMINAL</a>
             <a href="/cdd/perfil.html">PERFIL</a>
-            <a href="/cdd/estatisticas.html">ESTATÍSTICAS</a>
             <a href="#" class="active">MISSÕES</a>
+            <a href="/cdd/mapa/">MAPA</a>
         </div>
 
-        <div class="missoes-container">
-            <div class="jornada-header">
-                <div class="jornada-titulo">⚔️ JORNADA DO ARQUIVISTA</div>
-                <div class="jornada-progresso">
-                    <span style="color: var(--text-tertiary);">PROGRESSO: </span>
-                    <span style="color: var(--accent-primary);" id="progresso-jornada">0/8</span>
-                </div>
-            </div>
-
-            <div class="filtros-missao">
-                <div class="filtro ativo" onclick="filtrarMissoes('todas')">TODAS</div>
-                <div class="filtro" onclick="filtrarMissoes('principal')">PRINCIPAIS</div>
-                <div class="filtro" onclick="filtrarMissoes('secundaria')">SECUNDÁRIAS</div>
-                <div class="filtro" onclick="filtrarMissoes('diaria')">DIÁRIAS</div>
-            </div>
-
-            <div id="lista-missoes">
-                <!-- Missão 1 - Principal -->
-                <div class="missao-card" data-tipo="principal" id="missao1">
-                    <div class="missao-header">
-                        <div class="missao-nome">
-                            <span>📜</span> O PRIMEIRO FRAGMENTO
-                        </div>
-                        <span class="missao-tipo">PRINCIPAL</span>
-                    </div>
-                    <div class="missao-desc">
-                        Sua jornada começa aqui. Explore o módulo de História para encontrar o primeiro fragmento de memória do CDD 3001.
-                    </div>
-                    
-                    <div class="missao-objetivos">
-                        <div class="objetivo-item" data-objetivo="historia1">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Visitar o módulo História</span>
-                            <span class="objetivo-xp">+50 XP</span>
-                        </div>
-                        <div class="objetivo-item" data-objetivo="historia2">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Encontrar 3 memórias</span>
-                            <span class="objetivo-xp">+75 XP</span>
-                        </div>
-                    </div>
-
-                    <div class="progresso">
-                        <div class="progresso-preenchido" style="width: 0%" id="progresso1"></div>
-                    </div>
-
-                    <div class="missao-footer">
-                        <span class="missao-status status-disponivel">DISPONÍVEL</span>
-                        <div>
-                            <span class="missao-recompensa">🏆 +200 XP • Item Misterioso</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Missão 2 - Principal -->
-                <div class="missao-card" data-tipo="principal" id="missao2">
-                    <div class="missao-header">
-                        <div class="missao-nome">
-                            <span>🎬</span> IMAGENS DO PASSADO
-                        </div>
-                        <span class="missao-tipo">PRINCIPAL</span>
-                    </div>
-                    <div class="missao-desc">
-                        Os vídeos guardam segredos visuais. Decodifique as imagens para avançar.
-                    </div>
-                    
-                    <div class="missao-objetivos">
-                        <div class="objetivo-item" data-objetivo="video1">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Assistir ao teaser</span>
-                            <span class="objetivo-xp">+30 XP</span>
-                        </div>
-                        <div class="objetivo-item" data-objetivo="video2">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Encontrar 2 fragmentos visuais</span>
-                            <span class="objetivo-xp">+60 XP</span>
-                        </div>
-                    </div>
-
-                    <div class="progresso">
-                        <div class="progresso-preenchido" style="width: 0%" id="progresso2"></div>
-                    </div>
-
-                    <div class="missao-footer">
-                        <span class="missao-status status-disponivel">DISPONÍVEL</span>
-                        <div>
-                            <span class="missao-recompensa">🏆 +150 XP • Frame Secreto</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Missão 3 - Secundária -->
-                <div class="missao-card" data-tipo="secundaria" id="missao3">
-                    <div class="missao-header">
-                        <div class="missao-nome">
-                            <span>🎨</span> GALERIA PERDIDA
-                        </div>
-                        <span class="missao-tipo">SECUNDÁRIA</span>
-                    </div>
-                    <div class="missao-desc">
-                        Colecione todas as concept arts espalhadas pelos módulos.
-                    </div>
-                    
-                    <div class="missao-objetivos">
-                        <div class="objetivo-item" data-objetivo="arte1">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Encontrar 5 artes</span>
-                            <span class="objetivo-xp">+40 XP</span>
-                        </div>
-                        <div class="objetivo-item" data-objetivo="arte2">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Encontrar 8 artes</span>
-                            <span class="objetivo-xp">+60 XP</span>
-                        </div>
-                    </div>
-
-                    <div class="progresso">
-                        <div class="progresso-preenchido" style="width: 0%" id="progresso3"></div>
-                    </div>
-
-                    <div class="missao-footer">
-                        <span class="missao-status status-disponivel">DISPONÍVEL</span>
-                        <div>
-                            <span class="missao-recompensa">🏆 +100 XP • Galeria Completa</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Missão 4 - Diária -->
-                <div class="missao-card" data-tipo="diaria" id="missao4">
-                    <div class="missao-header">
-                        <div class="missao-nome">
-                            <span>🎵</span> SINFONIA DIÁRIA
-                        </div>
-                        <span class="missao-tipo">DIÁRIA</span>
-                    </div>
-                    <div class="missao-desc">
-                        Ouça as faixas do módulo Música e encontre o easter egg escondido.
-                    </div>
-                    
-                    <div class="missao-objetivos">
-                        <div class="objetivo-item" data-objetivo="musica1">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Ouvir 3 faixas</span>
-                            <span class="objetivo-xp">+25 XP</span>
-                        </div>
-                        <div class="objetivo-item" data-objetivo="musica2">
-                            <div class="objetivo-check" onclick="toggleObjetivo(this)">✓</div>
-                            <span class="objetivo-texto">Encontrar faixa secreta</span>
-                            <span class="objetivo-xp">+50 XP</span>
-                        </div>
-                    </div>
-
-                    <div class="progresso">
-                        <div class="progresso-preenchido" style="width: 0%" id="progresso4"></div>
-                    </div>
-
-                    <div class="missao-footer">
-                        <span class="missao-status status-disponivel">DISPONÍVEL</span>
-                        <div>
-                            <span class="missao-recompensa">🏆 +75 XP • Reset amanhã</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="missoes-container" id="missoes-container">
+            <!-- Missões serão inseridas via JS -->
         </div>
     </div>
 
     <script src="/cdd/assets/js/rpg-system.js"></script>
     <script>
-        // Sistema de missões
-        let missoes = {
-            missao1: { progresso: 0, total: 2, concluida: false },
-            missao2: { progresso: 0, total: 2, concluida: false },
-            missao3: { progresso: 0, total: 2, concluida: false },
-            missao4: { progresso: 0, total: 2, concluida: false }
-        };
+        const missoes = [
+            {
+                id: 1,
+                nome: '📜 O Primeiro Fragmento',
+                tipo: 'PRINCIPAL',
+                desc: 'Explore o módulo História',
+                objetivos: [
+                    { texto: 'Visitar História', xp: 50, feito: false },
+                    { texto: 'Encontrar 3 memórias', xp: 75, feito: false }
+                ],
+                recompensa: 200
+            },
+            {
+                id: 2,
+                nome: '🎬 Imagens do Passado',
+                tipo: 'PRINCIPAL',
+                desc: 'Decodifique os vídeos',
+                objetivos: [
+                    { texto: 'Assistir ao teaser', xp: 30, feito: false },
+                    { texto: 'Encontrar 2 fragmentos', xp: 60, feito: false }
+                ],
+                recompensa: 150
+            },
+            {
+                id: 3,
+                nome: '🎨 Galeria Perdida',
+                tipo: 'SECUNDÁRIA',
+                desc: 'Colecione todas as artes',
+                objetivos: [
+                    { texto: 'Encontrar 5 artes', xp: 40, feito: false },
+                    { texto: 'Encontrar 8 artes', xp: 60, feito: false }
+                ],
+                recompensa: 100
+            }
+        ];
 
-        function toggleObjetivo(elemento) {
-            const objetivo = elemento.closest('.objetivo-item');
-            const missaoCard = objetivo.closest('.missao-card');
-            const missaoId = missaoCard.id;
+        function renderizarMissoes() {
+            const container = document.getElementById('missoes-container');
+            container.innerHTML = missoes.map(m => `
+                <div class="missao-card" id="missao-${m.id}">
+                    <div class="missao-header">
+                        <span class="missao-nome">${m.nome}</span>
+                        <span class="missao-tipo">${m.tipo}</span>
+                    </div>
+                    <div class="missao-desc">${m.desc}</div>
+                    <div class="missao-objetivos">
+                        ${m.objetivos.map((obj, i) => `
+                            <div class="objetivo-item">
+                                <div class="objetivo-check" onclick="toggleObjetivo(${m.id}, ${i}, this)">✓</div>
+                                <span class="objetivo-texto">${obj.texto}</span>
+                                <span class="objetivo-xp">+${obj.xp} XP</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="progresso">
+                        <div class="progresso-preenchido" id="progresso-${m.id}" style="width: 0%"></div>
+                    </div>
+                    <div class="missao-footer">
+                        <span>Recompensa: +${m.recompensa} XP</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.toggleObjetivo = function(missaoId, objIndex, elemento) {
+            const missao = missoes.find(m => m.id === missaoId);
+            const objetivo = missao.objetivos[objIndex];
             
-            if (!elemento.classList.contains('concluido')) {
+            if (!objetivo.feito) {
+                objetivo.feito = true;
                 elemento.classList.add('concluido');
                 elemento.innerHTML = '✓';
-                missoes[missaoId].progresso++;
+                rpg.ganharXP(objetivo.xp, 'missão');
                 
-                // Ganhar XP
-                const xpText = objetivo.querySelector('.objetivo-xp').textContent;
-                const xp = parseInt(xpText.replace('+', '').replace(' XP', ''));
-                rpg.ganharXP(xp, 'missao');
-                
-                // Log
-                document.getElementById('consoleLog').innerHTML = `🎯 Objetivo concluído! +${xp} XP<br>` + document.getElementById('consoleLog').innerHTML;
-            } else {
-                elemento.classList.remove('concluído');
-                elemento.innerHTML = '';
-                missoes[missaoId].progresso--;
-            }
-            
-            // Atualizar progresso
-            const percentual = (missoes[missaoId].progresso / missoes[missaoId].total) * 100;
-            const barra = missaoCard.querySelector('.progresso-preenchido');
-            barra.style.width = percentual + '%';
-            
-            // Verificar missão completa
-            if (missoes[missaoId].progresso === missoes[missaoId].total && !missoes[missaoId].concluida) {
-                missoes[missaoId].concluida = true;
-                missaoCard.classList.add('completa');
-                missaoCard.querySelector('.missao-status').textContent = 'COMPLETA';
-                missaoCard.querySelector('.missao-status').className = 'missao-status status-completa';
-                
-                // Ganhar recompensa final
-                const recompensaText = missaoCard.querySelector('.missao-recompensa').textContent;
-                const xpFinal = parseInt(recompensaText.match(/\d+/)[0]);
-                rpg.ganharXP(xpFinal, 'missao_completa');
-                
-                rpg.log(`🏆 MISSÃO COMPLETA: ${missaoCard.querySelector('.missao-nome').textContent.trim()}`);
-            }
-            
-            // Salvar progresso
-            localStorage.setItem('cdd3001_missoes', JSON.stringify(missoes));
-        }
-
-        function filtrarMissoes(tipo) {
-            document.querySelectorAll('.filtro').forEach(f => f.classList.remove('ativo'));
-            event.target.classList.add('ativo');
-            
-            document.querySelectorAll('.missao-card').forEach(card => {
-                if (tipo === 'todas' || card.dataset.tipo === tipo) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
+                // Verificar se todos objetivos foram concluídos
+                const todosFeitos = missao.objetivos.every(obj => obj.feito);
+                if (todosFeitos) {
+                    rpg.ganharXP(missao.recompensa, 'missão completa');
+                    rpg.notificar('⚔️ MISSÃO COMPLETA!', missao.nome, 'var(--success)');
                 }
-            });
-        }
-
-        // Carregar progresso salvo
-        window.onload = function() {
-            const saved = localStorage.getItem('cdd3001_missoes');
-            if (saved) {
-                missoes = JSON.parse(saved);
-                // Reaplicar estados visuais
-                for (let [id, data] of Object.entries(missoes)) {
-                    const missao = document.getElementById(id);
-                    if (missao) {
-                        const objetivos = missao.querySelectorAll('.objetivo-check');
-                        for (let i = 0; i < data.progresso; i++) {
-                            if (objetivos[i]) {
-                                objetivos[i].classList.add('concluido');
-                                objetivos[i].innerHTML = '✓';
-                            }
-                        }
-                        
-                        const percentual = (data.progresso / data.total) * 100;
-                        const barra = missao.querySelector('.progresso-preenchido');
-                        barra.style.width = percentual + '%';
-                        
-                        if (data.concluida) {
-                            missao.classList.add('completa');
-                            missao.querySelector('.missao-status').textContent = 'COMPLETA';
-                            missao.querySelector('.missao-status').className = 'missao-status status-completa';
-                        }
-                    }
-                }
+                
+                // Atualizar barra de progresso
+                const percent = (missao.objetivos.filter(obj => obj.feito).length / missao.objetivos.length) * 100;
+                document.getElementById(`progresso-${missaoId}`).style.width = percent + '%';
             }
-            
-            // Atualizar contador de jornada
-            const completas = Object.values(missoes).filter(m => m.concluida).length;
-            document.getElementById('progresso-jornada').textContent = `${completas}/4`;
         };
+
+        renderizarMissoes();
     </script>
 </body>
 </html>
