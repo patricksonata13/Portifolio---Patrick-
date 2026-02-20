@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • Missões</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        .missoes-container {
+            max-width: 800px;
+            margin: 40px auto;
+        }
+        
+        .missao-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            margin: 15px 0;
+            padding: 20px;
+        }
+        
+        .missao-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .missao-nome {
+            color: var(--accent-primary);
+            font-size: 1.2rem;
+        }
+        
+        .missao-recompensa {
+            color: var(--accent-secondary);
+            font-size: 12px;
+        }
+        
+        .missao-desc {
+            color: var(--text-secondary);
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .progresso {
+            height: 4px;
+            background: var(--bg-primary);
+            margin: 15px 0 5px;
+        }
+        
+        .progresso-preenchido {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+        
+        .missao-status {
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        
+        .status-ativo { color: var(--success); }
+        .status-disponivel { color: var(--accent-primary); }
+        .status-completo { color: var(--text-tertiary); }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-path">~/cdd-3001/missoes</span>
+            <span class="terminal-status">OBJETIVOS</span>
+        </div>
+
+        <h1 class="text-glow">MISSÕES</h1>
+        
+        <div class="nav-bar">
+            <a href="/cdd/">← VOLTAR</a>
+            <a href="#" class="active">ATIVAS</a>
+            <a href="#">COMPLETAS</a>
+            <a href="#">DIÁRIAS</a>
+        </div>
+
+        <div class="missoes-container">
+            <div class="missao-card">
+                <div class="missao-header">
+                    <span class="missao-nome">📖 DECIFRAR O ROTEIRO</span>
+                    <span class="missao-recompensa">+150 XP</span>
+                </div>
+                <div class="missao-desc">
+                    Explorar o módulo de roteiro e encontrar as 12 páginas perdidas.
+                </div>
+                <div class="progresso">
+                    <div class="progresso-preenchido" style="width: 40%"></div>
+                </div>
+                <div class="flex justify-between">
+                    <span class="missao-status status-ativo">EM ANDAMENTO • 5/12</span>
+                    <span class="text-tertiary">Missão principal</span>
+                </div>
+            </div>
+
+            <div class="missao-card">
+                <div class="missao-header">
+                    <span class="missao-nome">🎨 COLECIONAR ARTES</span>
+                    <span class="missao-recompensa">+75 XP</span>
+                </div>
+                <div class="missao-desc">
+                    Visitar a galeria e encontrar todas as concept arts.
+                </div>
+                <div class="progresso">
+                    <div class="progresso-preenchido" style="width: 60%"></div>
+                </div>
+                <div class="flex justify-between">
+                    <span class="missao-status status-ativo">EM ANDAMENTO • 3/5</span>
+                    <span class="text-tertiary">Secundária</span>
+                </div>
+            </div>
+
+            <div class="missao-card">
+                <div class="missao-header">
+                    <span class="missao-nome">🎵 DECODIFICAR TRILHA</span>
+                    <span class="missao-recompensa">+100 XP</span>
+                </div>
+                <div class="missao-desc">
+                    Ouvir todas as faixas e encontrar o easter egg escondido.
+                </div>
+                <div class="progresso">
+                    <div class="progresso-preenchido" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between">
+                    <span class="missao-status status-disponivel">DISPONÍVEL</span>
+                    <span class="text-tertiary">Diária</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
