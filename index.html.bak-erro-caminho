@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATRICK SONATA | Roteirista</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- SEO -->
+    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
+    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus, CDD 3001, Patika">
+    <meta name="author" content="Patrick Sonata">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="PATRICK SONATA | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta property="og:image" content="https://patricksonata.com.br/assets/images/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Logo P - Home -->
+    <a href="/" class="logo-p" title="Voltar ao início">
+        <svg viewBox="0 0 100 100" width="25" height="25">
+            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
+                  stroke="white" stroke-width="6" stroke-linecap="round" 
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    
+    <!-- MENU SUPERIOR -->
+    <nav class="nav-top-right">
+        <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
+        <button onclick="window.location.href='patika/index.html'">PATIKA</button>
+        <button onclick="window.location.href='aulas/index.html'">AULAS</button>
+        <button onclick="window.location.href='contato.html'">CONTATO</button>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="main-container">
+        <img src="assets/images/fotodeperfil.jpg" alt="Patrick Sonata" class="profile-img">
+        <h1>PATRICK SONATA</h1>
+        
+        <!-- ABAS INFERIORES -->
+        <div class="nav-bottom-center">
+            <button onclick="mostrarSobre()">SOBRE</button>
+            <button onclick="mostrarPerfil()">PERFIL</button>
+            <button onclick="mostrarTrabalho()">TRABALHO</button>
+        </div>
+    </div>
+
+    <!-- SEÇÃO SOBRE -->
+    <section id="secao-sobre" style="display: none; padding: 60px 20px; background: #d0cbc0; width: 100%;">
+        <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px;">
+            <div style="text-align: right; color: #999; margin-bottom: 50px;">1.</div>
+            <p style="font-weight: bold;">FADE IN:</p>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. CIDADE DE DEUS - RIO DE JANEIRO - DIA</div>
+                <p style="margin-left: 40px; line-height: 2;">PATRICK SONATA, 37 anos, cria da Cidade de Deus. Sua jornada artística começa na escola municipal Compositor Luiz Gonzaga. Descobre no humor e no teatro sua forma de expressão.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">EXT. PROJETOS SOCIAIS - CDD - DIA</div>
+                <p style="margin-left: 40px; line-height: 2;">Formado em projetos sociais na comunidade. Tem como mestre o saudoso CICO CASEIRA. Estuda palhaçaria clássica com Márcio Libar, João Carlos Artigos, Fábio e Teatro de Anônimo.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. COLETIVO BONOBANDO - NOITE</div>
+                <p style="margin-left: 40px; line-height: 2;">Integrante do COLETIVO BONOBANDO. Direção de Andriana Shineider e Lucas Oradovish.</p>
+                <p style="margin-left: 40px;">"CIDADE CORRERIA" — Um bando de atores invade o teatro e abre debate com a plateia.</p>
+                <p style="margin-left: 40px;">"JONGO MAMULENGO" — Teatro infantojuvenil com atores e bonecos de Mamulengo.</p>
+            </div>
+            <div style="margin: 30px 0;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">2018 - A VIRADA</div>
+                <p style="margin-left: 40px;">Selecionado para a oficina "A LÓGICA POR TRÁS DO HUMOR", com Maurício Rizzo. Uma bolsa que muda os rumos de sua carreira — do palco para a tela.</p>
+            </div>
+            <p style="font-weight: bold; text-align: center; margin: 40px 0;">FADE OUT.</p>
+            <p>Patrick Sonata • Cria da Cidade de Deus • 20 anos de estrada</p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO PERFIL -->
+    <section id="secao-perfil" style="display: none; padding: 60px 20px; background: #d0cbc0; width: 100%;">
+        <div style="max-width: 780px; margin: 0 auto; background: #f5f0e8; box-shadow: 0 8px 30px rgba(0,0,0,0.2); padding: 70px 60px;">
+            <div style="text-align: right; color: #999; margin-bottom: 50px;">1.</div>
+            <div style="margin-bottom: 40px;">
+                <div style="font-weight: bold; text-transform: uppercase; text-decoration: underline;">INT. ESCRITÓRIO DE CRIAÇÃO - NOITE</div>
+                <p style="margin-left: 40px;">Luz focada em uma mesa de trabalho. Pilhas de escaletas, livros de dramaturgia. 20 anos de estrada condensados em páginas.</p>
+            </div>
+            <div style="border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 30px;">
+                <div style="font-weight: bold; font-size: 1.1rem;">PATRICK SONATA</div>
+                <div style="color: #555;">Roteirista • Ator • Comediante</div>
+                <div style="color: #777;">37 anos • 20 anos de trajetória • Cria da Cidade de Deus</div>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">TV • STREAMING</div>
+                <p style="margin-left: 20px;">PABLO & LUISÃO — Roteirista Globoplay 2025 • Globo 2026</p>
+                <p style="margin-left: 20px;">ZORRA — Roteirista TV Globo • 2019–2021</p>
+                <p style="margin-left: 20px;">HUMOR NEGRO — Roteirista Multishow/Globoplay • 2023–2024</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">TEATRO</div>
+                <p style="margin-left: 20px;">PELADA – A HORA DA GAYMADA — Dramaturgo 2023</p>
+                <p style="margin-left: 20px;">CIDADE CORRERIA — Autor/Ator Bonobando</p>
+                <p style="margin-left: 20px;">JONGO MAMULENGO — Elenco Bonobando</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">FORMAÇÃO</div>
+                <p style="margin-left: 20px;">Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo</p>
+                <p style="margin-left: 20px;">Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)</p>
+                <p style="margin-left: 20px;">Teatro de Mamulengo e Tradições Populares</p>
+            </div>
+            <div style="margin-bottom: 35px;">
+                <div style="font-weight: bold; border-bottom: 1px solid #000; padding-bottom: 5px;">VISÃO</div>
+                <p style="margin-left: 40px; font-style: italic;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
+            </div>
+            <p style="font-weight: bold; text-align: center; margin: 40px 0;">CORTE PARA PRETO.</p>
+            <p>Patrick Sonata • Roteirista • ABRACI/SBAT</p>
+        </div>
+    </section>
+
+    <!-- PAINEL DE TRABALHO -->
+    <div id="painel-trabalho" class="side-panel">
+        <div class="close-btn" onclick="fecharTrabalho()">FECHAR [X]</div>
+        <h2 id="titulo-painel">TRABALHO</h2>
+        <div id="conteudo-painel">
+            <div class="submenu-buttons">
+                <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
+            </div>
+            <p style="margin-top: 30px; text-align: center; color: #aaa;">
+                Selecione PORTFÓLIO para ver os projetos realizados.
+            </p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        function mostrarSobre() {
+            document.getElementById('secao-perfil').style.display = 'none';
+            document.getElementById('painel-trabalho').classList.remove('active');
+            let sobre = document.getElementById('secao-sobre');
+            sobre.style.display = 'block';
+            sobre.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function mostrarPerfil() {
+            document.getElementById('secao-sobre').style.display = 'none';
+            document.getElementById('painel-trabalho').classList.remove('active');
+            let perfil = document.getElementById('secao-perfil');
+            perfil.style.display = 'block';
+            perfil.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function mostrarTrabalho() {
+            document.getElementById('secao-sobre').style.display = 'none';
+            document.getElementById('secao-perfil').style.display = 'none';
+            let painel = document.getElementById('painel-trabalho');
+            painel.classList.add('active');
+            document.getElementById('titulo-painel').innerText = 'TRABALHO';
+            document.getElementById('conteudo-painel').innerHTML = `
+                <div class="submenu-buttons">
+                    <button onclick="mostrarPortfolio()" class="submenu-btn">PORTFÓLIO</button>
+                </div>
+                <p style="margin-top: 30px; text-align: center; color: #aaa;">
+                    Selecione PORTFÓLIO para ver os projetos realizados.
+                </p>
+            `;
+        }
+        
+        function mostrarPortfolio() {
+            document.getElementById('titulo-painel').innerText = 'PORTFÓLIO DE PROJETOS';
+            document.getElementById('conteudo-painel').innerHTML = `
+                <div class="portfolio-grid">
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/pabloeluisao.webp" alt="Pablo e Luisão" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Pablo+e+Luisão'">
+                        <div class="portfolio-info">
+                            <h3>PABLO E LUISÃO</h3>
+                            <div class="portfolio-role">Roteirista</div>
+                            <p>Série Original Globoplay. Globoplay 2025 • Globo 2026.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/humornegro.webp" alt="Humor Negro" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Humor+Negro'">
+                        <div class="portfolio-info">
+                            <h3>HUMOR NEGRO</h3>
+                            <div class="portfolio-role">Roteirista</div>
+                            <p>Especial e Série - Multishow/Globoplay. 2023-2024.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/cidadecorreriapeca.webp" alt="Cidade Correria" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Cidade+Correria'">
+                        <div class="portfolio-info">
+                            <h3>CIDADE CORRERIA</h3>
+                            <div class="portfolio-role">Autor e Ator</div>
+                            <p>Teatro e Documentário. Coletivo Bonobando.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/pelada.webp" alt="Pelada" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Pelada'">
+                        <div class="portfolio-info">
+                            <h3>PELADA</h3>
+                            <div class="portfolio-role">Dramaturgo</div>
+                            <p>Espetáculo teatral. 2023.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/jongo.webp" alt="Jongo" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Jongo'">
+                        <div class="portfolio-info">
+                            <h3>JONGO MAMULENGO</h3>
+                            <div class="portfolio-role">Elenco</div>
+                            <p>Teatro infantojuvenil com bonecos de Mamulengo.</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-card">
+                        <img src="assets/images/works/zorralogo.jpg" alt="Zorra" 
+                             onerror="this.src='https://via.placeholder.com/400x400?text=Zorra'">
+                        <div class="portfolio-info">
+                            <h3>ZORRA</h3>
+                            <div class="portfolio-role">Roteirista</div>
+                            <p>Programa de Humor - TV Globo. 2019-2021.</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function fecharTrabalho() {
+            document.getElementById('painel-trabalho').classList.remove('active');
+        }
+    </script>
+    <script src="assets/js/gestos.js"></script></body>
+</html>

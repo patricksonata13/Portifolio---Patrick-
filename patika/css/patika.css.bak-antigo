@@ -1,0 +1,416 @@
+/* ============================================ */
+/* PATIKA · EDITOR PROFISSIONAL DE ROTEIRO     */
+/* Design isolado - Não afeta outras abas      */
+/* ============================================ */
+
+:root {
+    --verde-principal: #3a5e3a;
+    --verde-claro: #a8c3a0;
+    --verde-hover: #8aad80;
+    --areia: #f5f0e8;
+    --areia-escura: #e8dfd2;
+    --texto-principal: #1d1d1f;
+    --texto-secundario: #5a5a5a;
+    --borda: #d4c8b8;
+}
+
+body {
+    background: var(--areia);
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Botão voltar - único link com o site principal */
+.voltar {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: var(--texto-principal);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'Courier New', monospace;
+    z-index: 1000;
+    transition: background 0.3s;
+}
+
+.voltar:hover {
+    background: #333;
+}
+
+/* Container principal */
+.patika-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Header */
+.patika-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--verde-claro);
+}
+
+.patika-header h1 {
+    font-size: 3rem;
+    color: var(--verde-principal);
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.patika-subtitle {
+    color: var(--texto-secundario);
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.projeto-info {
+    background: white;
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: 1px solid var(--borda);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#projetoNome {
+    font-weight: 600;
+    color: var(--verde-principal);
+}
+
+.salvo-status {
+    color: #8aad80;
+    font-size: 0.9rem;
+}
+
+/* Grid principal - 3 colunas */
+.patika-grid {
+    display: grid;
+    grid-template-columns: 280px 1fr 280px;
+    gap: 30px;
+    min-height: 700px;
+}
+
+/* Colunas */
+.patika-coluna {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    display: flex;
+    flex-direction: column;
+}
+
+.patika-coluna h2 {
+    color: var(--verde-principal);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--verde-claro);
+    letter-spacing: 0.5px;
+}
+
+.patika-coluna h3 {
+    color: var(--texto-principal);
+    font-size: 1rem;
+    margin: 20px 0 10px;
+}
+
+/* ========== COLUNA ESQUERDA - ETAPAS ========== */
+.etapas-lista {
+    flex: 1;
+    margin-bottom: 30px;
+}
+
+.etapa-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.etapa-item:hover {
+    background: var(--areia);
+    border-color: var(--verde-claro);
+}
+
+.etapa-item.ativa {
+    background: var(--verde-claro);
+    color: white;
+}
+
+.etapa-numero {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    width: 40px;
+    color: var(--texto-secundario);
+}
+
+.etapa-item.ativa .etapa-numero {
+    color: white;
+}
+
+.etapa-nome {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Lista de projetos */
+.projetos-sidebar {
+    border-top: 1px solid var(--borda);
+    padding-top: 20px;
+}
+
+.projetos-lista {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.projeto-item {
+    padding: 10px;
+    border-bottom: 1px solid var(--areia);
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.9rem;
+}
+
+.projeto-item:hover {
+    background: var(--areia);
+}
+
+.projeto-item.ativo {
+    border-left: 3px solid var(--verde-claro);
+    background: var(--areia);
+}
+
+/* ========== COLUNA CENTRAL - EDITOR ========== */
+.editor {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+
+.editor-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--borda);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+}
+
+.editor-header h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.editor-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.patika-btn.icone {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--texto-secundario);
+    font-size: 1.2rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.patika-btn.icone:hover {
+    background: var(--areia);
+    color: var(--verde-principal);
+    border-color: var(--verde-claro);
+}
+
+/* Área de edição */
+.editor-conteudo {
+    flex: 1;
+    padding: 25px;
+    background: var(--areia);
+}
+
+#conteudoTexto {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    padding: 20px;
+    border: none;
+    background: white;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--texto-principal);
+    resize: none;
+    border-radius: 8px;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.02);
+}
+
+#conteudoTexto:focus {
+    outline: 2px solid var(--verde-claro);
+}
+
+.editor-footer {
+    padding: 15px 25px;
+    border-top: 1px solid var(--borda);
+    display: flex;
+    justify-content: space-between;
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+    background: white;
+}
+
+/* ========== COLUNA DIREITA - FERRAMENTAS ========== */
+.atalhos-lista {
+    margin-bottom: 30px;
+}
+
+.atalho-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.atalho-item:hover {
+    background: var(--areia);
+}
+
+.atalho-tecla {
+    font-family: 'Courier New', monospace;
+    color: var(--verde-claro);
+    width: 30px;
+    font-size: 1.1rem;
+}
+
+.atalho-desc {
+    font-size: 0.95rem;
+}
+
+/* Ferramentas */
+.ferramentas-box, .dicas-box, .estatisticas-box {
+    background: var(--areia);
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 20px;
+}
+
+.ferramentas-box h3, .dicas-box h3, .estatisticas-box h3 {
+    color: var(--verde-principal);
+    margin: 0 0 15px;
+    font-size: 1rem;
+}
+
+.ferramenta-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.ferramenta-item span {
+    font-size: 0.9rem;
+}
+
+.ferramenta-btn {
+    background: var(--verde-claro);
+    color: white;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+}
+
+.ferramenta-btn:hover {
+    background: var(--verde-hover);
+}
+
+.dicas-box p {
+    color: var(--texto-secundario);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.estatistica-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+/* Botões principais */
+.patika-btn {
+    background: var(--verde-claro);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+    font-size: 0.95rem;
+}
+
+.patika-btn:hover {
+    background: var(--verde-hover);
+    transform: translateY(-1px);
+}
+
+.patika-btn.secundario {
+    background: white;
+    color: var(--verde-principal);
+    border: 1px solid var(--verde-claro);
+}
+
+.patika-btn.secundario:hover {
+    background: var(--areia);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .patika-grid {
+        grid-template-columns: 250px 1fr 250px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .patika-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .patika-coluna {
+        margin-bottom: 20px;
+    }
+}

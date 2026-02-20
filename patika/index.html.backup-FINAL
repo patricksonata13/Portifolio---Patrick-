@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PATIKA - Editor de Roteiro</title>
+    <link rel="stylesheet" href="css/patika.css">
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .patika-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .patika-header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Abas principais */
+        .nav-tabs {
+            display: flex;
+            background: #34495e;
+            padding: 0 20px;
+        }
+        
+        .tab-item {
+            padding: 12px 24px;
+            color: white;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .tab-item.active {
+            background: #00A86B;
+            color: white;
+        }
+        
+        /* Conteúdo das abas */
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Layout da aba Roteiro */
+        .roteiro-layout {
+            display: flex;
+            gap: 20px;
+        }
+        
+        /* Painel esquerdo - Cenas */
+        .painel-cenas {
+            width: 250px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        #lista-cenas {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .cena-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            border-left: 3px solid #00A86B;
+            transition: all 0.2s;
+        }
+        
+        .cena-item:hover {
+            background: #00A86B;
+            color: white;
+        }
+        
+        /* Editor central */
+        .editor-central {
+            flex: 1;
+        }
+        
+        #roteiro-editor {
+            min-height: 600px;
+            padding: 30px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            font-size: 14px;
+            outline: none;
+            overflow-y: auto;
+        }
+        
+        /* Barra de ferramentas */
+        .toolbar {
+            margin-bottom: 15px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        
+        .toolbar button {
+            padding: 8px 12px;
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+        
+        .toolbar button:hover {
+            background: #00A86B;
+            color: white;
+        }
+        
+        /* Painel direito - Estatísticas */
+        .painel-estatisticas {
+            width: 250px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Formatação do roteiro */
+        .patika-cena {
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 24px;
+            color: #00A86B;
+        }
+        
+        .patika-personagem {
+            margin-left: 200px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .patika-dialogo {
+            margin-left: 140px;
+            margin-right: 140px;
+        }
+        
+        .patika-acao {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="patika-container">
+        <!-- HEADER -->
+        <div class="patika-header">
+            <h1>PATIKA</h1>
+            <div>
+                <span id="projetoNome">projeto_sem_título</span>
+                <span style="margin-left: 15px; color: #00A86B;">●</span>
+            </div>
+        </div>
+        
+        <!-- ABAS PRINCIPAIS -->
+        <div class="nav-tabs">
+            <button class="tab-item active" onclick="mudarAba('roteiro')">📝 ROTEIRO</button>
+            <button class="tab-item" onclick="mudarAba('sinopse')">📋 SINOPSE</button>
+            <button class="tab-item" onclick="mudarAba('argumento')">📄 ARGUMENTO</button>
+            <button class="tab-item" onclick="mudarAba('escaleta')">📊 ESCALETA</button>
+            <button class="tab-item" onclick="mudarAba('personagens')">👥 PERSONAGENS</button>
+        </div>
+        
+        <!-- CONTEÚDO DAS ABAS -->
+        
+        <!-- ABA ROTEIRO (ATIVA POR PADRÃO) -->
+        <div id="roteiro-tab-content" class="tab-content active">
+            <h2 style="margin-top: 0;">Editor de Roteiro</h2>
+            
+            <div class="roteiro-layout">
+                <!-- PAINEL ESQUERDO - CENAS -->
+                <div class="painel-cenas">
+                    <h3 style="margin-top: 0; color: #00A86B;">📋 CENAS</h3>
+                    <div id="lista-cenas">
+                        <!-- Será preenchido pelo JavaScript -->
+                    </div>
+                    <button onclick="inserirCena()" style="width:100%; margin-top:15px; padding:10px; background:#00A86B; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        + Nova Cena
+                    </button>
+                </div>
+                
+                <!-- EDITOR CENTRAL -->
+                <div class="editor-central">
+                    <!-- BARRA DE FERRAMENTAS -->
+                    <div class="toolbar">
+                        <button onclick="inserirElemento('cena')">🎬 Cena</button>
+                        <button onclick="inserirElemento('personagem')">👤 Personagem</button>
+                        <button onclick="inserirElemento('acao')">📝 Ação</button>
+                        <button onclick="inserirElemento('dialogo')">💬 Diálogo</button>
+                        <button onclick="inserirElemento('transicao')">⏩ Transição</button>
+                        <span style="flex:1;"></span>
+                        <button onclick="salvarVersao()">💾 Salvar</button>
+                        <button onclick="exportarRoteiro()">📤 Exportar</button>
+                        <button onclick="toggleModoFoco()">🎯 Foco</button>
+                        <button onclick="toggleModoEscuro()">🌙 Escuro</button>
+                    </div>
+                    
+                    <!-- EDITOR PRINCIPAL -->
+                    <div id="roteiro-editor" contenteditable="true">
+                        <div class="patika-cena">1. INT. SALA DE ESTAR - DIA</div>
+                        <div class="patika-acao">João está sentado no sofá, pensativo. A luz da manhã entra pela janela.</div>
+                        <div class="patika-personagem">JOÃO</div>
+                        <div class="patika-dialogo">Preciso terminar este roteiro hoje.</div>
+                        <div class="patika-acao">Maria entra na sala.</div>
+                        <div class="patika-personagem">MARIA</div>
+                        <div class="patika-dialogo">Como está o progresso?</div>
+                    </div>
+                    
+                    <!-- STATUS BAR -->
+                    <div style="display: flex; justify-content: space-between; margin-top: 10px; padding: 8px; background: #f0f0f0; border-radius: 4px; font-size: 12px;">
+                        <span>Linhas: <span id="total-linhas">0</span></span>
+                        <span>Palavras: <span id="total-palavras">0</span></span>
+                        <span>Páginas: <span id="total-paginas">0</span></span>
+                        <span>Tempo: <span id="tempo-estimado">0</span> min</span>
+                    </div>
+                </div>
+                
+                <!-- PAINEL DIREITO - ESTATÍSTICAS -->
+                <div class="painel-estatisticas">
+                    <h3 style="margin-top: 0; color: #00A86B;">📊 ESTATÍSTICAS</h3>
+                    
+                    <div class="stat-item">
+                        <span>Total Cenas:</span>
+                        <span id="stat-cenas">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Personagens:</span>
+                        <span id="stat-personagens">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Diálogos:</span>
+                        <span id="stat-dialogos">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span>Falas:</span>
+                        <span id="stat-falas">0</span>
+                    </div>
+                    
+                    <h3 style="color: #00A86B; margin-top: 20px;">🔄 VERSÕES</h3>
+                    <div id="lista-versoes" style="max-height: 200px; overflow-y: auto;">
+                        <!-- Será preenchido pelo JavaScript -->
+                    </div>
+                    
+                    <button onclick="fazerBackup()" style="width:100%; margin-top:15px; padding:8px; background:#333; color:white; border:none; border-radius:5px; cursor:pointer;">
+                        💾 Backup Completo
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ABA SINOPSE -->
+        <div id="sinopse-tab-content" class="tab-content">
+            <h2>Sinopse</h2>
+            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Escreva a sinopse da sua história aqui..."></textarea>
+        </div>
+        
+        <!-- ABA ARGUMENTO -->
+        <div id="argumento-tab-content" class="tab-content">
+            <h2>Argumento</h2>
+            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Desenvolva o argumento completo..."></textarea>
+        </div>
+        
+        <!-- ABA ESCALETA -->
+        <div id="escaleta-tab-content" class="tab-content">
+            <h2>Escaleta</h2>
+            <textarea style="width:100%; min-height:400px; padding:15px; border:1px solid #ddd; border-radius:5px;" placeholder="Liste as cenas em ordem..."></textarea>
+        </div>
+        
+        <!-- ABA PERSONAGENS -->
+        <div id="personagens-tab-content" class="tab-content">
+            <h2>Personagens</h2>
+            <div style="display: flex; gap: 20px;">
+                <div style="flex:1;">
+                    <input type="text" id="novo-personagem" placeholder="Nome do personagem" style="width:70%; padding:8px;">
+                    <button onclick="adicionarPersonagem()" style="padding:8px 15px; background:#00A86B; color:white; border:none; border-radius:5px;">Adicionar</button>
+                </div>
+            </div>
+            <div id="lista-personagens" style="margin-top:20px;">
+                <!-- Lista de personagens -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/patika.js"></script>
+    <script>
+        // Função para mudar de aba
+        function mudarAba(aba) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            document.getElementById(aba + '-tab-content').classList.add('active');
+            event.target.classList.add('active');
+        }
+        
+        // Funções básicas
+        function adicionarPersonagem() {
+            const nome = document.getElementById('novo-personagem').value;
+            if (nome) {
+                const lista = document.getElementById('lista-personagens');
+                const div = document.createElement('div');
+                div.style.padding = '10px';
+                div.style.background = '#f0f0f0';
+                div.style.margin = '5px 0';
+                div.style.borderRadius = '5px';
+                div.innerText = nome;
+                lista.appendChild(div);
+                document.getElementById('novo-personagem').value = '';
+            }
+        }
+        
+        function fazerBackup() {
+            alert('Backup realizado com sucesso!');
+        }
+    </script>
+</body>
+</html>
