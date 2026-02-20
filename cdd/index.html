@@ -473,3 +473,26 @@
     </script>
 </body>
 </html>
+
+    <!-- SISTEMA RPG -->
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script>
+        // Adaptar a função abrirModulo existente
+        function abrirModulo(modulo) {
+            rpg.abrirModulo(modulo);
+        }
+        
+        // Adicionar atalho do perfil
+        document.addEventListener('keydown', function(e) {
+            // Pressione 'P' para abrir perfil
+            if (e.key === 'p' || e.key === 'P') {
+                window.location.href = '/cdd/perfil.html';
+            }
+            // Pressione 'I' para inventário
+            if (e.key === 'i' || e.key === 'I') {
+                window.location.href = '/cdd/inventario/';
+            }
+        });
+    </script>
+</body>
+</html>
