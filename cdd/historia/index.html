@@ -3,106 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDD 3001 • História</title>
+    <title>CDD 3001 • História • Cidade de Deus</title>
     <link rel="stylesheet" href="/cdd/assets/css/global.css">
     <style>
         body { background: #0a0c0e; color: #e2e8f0; font-family: 'Courier New', monospace; padding: 20px; }
-        .terminal { max-width: 900px; margin: 0 auto; background: #0f1215; border: 2px solid #ffd966; padding: 20px; }
+        .terminal { max-width: 1000px; margin: 0 auto; background: #0f1215; border: 2px solid #ffd966; padding: 20px; }
         h1 { color: #ffd966; border-left: 4px solid #b3a0ff; padding-left: 20px; }
         .nav-bar { margin: 20px 0; padding: 10px 0; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
         .nav-bar a { color: #64748b; text-decoration: none; margin-right: 20px; }
+        
+        .header-local {
+            background: linear-gradient(135deg, #0a0c0e, #1a1f24);
+            border: 2px solid #ffd966;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-local::before {
+            content: "🏙️";
+            position: absolute;
+            left: -20px;
+            top: -20px;
+            font-size: 150px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .header-local h2 {
+            color: #ffd966;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(255, 217, 102, 0.5);
+        }
+        
+        .header-local p {
+            color: #b3a0ff;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+        
         .timeline { position: relative; padding: 20px 0; }
         .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 2px; background: #ffd966; }
-        .evento { margin: 30px 0; padding-left: 50px; position: relative; }
+        .evento { margin: 40px 0; padding-left: 50px; position: relative; }
         .evento::before { content: '●'; position: absolute; left: 12px; color: #ffd966; font-size: 20px; }
-        .ano { color: #b3a0ff; font-size: 1.2rem; font-weight: bold; }
-        .titulo { color: #ffd966; font-size: 1.1rem; margin: 5px 0; }
+        .ano { color: #b3a0ff; font-size: 1.4rem; font-weight: bold; }
+        .titulo { color: #ffd966; font-size: 1.3rem; margin: 10px 0; }
         .desc { color: #94a3b8; line-height: 1.6; }
-        .personagem { background: #14181c; border: 1px solid #1e293b; padding: 15px; margin: 15px 0; display: flex; gap: 15px; }
-        .personagem-icon { font-size: 40px; }
-        .memoria { display: inline-block; background: #1e293b; color: #ffd966; padding: 2px 8px; margin: 2px; font-size: 12px; }
+        
+        .pandemia-box {
+            background: #14181c;
+            border: 1px solid #ff3333;
+            padding: 25px;
+            margin: 30px 0;
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.2);
+        }
+        
+        .pandemia-box h3 {
+            color: #ff6666;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .monstro-card {
+            background: #1a1f24;
+            border: 1px solid #ff6666;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .monstro-icon {
+            font-size: 60px;
+            filter: drop-shadow(0 0 10px #ff3333);
+        }
+        
+        .monstro-info h4 {
+            color: #ff6666;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .monstro-info p {
+            color: #94a3b8;
+        }
+        
+        .personagem-card {
+            background: #14181c;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            gap: 20px;
+            transition: all 0.3s;
+        }
+        
+        .personagem-card:hover {
+            border-color: #ffd966;
+            transform: translateX(10px);
+        }
+        
+        .personagem-icon { font-size: 50px; }
+        .personagem-nome { color: #ffd966; font-size: 1.3rem; font-weight: bold; }
+        .personagem-desc { color: #94a3b8; margin: 10px 0; }
+        .personagem-local { color: #b3a0ff; font-size: 0.9rem; }
+        
+        .mapa-local {
+            background: #14181c;
+            border: 1px solid #1e293b;
+            padding: 20px;
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        
+        .local-marcado {
+            color: #ffd966;
+            font-weight: bold;
+        }
+        
+        .memoria-badge {
+            display: inline-block;
+            background: #1e293b;
+            color: #ffd966;
+            padding: 2px 8px;
+            margin: 2px;
+            font-size: 12px;
+        }
     </style>
 </head>
 <body>
     <div class="terminal">
         <div class="terminal-header" style="background: #0f1215; padding: 8px; border-bottom: 1px solid #1e293b;">
-            <span class="terminal-path" style="color: #ffd966;">~/cdd-3001/historia</span>
-            <span class="terminal-status" style="color: #64748b;">+150 XP</span>
+            <span class="terminal-path">~/cdd-3001/historia</span>
+            <span class="terminal-status">+150 XP • RIO DE JANEIRO 3001</span>
         </div>
 
-        <h1>📜 HISTÓRIA • LINHA DO TEMPO</h1>
+        <h1>📜 HISTÓRIA • CIDADE DE DEUS 3001</h1>
         
         <div class="nav-bar">
             <a href="/cdd/">← TERMINAL</a>
             <a href="/cdd/perfil.html">PERFIL</a>
             <a href="#" class="active">HISTÓRIA</a>
-            <span style="color: #ffd966;">⏳ 3/10 memórias</span>
+            <span style="color: #b3a0ff;">⏳ 3/10 memórias</span>
         </div>
 
+        <!-- HEADER LOCAL -->
+        <div class="header-local">
+            <h2>🏙️ CIDADE DE DEUS • 3001</h2>
+            <p>A antiga comunidade do Rio de Janeiro agora é uma Zona de Resistência</p>
+        </div>
+
+        <!-- TIMELINE -->
         <div class="timeline">
             <div class="evento">
-                <div class="ano">2047 • ANO ZERO</div>
-                <div class="titulo">O Início do CDD 3001</div>
-                <div class="desc">O projeto CDD 3001 é concebido como um experimento transmídia, combinando narrativa, jogos e arte em um universo único. Os primeiros esboços são desenhados em um caderno Moleskine preto.</div>
-                <span class="memoria">🧠 MEMÓRIA 1/10</span>
+                <div class="ano">2057 • O INÍCIO</div>
+                <div class="titulo">A Pandemia Silenciosa</div>
+                <div class="desc">Uma pandemia desconhecida começa a se espalhar pelo Rio de Janeiro. Infectados gradualmente perdem a melanina, tornando-se completamente brancos, com olhos vermelhos e comportamento agressivo. O governo abandona as comunidades periféricas.</div>
+                <span class="memoria-badge">🧠 MEMÓRIA 1/10</span>
             </div>
 
             <div class="evento">
-                <div class="ano">2052 • PRIMEIRO PROTÓTIPO</div>
-                <div class="titulo">O Teaser Original</div>
-                <div class="desc">Primeiro teaser animado é criado usando técnicas de rotoscopia. A trilha sonora experimental é composta em um estúdio caseiro. O visual cyberpunk começa a tomar forma.</div>
-                <span class="memoria">🧠 MEMÓRIA 2/10</span>
+                <div class="ano">2078 • QUARENTENA</div>
+                <div class="titulo">O Isolamento da Cidade de Deus</div>
+                <div class="desc">A Cidade de Deus é isolada do resto da cidade. Muros são erguidos. Os moradores que não foram infectados organizam uma resistência para proteger o território. Nasce a "República da Cidade de Deus".</div>
+                <span class="memoria-badge">🧠 MEMÓRIA 2/10</span>
             </div>
 
             <div class="evento">
-                <div class="ano">2068 • EXPANSÃO</div>
-                <div class="titulo">O Universo se Expande</div>
-                <div class="desc">Mais de 20 personagens são criados, cada um com sua própria história de fundo. O roteiro atinge 200 páginas. A arte conceitual define o estilo visual único do CDD 3001.</div>
-                <span class="memoria">🧠 MEMÓRIA 3/10</span>
+                <div class="ano">2095 • OS BRANCOS</div>
+                <div class="titulo">A Evolução dos Infectados</div>
+                <div class="desc">Os infectados, agora chamados de "Brancos", evoluem. Desenvolvem força sobre-humana, sentidos aguçados e uma mente colmeia. Caçam em grupos e são atraídos pelo som e pelo calor humano.</div>
+                <span class="memoria-badge">🧠 MEMÓRIA 3/10</span>
+            </div>
+
+            <div class="evento">
+                <div class="ano">3001 • O PRESENTE</div>
+                <div class="titulo">A Última Resistência</div>
+                <div class="desc">Quase mil anos depois, a Cidade de Deus é uma das últimas comunidades resistentes do Rio de Janeiro. Cercada por Brancos, a sobrevivência depende de cada morador. As memórias do passado são a única arma contra o esquecimento.</div>
+                <span class="memoria-badge">🧠 MEMÓRIA 4/10</span>
             </div>
         </div>
 
-        <h2 style="color: #ffd966; margin-top: 40px;">👥 PERSONAGENS PRINCIPAIS</h2>
+        <!-- A PANDEMIA -->
+        <div class="pandemia-box">
+            <h3>☣️ A PANDEMIA DOS BRANCOS</h3>
+            <p style="color: #94a3b8; line-height: 1.6;">Conhecida como "Síndrome da Neve", a doença ataca a produção de melanina e degenera o córtex cerebral. Em 72 horas, o infectado perde completamente a cor da pele, cabelo e olhos. A personalidade se desfaz, restando apenas instinto de caça. Não há cura conhecida.</p>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px;">
+                <div style="background: #0a0c0e; padding: 15px; text-align: center; border: 1px solid #ff6666;">
+                    <div style="color: #ff6666; font-size: 2rem;">⚠️</div>
+                    <div style="color: #94a3b8;">Contágio por contato</div>
+                </div>
+                <div style="background: #0a0c0e; padding: 15px; text-align: center; border: 1px solid #ff6666;">
+                    <div style="color: #ff6666; font-size: 2rem;">⏱️</div>
+                    <div style="color: #94a3b8;">72h para transformação</div>
+                </div>
+                <div style="background: #0a0c0e; padding: 15px; text-align: center; border: 1px solid #ff6666;">
+                    <div style="color: #ff6666; font-size: 2rem;">🧠</div>
+                    <div style="color: #94a3b8;">Mente colmeia ativa</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- OS MONSTROS -->
+        <h2 style="color: #ffd966; margin: 40px 0 20px;">👻 OS BRANCOS • MONSTROS DA CIDADE</h2>
         
-        <div class="personagem">
+        <div class="monstro-card">
+            <div class="monstro-icon">👁️</div>
+            <div class="monstro-info">
+                <h4>O BRANCO SENTINELA</h4>
+                <p>Forma mais comum. Pele completamente branca, olhos vermelhos brilhantes. Caçam em grupos de 5 a 12. São atraídos por qualquer ruído acima de 30 decibéis. Sua pele é fria ao toque e emite um leve brilho noturno.</p>
+            </div>
+        </div>
+
+        <div class="monstro-card">
+            <div class="monstro-icon">👂</div>
+            <div class="monstro-info">
+                <h4>O BRANCO ECO</h4>
+                <p>Mutacão rara. Desenvolveu uma capacidade sonora única. Emite gritos que paralisam as presas e pode imitar vozes humanas para atrair vítimas. Sua pele tem veias negras aparentes.</p>
+            </div>
+        </div>
+
+        <div class="monstro-card">
+            <div class="monstro-icon">💀</div>
+            <div class="monstro-info">
+                <h4>O BRANCO ALFA</h4>
+                <p>Líder da colmeia. Mais alto, mais forte e mais inteligente. Coordena os ataques dos sentinelas. Dizem que ainda preserva fragmentos de memória de sua vida humana, o que o torna imprevisível e cruel.</p>
+            </div>
+        </div>
+
+        <!-- PERSONAGENS -->
+        <h2 style="color: #ffd966; margin: 40px 0 20px;">👥 MORADORES DA RESISTÊNCIA</h2>
+        
+        <div class="personagem-card">
             <div class="personagem-icon">🔫</div>
             <div>
-                <div style="color: #ffd966; font-weight: bold;">CAÇADOR</div>
-                <div style="color: #94a3b8;">Nível 3 • Força 14 • Agilidade 16</div>
-                <div style="color: #64748b; margin-top: 5px;">Especialista em combate à distância e sobrevivência. Carrega um rifle de assalto modificado e um diário com anotações sobre as criaturas da Zona.</div>
+                <div class="personagem-nome">CAÇADOR • MARCOS</div>
+                <div class="personagem-local">📍 Antiga Rua 13, Cidade de Deus</div>
+                <div class="personagem-desc">Nascido na resistência, nunca conheceu o mundo antes da pandemia. Especialista em eliminar Brancos com armas improvisadas. Conhece cada beco e esconderijo da comunidade. Carrega um diário com anotações sobre os padrões de caça dos monstros.</div>
             </div>
         </div>
 
-        <div class="personagem">
-            <div class="personagem-icon">🧙</div>
+        <div class="personagem-card">
+            <div class="personagem-icon">🧠</div>
             <div>
-                <div style="color: #ffd966; font-weight: bold;">CORREDOR</div>
-                <div style="color: #94a3b8;">Nível 2 • Agilidade 18 • Tecnologia 15</div>
-                <div style="color: #64748b; margin-top: 5px;">Rápido, furtivo e conhecedor de tecnologia. Rouba dados das corporações e vende no mercado negro. Possui um implante cibernético no braço esquerdo.</div>
+                <div class="personagem-nome">ARQUIVISTA • D. JUREMA</div>
+                <div class="personagem-local">📍 Antiga Igreja, Cidade de Deus</div>
+                <div class="personagem-desc">A mais velha da comunidade. Lembra-se do mundo antes da pandemia. Guarda memórias em um velho caderno, registrando cada pessoa que se foi e cada monstro derrotado. É a memória viva da Cidade de Deus.</div>
             </div>
         </div>
 
-        <div class="personagem">
+        <div class="personagem-card">
+            <div class="personagem-icon">⚡</div>
+            <div>
+                <div class="personagem-nome">CORREDOR • LUAN</div>
+                <div class="personagem-local">📍 Antigo Campo de Futebol</div>
+                <div class="personagem-desc">Aos 17 anos, é o mais jovem da resistência. Rápido e ágil, é responsável por buscar suprimentos na zona de risco. Conhece os caminhos mais seguros pelos telhados. Sonha em um dia ver o mar.</div>
+            </div>
+        </div>
+
+        <div class="personagem-card">
             <div class="personagem-icon">💪</div>
             <div>
-                <div style="color: #ffd966; font-weight: bold;">GUARDA</div>
-                <div style="color: #94a3b8;">Nível 4 • Força 18 • Constituição 16</div>
-                <div style="color: #64748b; margin-top: 5px;">Ex-militar, especializado em combate corpo a corpo. Protege os refugiados na Zona Franca. Carrega uma katana de liga de titânio.</div>
+                <div class="personagem-nome">GUARDA • SEU JORGE</div>
+                <div class="personagem-local">📍 Antiga Associação de Moradores</div>
+                <div class="personagem-desc">Ex-militar, foi um dos primeiros a organizar a resistência. Perdeu a família para os Brancos nos primeiros anos. Hoje treina os jovens para o combate e mantém as defesas da comunidade.</div>
             </div>
         </div>
 
-        <div style="margin-top: 30px; padding: 20px; background: #14181c; border: 1px solid #1e293b;">
-            <h3 style="color: #b3a0ff;">🔍 CONSTRUÇÃO DO UNIVERSO</h3>
-            <p style="color: #94a3b8;">O CDD 3001 se passa em um futuro distópico onde as memórias são a moeda mais valiosa. A Zona é um território neutralizado entre megacorporações, onde os Arquivistas exploram ruínas digitais em busca de fragmentos do passado.</p>
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <span class="memoria">🌍 Zona Franca</span>
-                <span class="memoria">🏢 Megacorp</span>
-                <span class="memoria">💿 Fragmentos</span>
-            </div>
+        <!-- MAPA LOCAL -->
+        <h2 style="color: #ffd966; margin: 40px 0 20px;">🗺️ PONTOS DE SOBREVIVÊNCIA</h2>
+        
+        <div class="mapa-local">
+            <div class="local-marcado">⛪ IGREJA</div>
+            <div>🏥 HOSPITAL</div>
+            <div class="local-marcado">🏫 ESCOLA</div>
+            <div>🏪 MERCADO</div>
+            <div class="local-marcado">⚽ CAMPO</div>
+            <div>🏭 FÁBRICA</div>
+            <div class="local-marcado">🚏 PONTO ÔNIBUS</div>
+            <div>🌳 PRAÇA</div>
+            <div class="local-marcado">🏘️ ASSOCIAÇÃO</div>
+        </div>
+        
+        <div style="color: #64748b; text-align: center; margin: 10px 0;">
+            <span class="memoria-badge">🔵 Locais seguros</span>
+            <span class="memoria-badge" style="background: #ff3333;">🔴 Zonas de risco</span>
         </div>
 
-        <div style="margin-top: 20px; color: #64748b; font-size: 12px; text-align: right;">
-            +150 XP • 3/10 memórias desbloqueadas
+        <!-- LORE FRAGMENTOS -->
+        <div style="background: #14181c; border: 1px solid #1e293b; padding: 25px; margin: 40px 0;">
+            <h3 style="color: #b3a0ff;">📖 FRAGMENTOS DA MEMÓRIA</h3>
+            <p style="color: #94a3b8; font-style: italic;">"Antes dos Brancos, a Cidade de Deus era apenas mais uma comunidade no Rio. Tinha seus problemas, mas tinha vida. Crianças jogavam bola no campo, feiras aos sábados, música nos bares. Hoje, o silêncio é interrompido apenas pelos gritos dos caçadores e pelos uivos dos monstros. Mas enquanto houver alguém para lembrar, a Cidade de Deus continua viva."</p>
+            <div style="margin-top: 15px; color: #64748b;">— D. Jurema, Arquivista da Resistência</div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; margin-top: 20px; color: #64748b; font-size: 12px;">
+            <span>📍 Rio de Janeiro • Cidade de Deus • 3001</span>
+            <span>🧠 4/10 memórias desbloqueadas • +150 XP</span>
         </div>
     </div>
 
@@ -112,7 +317,13 @@
         if (!rpg.jogador.modulosCompletos.includes('historia')) {
             rpg.jogador.modulosCompletos.push('historia');
             rpg.coletarMemoria();
+            rpg.coletarMemoria();
+            rpg.coletarMemoria();
+            rpg.coletarMemoria();
         }
+        
+        // Registrar visita
+        rpg.visitarModulo('historia');
     </script>
 </body>
 </html>
