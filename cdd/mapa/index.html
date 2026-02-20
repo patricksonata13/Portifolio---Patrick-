@@ -3,68 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CDD 3001 • Mapa • Rio de Janeiro</title>
-    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <title>CDD 3001 • Mapa • Cidade de Deus</title>
     <style>
-        body { background: #0a0c0e; color: #e2e8f0; font-family: 'Courier New', monospace; padding: 20px; }
-        .terminal { max-width: 1000px; margin: 0 auto; background: #0f1215; border: 2px solid #ffd966; padding: 20px; }
-        h1 { color: #ffd966; }
-        .nav-bar { margin: 20px 0; padding: 10px 0; border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b; }
-        
-        .mapa-principal {
-            background: #14181c;
-            border: 2px solid #1e293b;
-            padding: 30px;
-            margin: 30px 0;
-            position: relative;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #0a0c0e;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            padding: 20px;
+            background-image: linear-gradient(rgba(255, 217, 102, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255, 217, 102, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
         }
-        
+        .terminal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(15, 18, 21, 0.98);
+            border: 2px solid #ffd966;
+            padding: 20px;
+        }
+        .terminal-header {
+            background: #0f1215;
+            padding: 10px;
+            border-bottom: 1px solid #1e293b;
+            display: flex;
+            justify-content: space-between;
+            color: #ffd966;
+        }
+        h1 { color: #ffd966; margin: 20px 0; }
+        .nav-bar {
+            margin: 20px 0;
+            padding: 10px 0;
+            border-top: 1px solid #1e293b;
+            border-bottom: 1px solid #1e293b;
+        }
+        .nav-bar a {
+            color: #64748b;
+            text-decoration: none;
+            margin-right: 20px;
+        }
         .mapa-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-top: 30px;
+            margin: 30px 0;
         }
-        
         .mapa-node {
-            background: #1a1f24;
+            background: #14181c;
             border: 2px solid #1e293b;
-            padding: 25px 10px;
+            padding: 30px 10px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
         }
-        
-        .mapa-node:hover {
-            border-color: #ffd966;
-            transform: scale(1.05);
-        }
-        
-        .mapa-node.visitado {
-            border-color: #4ade80;
-        }
-        
-        .mapa-node.risco {
-            border-color: #ff6666;
-        }
-        
-        .mapa-icone {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-        
-        .mapa-nome {
-            color: #ffd966;
-            font-weight: bold;
-        }
-        
-        .mapa-status {
-            font-size: 10px;
-            color: #64748b;
-            margin-top: 5px;
-        }
-        
+        .mapa-node:hover { border-color: #ffd966; }
+        .mapa-node.seguro { border-color: #4ade80; }
+        .mapa-node.risco { border-color: #ff6666; }
+        .mapa-icone { font-size: 40px; }
+        .mapa-nome { color: #ffd966; font-weight: bold; }
         .legenda {
             display: flex;
             gap: 30px;
@@ -73,164 +68,83 @@
             background: #14181c;
             border: 1px solid #1e293b;
         }
-        
-        .legenda-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .cor {
-            width: 20px;
-            height: 20px;
-            border: 2px solid;
-        }
+        .legenda-item { display: flex; align-items: center; gap: 10px; }
+        .cor { width: 20px; height: 20px; border: 2px solid; }
         .cor.seguro { border-color: #4ade80; }
         .cor.risco { border-color: #ff6666; }
-        .cor.nao { border-color: #1e293b; }
     </style>
 </head>
 <body>
     <div class="terminal">
-        <div class="terminal-header" style="background: #0f1215; padding: 8px; border-bottom: 1px solid #1e293b;">
-            <span class="terminal-path">~/cdd-3001/mapa</span>
-            <span class="terminal-status">RIO DE JANEIRO • 3001</span>
+        <div class="terminal-header">
+            <span>~/cdd-3001/mapa</span>
+            <span>CIDADE DE DEUS • 3001</span>
         </div>
 
-        <h1>🗺️ MAPA DA CIDADE DE DEUS</h1>
+        <h1>🗺️ MAPA DA RESISTÊNCIA</h1>
         
         <div class="nav-bar">
-            <a href="/cdd/">← TERMINAL</a>
-            <a href="/cdd/perfil.html">PERFIL</a>
+            <a href="/cdd/">← VOLTAR</a>
             <a href="#" class="active">MAPA</a>
         </div>
 
-        <div class="mapa-principal">
-            <h2 style="color: #ffd966; text-align: center;">📍 CIDADE DE DEUS • ZONA DE RESISTÊNCIA</h2>
-            <p style="color: #94a3b8; text-align: center;">Antiga comunidade do Rio de Janeiro • 3001</p>
-            
-            <div class="mapa-grid">
-                <!-- Linha 1 -->
-                <div class="mapa-node" data-modulo="historia" onclick="viajar('historia')">
-                    <div class="mapa-icone">⛪</div>
-                    <div class="mapa-nome">IGREJA</div>
-                    <div class="mapa-status">Sede da Resistência</div>
-                </div>
-                
-                <div class="mapa-node" data-modulo="videos" onclick="viajar('videos')">
-                    <div class="mapa-icone">🏫</div>
-                    <div class="mapa-nome">ESCOLA</div>
-                    <div class="mapa-status">Arquivo de Memórias</div>
-                </div>
-                
-                <div class="mapa-node risco" data-modulo="game" onclick="viajar('game')">
-                    <div class="mapa-icone">🏭</div>
-                    <div class="mapa-nome">FÁBRICA</div>
-                    <div class="mapa-status">Zona de Risco • Brancos</div>
-                </div>
-                
-                <div class="mapa-node" data-modulo="roteiro" onclick="viajar('roteiro')">
-                    <div class="mapa-icone">🏘️</div>
-                    <div class="mapa-nome">ASSOCIAÇÃO</div>
-                    <div class="mapa-status">Centro de Comando</div>
-                </div>
-                
-                <!-- Linha 2 -->
-                <div class="mapa-node" data-modulo="arte" onclick="viajar('arte')">
-                    <div class="mapa-icone">🎨</div>
-                    <div class="mapa-nome">GRAFITE</div>
-                    <div class="mapa-status">Murais da Resistência</div>
-                </div>
-                
-                <div class="mapa-node" data-modulo="curiosidades" onclick="viajar('curiosidades')">
-                    <div class="mapa-icone">🏪</div>
-                    <div class="mapa-nome">MERCADO</div>
-                    <div class="mapa-status">Suprimentos</div>
-                </div>
-                
-                <div class="mapa-node" data-modulo="musica" onclick="viajar('musica')">
-                    <div class="mapa-icone">🎵</div>
-                    <div class="mapa-nome">BAR DO SEU ZÉ</div>
-                    <div class="mapa-status">Último boteco</div>
-                </div>
-                
-                <div class="mapa-node" data-modulo="inventario" onclick="viajar('inventario')">
-                    <div class="mapa-icone">🏥</div>
-                    <div class="mapa-nome">HOSPITAL</div>
-                    <div class="mapa-status">Enfermaria</div>
-                </div>
-                
-                <!-- Linha 3 -->
-                <div class="mapa-node" onclick="viajar('missões')">
-                    <div class="mapa-icone">⚔️</div>
-                    <div class="mapa-nome">CAMPO</div>
-                    <div class="mapa-status">Treinamento</div>
-                </div>
-                
-                <div class="mapa-node risco" onclick="alert('Zona de alto risco!')">
-                    <div class="mapa-icone">🌳</div>
-                    <div class="mapa-nome">PRAÇA</div>
-                    <div class="mapa-status">Território dos Brancos</div>
-                </div>
-                
-                <div class="mapa-node" onclick="viajar('perfil')">
-                    <div class="mapa-icone">👤</div>
-                    <div class="mapa-nome">CASAS</div>
-                    <div class="mapa-status">Moradores</div>
-                </div>
-                
-                <div class="mapa-node risco" onclick="alert('Zona de quarentena!')">
-                    <div class="mapa-icone">🚏</div>
-                    <div class="mapa-nome">PONTO</div>
-                    <div class="mapa-status">Barricada</div>
-                </div>
+        <div class="mapa-grid">
+            <div class="mapa-node seguro" onclick="window.location.href='/cdd/historia/'">
+                <div class="mapa-icone">⛪</div>
+                <div class="mapa-nome">IGREJA</div>
+                <div style="font-size: 12px; color: #94a3b8;">Sede da Resistência</div>
+            </div>
+            <div class="mapa-node seguro" onclick="window.location.href='/cdd/arte/'">
+                <div class="mapa-icone">🏫</div>
+                <div class="mapa-nome">ESCOLA</div>
+                <div style="font-size: 12px; color: #94a3b8;">Arquivos</div>
+            </div>
+            <div class="mapa-node risco" onclick="alert('Zona de alto risco! Brancos avistados.')">
+                <div class="mapa-icone">🏭</div>
+                <div class="mapa-nome">FÁBRICA</div>
+                <div style="font-size: 12px; color: #ff6666;">Território dos Brancos</div>
+            </div>
+            <div class="mapa-node seguro" onclick="window.location.href='/cdd/roteiro/'">
+                <div class="mapa-icone">🏘️</div>
+                <div class="mapa-nome">ASSOCIAÇÃO</div>
+                <div style="font-size: 12px; color: #94a3b8;">Comando</div>
+            </div>
+            <div class="mapa-node seguro" onclick="window.location.href='/cdd/inventario/'">
+                <div class="mapa-icone">🏪</div>
+                <div class="mapa-nome">MERCADO</div>
+                <div style="font-size: 12px; color: #94a3b8;">Suprimentos</div>
+            </div>
+            <div class="mapa-node seguro" onclick="window.location.href='/cdd/musica/'">
+                <div class="mapa-icone">🎵</div>
+                <div class="mapa-nome">BAR</div>
+                <div style="font-size: 12px; color: #94a3b8;">Último boteco</div>
+            </div>
+            <div class="mapa-node" onclick="window.location.href='/cdd/missoes/'">
+                <div class="mapa-icone">⚽</div>
+                <div class="mapa-nome">CAMPO</div>
+                <div style="font-size: 12px; color: #94a3b8;">Treinamento</div>
+            </div>
+            <div class="mapa-node risco" onclick="alert('Zona de quarentena! Não se aproxime.')">
+                <div class="mapa-icone">🌳</div>
+                <div class="mapa-nome">PRAÇA</div>
+                <div style="font-size: 12px; color: #ff6666;">Infectados</div>
+            </div>
+            <div class="mapa-node" onclick="window.location.href='/cdd/perfil.html'">
+                <div class="mapa-icone">👤</div>
+                <div class="mapa-nome">CASAS</div>
+                <div style="font-size: 12px; color: #94a3b8;">Moradores</div>
             </div>
         </div>
 
         <div class="legenda">
-            <div class="legenda-item">
-                <div class="cor seguro"></div>
-                <span>Área segura • Resistência</span>
-            </div>
-            <div class="legenda-item">
-                <div class="cor risco"></div>
-                <span>Zona de risco • Brancos</span>
-            </div>
-            <div class="legenda-item">
-                <div class="cor nao"></div>
-                <span>Não explorado</span>
-            </div>
+            <div class="legenda-item"><span class="cor seguro"></span> Área segura</div>
+            <div class="legenda-item"><span class="cor risco"></span> Zona de risco</div>
         </div>
 
-        <div style="background: #14181c; border: 1px solid #1e293b; padding: 20px; margin-top: 20px;">
-            <h3 style="color: #b3a0ff;">⚠️ AVISO DA RESISTÊNCIA</h3>
-            <p style="color: #94a3b8;">A Cidade de Deus está cercada. Os Brancos são atraídos por barulho. Movimente-se apenas durante o dia e em grupos. Evite a Praça e a Fábrica após o anoitecer. Mantenha suas armas carregadas e nunca confie no silêncio.</p>
-        </div>
-
-        <div style="margin-top: 20px; color: #64748b; font-size: 12px; text-align: right;">
-            🗺️ Mapa da Resistência • Atualizado em 3001
+        <div style="background: #14181c; border: 1px solid #1e293b; padding: 20px;">
+            <h3 style="color: #b3a0ff;">⚠️ REGRAS DE SOBREVIVÊNCIA</h3>
+            <p style="color: #94a3b8;">• Nunca saia após o anoitecer<br>• Ande sempre em grupo<br>• Evite fazer barulho<br>• Os Brancos são atraídos pelo som</p>
         </div>
     </div>
-
-    <script src="/cdd/assets/js/rpg-system.js"></script>
-    <script>
-        function viajar(modulo) {
-            if (modulo === 'perfil') {
-                window.location.href = '/cdd/perfil.html';
-            } else {
-                window.location.href = `/cdd/${modulo}/`;
-            }
-        }
-        
-        window.onload = function() {
-            const visitas = rpg.jogador.visitas || [];
-            document.querySelectorAll('.mapa-node').forEach(node => {
-                const modulo = node.dataset.modulo;
-                if (modulo && visitas.includes(modulo)) {
-                    node.classList.add('visitado');
-                }
-            });
-        };
-    </script>
 </body>
 </html>
