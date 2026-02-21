@@ -1,0 +1,259 @@
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import iaMock from './services/ia-mock.service.js';
+import dindo from './services/dindo.service.js';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
+
+console.log('🚀 Inicializando PATIKA...');
+iaMock.init();
+console.log('✅ Sistema pronto!\n');
+
+// ========================================
+// ROTAS PRINCIPAIS
+// ========================================
+
+app.get('/', (req, res) => {
+  res.json({
+    sistema: 'PATIKA',
+    versao: '7.0.0',
+    status: 'online',
+    ia: `✅ ${iaMock.getModeloAtivo()}`,
+    modulos: ['chat', 'projetos', 'kika', 'dindo', 'automacao'],
+    endpoints: [
+      'GET /',
+      'GET /api/status',
+      'POST /api/chat',
+      'GET /api/chat/historico',
+      'GET /api/projetos',
+      'GET /api/dindo/*',
+      'GET /dashboard'
+    ]
+  });
+});
+
+app.get('/api/status', (req, res) => {
+  res.json({
+    ia: {
+      ativo: iaMock.isReady(),
+      modelo: iaMock.getModeloAtivo(),
+      tipo: 'mock'
+    },
+    sistema: {
+      versao: '7.0.0',
+      uptime: Math.floor(process.uptime()),
+      memoria: Math.floor(process.memoryUsage().heapUsed / 1024 / 1024) + 'MB'
+    },
+    estatisticas: {
+      conversas: iaMock.getHistorico().length
+    }
+  });
+});
+
+// ========================================
+// CHAT
+// ========================================
+
+app.post('/api/chat', async (req, res) => {
+  const { mensagem } = req.body;
+  
+  if (!mensagem) {
+    return res.status(400).json({ 
+      sucesso: false, 
+      erro: 'Campo "mensagem" obrigatório' 
+    });
+  }
+  
+  const contexto = [
+    'Você é PATIKA, assistente pessoal criado por Patrick Sonata.',
+    'Ajude com roteiros, projetos criativos e organização.',
+    'Seja conciso, útil e encorajador.'
+  ];
+  
+  const resposta = await iaMock.perguntar(mensagem, contexto);
+  res.json(resposta);
+});
+
+app.get('/api/chat/historico', (req, res) => {
+  res.json({
+    historico: iaMock.getHistorico(),
+    total: iaMock.getHistorico().length
+  });
+});
+
+app.post('/api/gemini/perguntar', async (req, res) => {
+  const { pergunta } = req.body;
+  
+  if (!pergunta) {
+    return res.status(400).json({ 
+      sucesso: false, 
+      erro: 'Campo "pergunta" obrigatório' 
+    });
+  }
+  
+  const resposta = await iaMock.perguntar(pergunta);
+  res.json(resposta);
+});
+
+// ========================================
+// PROJETOS
+// ========================================
+
+app.get('/api/projetos', (req, res) => {
+  res.json({
+    projetos: [
+      {
+        id: 1,
+        nome: 'CDD-3001',
+        tipo: 'Universo Narrativo',
+        status: 'Em desenvolvimento',
+        descricao: 'Série afrofuturista ambientada em 3001',
+        tags: ['afrofuturismo', 'ficção científica', 'série'],
+        progresso: 45
+      },
+      {
+        id: 2,
+        nome: 'O Postinho',
+        tipo: 'Série',
+        status: 'Em desenvolvimento',
+        descricao: 'Comédia sobre um posto de saúde',
+        tags: ['comédia', 'série', 'cotidiano'],
+        progresso: 30
+      },
+      {
+        id: 3,
+        nome: 'PATIKA',
+        tipo: 'Metodologia',
+        status: 'Ativo',
+        descricao: 'Sistema pessoal de IA e organização',
+        tags: ['ia', 'produtividade', 'sistema'],
+        progresso: 70
+      }
+    ],
+    total: 3,
+    emDesenvolvimento: 2,
+    ativos: 1
+  });
+});
+
+// ========================================
+// DINDO - FINANÇAS
+// ========================================
+
+// Transações
+app.post('/api/dindo/transacao', (req, res) => {
+  const transacao = dindo.adicionarTransacao(req.body);
+  res.json({ sucesso: true, transacao });
+});
+
+app.get('/api/dindo/transacoes', (req, res) => {
+  const transacoes = dindo.listarTransacoes(req.query);
+  res.json({ transacoes, total: transacoes.length });
+});
+
+app.delete('/api/dindo/transacao/:id', (req, res) => {
+  const removido = dindo.removerTransacao(req.params.id);
+  res.json({ sucesso: removido });
+});
+
+// Resumo financeiro
+app.get('/api/dindo/resumo', (req, res) => {
+  const mes = req.query.mes;
+  const resumo = dindo.getResumo(mes);
+  res.json(resumo);
+});
+
+// Metas
+app.post('/api/dindo/meta', (req, res) => {
+  const meta = dindo.adicionarMeta(req.body);
+  res.json({ sucesso: true, meta });
+});
+
+app.get('/api/dindo/metas', (req, res) => {
+  const metas = dindo.listarMetas();
+  res.json({ metas, total: metas.length });
+});
+
+app.put('/api/dindo/meta/:id', (req, res) => {
+  const meta = dindo.atualizarMeta(req.params.id, req.body.valor);
+  res.json({ sucesso: !!meta, meta });
+});
+
+app.delete('/api/dindo/meta/:id', (req, res) => {
+  const removido = dindo.removerMeta(req.params.id);
+  res.json({ sucesso: removido });
+});
+
+// Simulações
+app.post('/api/dindo/simular-investimento', (req, res) => {
+  const resultado = dindo.simularInvestimento(req.body);
+  res.json(resultado);
+});
+
+app.post('/api/dindo/simular-divida', (req, res) => {
+  const resultado = dindo.simularDivida(req.body);
+  res.json(resultado);
+});
+
+// Estatísticas
+app.get('/api/dindo/stats', (req, res) => {
+  const stats = dindo.getEstatisticas();
+  res.json(stats);
+});
+
+// ========================================
+// DASHBOARD
+// ========================================
+
+app.get('/dashboard', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/dashboard.html'));
+});
+
+// ========================================
+// SERVIDOR
+// ========================================
+
+app.listen(PORT, () => {
+  console.log('╔═══════════════════════════════════════════════╗');
+  console.log('║                                               ║');
+  console.log('║                  🎬 PATIKA                    ║');
+  console.log('║         Seu Ecossistema Pessoal de IA        ║');
+  console.log('║              v7.0 · FUNCIONAL!               ║');
+  console.log('║                                               ║');
+  console.log('╠═══════════════════════════════════════════════╣');
+  console.log('║                                               ║');
+  console.log('║   🤖 IA        → ✅ PATIKA Mock v1.0         ║');
+  console.log('║   💬 CHAT      → Inteligente e contextual    ║');
+  console.log('║   📝 PROJETOS  → CDD-3001, Postinho, etc     ║');
+  console.log('║   💰 DINDO     → Finanças e simulações       ║');
+  console.log('║   🎯 STATUS    → 100% Operacional            ║');
+  console.log('║                                               ║');
+  console.log('╠═══════════════════════════════════════════════╣');
+  console.log('║                                               ║');
+  console.log(`║   📍 http://localhost:${PORT}                 ║`);
+  console.log(`║   📊 Dashboard → /dashboard                    ║`);
+  console.log('║   💬 Chat      → POST /api/chat              ║');
+  console.log('║   📋 Projetos  → GET /api/projetos           ║');
+  console.log('║   💰 DINDO     → GET /api/dindo/stats        ║');
+  console.log('║                                               ║');
+  console.log('╚═══════════════════════════════════════════════╝\n');
+  console.log('💡 Novos endpoints DINDO disponíveis!');
+  console.log('   - POST /api/dindo/transacao');
+  console.log('   - GET /api/dindo/resumo');
+  console.log('   - POST /api/dindo/simular-investimento\n');
+});
+
+process.on('SIGINT', () => {
+  console.log('\n✅ PATIKA encerrado');
+  process.exit(0);
+});

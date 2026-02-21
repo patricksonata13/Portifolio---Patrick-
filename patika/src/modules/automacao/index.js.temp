@@ -1,0 +1,22 @@
+// [SUBSTITUIR MÉTODO criarTarefa]
+criarTarefa(dados) {
+  if (!dados.titulo || dados.titulo.trim() === '') {
+    throw new Error('Título da tarefa é obrigatório');
+  }
+  
+  const tarefa = {
+    id: `task-${Date.now()}`,
+    titulo: dados.titulo.trim(),
+    descricao: dados.descricao || '',
+    status: 'pendente',
+    prioridade: dados.prioridade || 'media',
+    tags: dados.tags || [],
+    criado: new Date().toISOString(),
+    prazo: dados.prazo || null
+  };
+  
+  this.tarefas.push(tarefa);
+  this.salvar();
+  
+  return tarefa;
+}

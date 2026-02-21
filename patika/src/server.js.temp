@@ -1,0 +1,39 @@
+// [SUBSTITUIR A ROTA /api/chat por esta versão]
+app.post('/api/chat', async (req, res) => {
+  try {
+    const { mensagem } = req.body;
+    if (!mensagem) {
+      return res.status(400).json({ erro: 'Mensagem obrigatória' });
+    }
+    
+    // Usar Sankofa para buscar
+    const resultados = await sankofa.buscar(mensagem, 5);
+    
+    // Formatar resposta
+    let resposta = '';
+    if (resultados.total === 0) {
+      resposta = 'Não encontrei informações sobre isso nos seus projetos.';
+    } else {
+      resposta = `Encontrei ${resultados.total} resultados relacionados:\n\n`;
+      resultados.resultados.slice(0, 3).forEach((r, i) => {
+        resposta += `${i+1}. **${r.titulo}** (${r.tipo})\n`;
+        if (r.descricao) resposta += `   ${r.descricao.substring(0, 100)}...\n`;
+        resposta += '\n';
+      });
+    }
+    
+    res.json({
+      mensagem_original: mensagem,
+      resposta,
+      resultados: resultados.resultados.slice(0, 3),
+      timestamp: new Date().toISOString()
+    });
+    
+  } catch (error) {
+    console.error('❌ Erro no chat:', error);
+    res.status(500).json({ 
+      erro: error.message,
+      resposta: 'Desculpe, tive um problema ao processar sua mensagem.'
+    });
+  }
+});

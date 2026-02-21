@@ -1,0 +1,42 @@
+// [SUBSTITUIR MÉTODO criarNota]
+criarNota(dados) {
+  // Validar valor bruto
+  let valorBruto = parseFloat(dados.valor_bruto) || 0;
+  if (valorBruto <= 0) {
+    throw new Error('Valor bruto deve ser maior que zero');
+  }
+  
+  const id = `NF-${Date.now()}`;
+  const timestamp = new Date().toISOString();
+  
+  const calculo = this.calcularImposto(
+    valorBruto,
+    dados.regime || 'MEI'
+  );
+  
+  const nota = {
+    id,
+    numero: this.notas.length + 1,
+    data_emissao: timestamp,
+    cliente: {
+      nome: dados.cliente_nome || dados.cliente || 'Cliente',
+      cnpj: dados.cliente_cnpj || ''
+    },
+    servico: {
+      descricao: dados.descricao || 'Serviços profissionais',
+      valor_bruto: valorBruto
+    },
+    regime: dados.regime || 'MEI',
+    tributacao: calculo,
+    status: 'emitida',
+    created_at: timestamp
+  };
+  
+  this.notas.push(nota);
+  this.salvar();
+  
+  return {
+    ...nota,
+    mensagem: `✅ Nota emitida! Líquido: R$ ${calculo.valor_liquido.toFixed(2).replace('.', ',')}`
+  };
+}
