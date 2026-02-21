@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patrick Sonata | Roteirista</title>
+    
+    <!-- Anti-cache -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Meta tags -->
+    <meta name="description" content="Patrick Sonata - Roteirista, ator e comediante cria da Cidade de Deus. 20 anos de carreira.">
+    <meta name="keywords" content="Patrick Sonata, roteirista, comediante, Cidade de Deus">
+    <meta name="author" content="Patrick Sonata">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Patrick Sonata | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta property="og:image" content="assets/images/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#d0cbc0">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+</head>
+<body>
+    <!-- Logo P - Home -->
+    <a href="/" class="logo-p" title="Voltar ao início">
+        <svg viewBox="0 0 100 100" width="25" height="25">
+            <path d="M 25 20 L 25 80 M 25 20 L 60 20 Q 72 20 72 35 Q 72 50 60 50 L 25 50" 
+                  stroke="white" stroke-width="6" stroke-linecap="round" 
+                  stroke-linejoin="round" fill="none"/>
+        </svg>
+    </a>
+    
+    <!-- MENU SUPERIOR -->
+    <nav class="nav-top-right">
+        <button onclick="window.location.href='cdd/index.html'">CDD 3001</button>
+        <button onclick="window.location.href='patika/'">PATIKA</button>
+        <button onclick="window.location.href='aulas/index.html'">AULAS</button>
+    </nav>
+
+    <!-- CONTEÚDO PRINCIPAL AGORA DENTRO DA TAG <main> -->
+    <main>
+        <section class="container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+            <h1 style="font-size: 3.5rem; margin-bottom: 0.2rem; letter-spacing: 2px; border-left: 4px solid #b3a0ff; padding-left: 20px;">PATRICK SONATA</h1>
+            
+            <p style="color: #b3a0ff; margin-bottom: 2rem; font-size: 1.1rem;">Roteirista • Ator • Comediante</p>
+            
+            <div class="fade-in">
+                <p>37 anos • 20 anos de trajetória • Cria da Cidade de Deus</p>
+                
+                <p><span style="color: #b3a0ff;">TV • STREAMING</span><br>
+                <strong>PABLO & LUISÃO</strong> — Roteirista Globoplay 2025 • Globo 2026<br>
+                <strong>ZORRA</strong> — Roteirista TV Globo • 2019–2021<br>
+                <strong>HUMOR NEGRO</strong> — Roteirista Multishow/Globoplay • 2023–2024</p>
+                
+                <p><span style="color: #b3a0ff;">TEATRO</span><br>
+                <strong>PELADA – A HORA DA GAYMADA</strong> — Dramaturgo 2023<br>
+                <strong>CIDADE CORRERIA</strong> — Autor/Ator Bonobando<br>
+                <strong>JONGO MAMULENGO</strong> — Elenco Bonobando</p>
+                
+                <p><span style="color: #b3a0ff;">FORMAÇÃO</span><br>
+                Palhaçaria Clássica — Márcio Libar, João Carlos Artigos, Teatro de Anônimo<br>
+                Oficina "A Lógica por Trás do Humor" — Maurício Rizzo (2018)<br>
+                Teatro de Mamulengo e Tradições Populares</p>
+                
+                <p style="font-style: italic; color: #b3a0ff; margin-top: 2rem;">"Escrever a quebrada sem estereótipos. Meu humor não foge da realidade — ele a enfrenta. A periferia não é piada. É ponto de vista."</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer style="text-align: center; padding: 20px; color: #64748b; border-top: 1px solid #1e293b; margin-top: 40px;">
+        <p>Patrick Sonata • Roteirista • ABRACI/SBAT</p>
+        <p style="font-size: 0.8rem;">© 2026 • Cria da Cidade de Deus</p>
+    </footer>
+
+    <style>
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .nav-top-right {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .nav-top-right button {
+            background: transparent;
+            border: 1px solid #ffd966;
+            color: #ffd966;
+            padding: 8px 16px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            transition: all 0.3s;
+        }
+        .nav-top-right button:hover {
+            background: #ffd966;
+            color: #0a0c0e;
+        }
+        .logo-p {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .logo-p:hover {
+            opacity: 1;
+        }
+        .logo-p svg path {
+            stroke: #ffd966;
+        }
+    </style>
+
+    <script>
+        // Pequeno script para garantir que não há erros
+        console.log('✅ Página carregada com sucesso!');
+        window.onerror = function(msg, url, line) {
+            console.error('❌ Erro detectado:', msg, 'na linha', line);
+            return false;
+        };
+    </script>
+</body>
+</html>
+    <!-- Open Graph Melhorado -->
+    <meta property="og:title" content="Patrick Sonata | Roteirista">
+    <meta property="og:description" content="Roteirista, ator e comediante. 20 anos de carreira. Cria da Cidade de Deus.">
+    <meta property="og:image" content="https://patricksonata.com.br/assets/images/fotodeperfil.jpg">
+    <meta property="og:url" content="https://patricksonata.com.br">
+    <meta property="og:type" content="profile">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Patrick Sonata | Roteirista">
+    <meta name="twitter:description" content="Roteirista, ator e comediante. Cria da Cidade de Deus.">
+    <meta name="twitter:image" content="https://patricksonata.com.br/assets/images/fotodeperfil.jpg">
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
