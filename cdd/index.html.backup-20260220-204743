@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001 • Terminal da Resistência</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-primary));
+            border: 2px solid var(--accent-primary);
+            padding: 40px;
+            margin: 30px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "🏙️";
+            position: absolute;
+            left: -30px;
+            top: -30px;
+            font-size: 200px;
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .hero-section::after {
+            content: "3001";
+            position: absolute;
+            right: 20px;
+            bottom: 10px;
+            font-size: 80px;
+            opacity: 0.05;
+            font-weight: bold;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(255, 217, 102, 0.5);
+        }
+        
+        .hero-subtitle {
+            color: var(--accent-secondary);
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px;
+        }
+        
+        .stat-card {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 25px 15px;
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-5px);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+        }
+        
+        .warning-banner {
+            background: rgba(255, 102, 102, 0.1);
+            border: 1px solid var(--error);
+            padding: 15px 20px;
+            margin: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .warning-icon {
+            font-size: 30px;
+        }
+        
+        .quick-actions {
+            display: flex;
+            gap: 15px;
+            margin: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .quick-action {
+            flex: 1;
+            min-width: 150px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .quick-action:hover {
+            border-color: var(--accent-primary);
+            transform: scale(1.02);
+        }
+        
+        .progress-section {
+            margin: 30px 20px;
+            padding: 20px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .progress-item {
+            margin: 15px 0;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+        
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            width: 0%;
+        }
+        
+        .version-footer {
+            margin: 40px 20px 20px;
+            padding: 15px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-tertiary);
+            font-size: 11px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Lateral -->
+    <div class="menu-lateral">
+        <a href="/cdd/crafting.html" title="Crafting">🔨</a>
+        <a href="/cdd/aliados.html" title="Aliados">🤝</a>
+        <a href="/cdd/" title="Terminal">🏠</a>
+        <a href="/cdd/perfil.html" title="Perfil">👤</a>
+        <a href="/cdd/mapa/" title="Mapa">🗺️</a>
+        <a href="/cdd/missoes/" title="Missões">⚔️</a>
+        <a href="/cdd/inventario/" title="Inventário">🎒</a>
+        <a href="/cdd/diario.html" title="Diário">📖</a>
+        <a href="/cdd/estatisticas.html" title="Estatísticas">📊</a>
+    </div>
+
+    <!-- Terminal Principal -->
+    <div class="terminal">
+        <div class="terminal-header">
+            <span class="terminal-path">~/cdd-3001/terminal</span>
+            <span class="terminal-status">SISTEMA ATIVO • 3001</span>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="hero-title">CDD 3001</div>
+            <div class="hero-subtitle">CIDADE DE DEUS • A ÚLTIMA RESISTÊNCIA</div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">ARQUIVISTA</span>
+                <span class="status-value" id="jogador-nome">Resistente</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">NÍVEL</span>
+                <span class="status-value nivel-atual">1</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">MEMÓRIAS</span>
+                <span class="status-value"><span class="memorias-atual">0</span>/<span class="memorias-max">100</span></span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">MOEDAS</span>
+                <span class="status-value moedas-atual">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">MÓDULOS</span>
+                <span class="status-value visitas-atual">0</span>
+            </div>
+        </div>
+
+        <!-- Warning Banner -->
+        <div class="warning-banner">
+            <div class="warning-icon">⚠️</div>
+            <div class="flex-col">
+                <strong style="color: var(--error);">ZONA DE RISCO</strong>
+                <span style="color: var(--text-secondary); font-size: 12px;">Os Brancos estão se movimentando perto da Fábrica. Reforcem as barricadas.</span>
+            </div>
+        </div>
+
+        <!-- XP Bar -->
+        <div class="xp-container">
+            <div class="xp-info">
+                <span class="xp-label">PROGRESSO PARA NÍVEL <span class="nivel-atual">1</span></span>
+                <span class="xp-values"><span class="xp-atual">0</span>/<span class="xp-max">1000</span> XP</span>
+            </div>
+            <div class="xp-bar">
+                <div class="xp-fill xp-barra" style="width: 0%;"></div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="quick-action" onclick="window.location.href='/cdd/mapa/'">
+                <div style="font-size: 30px;">🗺️</div>
+                <div>Ver Mapa</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/missoes/'">
+                <div style="font-size: 30px;">⚔️</div>
+                <div>Missões</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/diario.html'">
+                <div style="font-size: 30px;">📖</div>
+                <div>Diário</div>
+            </div>
+            <div class="quick-action" onclick="window.location.href='/cdd/brancos.html'">
+                <div style="font-size: 30px;">👻</div>
+                <div>Os Brancos</div>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">MÓDULOS</div>
+                <div class="stat-value visitas-atual">0</div>
+                <div style="color: var(--text-tertiary);">/15 explorados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">CONQUISTAS</div>
+                <div class="stat-value" id="conquistas-count">0</div>
+                <div style="color: var(--text-tertiary);">/28 disponíveis</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">INIMIGOS</div>
+                <div class="stat-value" id="inimigos-count">0</div>
+                <div style="color: var(--text-tertiary);">derrotados</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">TEMPO</div>
+                <div class="stat-value" id="tempo-count">0</div>
+                <div style="color: var(--text-tertiary);">horas</div>
+            </div>
+        </div>
+
+        <!-- Módulos Grid -->
+        <h2>📋 MÓDULOS DISPONÍVEIS</h2>
+        <div class="grid">
+            <!-- História -->
+            <div class="card" onclick="rpg.abrirModulo('historia')">
+                <h3>📜 HISTÓRIA</h3>
+                <p>A pandemia dos Brancos no Rio de Janeiro 3001. Linha do tempo 2057-3001.</p>
+                <div class="status online">+150 XP • 4/10</div>
+            </div>
+
+            <!-- Mapa -->
+            <div class="card" onclick="rpg.abrirModulo('mapa')">
+                <h3>🗺️ MAPA</h3>
+                <p>Cidade de Deus interativa. Zonas seguras e de risco.</p>
+                <div class="status online">+100 XP • 12 locais</div>
+            </div>
+
+            <!-- Personagens -->
+            <div class="card" onclick="window.location.href='/cdd/personagens.html'">
+                <h3>👥 PERSONAGENS</h3>
+                <p>Marcos, D. Jurema, Luan, Seu Jorge. A resistência.</p>
+                <div class="status online">+75 XP • 4 heróis</div>
+            </div>
+
+            <!-- Brancos -->
+            <div class="card" onclick="window.location.href='/cdd/brancos.html'">
+                <h3>👻 OS BRANCOS</h3>
+                <p>Sentinela, Eco, Alfa. A Síndrome da Neve.</p>
+                <div class="status risco">+200 XP • 3 ameaças</div>
+            </div>
+
+            <!-- Música -->
+            <div class="card" onclick="rpg.abrirModulo('musica')">
+                <h3>🎵 MÚSICA</h3>
+                <p>Trilha da resistência. Rádio Vigia 24h.</p>
+                <div class="status online">+25 XP • 6 faixas</div>
+            </div>
+
+            <!-- Arte -->
+            <div class="card" onclick="rpg.abrirModulo('arte')">
+                <h3>🎨 ARTE</h3>
+                <p>Murais e grafites da comunidade.</p>
+                <div class="status online">+50 XP • 8 obras</div>
+            </div>
+
+            <!-- Diário -->
+            <div class="card" onclick="window.location.href='/cdd/diario.html'">
+                <h3>📖 DIÁRIO</h3>
+                <p>Memórias de D. Jurema. 2057-3001, 47 anos de registros.</p>
+                <div class="status online">+150 XP • 47 entradas</div>
+            </div>
+
+            <!-- Inventário -->
+            <div class="card" onclick="rpg.abrirModulo('inventario')">
+                <h3>🎒 INVENTÁRIO</h3>
+                <p>Itens coletados na resistência. Armas, memórias, especiais.</p>
+                <div class="status online">7/30 itens</div>
+            </div>
+
+            <!-- Missões -->
+            <div class="card" onclick="rpg.abrirModulo('missoes')">
+                <h3>⚔️ MISSÕES</h3>
+                <p>Missões principais e secundárias da resistência.</p>
+                <div class="status online">+200 XP • 6 missões</div>
+            </div>
+
+            <!-- Estatísticas -->
+            <div class="card" onclick="window.location.href='/cdd/estatisticas.html'">
+                <h3>📊 ESTATÍSTICAS</h3>
+                <p>Dados completos do jogador. Progresso detalhado.</p>
+                <div class="status online">Nível <span class="nivel-atual">1</span></div>
+            </div>
+
+            <!-- Game -->
+            <div class="card" onclick="rpg.abrirModulo('game')">
+                <h3>🎮 GAME</h3>
+                <p>Versão jogável em desenvolvimento. 45% concluído.</p>
+                <div class="status dev">EM DESENVOLVIMENTO</div>
+            </div>
+
+            <!-- Vídeos -->
+            <div class="card" onclick="rpg.abrirModulo('videos')">
+                <h3>🎬 VÍDEOS</h3>
+                <p>Teasers e making of da resistência.</p>
+                <div class="status online">+100 XP • 2/8</div>
+            </div>
+
+            <!-- Roteiro -->
+            <div class="card" onclick="rpg.abrirModulo('roteiro')">
+                <h3>📝 ROTEIRO</h3>
+                <p>Páginas decifradas do roteiro original.</p>
+                <div class="status online">+75 XP • 12/15</div>
+            </div>
+
+            <!-- Curiosidades -->
+            <div class="card" onclick="rpg.abrirModulo('curiosidades')">
+                <h3>🔍 CURIOSIDADES</h3>
+                <p>Easter eggs e segredos escondidos.</p>
+                <div class="status online">+200 XP • 5/25</div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="card" onclick="window.location.href='/cdd/perfil.html'">
+                <h3>👤 PERFIL</h3>
+                <p>Atributos, conquistas e progresso do jogador.</p>
+                <div class="status online">Nível <span class="nivel-atual">1</span></div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <h3>📈 PROGRESSO DA RESISTÊNCIA</h3>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Módulos Explorados</span>
+                    <span class="visitas-atual">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-modulos"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Memórias Coletadas</span>
+                    <span class="memorias-atual">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-memorias"></div>
+                </div>
+            </div>
+            <div class="progress-item">
+                <div class="progress-header">
+                    <span>Conquistas</span>
+                    <span id="conquistas-progress">0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 0%;" id="progress-conquistas"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Log -->
+        <div class="console-log" id="consoleLog">
+            <div>[SISTEMA] 🚀 CDD 3001 v3.0 iniciado</div>
+            <div>[SISTEMA] 📍 Cidade de Deus • Rio de Janeiro • 3001</div>
+            <div>[SISTEMA] 👻 Os Brancos estão ativos</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="version-footer">
+            <span>📍 CIDADE DE DEUS • RIO DE JANEIRO • 3001</span>
+            <span>⚙️ v3.0 • SISTEMA DA RESISTÊNCIA</span>
+            <span>💾 Auto-save ativo</span>
+        </div>
+    </div>
+
+    <script src="/cdd/assets/js/rpg-system.js"></script>
+    <script>
+        // Atualizar interface periodicamente
+        setInterval(() => {
+            if (rpg) {
+                rpg.atualizarInterface();
+                
+                // Atualizar contadores específicos
+                document.getElementById('conquistas-count').textContent = rpg.jogador.progresso.conquistas.length;
+                document.getElementById('inimigos-count').textContent = rpg.jogador.progresso.inimigosDerrotados;
+                document.getElementById('tempo-count').textContent = Math.floor(rpg.jogador.progresso.tempoJogado / 60);
+                
+                // Progress bars
+                const modulosPercent = (rpg.jogador.progresso.visitas.length / 15) * 100;
+                document.getElementById('progress-modulos').style.width = modulosPercent + '%';
+                
+                const memoriasPercent = (rpg.jogador.recursos.memorias / rpg.jogador.recursos.memoriasMax) * 100;
+                document.getElementById('progress-memorias').style.width = memoriasPercent + '%';
+                
+                const conquistasPercent = (rpg.jogador.progresso.conquistas.length / rpg.conquistas.length) * 100;
+                document.getElementById('progress-conquistas').style.width = conquistasPercent + '%';
+                document.getElementById('conquistas-progress').textContent = `${rpg.jogador.progresso.conquistas.length}/${rpg.conquistas.length}`;
+            }
+        }, 100);
+        
+        // Mensagem de boas-vindas
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                rpg.log('👋 Bem-vindo à Resistência, Arquivista!', 'sucesso');
+            }, 1000);
+        });
+    </script>
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+        <a href="/cdd/combate.html" class="btn" style="background: #ff4444; color: white; border: none; padding: 15px; border-radius: 50%; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(255,68,68,0.5);">
+            ⚔️
+        </a>
+    </div>
+</body>
+</html>
