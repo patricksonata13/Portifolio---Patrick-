@@ -1,4 +1,20 @@
-/* ============================================ */
+/* Fonte Courier Prime - mesma do favicon */
+@import 
+url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap');
+
+body {
+    font-family: 'Courier Prime', 'Courier 
+New', monospace;
+    /* resto do seu CSS */
+}
+
+/* Para títulos */
+h1, h2, h3 {
+    font-family: 'Courier Prime', 'Courier 
+New', monospace;
+    font-weight: 700; /* bold */
+}/* 
+============================================ */
 /* ESTILO PRINCIPAL - PATRICK SONATA           */
 /* ============================================ */
 
