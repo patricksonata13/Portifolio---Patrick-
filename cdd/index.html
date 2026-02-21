@@ -539,3 +539,202 @@ var(--accent-secondary));
     </script>
 </body>
 </html>
+
+<!-- SISTEMA DE SOM -->
+<audio id="bg-music" loop volume="0.2" preload="auto">
+    <source src="/cdd/assets/audio/radio-vigia.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// Sistema de áudio da resistência
+(function() {
+    const audio = document.getElementById('bg-music');
+    let tocando = false;
+    
+    // Criar botão de controle
+    const controle = document.createElement('div');
+    controle.innerHTML = '📻';
+    controle.style.cssText = `
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: var(--bg-tertiary);
+        border: 1px solid var(--accent-primary);
+        color: var(--accent-primary);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s;
+        box-shadow: 0 0 20px rgba(255, 217, 102, 0.3);
+    `;
+    
+    controle.onmouseover = () => {
+        controle.style.transform = 'scale(1.1)';
+        controle.style.boxShadow = '0 0 30px rgba(255, 217, 102, 0.5)';
+    };
+    
+    controle.onmouseout = () => {
+        controle.style.transform = 'scale(1)';
+        controle.style.boxShadow = '0 0 20px rgba(255, 217, 102, 0.3)';
+    };
+    
+    controle.onclick = () => {
+        if (tocando) {
+            audio.pause();
+            controle.innerHTML = '📻';
+            controle.style.borderColor = 'var(--accent-primary)';
+            console.log('🔇 Rádio Vigia desligado');
+        } else {
+            audio.play().catch(e => console.log('Áudio bloqueado pelo navegador'));
+            controle.innerHTML = '🔊';
+            controle.style.borderColor = 'var(--success)';
+            console.log('🔊 Rádio Vigia ligado - Frequência da Resistência');
+        }
+        tocando = !tocando;
+    };
+    
+    document.body.appendChild(controle);
+    
+    // Mensagem no console
+    console.log('📻 Rádio Vigia - Sintonize na frequência da resistência');
+})();
+</script>
+
+<!-- ANIMAÇÕES -->
+<style>
+/* Efeito glitch nos títulos */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}
+
+h1:hover {
+    animation: glitch 0.3s infinite;
+    text-shadow: 
+        -2px 0 #ff4444,
+        2px 0 #4a90e2;
+}
+
+/* Loading screen */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s;
+}
+
+.loading-text {
+    color: var(--accent-primary);
+    font-size: 20px;
+    margin-top: 20px;
+    animation: pulse 1s infinite;
+}
+
+.loading-bar {
+    width: 300px;
+    height: 4px;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.loading-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    animation: carregar 2s ease-in-out forwards;
+}
+
+@keyframes carregar {
+    0% { width: 0%; }
+    70% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* Transição entre páginas */
+.fade-out {
+    animation: fadeOut 0.3s forwards;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+
+<!-- LOADING SCREEN -->
+<div class="loading-screen" id="loading">
+    <div style="font-size: 60px; margin-bottom: 20px;">⌛</div>
+    <div class="loading-bar">
+        <div class="loading-progress"></div>
+    </div>
+    <div class="loading-text">CARREGANDO SISTEMA DA RESISTÊNCIA...</div>
+</div>
+
+<script>
+// Remover loading após carregar
+window.addEventListener('load', function() {
+    setTimeout(function() {
+        document.getElementById('loading').style.opacity = '0';
+        setTimeout(function() {
+            document.getElementById('loading').style.display = 'none';
+        }, 500);
+    }, 2000);
+});
+
+// Transição suave nos links
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if (this.href && this.href.startsWith(window.location.origin)) {
+            e.preventDefault();
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = this.href;
+            }, 300);
+        }
+    });
+});
+</script>
+
+<!-- SISTEMA DE CLIMA -->
+<script src="/cdd/assets/js/clima.js"></script>
+
+<style>
+@keyframes slideDown {
+    from { transform: translateY(-100%); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+#clima-indicador {
+    backdrop-filter: blur(5px);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+</style>
