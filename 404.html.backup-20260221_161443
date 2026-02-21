@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>404 - SANKOFA OS</title>
+    <style>
+        body { background: #000; color: #00FF41; font-family: 'Courier New'; 
+               display: flex; justify-content: center; align-items: center; 
+               height: 100vh; text-align: center; padding: 20px; }
+        .terminal { border: 2px solid #00FF41; padding: 40px; }
+        .glitch { animation: glitch 2s infinite; }
+        @keyframes glitch { 
+            0% { opacity: 1; } 90% { opacity: 1; } 
+            91% { opacity: 0; } 92% { opacity: 1; } 
+            93% { opacity: 0; } 94% { opacity: 1; } 
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <h1 class="glitch">ERRO CRÍTICO</h1>
+        <p>Coordenadas não encontradas no SANKOFA OS.</p>
+        <p>O local que você procura foi apagado pela NEOCORP</p>
+        <p>ou ainda não foi escrito.</p>
+        <br>
+        <a href="/" style="color:#00FF41;">→ VOLTAR AO SISTEMA</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDD 3001</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            background: #000; 
+            color: #00FF41; 
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        #container { max-width: 900px; width: 100%; }
+        .screen { 
+            background: #0a0a0a; 
+            border: 2px solid #00FF41; 
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+            display: none;
+        }
+        .screen.active { display: block; }
+        h1 { 
+            color: #00FF41; 
+            text-align: center; 
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+        }
+        button {
+            background: #00FF41;
+            color: #000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            font-family: 'Courier New', monospace;
+        }
+        button:hover {
+            background: #00CC33;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.5);
+        }
+        #gameCanvas {
+            display: block;
+            margin: 20px auto;
+            border: 1px solid #333;
+            background: #000;
+        }
+        #hud {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00FF41;
+        }
+        .intro-text { line-height: 1.8; margin: 20px 0; font-size: 14px; }
+        .controls { text-align: center; margin-top: 15px; font-size: 12px; color: #888; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="intro" class="screen active">
+            <h1>CDD 3001</h1>
+            <div class="intro-text">
+                <p><strong>RIO DE JANEIRO, 3001.</strong></p>
+                <br>
+                <p>A cidade foi formatada. O "Vazio Alvo" transformou</p>
+                <p>os seres em monstros pálidos.</p>
+                <br>
+                <p>Mas na <strong>Cidade de Deus</strong>, a resistência respira.</p>
+                <p>Nossas ruas bíblicas guardam nossa existência.</p>
+                <br>
+                <p><strong>Missão:</strong> Resgate os 3 moradores.</p>
+                <p>A cada morador salvo, a cor volta.</p>
+            </div>
+            <button onclick="start()">COMEÇAR</button>
+        </div>
+
+        <div id="game" class="screen">
+            <h1>CDD 3001</h1>
+            <canvas id="gameCanvas" width="800" height="400"></canvas>
+            <div id="hud">
+                <div>❤️ <span id="lives">3</span></div>
+                <div>SALVOS: <span id="saved">0</span>/3</div>
+                <div>LOCAL: <span id="zone">RUA EDOM</span></div>
+            </div>
+            <div class="controls">Setas: Mover | Espaço: Pular | X: Atacar</div>
+        </div>
+
+        <div id="victory" class="screen">
+            <h1>🏆 VITÓRIA!</h1>
+            <p style="text-align:center; margin:20px 0;">
+                Você expulsou a invasão e protegeu a CDD!
+            </p>
+            <button onclick="location.reload()">JOGAR NOVAMENTE</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        let active = false, keys = {}, cam = 0, saved = 0;
+        
+        const p = { x:50, y:300, w:20, h:30, vx:0, vy:0, speed:5, jump:12, ground:false, lives:3, inv:false };
+        const citizens = [
+            { x:600, y:330, saved:false, name:"Sankofa", c:"#F1C40F" },
+            { x:1400, y:330, saved:false, name:"Afronta", c:"#E74C3C" },
+            { x:2200, y:330, saved:false, name:"Esperança", c:"#9B59B6" }
+        ];
+        const enemies = [
+            { x:400, y:330, s:2, r:100, sx:400, dead:false },
+            { x:1000, y:330, s:3, r:150, sx:1000, dead:false },
+            { x:1800, y:330, s:2.5, r:120, sx:1800, dead:false }
+        ];
+        
+        function start() {
+            document.getElementById('intro').classList.remove('active');
+            document.getElementById('game').classList.add('active');
+            active = true;
+            loop();
+        }
+        
+        window.addEventListener('keydown', e => { keys[e.code] = true; e.preventDefault(); });
+        window.addEventListener('keyup', e => keys[e.code] = false);
+        
+        function loop() {
+            if (!active) return;
+            
+            // Movimento
+            p.vx = keys.ArrowRight ? p.speed : keys.ArrowLeft ? -p.speed : 0;
+            if (keys.Space && p.ground) { p.vy = -p.jump; p.ground = false; }
+            
+            p.vy += 0.6;
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            if (p.y + p.h >= 360) { p.y = 330; p.vy = 0; p.ground = true; }
+            p.x = Math.max(0, Math.min(p.x, 2500));
+            
+            cam = Math.max(0, Math.min(p.x - 200, 1700));
+            
+            // Inimigos
+            enemies.forEach(e => {
+                if (e.dead) return;
+                e.x += e.s;
+                if (Math.abs(e.x - e.sx) > e.r) e.s *= -1;
+                if (!p.inv && Math.abs(p.x - e.x) < 25 && Math.abs(p.y - e.y) < 25) {
+                    p.lives--;
+                    p.inv = true;
+                    setTimeout(() => p.inv = false, 1500);
+                    document.getElementById('lives').textContent = p.lives;
+                    if (p.lives <= 0) { alert('GAME OVER'); location.reload(); }
+                }
+            });
+            
+            // Ataque
+            if (keys.KeyX) {
+                enemies.forEach(e => {
+                    if (!e.dead && Math.abs(p.x - e.x) < 50) e.dead = true;
+                });
+            }
+            
+            // Resgates
+            citizens.forEach(c => {
+                if (!c.saved && Math.abs(p.x - c.x) < 40 && Math.abs(p.y - c.y) < 40) {
+                    c.saved = true;
+                    saved++;
+                    document.getElementById('saved').textContent = saved;
+                    if (saved >= 3) {
+                        active = false;
+                        document.getElementById('game').classList.remove('active');
+                        document.getElementById('victory').classList.add('active');
+                        return;
+                    }
+                }
+            });
+            
+            // Render
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, 800, 400);
+            
+            const sat = saved / 3 * 150;
+            const bri = 2 - saved / 3;
+            canvas.style.filter = `saturate(${sat}%) brightness(${bri})`;
+            
+            ctx.save();
+            ctx.translate(-cam, 0);
+            
+            // Chão
+            ctx.strokeStyle = '#00FF41';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(0, 360);
+            ctx.lineTo(2500, 360);
+            ctx.stroke();
+            
+            // Moradores
+            citizens.forEach(c => {
+                if (!c.saved) {
+                    ctx.fillStyle = c.c;
+                    ctx.fillRect(c.x, c.y, 20, 30);
+                    ctx.fillStyle = '#fff';
+                    ctx.font = '10px monospace';
+                    ctx.fillText(c.name, c.x - 15, c.y - 5);
+                }
+            });
+            
+            // Inimigos
+            enemies.forEach(e => {
+                if (!e.dead) {
+                    ctx.fillStyle = '#fff';
+                    ctx.fillRect(e.x, e.y, 25, 35);
+                    ctx.fillStyle = '#f00';
+                    ctx.fillRect(e.x + 5, e.y + 8, 4, 4);
+                    ctx.fillRect(e.x + 16, e.y + 8, 4, 4);
+                }
+            });
+            
+            // Player
+            ctx.fillStyle = p.inv ? '#f00' : '#0f0';
+            ctx.fillRect(p.x, p.y, p.w, p.h);
+            
+            ctx.restore();
+            
+            requestAnimationFrame(loop);
+        }
+    </script>
+</body>
+</html>
