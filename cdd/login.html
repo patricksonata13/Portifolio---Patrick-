@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDD 3001 • ACESSO</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+        }
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .auth-tab {
+            flex: 1;
+            padding: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-tertiary);
+            cursor: pointer;
+            text-align: center;
+        }
+        .auth-tab.active {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        .auth-form {
+            display: none;
+        }
+        .auth-form.active {
+            display: block;
+        }
+        .auth-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .auth-button {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .auth-button:hover {
+            background: var(--accent-secondary);
+        }
+        .social-login {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .social-button {
+            flex: 1;
+            padding: 10px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .social-button:hover {
+            border-color: var(--accent-primary);
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span>CDD-3001/ACESSO</span>
+            <span>🔐 SISTEMA DA RESISTÊNCIA</span>
+        </div>
+
+        <div class="auth-container">
+            <h1 style="text-align: center; margin-bottom: 30px;">🔐 ACESSO</h1>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="showTab('login')">ENTRAR</div>
+                <div class="auth-tab" onclick="showTab('register')">CADASTRAR</div>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <div id="login-form" class="auth-form active">
+                <input type="email" id="login-email" class="auth-input" placeholder="Email" autocomplete="email">
+                <input type="password" id="login-password" class="auth-input" placeholder="Senha" autocomplete="current-password">
+                <button class="auth-button" onclick="login()">ENTRAR NA RESISTÊNCIA</button>
+                
+                <div class="social-login">
+                    <button class="social-button" onclick="loginGoogle()">
+                        <span>G</span> Google
+                    </button>
+                    <button class="social-button" onclick="loginGithub()">
+                        <span>GH</span> GitHub
+                    </button>
+                </div>
+            </div>
+
+            <!-- REGISTER FORM -->
+            <div id="register-form" class="auth-form">
+                <input type="text" id="register-name" class="auth-input" placeholder="Nome do Arquivista">
+                <input type="email" id="register-email" class="auth-input" placeholder="Email">
+                <input type="password" id="register-password" class="auth-input" placeholder="Senha">
+                <button class="auth-button" onclick="register()">CRIAR CONTA</button>
+            </div>
+
+            <div id="auth-message" style="text-align: center; margin-top: 20px; color: var(--error);"></div>
+        </div>
+
+        <div style="text-align: center; margin: 20px;">
+            <a href="/cdd/" class="btn">← VOLTAR</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://uhchpjdkuogdspkzujua.supabase.co'
+        const SUPABASE_ANON_KEY = 'sb_publishable_7jGY1vUGLgdvoSqy6I9e6g_zl-Wn1Vn'
+        const supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        function showTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'))
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'))
+            
+            if (tab === 'login') {
+                document.querySelector('.auth-tab').classList.add('active')
+                document.getElementById('login-form').classList.add('active')
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active')
+                document.getElementById('register-form').classList.add('active')
+            }
+        }
+
+        async function login() {
+            const email = document.getElementById('login-email').value
+            const password = document.getElementById('login-password').value
+            
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email, password
+            })
+
+            if (error) {
+                document.getElementById('auth-message').textContent = error.message
+            } else {
+                localStorage.setItem('cdd_user', JSON.stringify(data.user))
+                window.location.href = '/cdd/'
+            }
+        }
+
+        async function register() {
+            const name = document.getElementById('register-name').value
+            const email = document.getElementById('register-email').value
+            const password = document.getElementById('register-password').value
+            
+            const { data, error } = await supabase.auth.signUp({
+                email, password,
+                options: { data: { name } }
+            })
+
+            if (error) {
+                document.getElementById('auth-message').textContent = error.message
+            } else {
+                alert('Conta criada! Verifique seu email para confirmar.')
+                showTab('login')
+            }
+        }
+
+        async function loginGoogle() {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'google'
+            })
+        }
+
+        async function loginGithub() {
+            const { error } = await supabase.auth.signInWithOAuth({
+                provider: 'github'
+            })
+        }
+    </script>
+</body>
+</html>

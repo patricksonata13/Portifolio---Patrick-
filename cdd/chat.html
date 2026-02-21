@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDD 3001 • CHAT</title>
+    <link rel="stylesheet" href="/cdd/assets/css/global.css">
+    <style>
+        .chat-container {
+            height: 400px;
+            overflow-y: auto;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            background: var(--bg-tertiary);
+            border-left: 3px solid var(--accent-primary);
+        }
+        .message .user {
+            color: var(--accent-primary);
+            font-weight: bold;
+        }
+        .message .time {
+            color: var(--text-tertiary);
+            font-size: 10px;
+            margin-left: 10px;
+        }
+        .message .text {
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+        .chat-input {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 15px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+        .chat-input button {
+            padding: 15px 30px;
+            background: var(--accent-primary);
+            color: var(--bg-primary);
+            border: none;
+            cursor: pointer;
+        }
+        .online-count {
+            float: right;
+            color: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="terminal-header">
+            <span>CDD-3001/CHAT</span>
+            <span>💬 RESISTÊNCIA ONLINE <span id="online-count">0</span></span>
+        </div>
+
+        <h1>💬 CHAT DA RESISTÊNCIA</h1>
+
+        <div class="chat-container" id="chat-messages">
+            Carregando mensagens...
+        </div>
+
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Digite sua mensagem..." maxlength="200">
+            <button onclick="sendMessage()">ENVIAR</button>
+        </div>
+
+        <div style="text-align: center; margin: 20px;">
+            <a href="/cdd/" class="btn">← VOLTAR</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const SUPABASE_URL = 'https://uhchpjdkuogdspkzujua.supabase.co'
+        const SUPABASE_ANON_KEY = 'sb_publishable_7jGY1vUGLgdvoSqy6I9e6g_zl-Wn1Vn'
+        const supabase = supabaseClient.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        // CRIAR TABELA DE MENSAGENS (executar no SQL Editor)
+        /*
+        CREATE TABLE mensagens (
+            id SERIAL PRIMARY KEY,
+            user_id UUID REFERENCES jogadores(id),
+            user_name TEXT,
+            message TEXT,
+            created_at TIMESTAMP DEFAULT NOW()
+        );
+        */
+
+        async function loadMessages() {
+            const { data } = await supabase
+                .from('mensagens')
+                .select('*')
+                .order('created_at', { ascending: false })
+                .limit(50)
+
+            const container = document.getElementById('chat-messages')
+            container.innerHTML = data.reverse().map(msg => `
+                <div class="message">
+                    <span class="user">${msg.user_name}</span>
+                    <span class="time">${new Date(msg.created_at).toLocaleTimeString()}</span>
+                    <div class="text">${msg.message}</div>
+                </div>
+            `).join('')
+        }
+
+        // RECEBER MENSAGENS EM TEMPO REAL
+        supabase
+            .channel('mensagens')
+            .on('postgres_changes', 
+                { event: 'INSERT', schema: 'public', table: 'mensagens' },
+                payload => {
+                    loadMessages() // Recarregar ao receber nova mensagem
+                }
+            )
+            .subscribe()
+
+        async function sendMessage() {
+            const input = document.getElementById('message-input')
+            const message = input.value.trim()
+            if (!message) return
+
+            const user = JSON.parse(localStorage.getItem('cdd_user') || '{}')
+            
+            await supabase
+                .from('mensagens')
+                .insert({
+                    user_id: user.id,
+                    user_name: user.user_metadata?.name || 'Arquivista',
+                    message: message
+                })
+
+            input.value = ''
+        }
+
+        // ATUALIZAR CONTAGEM DE ONLINE
+        setInterval(async () => {
+            const { count } = await supabase
+                .from('jogadores')
+                .select('*', { count: 'exact', head: true })
+            document.getElementById('online-count').textContent = count || 0
+        }, 10000)
+
+        loadMessages()
+        setInterval(loadMessages, 5000)
+    </script>
+</body>
+</html>
