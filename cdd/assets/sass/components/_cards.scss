@@ -1,0 +1,44 @@
+.card {
+    background: $bg-tertiary;
+    border: 1px solid $border-color;
+    padding: $spacing-lg $spacing-md;
+    transition: all $transition-normal $ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: "▶";
+        position: absolute;
+        bottom: $spacing-sm;
+        right: $spacing-sm;
+        color: $accent-primary;
+        opacity: 0;
+        transition: opacity $transition-normal;
+    }
+
+    &:hover {
+        border-color: $accent-primary;
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+
+        &::after {
+            opacity: 1;
+        }
+    }
+
+    h3 {
+        color: $accent-primary;
+        margin-bottom: $spacing-sm;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+    }
+
+    p {
+        color: $text-secondary;
+        margin-bottom: $spacing-md;
+        font-size: 0.9rem;
+    }
+}

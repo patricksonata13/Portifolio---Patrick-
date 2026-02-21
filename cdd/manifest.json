@@ -1,0 +1,21 @@
+{
+    "name": "CDD 3001 - RPG Transmídia",
+    "short_name": "CDD 3001",
+    "description": "RPG da resistência na Cidade de Deus em 3001",
+    "start_url": "/cdd/",
+    "display": "standalone",
+    "background_color": "#0a0c0e",
+    "theme_color": "#ffd966",
+    "icons": [
+        {
+            "src": "/cdd/assets/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/cdd/assets/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

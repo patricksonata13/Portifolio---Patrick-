@@ -1,0 +1,30 @@
+// BASE
+@import 'base/variables';
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/animations';
+
+// LAYOUTS
+@import 'layouts/terminal';
+@import 'layouts/grid';
+@import 'layouts/header';
+@import 'layouts/footer';
+
+// COMPONENTS
+@import 'components/buttons';
+@import 'components/cards';
+@import 'components/menu';
+@import 'components/status';
+@import 'components/console';
+@import 'components/loading';
+@import 'components/clima';
+
+// PAGES
+@import 'pages/home';
+@import 'pages/perfil';
+@import 'pages/missoes';
+@import 'pages/combate';
+
+// THEMES
+@import 'themes/cyberpunk';
+@import 'themes/dark';

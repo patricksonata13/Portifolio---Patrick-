@@ -738,3 +738,12 @@ document.querySelectorAll('a').forEach(link => {
     letter-spacing: 1px;
 }
 </style>
+<link rel="manifest" href="/cdd/manifest.json">
+<meta name="theme-color" content="#ffd966">
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/cdd/sw.js')
+        .then(reg => console.log('SW registrado:', reg))
+        .catch(err => console.log('SW erro:', err));
+}
+</script>
