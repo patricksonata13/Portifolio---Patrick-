@@ -25,3 +25,12 @@ package-lock.json
 
 # Local Netlify folder
 .netlify
+
+# Nunca mais subir backups
+*.backup
+*.backup-*
+*.bak
+*.bak-*
+*.old
+1234
+1234.pub
