@@ -43,3 +43,5 @@ package-lock.json
 *.old
 1234
 1234.pub
+*.sh
+*.sh
