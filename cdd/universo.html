@@ -2,126 +2,291 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>Universo CDD 3001</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universo CDD 3001 | Patrick Sonata</title>
+<meta name="description" content="Universo narrativo do projeto CDD 3001: personagens, história, mapa, missões e arte do mundo criado por Patrick Sonata.">
+<meta name="robots" content="index, follow">
 <link rel="stylesheet" href="/assets/css/style.css">
-</head>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
+body {
+    background: #0a0c0e;
+    color: #e2e8f0;
+    font-family: 'Courier New', monospace;
+    line-height: 1.6;
+}
+
+.top-bar {
+    background: #0f1215;
+    border-bottom: 1px solid #1e293b;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-bar a {
+    color: #ffd966;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.top-bar .title {
+    color: #b3a0ff;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+.hero {
+    padding: 80px 24px 60px;
+    text-align: center;
+    border-bottom: 1px solid #1e293b;
+}
+
+.hero h1 {
+    font-size: 2.8rem;
+    color: #ffd966;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+}
+
+.hero p {
+    color: #64748b;
+    font-size: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 24px;
+}
+
+.card {
+    background: #0f1215;
+    border: 1px solid #1e293b;
+    padding: 28px;
+    text-decoration: none;
+    color: #e2e8f0;
+    transition: border-color 0.2s, transform 0.2s;
+    display: block;
+}
+
+.card:hover {
+    border-color: #ffd966;
+    transform: translateY(-3px);
+}
+
+.card .icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+}
+
+.card h3 {
+    color: #ffd966;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #64748b;
+    font-size: 0.85rem;
+}
+
+.rpg-section {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 24px;
+}
+
+.rpg-section h2 {
+    color: #b3a0ff;
+    letter-spacing: 3px;
+    font-size: 1rem;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+.rpg-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.rpg-btn {
+    background: transparent;
+    border: 1px solid #1e293b;
+    color: #94a3b8;
+    padding: 10px 18px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+}
+
+.rpg-btn:hover {
+    border-color: #b3a0ff;
+    color: #b3a0ff;
+}
+
+.back {
+    display: block;
+    text-align: center;
+    color: #64748b;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 40px 0;
+    letter-spacing: 1px;
+    border-top: 1px solid #1e293b;
+}
+
+.back:hover { color: #ffd966; }
+
+#status-jogador {
+    background: #0f1215;
+    border: 1px solid #1e293b;
+    padding: 20px 24px;
+    margin: 0 24px 40px;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: none;
+    font-size: 0.85rem;
+    color: #94a3b8;
+}
+
+#status-jogador.ativo { display: block; }
+
+@media (max-width: 768px) {
+    .hero h1 { font-size: 1.8rem; }
+    .grid { grid-template-columns: 1fr; }
+    .rpg-buttons { flex-direction: column; }
+}
+</style>
+</head>
 <body>
 
-<h1>UNIVERSO CDD 3001</h1>
-<p>Explore o mundo da Cidade de Deus em 3001.</p>
+<div class="top-bar">
+    <a href="/cdd/">← CDD TERMINAL</a>
+    <span class="title">UNIVERSO CDD 3001</span>
+    <a href="/">PORTFÓLIO</a>
+</div>
+
+<div class="hero">
+    <h1>UNIVERSO CDD 3001</h1>
+    <p>Cidade de Deus, ano 3001. Um mundo pós-colapso onde a memória é poder e a periferia resistiu.</p>
+</div>
 
 <div class="grid">
+    <a href="/cdd/historia/" class="card">
+        <div class="icon">📜</div>
+        <h3>HISTÓRIA</h3>
+        <p>Linha do tempo, eventos e a construção do universo narrativo.</p>
+    </a>
 
-<a href="/cdd/historia/">História</a>
+    <a href="/cdd/historia/personagens/" class="card">
+        <div class="icon">👥</div>
+        <h3>PERSONAGENS</h3>
+        <p>Demario, Marinalva e os sobreviventes do CDD pós-colapso.</p>
+    </a>
 
-<a href="/cdd/historia/personagens/">Personagens</a>
+    <a href="/cdd/mapa/" class="card">
+        <div class="icon">🗺️</div>
+        <h3>MAPA</h3>
+        <p>Territórios, zonas de conflito e pontos de interesse da Cidade de Deus em 3001.</p>
+    </a>
 
-<a href="/cdd/mapa/">Mapa</a>
+    <a href="/cdd/missoes/" class="card">
+        <div class="icon">⚔️</div>
+        <h3>MISSÕES</h3>
+        <p>Objetivos ativos, missões diárias e a missão principal.</p>
+    </a>
 
-<a href="/cdd/missoes/">Missões</a>
+    <a href="/cdd/inventario/" class="card">
+        <div class="icon">🎒</div>
+        <h3>INVENTÁRIO</h3>
+        <p>Itens coletados, fragmentos de memória e equipamentos.</p>
+    </a>
 
-<a href="/cdd/inventario/">Inventário</a>
+    <a href="/cdd/musica/" class="card">
+        <div class="icon">🎵</div>
+        <h3>MÚSICA</h3>
+        <p>Trilha sonora e sound design do universo.</p>
+    </a>
 
-<a href="/cdd/musica/">Música</a>
+    <a href="/cdd/arte/" class="card">
+        <div class="icon">🎨</div>
+        <h3>ARTE</h3>
+        <p>Concept art, storyboards e ilustrações do mundo.</p>
+    </a>
 
-<a href="/cdd/arte/">Arte</a>
+    <a href="/cdd/videos/" class="card">
+        <div class="icon">🎬</div>
+        <h3>VÍDEOS</h3>
+        <p>Teaser, making of e conteúdo audiovisual.</p>
+    </a>
 
-<a href="/cdd/videos/">Vídeos</a>
-
-<a href="/cdd/games/demo/">🎮 Jogar Demo</a>
-
+    <a href="/cdd/game/mapa-gta.html" class="card">
+        <div class="icon">🎮</div>
+        <h3>JOGAR</h3>
+        <p>Entrar no RPG narrativo do CDD 3001. Explore o mapa, colete itens, complete missões.</p>
+    </a>
 </div>
+
+<!-- PAINEL RPG -->
+<div class="rpg-section">
+    <h2>▷ SISTEMA RPG</h2>
+    <div id="status-jogador"></div>
+    <div class="rpg-buttons">
+        <button class="rpg-btn" onclick="falarComNPC('Joice')">💬 Falar com Joice</button>
+        <button class="rpg-btn" onclick="falarComNPC('Sabrina')">💬 Falar com Sabrina</button>
+        <button class="rpg-btn" onclick="pegarItem('Caderno de Missões')">👜 Pegar Item</button>
+        <button class="rpg-btn" onclick="usarItem('Caderno de Missões')">⚡ Usar Item</button>
+        <button class="rpg-btn" onclick="mostrarStatus()">📊 Status</button>
+        <button class="rpg-btn" onclick="mostrarMapa()">🗺️ Zonas</button>
+        <button class="rpg-btn" onclick="desbloquearZona('Beco da Internet')">🔓 Desbloquear Beco</button>
+        <button class="rpg-btn" onclick="miniJogoAdivinha()">🎲 Mini-jogo</button>
+        <button class="rpg-btn" onclick="gerarMissao()">⚡ Gerar Missão</button>
+    </div>
+</div>
+
+<a href="/cdd/" class="back">← VOLTAR AO TERMINAL CDD</a>
+
+<!-- SCRIPTS RPG — carregados uma única vez -->
+<script src="/assets/js/xp-niveis.js"></script>
+<script src="/assets/js/inventario-evolutivo.js"></script>
+<script src="/assets/js/mapa.js"></script>
+<script src="/assets/js/npcs.js"></script>
+<script src="/assets/js/dialogos.js"></script>
+<script src="/assets/js/mini-jogo.js"></script>
+<script src="/assets/js/missoes-ia.js"></script>
+<script src="/assets/js/conquistas.js"></script>
+<script src="/assets/js/save-game.js"></script>
+
+<script>
+function mostrarStatus() {
+    const el = document.getElementById('status-jogador');
+    el.classList.add('ativo');
+    el.innerHTML = `
+        JOGADOR: ${jogador.nome} &nbsp;|&nbsp;
+        NÍVEL: ${jogador.nivel} &nbsp;|&nbsp;
+        XP: ${jogador.xp} &nbsp;|&nbsp;
+        ITENS: ${jogador.inventario.length > 0 ? jogador.inventario.join(', ') : 'nenhum'}
+    `;
+}
+</script>
 
 </body>
 </html>
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/cdd/mapa-interativo.html">🗺 Ver mapa da Cidade de Deus</a>
-</p>
-
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/painel-ia-cdd.html">🧠 Laboratório Narrativo CDD</a>
-</p>
-
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/cdd/mapa-exploravel.html">
-🗺 Explorar mapa da Cidade de Deus
-</a>
-</p>
-
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/cdd/game/escolha.html">
-🎮 Iniciar experiência narrativa
-</a>
-</p>
-
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/cdd/game/mapa-gta.html">
-🎮 Entrar no jogo CDD
-</a>
-</p>
-
-
-<br><br>
-
-<p style="text-align:center">
-<a href="/cdd/game/mapa-gta.html">
-🎮 Entrar no RPG CDD 3001
-</a>
-</p>
-
-<script src="/assets/js/xp-system.js"></script>
-<script src="/assets/js/conquistas.js"></script>
-<script src="/assets/js/radar-missoes.js"></script>
-<script src="/assets/js/missoes-ia.js"></script>
-<script src="/assets/js/npcs.js"></script>
-<script src="/assets/js/save-game.js"></script>
-<script src="/assets/js/mapa-feedback.js"></script>
-
-
-<!-- Novos scripts do RPG -->
-<script src="/assets/js/dialogos.js"></script>
-<script src="/assets/js/inventario.js"></script>
-<script src="/assets/js/mini-jogo.js"></script>
-
-<p style="text-align:center">
-<button onclick="dialogo1.iniciar()">💬 Falar com Joice</button>
-<button onclick="pegarItem('Caderno de Missões')">👜 Pegar Item</button>
-<button onclick="mostrarInventario()">📦 Inventário</button>
-<button onclick="miniJogoAdivinha()">🎲 Mini-jogo</button>
-</p>
-
-
-<!-- Scripts RPG Completo -->
-<script src="/assets/js/dialogos.js"></script>
-<script src="/assets/js/inventario-evolutivo.js"></script>
-<script src="/assets/js/xp-niveis.js"></script>
-<script src="/assets/js/mapa.js"></script>
-<script src="/assets/js/npcs.js"></script>
-
-<p style="text-align:center;margin-top:20px">
-<button onclick="dialogo1.iniciar()">💬 Falar com Joice</button>
-<button onclick="pegarItem('Caderno de Missões')">👜 Pegar Item</button>
-<button onclick="usarItem('Caderno de Missões')">⚡ Usar Item</button>
-<button onclick="mostrarStatus()">📊 Status do Jogador</button>
-<button onclick="mostrarMapa()">🗺️ Ver Mapa</button>
-<button onclick="desbloquearZona('Beco da Internet')">🔓 Desbloquear Beco</button>
-<button onclick="falarComNPC('Sabrina')">💬 Falar com Sabrina</button>
-<button onclick="miniJogoAdivinha()">🎲 Mini-jogo</button>
-</p>
-
