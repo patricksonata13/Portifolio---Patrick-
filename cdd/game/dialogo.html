@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<title>Encontro</title>
+
+<style>
+
+body{
+background:#000;
+color:white;
+font-family:Arial;
+max-width:700px;
+margin:auto;
+padding:40px;
+}
+
+.opcao{
+display:block;
+margin:15px 0;
+color:#00ffcc;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Você encontra um informante</h2>
+
+<p>"Tem algo acontecendo no beco... quer saber?"</p>
+
+<div class="opcao" onclick="aceitar()">Sim, conte mais</div>
+
+<div class="opcao" onclick="recusar()">Não tenho tempo</div>
+
+<script>
+
+function aceitar(){
+
+alert("Nova missão desbloqueada!")
+
+}
+
+function recusar(){
+
+alert("Você perdeu uma pista")
+
+}
+
+</script>
+
+</body>
+</html>

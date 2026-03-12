@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Perfil do Jogador</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+
+body{
+background:#0b0b0b;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Perfil do Jogador</h1>
+
+<p id="itens"></p>
+
+<script>
+
+let inventario = JSON.parse(localStorage.getItem("inventario")) || []
+
+document.getElementById("itens").innerHTML =
+"Itens coletados: " + inventario.length
+
+</script>
+
+</body>
+</html>

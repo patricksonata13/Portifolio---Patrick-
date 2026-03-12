@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Painel de Projetos</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+
+body{
+max-width:900px;
+margin:auto;
+font-family:Arial;
+padding:40px;
+}
+
+input, textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+font-size:16px;
+}
+
+button{
+padding:15px 25px;
+font-size:16px;
+cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Painel de Publicação de Projetos</h1>
+
+<input id="titulo" placeholder="Título do projeto">
+
+<input id="tipo" placeholder="Tipo (Filme, Série, Peça, Game)">
+
+<textarea id="descricao" placeholder="Descrição"></textarea>
+
+<button onclick="criarProjeto()">Gerar página</button>
+
+<p id="status"></p>
+
+<script src="/assets/js/projetos.js"></script>
+
+</body>
+</html>

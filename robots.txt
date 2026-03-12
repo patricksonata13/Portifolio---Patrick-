@@ -1,3 +1,8 @@
 User-agent: *
 Allow: /
+
+Disallow: /admin/
+Disallow: /src/
+Disallow: /assets/backups/
+
 Sitemap: https://patricksonata.com.br/sitemap.xml

@@ -726,3 +726,29 @@ h1 {
         height: 38px;
     }
 }
+
+/* UNIVERSO CDD */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+margin-top:40px;
+}
+
+.grid a{
+background:#111;
+color:white;
+padding:30px;
+text-align:center;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+transition:0.3s;
+}
+
+.grid a:hover{
+background:#333;
+transform:scale(1.05);
+}
+

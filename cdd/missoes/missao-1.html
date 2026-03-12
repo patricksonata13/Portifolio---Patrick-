@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Missão 1</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+body{
+background:#0d0d0d;
+color:white;
+font-family:Arial;
+max-width:800px;
+margin:auto;
+padding:40px;
+}
+button{
+padding:10px 20px;
+margin-top:20px;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Missão: O Drone Perdido</h1>
+
+<p>
+Um drone caiu em uma área abandonada da Cidade de Deus.
+Você precisa recuperá-lo antes que outra facção encontre.
+</p>
+
+<button onclick="sucesso()">Recuperar Drone</button>
+
+<script>
+
+function sucesso(){
+
+alert("Missão completada!")
+
+let inventario = JSON.parse(localStorage.getItem("inventario")) || []
+
+inventario.push("Drone Recuperado")
+
+localStorage.setItem("inventario", JSON.stringify(inventario))
+
+}
+
+</script>
+
+</body>
+</html>

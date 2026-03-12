@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Mapa da Cidade de Deus 3001</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+
+body{
+background:#0a0a0a;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+h1{
+margin-top:40px;
+}
+
+.mapa{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+max-width:900px;
+margin:50px auto;
+}
+
+.area{
+background:#111;
+padding:40px;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.area:hover{
+background:#1f1f1f;
+transform:scale(1.05);
+}
+
+a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mapa da Cidade de Deus 3001</h1>
+
+<p>Explore as zonas do universo CDD</p>
+
+<div class="mapa">
+
+<a href="/cdd/historia/">
+<div class="area">
+CENTRO HISTÓRICO
+</div>
+</a>
+
+<a href="/cdd/missoes/">
+<div class="area">
+ZONA DAS MISSÕES
+</div>
+</a>
+
+<a href="/cdd/historia/personagens/">
+<div class="area">
+BAIRRO DOS PERSONAGENS
+</div>
+</a>
+
+<a href="/cdd/inventario/">
+<div class="area">
+MERCADO NEGRO
+</div>
+</a>
+
+<a href="/cdd/musica/">
+<div class="area">
+DISTRITO SONORO
+</div>
+</a>
+
+<a href="/cdd/games/">
+<div class="area">
+ARENA DIGITAL
+</div>
+</a>
+
+</div>
+
+<p>
+<a href="/cdd/universo.html">← Voltar ao Universo</a>
+</p>
+
+</body>
+</html>

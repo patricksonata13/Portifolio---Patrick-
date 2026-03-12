@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+<meta charset="UTF-8">
+<title>Mapa CDD</title>
+
+<link rel="stylesheet" href="/assets/css/style.css">
+
+<style>
+
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+.mapa{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+max-width:800px;
+margin:40px auto;
+}
+
+.area{
+background:#1a1a1a;
+padding:40px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.area:hover{
+background:#333;
+transform:scale(1.05);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Mapa da Cidade de Deus</h1>
+
+<div class="mapa">
+
+<a href="/cdd/missoes/missao-1.html">
+<div class="area">Centro</div>
+</a>
+
+<a href="/cdd/game/escolha.html">
+<div class="area">Beco da Internet</div>
+</a>
+
+<a href="/cdd/personagens.html">
+<div class="area">Conjunto Azul</div>
+</a>
+
+<a href="/cdd/inventario/">
+<div class="area">Mercado</div>
+</a>
+
+<a href="/cdd/musica/">
+<div class="area">Baile</div>
+</a>
+
+<a href="/cdd/videos/">
+<div class="area">Praça</div>
+</a>
+
+</div>
+
+</body>
+</html>
