@@ -927,3 +927,99 @@ transform:scale(1.05);
         font-size: 7rem;
     }
 }
+
+/* ========================================
+   CORREÇÕES FORÇADAS - FONTE E ABAS
+   ======================================== */
+
+/* Garantir fonte monoespaçada em TODOS os textos */
+body, button, input, textarea, .nav-top a, .nav-abas button, .mobile-sidebar .m-item,
+h1, h2, h3, p, a, .hero, .hero-eyebrow, .hero-sub, .script-card, .scene-heading,
+.action, .transition, .credits, .perfil-nome, .perfil-cargo, .perfil-meta,
+.portfolio-tag, .portfolio-info h3, .portfolio-info p {
+    font-family: 'Courier New', Courier, monospace !important;
+}
+
+/* Ajuste específico para títulos que usavam serifada */
+.hero h1, .perfil-nome, .portfolio-header h2, .portfolio-info h3 {
+    font-family: 'Courier New', Courier, monospace !important;
+    font-weight: bold; /* opcional, para dar destaque */
+}
+
+/* Melhorias nas abas para evitar sobreposição */
+.nav-abas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 5px;
+}
+
+.nav-abas button {
+    flex: 0 1 auto;
+    min-width: 100px;
+    white-space: nowrap;
+    padding: 10px 20px;
+    font-size: 12px;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+/* Para telas pequenas, empilhar e ocupar largura total */
+@media (max-width: 768px) {
+    .nav-abas {
+        flex-direction: column;
+        width: 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    .nav-abas button {
+        width: 100%;
+        min-width: auto;
+        white-space: normal;
+        padding: 12px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+    .nav-abas button:last-child {
+        border-bottom: none;
+    }
+}
+
+/* Ajuste no menu superior para não invadir */
+.nav-top {
+    position: fixed;
+    top: 20px;
+    right: 30px;
+    left: auto;
+    display: flex;
+    gap: 8px;
+    z-index: 1000;
+    background: transparent;
+    padding: 10px 15px;
+    border-radius: 4px;
+}
+
+.nav-top a {
+    color: #888;
+    font-size: 12px;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+@media (max-width: 1024px) {
+    .nav-top a {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+}
+
+/* Garantir que o conteúdo das seções não apareça sobreposto */
+.secao, #painel-portfolio {
+    position: relative;
+    z-index: 1;
+    background: var(--bg);
+    margin-top: 20px;
+}
