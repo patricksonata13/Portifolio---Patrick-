@@ -45,3 +45,9 @@ package-lock.json
 1234.pub
 *.sh
 *.sh
+*.sh
+*.log
+.DS_Store
+backups-html/
+assets/backups/
+node_modules/
