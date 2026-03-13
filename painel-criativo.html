@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel Criativo | Patrick Sonata</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+    --bg: #0a0c0e; --surface: #0f1215; --border: #1e293b;
+    --text: #e2e8f0; --muted: #64748b; --accent: #ffd966;
+    --purple: #b3a0ff; --green: #4ade80;
+}
+body { background: var(--bg); color: var(--text); font-family: 'Courier New', monospace; min-height: 100vh; }
+.topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 14px 28px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; }
+.topbar a { color: var(--accent); text-decoration: none; font-size: 12px; letter-spacing: 1px; }
+.topbar .title { color: var(--purple); font-size: 12px; letter-spacing: 3px; }
+.tabs { display: flex; gap: 2px; background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; overflow-x: auto; }
+.tab { padding: 14px 20px; font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 2px; background: transparent; border: none; border-bottom: 2px solid transparent; color: var(--muted); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.tab:hover { color: var(--text); }
+.tab.ativo { color: var(--accent); border-bottom-color: var(--accent); }
+.painel { display: none; padding: 40px 28px; max-width: 1100px; margin: 0 auto; }
+.painel.ativo { display: block; }
+.painel h2 { color: var(--purple); font-size: 11px; letter-spacing: 3px; border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 28px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 40px; }
+.card { background: var(--surface); border: 1px solid var(--border); padding: 24px; }
+.card h3 { color: var(--accent); font-size: 11px; letter-spacing: 2px; margin-bottom: 8px; }
+.card p { color: var(--muted); font-size: 12px; line-height: 1.6; margin-bottom: 16px; }
+.btn { background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 8px 14px; font-family: 'Courier New', monospace; font-size: 11px; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; text-decoration: none; display: inline-block; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn-primary { border-color: var(--accent); color: var(--accent); }
+.btn-purple { border-color: var(--purple); color: var(--purple); }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; color: var(--muted); font-size: 11px; letter-spacing: 1px; margin-bottom: 8px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 10px 14px; font-family: 'Courier New', monospace; font-size: 13px; outline: none; transition: border-color 0.2s; }
+.form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.gerador-output { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--purple); padding: 20px; margin-top: 20px; min-height: 60px; font-size: 13px; color: var(--text); line-height: 1.6; display: none; white-space: pre-line; }
+.gerador-output.ativo { display: block; }
+.status-bar { background: var(--surface); border: 1px solid var(--border); padding: 16px 20px; display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; font-size: 12px; }
+.status-item { color: var(--muted); }
+.status-item span { color: var(--green); font-weight: bold; }
+.projetos-table { width: 100%; border-collapse: collapse; }
+.projetos-table th { text-align: left; color: var(--muted); font-size: 10px; letter-spacing: 2px; padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.projetos-table td { padding: 14px; border-bottom: 1px solid var(--border); font-size: 12px; }
+.projetos-table tr:hover td { background: var(--surface); }
+.tag { display: inline-block; padding: 3px 10px; font-size: 10px; letter-spacing: 1px; border: 1px solid var(--border); color: var(--muted); }
+.tag.serie { border-color: var(--purple); color: var(--purple); }
+.tag.filme { border-color: var(--accent); color: var(--accent); }
+.tag.teatro { border-color: var(--green); color: var(--green); }
+.tag.game { border-color: #f87171; color: #f87171; }
+</style>
+</head>
+<body>
+<div class="topbar">
+    <a href="/">← PORTFÓLIO</a>
+    <span class="title">PAINEL CRIATIVO</span>
+    <a href="/cdd/">CDD 3001</a>
+</div>
+<div class="tabs">
+    <button class="tab ativo" onclick="abrirTab('projetos', this)">PROJETOS</button>
+    <button class="tab" onclick="abrirTab('gerador', this)">GERADOR CDD</button>
+    <button class="tab" onclick="abrirTab('missoes', this)">MISSÕES</button>
+    <button class="tab" onclick="abrirTab('personagens', this)">PERSONAGENS</button>
+    <button class="tab" onclick="abrirTab('historias', this)">HISTÓRIAS</button>
+</div>
+<div id="tab-projetos" class="painel ativo">
+    <h2>▷ PROJETOS 2026</h2>
+    <div class="status-bar">
+        <div class="status-item">SÉRIES: <span>6</span></div>
+        <div class="status-item">FILMES: <span>2</span></div>
+        <div class="status-item">TEATRO: <span>1</span></div>
+        <div class="status-item">GAMES: <span>1</span></div>
+        <div class="status-item">TOTAL: <span>10</span></div>
+    </div>
+    <table class="projetos-table">
+        <thead><tr><th>PROJETO</th><th>TIPO</th><th>STATUS</th><th>PLATAFORMA</th></tr></thead>
+        <tbody>
+            <tr><td>Pablo &amp; Luisão</td><td><span class="tag serie">SÉRIE</span></td><td>Em produção</td><td>Globoplay</td></tr>
+            <tr><td>Humor Negro</td><td><span class="tag serie">SÉRIE</span></td><td>Entregue</td><td>Multishow</td></tr>
+            <tr><td>CDD 3001</td><td><span class="tag game">GAME</span></td><td>Em desenvolvimento</td><td>Godot / Web</td></tr>
+            <tr><td>Cidade de Deus 1986</td><td><span class="tag filme">FILME</span></td><td>Roteiro entregue</td><td>Rio Filmes</td></tr>
+            <tr><td>Pop! Pop! Pop!</td><td><span class="tag serie">SÉRIE</span></td><td>Em negociação</td><td>Editora Abril</td></tr>
+            <tr><td>Pelada</td><td><span class="tag teatro">TEATRO</span></td><td>Produzido</td><td>Temporada 2023</td></tr>
+            <tr><td>KUFILA</td><td><span class="tag teatro">TEATRO</span></td><td>Em desenvolvimento</td><td>Teatro / Podcast</td></tr>
+        </tbody>
+    </table>
+    <br>
+    <div class="form-group"><label>ADICIONAR PROJETO</label><input type="text" id="novo-projeto" placeholder="Nome do projeto"></div>
+    <div style="display:flex;gap:10px">
+        <select id="novo-tipo" style="background:#0f1215;border:1px solid #1e293b;color:#e2e8f0;padding:10px;font-family:'Courier New';flex:1">
+            <option>SÉRIE</option><option>FILME</option><option>TEATRO</option><option>GAME</option><option>LIVRO</option>
+        </select>
+        <button class="btn btn-primary" onclick="adicionarProjeto()">[ ADICIONAR ]</button>
+    </div>
+</div>
+<div id="tab-gerador" class="painel">
+    <h2>▷ LABORATÓRIO NARRATIVO — CDD 3001</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>GERAR MISSÃO</h3>
+            <p>Cria uma missão aleatória para o universo CDD 3001.</p>
+            <button class="btn btn-purple" onclick="gerarMissao()">[ GERAR ]</button>
+        </div>
+        <div class="card">
+            <h3>GERAR PERSONAGEM</h3>
+            <p>Cria um personagem com nome, habilidade e origem.</p>
+            <button class="btn btn-purple" onclick="gerarPersonagem()">[ GERAR ]</button>
+        </div>
+        <div class="card">
+            <h3>GERAR HISTÓRIA</h3>
+            <p>Gera uma premissa narrativa para o universo.</p>
+            <button class="btn btn-purple" onclick="gerarHistoria()">[ GERAR ]</button>
+        </div>
+    </div>
+    <div class="form-group"><label>TEMA (opcional)</label><input type="text" id="tema-input" placeholder="Ex: hacker, drone, baile funk, resistência..."></div>
+    <button class="btn btn-primary" onclick="gerarTudo()">[ GERAR TUDO ]</button>
+    <div id="gerador-output" class="gerador-output"></div>
+</div>
+<div id="tab-missoes" class="painel">
+    <h2>▷ MISSÕES ATIVAS — CDD 3001</h2>
+    <div id="lista-missoes"></div>
+    <br>
+    <div class="form-group"><label>NOVA MISSÃO</label><input type="text" id="nova-missao" placeholder="Descreva a missão..."></div>
+    <button class="btn btn-primary" onclick="adicionarMissao()">[ ADICIONAR MISSÃO ]</button>
+</div>
+<button class="btn" id="export-btn" onclick="exportarDados()">[ EXPORTAR JSON ]</button>
+<div id="tab-ultimate" class="painel">
+    <h2>▷ LABORATÓRIO CDD 3001 — VERSÃO ULTIMATE</h2>
+    <p>Gere missões, personagens e itens colecionáveis inspirados na Cidade de Deus.</p>
+    <div class="grid">
+        <div class="card">
+            <h3>GERAR MISSÃO</h3>
+            <p>Missões no estilo Cidade de Deus: tráfico, baile, favela, resistência.</p>
+            <button class="btn btn-purple" onclick="gerarMissao()">[ GERAR MISSÃO ]</button>
+        </div>
+        <div class="card">
+            <h3>GERAR PERSONAGEM</h3>
+            <p>Personagens com nome, função e origem na CDD.</p>
+            <button class="btn btn-purple" onclick="gerarPersonagem()">[ GERAR PERSONAGEM ]</button>
+        </div>
+        <div class="card">
+            <h3>GERAR OBJETO COLECIONÁVEL</h3>
+            <p>Itens especiais do universo CDD, como motos, rádios, fitas de baile funk.</p>
+            <button class="btn btn-purple" onclick="gerarObjeto()">[ GERAR OBJETO ]</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>TEMA (opcional)</label>
+        <input type="text" id="tema-input-ultimate" placeholder="Ex: gangue, baile funk, drone, comunidade...">
+    </div>
+    <button class="btn btn-primary" onclick="gerarTudoUltimate()">[ GERAR TUDO ULTIMATE ]</button>
+    <div id="gerador-output-ultimate" class="gerador-output"></div>
+    <br>
+    <button class="btn" id="export-btn-ultimate" onclick="exportarDadosUltimate()">[ EXPORTAR JSON ULTIMATE ]</button>
+</div>
+<div id="tab-rpg" class="painel">
+    <h2>▷ CDD 3001 — SIMULAÇÃO RPG</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>SIMULAR MISSÃO</h3>
+            <p>Testa a execução de uma missão com seus personagens e objetos.</p>
+            <button class="btn btn-purple" onclick="simularMissao()">[ SIMULAR ]</button>
+        </div>
+        <div class="card">
+            <h3>RANKING DE PERSONAGENS</h3>
+            <div id="ranking-personagens"></div>
+        </div>
+        <div class="card">
+            <h3>INVENTÁRIO</h3>
+            <div id="inventario"></div>
+        </div>
+    </div>
+    <div id="simulacao-output" class="gerador-output"></div>
+</div>
+<div id="tab-rpg-v2" class="painel">
+    <h2>▷ CDD 3001 — SIMULAÇÃO AVANÇADA</h2>
+    <div class="grid">
+        <div class="card">
+            <h3>EVENTO DIÁRIO</h3>
+            <p>Descubra o que acontece no dia na favela: baile, operação policial ou oportunidade de negócio.</p>
+            <button class="btn btn-purple" onclick="eventoDiario()">[ EXECUTAR EVENTO ]</button>
+        </div>
+        <div class="card">
+            <h3>MISSÕES DIÁRIAS</h3>
+            <div id="lista-missoes-diarias"></div>
+            <button class="btn btn-purple" onclick="gerarMissaoDiaria()">[ GERAR NOVA MISSÃO ]</button>
+        </div>
+        <div class="card">
+            <h3>ECONOMIA DA FAVELA</h3>
+            <div id="economia-favela"></div>
+        </div>
+    </div>
+    <div id="evento-output" class="gerador-output"></div>
+</div>
