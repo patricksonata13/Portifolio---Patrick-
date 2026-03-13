@@ -1,30 +1,33 @@
-const input = document.getElementById("busca");
-const resultados = document.getElementById("resultados");
+document.addEventListener('DOMContentLoaded', function() {
+  const inputBusca = document.getElementById('busca');
+  const resultadosDiv = document.getElementById('resultados');
 
-input.addEventListener("input", function(){
+  function buscar(termo) {
+    if (!termo) {
+      resultadosDiv.innerHTML = '';
+      return;
+    }
+    const termoLower = termo.toLowerCase();
+    const encontrados = paginas.filter(p => p.titulo.toLowerCase().includes(termoLower));
+    mostrarResultados(encontrados);
+  }
 
-const termo = input.value.toLowerCase();
+  function mostrarResultados(lista) {
+    resultadosDiv.innerHTML = '';
+    if (lista.length === 0) {
+      resultadosDiv.innerHTML = '<p class="nenhum-resultado">Nenhuma página encontrada.</p>';
+      return;
+    }
+    lista.forEach(p => {
+      const link = document.createElement('a');
+      link.href = p.url;
+      link.className = 'resultado-item';
+      link.innerHTML = `<span class="titulo">${p.titulo}</span>`;
+      resultadosDiv.appendChild(link);
+    });
+  }
 
-resultados.innerHTML = "";
-
-if(termo.length < 2){
-return;
-}
-
-paginas.forEach(pagina => {
-
-if(pagina.titulo.toLowerCase().includes(termo)){
-
-const div = document.createElement("div");
-
-div.className = "resultado";
-
-div.innerHTML = "<a href='"+pagina.url+"'>" + pagina.titulo + "</a>";
-
-resultados.appendChild(div);
-
-}
-
-});
-
+  inputBusca.addEventListener('input', function(e) {
+    buscar(e.target.value);
+  });
 });
